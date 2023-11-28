@@ -1,0 +1,3203 @@
+CREATE OR REPLACE FUNCTION imagine.bcae_cerillion_account_sync_debug_sp()
+ RETURNS text
+ LANGUAGE plpgsql
+AS $function$
+DECLARE 
+v_result text;
+BEGIN
+
+
+
+
+update accounts_template_debug set address_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from address_debug a
+where 
+a.crm_addr_uid = accounts_template_debug.crm_address_id::varchar
+--and a.crm_customer_id = accounts_template_debug.crm_customer_no 
+--and a.crm_account_id = accounts_template_debug.account_no
+)
+and accounts_template_debug.crm_address_id is not null
+;
+
+
+update accounts_template_debug set address_update_flag = 'Y'
+where exists 
+(
+select 'x' from address_debug a
+where 
+a.crm_addr_uid = accounts_template_debug.crm_address_id::varchar
+--anda.crm_customer_id = accounts_template_debug.crm_customer_no
+--and a.crm_account_id = accounts_template_debug.account_no
+)
+and accounts_template_debug.crm_address_id is not null
+;
+
+
+
+update accounts_template_debug set contact_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from contacts_debug c
+where 
+c.crm_contact_id = accounts_template_debug.crm_contact_id::integer
+--and a.crm_customer_id = accounts_template_debug.crm_customer_no 
+--and c.crm_account_id = accounts_template_debug.account_no
+)
+and accounts_template_debug.crm_contact_id is not null;
+
+
+update accounts_template_debug set contact_update_flag = 'Y'
+where exists 
+(
+select 'x' from contacts_debug c
+where 
+c.crm_contact_id = accounts_template_debug.crm_contact_id::integer
+--and c.crm_customer_id = accounts_template_debug.crm_customer_no 
+--and c.crm_account_id = accounts_template_debug.account_no
+)
+and accounts_template_debug.crm_contact_id is not null;
+
+
+
+
+
+update accounts_template_debug set account_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from accounts_debug a
+where a.account_no = accounts_template_debug.account_no::integer 
+)
+and accounts_template_debug.crm_address_id is not null
+and accounts_template_debug.crm_contact_id is not null;
+
+
+
+update accounts_template_debug set account_update_flag = 'Y'
+where exists 
+(
+select 'x' from accounts_debug a
+where a.account_no = accounts_template_debug.account_no::integer 
+)
+and accounts_template_debug.crm_address_id is not null
+and accounts_template_debug.crm_contact_id is not null;
+
+
+--bcae address_test type
+
+update accounts_template_debug set bcae_address_type = 'Home';
+
+
+
+update accounts_template_debug set contact_type = 'Mobile'
+where contact_type in ('MOBILE','MOBILE_NO','PHONE_NO');
+
+update accounts_template_debug set bcae_contact_type = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template_debug.contact_type))
+and be.code_type = 'CONTACT_TYPE';
+
+
+update accounts_template_debug set account_category = 'Private Limited (Sdn Bhd)'
+where account_category = 'PVT-LTD';
+
+
+update accounts_template_debug set account_category = 'Ministries'
+where account_category = 'MINISTRY';
+
+update accounts_template_debug set account_category = 'Sole Trader'
+where account_category = 'SOLE-TRADER';
+
+update accounts_template_debug set account_category = 'Sole Trader'
+where account_category = 'SO';
+
+update accounts_template_debug set account_category='Embassy'
+where account_category='EM';
+
+
+update accounts_template_debug set account_category='Banking'
+where account_category='BN';
+
+
+update accounts_template_debug set account_category='Ministries'
+where account_category='MN';
+
+update accounts_template_debug set account_category='Others'
+where account_category='OT';
+
+
+
+update accounts_template_debug set account_category='NGO'
+where account_category='NG';
+
+
+
+
+update accounts_template_debug set account_category='Standard'
+where account_category='ST';
+
+update accounts_template_debug set account_category='Senior Citizen'
+where account_category='SC';
+
+
+update accounts_template_debug set account_category='Student'
+where account_category='SD';
+
+update accounts_template_debug set account_category='Limited Company'
+where account_category='LC';
+
+
+update accounts_template_debug set account_category='Expat'
+where account_category='XP';
+
+
+
+update accounts_template_debug set account_category='Public Service'
+where account_category='PC';
+
+update accounts_template_debug set bcae_account_category = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template_debug.account_category))
+and be.code_type = 'ACCOUNT_CATEGORY';
+
+
+
+update accounts_template_debug set account_class = 'Corporate/Enterprise'
+where account_class = 'CO';
+
+
+
+update accounts_template_debug set account_class = 'Imagine'
+where account_class = 'IM';
+
+update accounts_template_debug set account_class = 'Medium Business'
+where account_class = 'MB';
+
+update accounts_template_debug set account_class = 'VIP'
+where account_class = 'VP';
+
+update accounts_template_debug set account_class = 'VVIP'
+where account_class = 'VV';
+
+
+update accounts_template_debug set account_class = 'Government'
+where account_class = 'GO';
+
+update accounts_template_debug set account_class = 'SOHO'
+where account_class = 'SH';
+
+update accounts_template_debug set account_class = 'Small Business'
+where account_class = 'SB';
+
+update accounts_template_debug set account_class = 'Test Account'
+where account_class = 'TA';
+
+update accounts_template_debug set account_class = 'Staff'
+where account_class = 'SF';
+
+update accounts_template_debug set account_class = 'Standard'
+where account_class = 'ST';
+
+update accounts_template_debug set bcae_account_class = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template_debug.account_class))
+and be.code_type = 'ACCOUNT_CLASS';
+
+update accounts_template_debug set bcae_account_class = be.code
+from business_entity be
+where lower(trim(be.code)) = lower(trim(accounts_template_debug.account_class))
+and be.code_type = 'ACCOUNT_CLASS';
+
+---bcae account priority
+
+/*select * from business_entity be where code_type = 'ACCOUNT_CLASS';
+
+select distinct account_priority,bcae_account_priority from accounts_template_debug ct;*/
+
+update accounts_template_debug set account_priority = 'PRTYSTD'
+where account_priority = '10';
+
+
+update accounts_template_debug set account_priority = 'Standard'
+where account_priority = 'PRTYSTD';
+
+
+update accounts_template_debug set account_priority = 'PRTYHGH'
+where account_priority = '20';
+
+update accounts_template_debug set account_priority = 'PRTYSTD'
+where account_priority = '40';
+
+update accounts_template_debug set account_priority = 'PRTYMED'
+where account_priority = '30';
+
+update accounts_template_debug set account_priority = 'PRTYHGH'
+where account_priority = '99';
+
+
+
+
+update accounts_template_debug set bcae_account_priority = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template_debug.account_priority))
+and be.code_type = 'PRIORITY';
+
+update accounts_template_debug set bcae_account_priority = be.code
+from business_entity be
+where lower(trim(be.code)) = lower(trim(accounts_template_debug.account_priority))
+and be.code_type = 'PRIORITY';
+
+---bcae account bcae_base_coll_plan
+
+/*
+ select * from business_entity be where code_type like '%BASE%';
+
+select distinct base_coll_plan,bcae_base_coll_plan from accounts_template_debug ct;
+*/
+
+update accounts_template_debug set base_coll_plan = (case 
+when base_coll_plan = 'BUS1' then 'Business - Standard'
+when base_coll_plan = 'BUS2' then 'Business - Special'
+when base_coll_plan = 'RES1' then 'Residential - Standard'
+when base_coll_plan = 'RES2' then 'Residential - Special' end);
+
+
+update accounts_template_debug set bcae_base_coll_plan = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template_debug.base_coll_plan))
+and be.code_type = 'BASE_COLL_PLAN';
+
+
+
+
+---bcae account bcae_bill_delivery_method
+
+/*select * from business_entity be where code_type = 'BILL_DELIVERY_METHOD';
+
+select distinct bill_delivery_mthd from accounts_template_debug ct;*/
+
+update accounts_template_debug set bcae_bill_delivery_method = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template_debug.bill_delivery_mthd))
+and be.code_type = 'BILL_DELIVERY_METHOD';
+
+
+update accounts_template_debug set id_type = (case 
+when id_type in ('ICYELL') then 'IC Card (Yellow)'
+when id_type in ('ICGREEN') then 'IC Card (Green)'
+when id_type in ('ICRED') then 'IC Card (Red)'
+when id_type in ('PASSPORT') then 'Passport' end);
+
+update accounts_template_debug set bcae_id_type = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template_debug.id_type))
+and be.code_type = 'ID_TYPE';
+
+----Address Insert
+
+INSERT INTO address_debug
+(address_type, hno, block, building_name, street, road, city, town, state, district, country, 
+ post_code, created_by, created_at, updated_by, updated_at, is_cust_addr, is_bill_addr, 
+ crm_addr_uid, migration_date, migration_table, migration_remarks,crm_customer_id,crm_account_id)
+
+select address_type,hno,block,building_name,street,road,city,town,state,district,country,post_code,
+1,current_timestamp,1,current_timestamp,'Y','N',null,current_date,'accounts_template_debug',
+'New Account Address From Cerillion',crm_customer_no,account_no::integer
+from accounts_template_debug ct
+where address_insert_flag='Y' 
+and not exists (
+select 'x' from address_debug a
+where ct.crm_address_id::varchar  = a.crm_addr_uid
+--and a.crm_customer_id = ct.crm_customer_no
+--and a.crm_account_id = ct.account_no
+) and ct.account_no  not in (select crm_account_no from exception_table);
+
+----Address Update
+
+update address_debug set hno=ct.hno,street=ct.street,road=ct.road,
+city=ct.city,town=ct.town,state=ct.state,district=ct.district,country=ct.country,post_code=ct.post_code,
+updated_by =1 ,updated_at = current_timestamp,
+migration_remarks = coalesce(trim(address_debug.migration_remarks),'')|| current_date ||'-Updating latest account address detail from cerillion'
+FROM accounts_template_debug ct  
+WHERE address_update_flag='Y' 
+--and ct.crm_customer_no  = address.crm_customer_id 
+--and ct.account_no = address.crm_account_id 
+and ct.crm_address_id::varchar = address_debug.crm_addr_uid
+ and ct.account_no  not in (select crm_account_no from exception_table);
+
+
+----Contacts insert 
+
+INSERT INTO imagine.contacts_debug
+(title, first_name, last_name, contact_type, contact_no, contact_no_pfx, alt_contact_no1, email, alt_email, 
+status, created_by, created_at, updated_by, updated_at, crm_contact_id, migration_date, migration_table, 
+migration_remarks,crm_customer_id,crm_account_id)
+
+select title,first_name,last_name,
+case when coalesce(trim(bcae_contact_type),'') = '' then 'CNTEMAIL'
+else bcae_contact_type end,
+(case when coalesce(ct.contact_no,'') in ('',' ') then '1111111' 
+when coalesce(ct.contact_no,'') like ('%-%') then '1111111' 
+when coalesce(ct.contact_no,'') like ('%/%') then substring(ct.contact_no,1,7)
+when coalesce(ct.contact_no,'') like ('%(%') then substring(ct.contact_no,1,7)
+else replace(ct.contact_no, ' ', '1111111') end)::numeric as contact_no,
+'673' as contact_no_pfx,(case when coalesce(ct.alt_contact_no_1,'') in ('',' ') then '1111111' 
+when coalesce(ct.alt_contact_no_1,'') like ('%-%') then '1111111' 
+else replace(ct.alt_contact_no_1, ' ', '') end)::numeric as alt_contact_no1
+,email,alt_email,'AC'as status,1,current_timestamp,1,current_timestamp,ct.crm_contact_id::integer,current_date,
+'accounts_template_debug','New Account Contacts From Cerillion',crm_customer_no,account_no::integer
+from accounts_template_debug ct
+where contact_insert_flag='Y' 
+and not exists (
+select 'x' from contacts_debug c 
+where c.crm_contact_id = ct.crm_contact_id::integer
+--and c.crm_customer_id  = ct.crm_customer_no
+--and c.crm_account_id = ct.account_no
+)  and ct.account_no  not in (select crm_account_no from exception_table);
+
+----Contacts Update
+
+update contacts_debug set contact_no = (case when coalesce(ct.contact_no,'') in ('',' ') then '1111111' 
+when coalesce(ct.contact_no,'') like ('%-%') then '1111111' 
+when coalesce(ct.contact_no,'') like ('%/%') then substring(ct.contact_no,1,7)
+when coalesce(ct.contact_no,'') like ('%(%') then substring(ct.contact_no,1,7)
+else replace(ct.contact_no, ' ', '1111111') end)::numeric,email = ct.email,
+updated_by = 1, updated_at = current_timestamp,
+migration_remarks = coalesce(trim(contacts_debug.migration_remarks),'')|| current_date ||'-Updating latest account contacts detail from cerillion'
+FROM accounts_template_debug ct  
+WHERE contact_update_flag='Y' 
+--and ct.crm_customer_no  = contacts.crm_customer_id
+--and ct.account_no = contacts.crm_account_id
+and ct.crm_contact_id::integer = contacts_debug.crm_contact_id
+and ct.account_no  not in (select crm_account_no from exception_table);
+
+
+----Account Insert
+
+
+
+
+INSERT INTO imagine.accounts_debug
+(account_cat, account_class, account_priority, title, first_name, last_name, gender, birth_date, 
+registered_no, id_type, id_value, customer_id, account_no, contact_id, address_id, base_coll_plan, status, 
+created_by, created_at, updated_by, updated_at, bill_lang, bill_delivery_mthd, no_of_copies, 
+account_type, migration_date, migration_table, migration_remarks)
+select bcae_account_category ,bcae_account_class ,bcae_account_priority ,ct.title,ct.first_name,ct.last_name,
+ct.gender,ct.birth_date::date,
+ct.registered_no,bcae_id_type,ct.id_value,max(c.customer_id),account_no::integer,max(c2.contact_id),
+max(a.address_id),bcae_base_coll_plan ,
+'AC' as status,1,current_timestamp,1,current_timestamp ,bill_lang,bcae_bill_delivery_method,no_of_copies::numeric,
+account_type,
+current_date,'accounts_template_debug','New Accounts From Cerillion'
+from accounts_template_debug ct
+left join customers_debug c on c.crm_customer_no = ct.crm_customer_no
+left join address_debug a on a.crm_addr_uid  = ct.crm_address_id::varchar 
+left join contacts_debug c2 on c2.crm_contact_id = ct.crm_contact_id::integer 
+where account_insert_flag='Y' and c.customer_id is not null
+and c2.contact_id is not null and a.address_id is not null
+and not exists (
+select 'x' from accounts_debug a
+where a.account_no = ct.account_no::integer
+)  and ct.account_no  not in (select crm_account_no from exception_table)
+group by bcae_account_category ,bcae_account_class ,bcae_account_priority ,ct.title,ct.first_name,
+ct.last_name,ct.gender,ct.birth_date,
+ct.registered_no,bcae_id_type,ct.id_value,account_no,bcae_base_coll_plan ,ct.status,bill_lang,bcae_bill_delivery_method,no_of_copies,
+account_type;
+
+
+----Account Update
+
+update accounts_debug set id_type = ct.bcae_id_type,id_value = ct.id_type,
+account_cat  = ct.bcae_account_category ,account_class  = ct.bcae_account_class ,
+base_coll_plan = ct.bcae_base_coll_plan ,bill_lang = ct.bill_lang,bill_delivery_mthd = ct.bcae_bill_delivery_method ,
+updated_by = 1, updated_at = current_timestamp,migration_remarks = coalesce(trim(accounts_debug.migration_remarks),'')|| current_date ||'-Updating latest account detail from cerillion'
+FROM accounts_template_debug ct  
+WHERE account_update_flag='Y'
+and ct.account_no::integer  = accounts_debug.account_no 
+ and ct.account_no  not in (select crm_account_no from exception_table);
+
+v_result:='SUCCESS';
+return v_result;
+
+END;
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.bcae_cerillion_account_sync_sp()
+ RETURNS text
+ LANGUAGE plpgsql
+AS $function$
+DECLARE 
+v_result text;
+BEGIN
+
+	
+---Account address and contact id update
+
+update accounts_template  set crm_address_id = aam.address_id::integer
+from account_address_map aam
+where aam.customer_id = accounts_template.crm_customer_no
+;
+
+update accounts_template set crm_contact_id = acm.contact_id::integer
+from account_contact_map acm 
+where acm.customer_id = accounts_template.crm_customer_no
+;
+
+
+---ACCOUNT ADDRESS AND CONTACTS DETAIL UPDATE
+
+UPDATE imagine.accounts_template
+SET address_type=aad.address_type, hno=aad.hno, block=aad.block, building_name=aad.building_name, street='',
+road=aad.road , city=aad.city, town=aad.town, state=aad.state, district=aad.district, 
+country=aad.country, post_code=aad.post_code
+from account_address_details aad
+where aad.address_id::integer = accounts_template.crm_address_id;
+
+
+UPDATE imagine.accounts_template
+SET contact_type=acd.contact_type , contact_no=acd.contact_no,
+--contact_no_pfx=coalesce(trim(acd.contact_no_pfx),null) , 
+alt_contact_no1=acd.alt_contact_no1 ,
+email=acd.email , alt_email=acd.alt_email
+from account_contact_details acd
+where acd.contact_id::integer = accounts_template.crm_contact_id;
+
+
+
+	
+--address insert flag
+
+/*select * from accounts_template ct 
+where not exists 
+(
+select 'x' from address a
+where a.crm_customer_id = ct.crm_customer_no 
+and a.crm_account_id = ct.account_no
+and ct.crm_address_id = a.crm_addr_uid
+)
+;*/
+
+
+update accounts_template set address_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from address a
+where 
+a.crm_addr_uid = accounts_template.crm_address_id::varchar
+--and a.crm_customer_id = accounts_template.crm_customer_no 
+--and a.crm_account_id = accounts_template.account_no
+)
+and accounts_template.crm_address_id is not null
+;
+
+--address update flag
+
+/*select * from accounts_template ct 
+where exists 
+(
+select 'x' from address a
+where a.crm_customer_id = ct.crm_customer_no 
+and a.crm_account_id = ct.account_no
+and ct.crm_address_id = a.crm_addr_uid
+);*/
+
+update accounts_template set address_update_flag = 'Y'
+where exists 
+(
+select 'x' from address a
+where 
+a.crm_addr_uid = accounts_template.crm_address_id::varchar
+--anda.crm_customer_id = accounts_template.crm_customer_no
+--and a.crm_account_id = accounts_template.account_no
+)
+and accounts_template.crm_address_id is not null
+;
+
+
+--contacts insert flag
+
+/*select * from accounts_template ct 
+where not exists 
+(
+select 'x' from contacts c
+where c.crm_customer_id = ct.crm_customer_no 
+and c.crm_account_id = ct.account_no
+and c.crm_contact_uid = ct.crm_contact_id
+);*/
+
+
+update accounts_template set contact_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from contacts c
+where 
+c.crm_contact_id = accounts_template.crm_contact_id
+--and a.crm_customer_id = accounts_template.crm_customer_no 
+--and c.crm_account_id = accounts_template.account_no
+)
+and accounts_template.crm_contact_id is not null;
+
+--contacts update flag
+
+/*select * from accounts_template ct 
+where exists 
+(
+select 'x' from contacts c
+where c.crm_customer_id = ct.crm_customer_no 
+and c.crm_account_id = ct.account_no
+and c.crm_contact_uid = ct.crm_contact_id
+);*/
+
+update accounts_template set contact_update_flag = 'Y'
+where exists 
+(
+select 'x' from contacts c
+where 
+c.crm_contact_id = accounts_template.crm_contact_id
+--and c.crm_customer_id = accounts_template.crm_customer_no 
+--and c.crm_account_id = accounts_template.account_no
+)
+and accounts_template.crm_contact_id is not null;
+
+
+
+--account insert flag
+
+/*
+select * from accounts_template ct 
+where not exists 
+(
+select 'x' from accounts a
+where a.account_no = ct.account_no
+);
+*/
+
+
+update accounts_template set account_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from accounts a
+where a.account_no = accounts_template.account_no 
+)
+and accounts_template.crm_address_id is not null
+and accounts_template.crm_contact_id is not null;
+
+--account update flag
+
+/*select * from accounts_template ct 
+where exists 
+(
+select 'x' from accounts c
+where c.account_no = ct.account_no 
+);*/
+
+update accounts_template set account_update_flag = 'Y'
+where exists 
+(
+select 'x' from accounts a
+where a.account_no = accounts_template.account_no 
+)
+and accounts_template.crm_address_id is not null
+and accounts_template.crm_contact_id is not null;
+
+
+--bcae address_test type
+
+update accounts_template set bcae_address_type = 'Home';
+
+--bcae contact type
+
+/*select * from business_entity be where code_type = 'CONTACT_TYPE';
+
+select distinct contact_type from accounts_template ct;*/
+
+update accounts_template set contact_type = 'Mobile'
+where contact_type in ('MOBILE','MOBILE_NO','PHONE_NO');
+
+update accounts_template set bcae_contact_type = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template.contact_type))
+and be.code_type = 'CONTACT_TYPE';
+
+---bcae account category
+
+/*select * from business_entity be where code_type = 'ACCOUNT_CATEGORY';
+
+select distinct account_category from accounts_template ct;
+
+select distinct bcae_account_category,account_category from accounts_template ct
+**/
+
+update accounts_template set account_category = 'Private Limited (Sdn Bhd)'
+where account_category = 'PRIVATE LIMITED';
+
+
+update accounts_template set account_category = 'Ministries'
+where account_category = 'MINISTRY';
+
+update accounts_template set account_category = 'Sole Trader'
+where account_category = 'SOLE-TRADER';
+
+update accounts_template set bcae_account_category = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template.account_category))
+and be.code_type = 'ACCOUNT_CATEGORY';
+
+---bcae account class
+
+/*select * from business_entity be where code_type = 'ACCOUNT_CLASS';
+
+select distinct account_class,bcae_account_class from accounts_template ct;*/
+
+update accounts_template set account_class = 'CORPORATE-ENTERPRISE'
+where account_class = 'CORPORATE';
+
+update accounts_template set account_class = 'SOHO'
+where account_class = 'SH';
+
+update accounts_template set bcae_account_class = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template.account_class))
+and be.code_type = 'ACCOUNT_CLASS';
+
+update accounts_template set bcae_account_class = be.code
+from business_entity be
+where lower(trim(be.code)) = lower(trim(accounts_template.account_class))
+and be.code_type = 'ACCOUNT_CLASS';
+
+---bcae account priority
+
+/*select * from business_entity be where code_type = 'ACCOUNT_CLASS';
+
+select distinct account_priority,bcae_account_priority from accounts_template ct;*/
+
+update accounts_template set account_priority = 'PRTYSTD'
+where account_priority = '10';
+
+update accounts_template set bcae_account_priority = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template.account_priority))
+and be.code_type = 'PRIORITY';
+
+update accounts_template set bcae_account_priority = be.code
+from business_entity be
+where lower(trim(be.code)) = lower(trim(accounts_template.account_priority))
+and be.code_type = 'PRIORITY';
+
+---bcae account bcae_base_coll_plan
+
+/*
+ select * from business_entity be where code_type like '%BASE%';
+
+select distinct base_coll_plan,bcae_base_coll_plan from accounts_template ct;
+*/
+
+update accounts_template set base_coll_plan = (case 
+when base_coll_plan = 'BUSINESS SPECIAL' then 'Business - Special'
+when base_coll_plan = 'BUSINESS STANDARD' then 'Business - Standard'
+when base_coll_plan = 'RESIDENTIAL SPECIAL' then 'Residential - Special'
+when base_coll_plan = 'RESIDENTIAL STANDARD' then 'Residential - Standard' end);
+
+update accounts_template set bcae_base_coll_plan = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template.base_coll_plan))
+and be.code_type = 'BASE_COLL_PLAN';
+
+
+---bcae account bcae_bill_delivery_method
+
+/*select * from business_entity be where code_type = 'BILL_DELIVERY_METHOD';
+
+select distinct bill_delivery_mthd from accounts_template ct;*/
+
+update accounts_template set bcae_bill_delivery_method = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template.bill_delivery_mthd))
+and be.code_type = 'BILL_DELIVERY_METHOD';
+
+
+---bcae account bcae_bill_delivery_method
+
+/*select * from business_entity be where code_type = 'ID_TYPE';
+
+select distinct id_type from accounts_template ct;
+
+select (case 
+when id_type in ('ICYELL') then 'IC Card (Yellow)'
+when id_type in ('ICGREEN') then 'IC Card (Green)'
+when id_type in ('ICRED') then 'IC Card (Red)'
+when id_type in ('PASSPORT') then 'Passport' end) from accounts_template;
+
+update accounts_template set id_type = ait.id_type
+from account_id_type ait
+where ait.account_no = accounts_template.account_no::varchar;
+**/
+
+
+
+
+update accounts_template set id_type = (case 
+when id_type in ('ICYELL') then 'IC Card (Yellow)'
+when id_type in ('ICGREEN') then 'IC Card (Green)'
+when id_type in ('ICRED') then 'IC Card (Red)'
+when id_type in ('PASSPORT') then 'Passport' end);
+
+update accounts_template set bcae_id_type = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(accounts_template.id_type))
+and be.code_type = 'ID_TYPE';
+
+----Address Insert
+
+INSERT INTO address
+(address_type, hno, block, building_name, street, road, city, town, state, district, country, 
+ post_code, created_by, created_at, updated_by, updated_at, is_cust_addr, is_bill_addr, 
+ crm_addr_uid, migration_date, migration_table, migration_remarks,crm_customer_id,crm_account_id)
+
+select address_type,hno,block,building_name,street,road,city,town,state,district,country,post_code,
+1,current_timestamp,1,current_timestamp,'Y','N',null,current_date,'accounts_template',
+'New Account Address From Cerillion',crm_customer_no,account_no
+from accounts_template ct
+where address_insert_flag='Y' 
+and not exists (
+select 'x' from address a
+where ct.crm_address_id::varchar  = a.crm_addr_uid
+--and a.crm_customer_id = ct.crm_customer_no
+--and a.crm_account_id = ct.account_no
+);
+
+----Address Update
+
+update address set hno=ct.hno,street=ct.street,road=ct.road,
+city=ct.city,town=ct.town,state=ct.state,district=ct.district,country=ct.country,post_code=ct.post_code,
+updated_by =1 ,updated_at = current_timestamp,
+migration_remarks = coalesce(trim(address.migration_remarks),'')|| current_date ||'-Updating latest account address detail from cerillion'
+FROM accounts_template ct  
+WHERE address_update_flag='Y' 
+--and ct.crm_customer_no  = address.crm_customer_id 
+--and ct.account_no = address.crm_account_id 
+and ct.crm_address_id::varchar = address.crm_addr_uid;
+
+
+----Contacts insert 
+
+INSERT INTO imagine.contacts
+(title, first_name, last_name, contact_type, contact_no, contact_no_pfx, alt_contact_no1, email, alt_email, 
+status, created_by, created_at, updated_by, updated_at, crm_contact_id, migration_date, migration_table, 
+migration_remarks,crm_customer_id,crm_account_id)
+
+select title,first_name,last_name,
+case when coalesce(trim(bcae_contact_type),'') = '' then 'CNTEMAIL'
+else bcae_contact_type end,
+(case when coalesce(ct.contact_no,'') in ('',' ') then '1111111' 
+when coalesce(ct.contact_no,'') like ('%-%') then '1111111' 
+else replace(ct.contact_no, ' ', '1111111') end)::numeric as contact_no,
+'673' as contact_no_pfx,(case when coalesce(ct.alt_contact_no1,'') in ('',' ') then '1111111' 
+when coalesce(ct.alt_contact_no1,'') like ('%-%') then '1111111' 
+else replace(ct.alt_contact_no1, ' ', '') end)::numeric as alt_contact_no1
+,email,alt_email,'AC'as status,1,current_timestamp,1,current_timestamp,ct.crm_contact_id,current_date,
+'accounts_template','New Account Contacts From Cerillion',crm_customer_no,account_no
+from accounts_template ct
+where contact_insert_flag='Y' 
+and not exists (
+select 'x' from contacts c 
+where c.crm_contact_id = ct.crm_contact_id
+--and c.crm_customer_id  = ct.crm_customer_no
+--and c.crm_account_id = ct.account_no
+);
+
+----Contacts Update
+
+update contacts set contact_no = (case when coalesce(ct.contact_no,'') in ('',' ') then '1111111' 
+when coalesce(ct.contact_no,'') like ('%-%') then '1111111' 
+else replace(ct.contact_no, ' ', '1111111') end)::numeric,email = ct.email,
+updated_by = 1, updated_at = current_timestamp,
+migration_remarks = coalesce(trim(contacts.migration_remarks),'')|| current_date ||'-Updating latest account contacts detail from cerillion'
+FROM accounts_template ct  
+WHERE contact_update_flag='Y' 
+--and ct.crm_customer_no  = contacts.crm_customer_id
+--and ct.account_no = contacts.crm_account_id
+and ct.crm_contact_id = contacts.crm_contact_id;
+
+
+----Account Insert
+
+INSERT INTO imagine.accounts
+(account_cat, account_class, account_priority, title, first_name, last_name, gender, birth_date, 
+registered_no, id_type, id_value, customer_id, account_no, contact_id, address_id, base_coll_plan, status, 
+created_by, created_at, updated_by, updated_at, bill_lang, bill_delivery_mthd, no_of_copies, 
+account_type, migration_date, migration_table, migration_remarks)
+select bcae_account_category ,bcae_account_class ,bcae_account_priority ,ct.title,ct.first_name,ct.last_name,
+ct.gender,ct.birth_date,
+ct.registered_no,bcae_id_type,ct.id_value,max(c.customer_id),account_no,max(c2.contact_id),
+max(a.address_id),bcae_base_coll_plan ,
+'AC' as status,1,current_timestamp,1,current_timestamp ,bill_lang,bcae_bill_delivery_method,no_of_copies,
+account_type,
+current_date,'accounts_template','New Accounts From Cerillion'
+from accounts_template ct
+left join customers c on c.crm_customer_no = ct.crm_customer_no
+left join address a on a.crm_addr_uid  = ct.crm_address_id::varchar 
+left join contacts c2 on c2.crm_contact_id = ct.crm_contact_id 
+where account_insert_flag='Y' and c.customer_id is not null
+and c2.contact_id is not null and a.address_id is not null
+and not exists (
+select 'x' from accounts a
+where a.account_no = ct.account_no
+)
+group by bcae_account_category ,bcae_account_class ,bcae_account_priority ,ct.title,ct.first_name,
+ct.last_name,ct.gender,ct.birth_date,
+ct.registered_no,bcae_id_type,ct.id_value,account_no,bcae_base_coll_plan ,ct.status,bill_lang,bcae_bill_delivery_method,no_of_copies,
+account_type;
+
+
+----Account Update
+
+update accounts set id_type = ct.bcae_id_type,id_value = ct.id_type,
+account_cat  = ct.bcae_account_category ,account_class  = ct.bcae_account_class ,
+base_coll_plan = ct.bcae_base_coll_plan ,bill_lang = ct.bill_lang,bill_delivery_mthd = ct.bcae_bill_delivery_method ,
+updated_by = 1, updated_at = current_timestamp,migration_remarks = coalesce(trim(accounts.migration_remarks),'')|| current_date ||'-Updating latest account detail from cerillion'
+FROM accounts_template ct  
+WHERE account_update_flag='Y'
+and ct.account_no  = accounts.account_no ;
+
+
+v_result:='SUCCESS';
+return v_result;
+
+END;
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.bcae_cerillion_connection_sync_debug_sp()
+ RETURNS text
+ LANGUAGE plpgsql
+AS $function$
+DECLARE 
+v_result text;
+BEGIN
+
+
+
+--new connection insert flag
+update connection_template_debug set connection_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from connections_debug c ,accounts_debug a 
+where c.identification_no = connection_template_debug.identification_no
+and c.account_id=a.account_id 
+and connection_template_debug.crm_account_no::integer=a.account_no
+);
+
+
+
+--new connection status update flag
+update connection_template_debug set connection_status_update_flag = 'Y'
+where exists 
+(
+select 'x' from connections_debug c  ,accounts_debug a
+where c.identification_no = connection_template_debug.identification_no
+and c.account_id=a.account_id 
+and connection_template_debug.crm_account_no::integer=a.account_no
+and  lower(trim(c.status)) != lower(trim(connection_template_debug.status))
+);
+
+
+
+
+
+--bcae address_test type
+/*
+update customer_template set bcae_address_type = (case 
+when customer_type in ('STANDARD','RES','RESDENTIAL') then 'Home'
+when customer_type in ('BUS','BUSINESS') then 'Business'
+end);
+*/
+
+------ new connection inserts
+--select count(1) from conn_temp--16468
+drop table conn_temp;
+
+create table conn_temp as 
+select distinct
+connection_type,connection_group,identification_no,iccid,imsi,is_ported,(case 
+when ct.status = 'RE' then 'PD' 
+when ct.status = 'FA' then 'PENDING'
+when ct.status='CU' then 'ACTIVE'
+when ct.status='TR' then 'TRANSFERRED'
+when ct.status='CA' then 'CANCELLED'
+when ct.status='TP' then 'TRANSFER PENDING'
+when ct.status='RP' then 'RECOVERY PENDING'
+when ct.status='TA' then 'TRANSFER AWAIT'
+else ct.status end) as status,
+1 as created_by,current_timestamp as created_at,1 as updated_by, current_timestamp as updated_at,
+a.address_id,a1.account_id,trim('{"plans": [{"planId": '||p.plan_id||'}]}'::text)::jsonb as plan_id,
+current_date,'connection_template_debug' as migration_table,'New Connection From Cerillion'
+as migraton_remarks
+from connection_template_debug ct 
+left join address_debug a on a.crm_addr_uid = ct.crm_address_id::varchar
+left join accounts_debug a1 on a1.account_no= ct.crm_account_no::integer
+left join plan_debug p on lower(trim(p.plan_name)) = lower(trim(ct.plan_name))
+where 
+ct.connection_insert_flag = 'Y' and p.status ='AC'
+and ct.crm_customer_no =a.crm_customer_id 
+and  not exists 
+(
+select 'x' from connections_debug c 
+where c.identification_no = ct.identification_no
+and c.account_id=a1.account_id 
+and ct.crm_account_no::integer=a1.account_no
+) and ct.identification_no not in (select identification_no from exception_table);
+
+
+insert into connections_debug (connection_type,connection_grp,identification_no,iccid,imsi,is_ported,
+status,created_by,created_at,updated_by,updated_at,address_id,account_id,
+mapping_payload,migration_date,migration_table,migration_remarks)
+select connection_type,connection_group,identification_no,iccid,imsi,is_ported,
+status,created_by,created_at,updated_by,updated_at,address_id,account_id,
+plan_id,current_date,migration_table,migraton_remarks from 
+conn_temp;
+
+
+
+
+
+
+
+---- connection status update
+
+-- select distinct status from connection_template_debug ct;
+
+update connections_debug set status = (case when ct.status = 'RE' then 'PD' 
+when ct.status = 'FA' then 'PENDING'
+when ct.status='CU' then 'ACTIVE'
+when ct.status='TR' then 'TRANSFERRED'
+when ct.status='CA' then 'CANCELLED'
+when ct.status='TP' then 'TRANSFER PENDING'
+when ct.status='RP' then 'RECOVERY PENDING'
+when ct.status='TA' then 'TRANSFER AWAIT'
+else ct.status end),
+updated_by = 1,updated_at = current_timestamp ,
+migration_remarks = coalesce(trim(connections_debug.migration_remarks),'') ||current_date||'-Status Sync'
+from connection_template_debug ct
+left join accounts_debug a on a.account_no = ct.crm_account_no::integer
+where ct.identification_no = connections_debug.identification_no 
+and connections_debug.account_id=a.account_id
+and ct.connection_status_update_flag = 'Y'
+and ct.identification_no not in (select identification_no from exception_table );
+
+
+----- connection plan update
+--new connection plan update flag
+/*update connection_template_debug set connection_plan_update_flag = 'Y'
+where exists 
+(
+select 'x' from connections_debug c 
+left join plan_debug p on lower(trim(p.plan_name)) = lower(trim(connection_template_debug.plan_name)) 
+where c.identification_no = connection_template_debug.identification_no
+and (c.mapping_payload->'plans'->0->'planId')::text != p.plan_id::text)
+and connection_template_debug.identification_no not in (select identification_no from exception_table) ;
+*/
+
+
+update connections_debug set mapping_payload  = ('{"plans": [{"planId": '||p.plan_id||'}]}'::text)::jsonb
+,updated_by = 1,updated_at = current_timestamp ,
+migration_remarks = coalesce(trim(connections_debug.migration_remarks),'') ||current_date||'-Plan Sync'
+from connection_template_debug ct
+left join accounts_debug a on a.account_no = ct.crm_account_no::integer
+left join plan p on lower(trim(p.plan_name)) = lower(trim(ct.plan_name)) 
+where ct.identification_no = connections_debug.identification_no 
+--and ct.connection_plan_update_flag  = 'Y'
+and connections_debug.status in ('ACTIVE','FA') 
+and ct.status in ('CU','FA') 
+and p.status ='AC';
+
+
+
+v_result:='SUCCESS';
+return v_result;
+
+END;
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.bcae_cerillion_connection_sync_sp()
+ RETURNS text
+ LANGUAGE plpgsql
+AS $function$
+DECLARE 
+v_result text;
+BEGIN
+
+---Connections address id update
+
+update connection_template set crm_address_id = aam.address_id::integer
+from connection_address_map aam
+where aam.access_no  = connection_template.identification 
+;
+
+---Connections ADDRESS  DETAIL UPDATE
+
+UPDATE imagine.connection_template
+SET address_type=aad.address_type, hno=aad.hno, block=aad.block, building_name=aad.building_name, street='',
+road=aad.road , city=aad.city, town=aad.town, state=aad.state, district=aad.district, 
+country=aad.country, post_code=aad.post_code
+from connection_address_details aad
+where aad.access_no = connection_template.identification;	
+	
+	
+---new connection validation
+/*select * from connection_template ct
+where not exists 
+(
+select 'x' from connections c 
+where c.identification_no = ct.identification
+);*/
+
+--new connection insert flag
+update connection_template set connection_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from connections c ,accounts a 
+where c.identification_no = connection_template.identification
+and c.account_id=a.account_id 
+and connection_template.crm_account_no=a.account_no
+);
+
+-----connection status validation
+/*select * from connection_template ct
+where exists 
+(
+select 'x' from connections c 
+where c.identification_no = ct.identification
+and lower(trim(c.status)) != lower(trim(ct.status))
+)
+;*/
+
+--new connection status update flag
+update connection_template set connection_status_update_flag = 'Y'
+where exists 
+(
+select 'x' from connections c  ,accounts a
+where c.identification_no = connection_template.identification
+and c.account_id=a.account_id 
+and connection_template.crm_account_no=a.account_no
+and  lower(trim(c.status)) != lower(trim(connection_template.status))
+);
+
+
+-----connection plan validation
+/*select * from connection_template ct
+where exists 
+(
+select 'x' from connections c 
+left join plan p on lower(trim(p.plan_name)) = lower(trim(ct.plan_name)) 
+where c.identification_no = ct.identification
+and (c.mapping_payload->'plans'->0->'planId')::text <> p.plan_id::text
+) 
+;*/
+
+--new connection plan update flag
+update connection_template set connection_plan_update_flag = 'Y'
+where exists 
+(
+select 'x' from connections c 
+left join plan p on lower(trim(p.plan_name)) = lower(trim(connection_template.plan_name)) 
+where c.identification_no = connection_template.identification
+and (c.mapping_payload->'plans'->0->'planId')::text != p.plan_id::text
+);
+
+--bcae address_test type
+/*
+update customer_template set bcae_address_type = (case 
+when customer_type in ('STANDARD','RES','RESDENTIAL') then 'Home'
+when customer_type in ('BUS','BUSINESS') then 'Business'
+end);
+*/
+
+------ new connection inserts
+
+insert into connections (connection_type,connection_grp,identification_no,iccid,imsi,is_ported,
+status,created_by,created_at,updated_by,updated_at,address_id,account_id,
+mapping_payload,migration_date,migration_table,migration_remarks)
+
+select distinct
+connection_type,connection_group,identification,iccid,imsi,is_ported,(case 
+when ct.status = 'RE' then 'PD' 
+when ct.status = 'FA' then 'PENDING' 
+else ct.status end) as status,
+1 as created_by,current_timestamp as created_at,1 as updated_by, current_timestamp as updated_at,
+a.address_id,a1.account_id,trim('{"plans": [{"planId": '||p.plan_id||'}]}'::text)::jsonb as plan_id,
+current_date,'connection_template','New Connection From Cerillion'
+from connection_template ct 
+left join address a on a.crm_addr_uid = ct.crm_address_id::varchar
+left join accounts a1 on a1.account_no = ct.crm_account_no
+left join plan p on lower(trim(p.plan_name)) = lower(trim(ct.plan_name))
+where 
+ct.connection_insert_flag = 'Y' and p.status ='AC'
+and ct.crm_customer_no =a.crm_customer_id 
+and  not exists 
+(
+select 'x' from connections c 
+where c.identification_no = ct.identification
+and c.account_id=a1.account_id 
+and ct.crm_account_no=a1.account_no
+);
+
+
+---- connection status update
+
+-- select distinct status from connection_template ct;
+
+update connections set status = (case 
+when ct.status = 'RE' then 'PD' 
+when ct.status = 'FA' then 'PENDING' 
+else ct.status end),
+updated_by = 1,updated_at = current_timestamp ,
+migration_remarks = coalesce(trim(connections.migration_remarks),'') ||current_date||'-Status Sync'
+from connection_template ct
+left join accounts a on a.account_no = ct.crm_account_no
+where ct.identification = connections.identification_no 
+and connections.account_id=a.account_id
+and ct.connection_status_update_flag = 'Y';
+
+
+----- connection plan update
+
+update connections set mapping_payload  = ('{"plans": [{"planId": '||p.plan_id||'}]}'::text)::jsonb
+,updated_by = 1,updated_at = current_timestamp ,
+migration_remarks = coalesce(trim(connections.migration_remarks),'') ||current_date||'-Plan Sync'
+from connection_template ct
+left join accounts a on a.account_no = ct.crm_account_no
+left join plan p on lower(trim(p.plan_name)) = lower(trim(ct.plan_name)) 
+where ct.identification = connections.identification_no 
+and ct.connection_plan_update_flag  = 'Y'
+and connections.status in ('ACTIVE','FA') 
+and ct.status in ('ACTIVE','FA') 
+and p.status ='AC';
+
+
+
+v_result:='SUCCESS';
+return v_result;
+
+END;
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.bcae_cerillion_customer_sync_debug_sp()
+ RETURNS text
+ LANGUAGE plpgsql
+AS $function$
+DECLARE 
+v_result text;
+begin
+
+
+
+
+update customer_template_debug set address_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from address_debug a
+where a.crm_addr_uid= customer_template_debug.crm_address_id::varchar 
+--and a.crm_customer_id = customer_template.crm_customer_no   
+and a.crm_addr_uid is not null
+)
+and crm_address_id is not null;
+--4868
+
+
+
+update customer_template_debug set address_update_flag = 'Y'
+where exists 
+(
+select 'x' from address_debug a
+where a.crm_addr_uid = customer_template_debug.crm_address_id
+--and  a.crm_customer_id = customer_template.crm_customer_no 
+and a.crm_addr_uid is not null
+)
+and crm_address_id is not null;
+
+
+
+update customer_template_debug set contact_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from contacts_debug c
+where c.crm_contact_id::varchar = customer_template_debug.crm_contact_id
+--and a.crm_customer_id = customer_template.crm_customer_no 
+) and coalesce(customer_template_debug.crm_contact_id::varchar,'') <>'' ; 
+
+
+update customer_template_debug set contact_update_flag = 'Y'
+where exists 
+(
+select 'x' from contacts_debug c
+where c.crm_contact_id::varchar = customer_template_debug.crm_contact_id
+--and c.crm_customer_id = customer_template.crm_customer_no
+) and coalesce(customer_template_debug.crm_contact_id::varchar,'') <>'';
+
+
+
+update customer_template_debug set customer_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from customers_debug c
+where c.crm_customer_no = customer_template_debug.crm_customer_no 
+);
+
+
+update customer_template_debug set customer_update_flag = 'Y'
+where exists 
+(
+select 'x' from customers_debug c
+where c.crm_customer_no = customer_template_debug.crm_customer_no 
+);
+--50200
+-----------------------------------------------------------------------------------------
+
+
+--bcae address type
+
+update customer_template_debug set bcae_address_type = (case 
+when customer_type in ('STANDARD','RES','RESIDENTIAL') then 'Home'
+when customer_type in ('BUS','BUSINESS') then 'Business'
+else '' 
+end);
+
+
+
+
+
+update customer_template_debug set contact_type = 'Mobile'
+where contact_type in ('MOBILE','MOBILE_NO','PHONE_NO');
+
+update customer_template_debug set bcae_contact_type = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(customer_template_debug.contact_type))
+and be.code_type = 'CONTACT_TYPE';
+
+--bcae customer type
+
+/*
+select * from business_entity be where code_type = 'CUSTOMER_TYPE';
+*/
+
+update  customer_template_debug set bcae_customer_type = 'BUSINESS'
+where customer_type in ('BUS','BUSINESS');
+
+update customer_template_debug set bcae_customer_type = 'RESIDENTIAL'
+where customer_type in ('STANDARD','RES','RESIDENTIAL');
+
+--bcae customer category
+
+update customer_template_debug set bcae_customer_category = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(customer_template_debug.customer_class))
+and be.code_type = 'CATEGORY';
+
+--bcae customer class
+
+update customer_template_debug set bcae_customer_class = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(customer_template_debug.customer_category))
+and be.code_type = 'CLASS';
+
+--bcae customer id type
+--select * from business_entity be where code_type = 'ID_TYPE'
+
+update customer_template_debug set bcae_id_type = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(customer_template_debug.id_type))
+and be.code_type = 'ID_TYPE';
+
+
+
+
+
+----address Insert
+
+INSERT INTO address_debug
+(address_type, hno, block, building_name, street, road, city, town, state, district, country, 
+ post_code, created_by, created_at, updated_by, updated_at, 
+is_cust_addr, is_bill_addr, crm_addr_uid, migration_date, migration_table, migration_remarks,crm_customer_id)
+
+select distinct bcae_address_type,hno,block,building_name,street,road,city,town,state,district,country,post_code,
+1,current_timestamp,1,current_timestamp,'Y','N',crm_address_id,current_date,'customer_template_debug',
+'New address From Cerillion',crm_customer_no
+from customer_template_debug ct
+where address_insert_flag='Y' and not exists (
+select 'x' from address_debug a
+where ct.crm_address_id::varchar = a.crm_addr_uid
+--and  a.crm_customer_id = ct.crm_customer_no
+) and ct.crm_customer_no not in (select crm_customer_no from exception_table);
+
+
+
+
+
+
+----address Update
+
+update address_debug set hno=ct.hno,street=ct.street,road=ct.road,
+city=ct.city,town=ct.town,state=ct.state,district=ct.district,country=ct.country,post_code=ct.post_code,
+updated_by =1 ,updated_at = current_timestamp,
+migration_remarks = coalesce(trim(address_debug.migration_remarks),'')|| current_date ||'-Updating latest address detail from cerillion'
+FROM customer_template_debug ct  
+WHERE address_update_flag='Y'  
+--and ct.crm_customer_no  = address.crm_customer_id
+and  ct.crm_address_id::varchar = address_debug.crm_addr_uid 
+and  ct.crm_customer_no not in (select crm_customer_no from exception_table);
+
+
+----contacts_test insert 
+
+INSERT INTO imagine.contacts_debug
+(title, first_name, last_name, contact_type, contact_no, contact_no_pfx, alt_contact_no1, email, alt_email, 
+status, created_by, created_at, updated_by, updated_at, crm_contact_id, migration_date, migration_table, 
+migration_remarks,crm_customer_id)
+
+select title,first_name,last_name,
+case when coalesce(trim(bcae_contact_type),'') = '' then 'CNTEMAIL'
+else bcae_contact_type end,
+(case when coalesce(ct.contact_no,'') in ('',' ') then '1111111' 
+when coalesce(ct.contact_no,'') like ('%-%') then '1111111' 
+else replace(ct.contact_no, ' ', '') end)::numeric as contact_no,
+contact_no_pfx::numeric,(case when coalesce(ct.alt_contact_no_1,'') in ('',' ') then '1111111' 
+when coalesce(ct.alt_contact_no_1,'') like ('%-%') then '1111111' 
+else replace(ct.alt_contact_no_1, ' ', '') end)::numeric as alt_contact_no1,
+email,alt_email,'AC' as status,1,current_timestamp,1,current_timestamp,
+crm_contact_id::integer,current_date,'customer_template',
+'New contacts From Cerillion',crm_customer_no
+from customer_template_debug ct
+where contact_insert_flag='Y' 
+and not exists (
+select 'x' from contacts_debug c 
+where ct.crm_contact_id::integer = c.crm_contact_id
+) and ct.crm_customer_no not in (select crm_customer_no from exception_table)
+and coalesce(ct.crm_contact_id::varchar,'') <>'';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----contacts_test Update
+
+update contacts_debug set contact_no = (case when coalesce(ct.contact_no,'') in ('',' ') then '1111111' 
+when coalesce(ct.contact_no,'') like ('%-%') then '1111111' 
+else replace(ct.contact_no, ' ', '0') end)::numeric ,email = ct.email,
+updated_by = 1, updated_at = current_timestamp,
+migration_remarks = coalesce(trim(contacts_debug.migration_remarks),'')|| current_date ||'-Updating latest contacts detail from cerillion'
+FROM customer_template_debug ct  
+WHERE contact_update_flag='Y' 
+--and ct.crm_customer_no  = contacts.crm_customer_id 
+and ct.crm_contact_id::integer = contacts_debug.crm_contact_id
+and ct.crm_customer_no not in (select crm_customer_no from exception_table);
+
+
+----Customer Insert
+
+INSERT INTO imagine.customers_debug
+(title, first_name, last_name, gender, birth_date,id_type, id_value, contact_id, cust_type,
+status, crm_customer_no, customer_cat, customer_class, address_id,created_by, created_at,
+updated_by, updated_at, migration_date, migration_table, migration_remarks)
+
+select ct.title,ct.first_name,ct.last_name,ct.gender,ct.birth_date::date,ct.bcae_id_type ,ct.id_value,max(c2.contact_id),
+ct.bcae_customer_type,'AC'  as status, 
+ct.crm_customer_no,ct.bcae_customer_category,ct.bcae_customer_class,max(a.address_id),
+1,current_timestamp,1,current_timestamp,current_date,'customer_template_debug',
+'New customers From Cerillion'
+from customer_template_debug ct
+left join address_debug a on a.crm_addr_uid = ct.crm_address_id::varchar
+left join contacts_debug c2 on c2.crm_contact_id = ct.crm_contact_id::integer 
+where customer_insert_flag='Y' 
+--and  ct.status not in ('HISTORIC','PROSPECT')
+and not exists (
+select 'x' from customers_debug c 
+where c.crm_customer_no = ct.crm_customer_no
+) and ct.crm_customer_no not in (select crm_customer_no from exception_table)
+and coalesce(ct.crm_contact_id::varchar,'') <>''
+group by ct.title,ct.first_name,ct.last_name,ct.gender,ct.birth_date::date,ct.bcae_id_type ,ct.id_value,
+ct.bcae_customer_type,ct.status,ct.crm_customer_no,ct.bcae_customer_category,ct.bcae_customer_class
+;
+
+
+
+----Customer Update
+
+update customers_debug set id_type = ct.bcae_id_type,id_value = ct.id_value,
+customer_cat = ct.bcae_customer_category,customer_class = ct.bcae_customer_class,
+updated_by = 1, updated_at = current_timestamp,
+migration_remarks = coalesce(trim(customers_debug.migration_remarks),'')|| current_date ||'-Updating latest customers detail from cerillion'
+FROM customer_template_debug ct  
+WHERE contact_update_flag='Y' and 
+ct.crm_customer_no  = customers_debug.crm_customer_no
+and ct.crm_customer_no not in (select crm_customer_no from exception_table);
+
+
+update customers_debug set contact_id =a.contact_id  
+from customer_template_debug c  ,contacts_debug a
+where c.crm_customer_no = customers_debug.crm_customer_no
+and c.crm_contact_id::integer=a.crm_contact_id 
+and c.crm_customer_no not in (select crm_customer_no from exception_table)
+and coalesce(c.crm_contact_id::varchar,'') <>'' ;
+
+
+
+
+
+
+
+
+
+v_result:='SUCCESS';
+return v_result;
+
+END;
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.bcae_cerillion_customer_sync_sp()
+ RETURNS text
+ LANGUAGE plpgsql
+AS $function$
+DECLARE 
+v_result text;
+begin
+
+--address_test insert flag
+
+/*
+select * from customer_template ct 
+where not exists 
+(
+select 'x' from address_test a
+where ct.crm_address_id::varchar = a.crm_addr_uid
+--and  a.crm_customer_id = ct.crm_customer_no 
+and a.crm_addr_uid is not null
+) 
+and crm_address_id is not null;
+*/
+
+
+update customer_template set address_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from address a
+where a.crm_addr_uid= customer_template.crm_address_id::varchar 
+--and a.crm_customer_id = customer_template.crm_customer_no   
+and a.crm_addr_uid is not null
+)
+and crm_address_id is not null;
+--4868
+
+--address_test update flag
+
+/*
+select * from customer_template ct 
+where exists 
+(
+select 'x' from address_test a
+where ct.crm_addr_uid = a.crm_addr_uid
+and a.crm_customer_id = ct.crm_customer_no 
+);
+*/
+
+update customer_template set address_update_flag = 'Y'
+where exists 
+(
+select 'x' from address a
+where a.crm_addr_uid = customer_template.crm_address_id::varchar
+--and  a.crm_customer_id = customer_template.crm_customer_no 
+and a.crm_addr_uid is not null
+)
+and crm_address_id is not null;
+
+
+--contacts_test insert flag
+
+/*select * from customer_template ct 
+where not exists 
+(
+select 'x' from contacts_test c
+where ct.crm_contact_id = c.crm_contact_id 
+--and c.crm_customer_id = ct.crm_customer_no
+);*/
+
+
+update customer_template set contact_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from contacts c
+where c.crm_contact_id = customer_template.crm_contact_id
+--and a.crm_customer_id = customer_template.crm_customer_no 
+); 
+--4255
+
+--contacts_test update flag
+
+/*select * from customer_template ct 
+where exists 
+(
+select 'x' from contacts_test c
+where ct.crm_contact_id = c.crm_contact_id
+--and c.crm_customer_id = ct.crm_customer_no 
+);*/
+
+update customer_template set contact_update_flag = 'Y'
+where exists 
+(
+select 'x' from contacts c
+where c.crm_contact_id = customer_template.crm_contact_id
+--and c.crm_customer_id = customer_template.crm_customer_no
+);
+--50050
+
+--customer insert flag
+
+/*select * from customer_template ct 
+where not exists 
+(
+select 'x' from customers_test c
+where c.crm_customer_no = ct.crm_customer_no 
+);*/
+
+
+update customer_template set customer_insert_flag = 'Y'
+where not exists 
+(
+select 'x' from customers c
+where c.crm_customer_no = customer_template.crm_customer_no 
+);
+--4105
+
+--customer update flag
+
+/*select * from customer_template ct 
+where exists 
+(
+select 'x' from customers_test c
+where c.crm_customer_no = ct.crm_customer_no 
+);*/
+
+update customer_template set customer_update_flag = 'Y'
+where exists 
+(
+select 'x' from customers c
+where c.crm_customer_no = customer_template.crm_customer_no 
+);
+--50200
+-----------------------------------------------------------------------------------------
+
+
+--bcae address type
+
+update customer_template set bcae_address_type = (case 
+when customer_type in ('STANDARD','RES','RESDENTIAL') then 'Home'
+when customer_type in ('BUS','BUSINESS') then 'Business'
+end);
+
+--bcae contact type
+
+/*select * from business_entity be where code_type = 'CONTACT_TYPE';
+
+select distinct contact_type from customer_template ct;*/
+
+
+
+
+update customer_template set contact_type = 'Mobile'
+where contact_type in ('MOBILE','MOBILE_NO','PHONE_NO');
+
+update customer_template set bcae_contact_type = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(customer_template.contact_type))
+and be.code_type = 'CONTACT_TYPE';
+
+--bcae customer type
+
+/*
+select * from business_entity be where code_type = 'CUSTOMER_TYPE';
+*/
+
+update  customer_template set bcae_customer_type = 'BUSINESS'
+where customer_type in ('BUS','BUSINESS');
+
+update customer_template set bcae_customer_type = 'RESIDENTIAL'
+where customer_type in ('STANDARD','RES','RESDENTIAL');
+
+--bcae customer category
+
+update customer_template set bcae_customer_category = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(customer_template.customer_class))
+and be.code_type = 'CATEGORY';
+
+--bcae customer class
+
+update customer_template set bcae_customer_class = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(customer_template.customer_category))
+and be.code_type = 'CLASS';
+
+--bcae customer id type
+--select * from business_entity be where code_type = 'ID_TYPE'
+
+update customer_template set bcae_id_type = be.code
+from business_entity be
+where lower(trim(be.description)) = lower(trim(customer_template.id_type))
+and be.code_type = 'ID_TYPE';
+
+----address Insert
+
+INSERT INTO address
+(address_type, hno, block, building_name, street, road, city, town, state, district, country, 
+ post_code, created_by, created_at, updated_by, updated_at, 
+is_cust_addr, is_bill_addr, crm_addr_uid, migration_date, migration_table, migration_remarks,crm_customer_id)
+
+select bcae_address_type,hno,block,building_name,street,road,city,town,state,district,country,post_code,
+1,current_timestamp,1,current_timestamp,'Y','N',crm_address_id,current_date,'customer_template',
+'New address From Cerillion',crm_customer_no
+from customer_template ct
+where address_insert_flag='Y' and not exists (
+select 'x' from address a
+where ct.crm_address_id::varchar = a.crm_addr_uid
+--and  a.crm_customer_id = ct.crm_customer_no
+);
+
+----address Update
+
+update address set hno=ct.hno,street=ct.street,road=ct.road,
+city=ct.city,town=ct.town,state=ct.state,district=ct.district,country=ct.country,post_code=ct.post_code,
+updated_by =1 ,updated_at = current_timestamp,
+migration_remarks = coalesce(trim(address.migration_remarks),'')|| current_date ||'-Updating latest address detail from cerillion'
+FROM customer_template ct  
+WHERE address_update_flag='Y'  
+--and ct.crm_customer_no  = address.crm_customer_id
+and  ct.crm_address_id::varchar = address.crm_addr_uid ;
+
+
+----contacts_test insert 
+
+INSERT INTO imagine.contacts
+(title, first_name, last_name, contact_type, contact_no, contact_no_pfx, alt_contact_no1, email, alt_email, 
+status, created_by, created_at, updated_by, updated_at, crm_contact_id, migration_date, migration_table, 
+migration_remarks,crm_customer_id)
+
+select title,first_name,last_name,
+case when coalesce(trim(bcae_contact_type),'') = '' then 'CNTEMAIL'
+else bcae_contact_type end,
+(case when coalesce(ct.contact_no,'') in ('',' ') then '1111111' 
+when coalesce(ct.contact_no,'') like ('%-%') then '1111111' 
+else replace(ct.contact_no, ' ', '') end)::numeric as contact_no,
+contact_no_pfx,(case when coalesce(ct.alt_contact_no1,'') in ('',' ') then '1111111' 
+when coalesce(ct.alt_contact_no1,'') like ('%-%') then '1111111' 
+else replace(ct.alt_contact_no1, ' ', '') end)::numeric as alt_contact_no1,
+email,alt_email,'AC' as status,1,current_timestamp,1,current_timestamp,
+crm_contact_id,current_date,'customer_template',
+'New contacts From Cerillion',crm_customer_no
+from customer_template ct
+where contact_insert_flag='Y' 
+and not exists (
+select 'x' from contacts c 
+where ct.crm_contact_id = c.crm_contact_id
+--and  c.crm_customer_id = ct.crm_customer_no
+);
+
+----contacts_test Update
+
+update contacts set contact_no = (case when coalesce(ct.contact_no,'') in ('',' ') then '1111111' 
+when coalesce(ct.contact_no,'') like ('%-%') then '1111111' 
+else replace(ct.contact_no, ' ', '0') end)::numeric ,email = ct.email,
+updated_by = 1, updated_at = current_timestamp,
+migration_remarks = coalesce(trim(contacts.migration_remarks),'')|| current_date ||'-Updating latest contacts detail from cerillion'
+FROM customer_template ct  
+WHERE contact_update_flag='Y' 
+--and ct.crm_customer_no  = contacts.crm_customer_id 
+and ct.crm_contact_id = contacts.crm_contact_id
+;
+
+
+----Customer Insert
+
+INSERT INTO imagine.customers
+(title, first_name, last_name, gender, birth_date,id_type, id_value, contact_id, cust_type,
+status, crm_customer_no, customer_cat, customer_class, address_id,created_by, created_at,
+updated_by, updated_at, migration_date, migration_table, migration_remarks)
+
+select ct.title,ct.first_name,ct.last_name,ct.gender,ct.birth_date,ct.bcae_id_type ,ct.id_value,max(c2.contact_id),
+ct.bcae_customer_type,'AC'  as status, 
+ct.crm_customer_no,ct.bcae_customer_category,ct.bcae_customer_class,max(a.address_id),
+1,current_timestamp,1,current_timestamp,current_date,'customer_template',
+'New customers From Cerillion'
+from customer_template ct
+left join address a on a.crm_addr_uid = ct.crm_address_id::varchar
+left join contacts c2 on c2.crm_contact_id = ct.crm_contact_id 
+where customer_insert_flag='Y' 
+--and  ct.status not in ('HISTORIC','PROSPECT')
+and not exists (
+select 'x' from customers c 
+where c.crm_customer_no = ct.crm_customer_no
+) 
+group by ct.title,ct.first_name,ct.last_name,ct.gender,ct.birth_date,ct.bcae_id_type ,ct.id_value,
+ct.bcae_customer_type,ct.status,ct.crm_customer_no,ct.bcae_customer_category,ct.bcae_customer_class
+;
+
+----Customer Update
+
+update customers set id_type = ct.bcae_id_type,id_value = ct.id_value,
+customer_cat = ct.bcae_customer_category,customer_class = ct.bcae_customer_class,
+updated_by = 1, updated_at = current_timestamp,
+migration_remarks = coalesce(trim(customers.migration_remarks),'')|| current_date ||'-Updating latest customers detail from cerillion'
+FROM customer_template ct  
+WHERE contact_update_flag='Y' and 
+ct.crm_customer_no  = customers.crm_customer_no;
+
+v_result:='SUCCESS';
+return v_result;
+
+END;
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.be_desc(i_entity_code character varying)
+ RETURNS character varying
+ LANGUAGE plpgsql
+AS $function$
+declare v_cnt int;
+v_entity_desc varchar(2000);
+	BEGIN
+
+		select 	count(*) into v_cnt
+		from 	business_entity bu 
+		where   code = i_entity_code;
+	
+	if v_cnt > 0
+	then
+		select 	description into v_entity_desc
+		from 	business_entity bu 
+		where   code = i_entity_code;
+	end if;
+
+return v_entity_desc;
+	END;
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.bu_desc(i_unit_code character varying)
+ RETURNS character varying
+ LANGUAGE plpgsql
+AS $function$
+declare v_cnt int;
+v_unit_desc varchar(200);
+	BEGIN
+
+		select 	count(*) into v_cnt
+		from 	business_units bu
+		where   unit_id = i_unit_code;
+	
+	if v_cnt > 0
+	then
+		select 	unit_desc into v_unit_desc
+		from 	business_units bu 
+		where   unit_id = i_unit_code;
+	end if;
+
+return v_unit_desc;
+	END;
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.cc_plan_id(cc_connection_id integer)
+ RETURNS integer
+ LANGUAGE plpgsql
+AS $function$
+declare v_cnt int;
+plan_id int;
+	BEGIN
+
+		select 	count(*) into v_cnt
+		from 	connections cc 
+		where   connection_id=cc_connection_id;
+	
+	if v_cnt > 0
+	then
+		select 	(((mapping_payload -> 'plans'::text) -> 0) -> 'planId'::text)::text AS plan_id
+		into plan_id 
+		from connections cc	  
+		where connection_id=cc_connection_id ;
+	end if;
+
+return plan_id;
+	END;
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.chat_visited_count(i_date character varying)
+ RETURNS integer
+ LANGUAGE plpgsql
+AS $function$
+	declare 
+	v_count int4;
+
+	BEGIN
+		SELECT DISTINCT count(*)::text into v_count
+
+       FROM chat
+
+      WHERE created_at::date = i_date::date 
+--date_trunc('day', (i_date::date AT TIME ZONE 'Asia/Brunei'))
+      GROUP BY (created_at::date);
+     
+     return v_count;
+	END;
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.get_chat_msg()
+ RETURNS TABLE(chat_id text, contact_no text, email_id text, customer_name text, start_at timestamp without time zone, end_at timestamp without time zone, status text, chat_msg text, serviectype text, created_at timestamp without time zone, updated_at timestamp without time zone, access_no text, category text, id_value text, agent text, queue_wait_in_min text, duration_chatin_min text)
+ LANGUAGE plpgsql
+AS $function$
+declare
+qry text;
+	BEGIN
+	qry:='
+select c.chat_id::text
+,c.contact_no::text
+,c.email_id::text
+,c.customer_name::text
+,c.start_at::timestamp
+,c.end_at::timestamp
+,c.status::text
+,STRING_AGG(concat(concat(item_object->>''from''::text,''-> ''),trim(item_object->>''msg''::text)),E'' \n'' order by c.chat_id )::text as chat_msg
+,c.type::text as serviectype
+,c.created_at::timestamp
+,c.updated_at::timestamp
+,c.access_no::text
+,c.category::text
+,c.id_value::text
+,(u.first_name||'' ''||u.last_name)::text as agent,
+round((extract(epoch from (c.start_at -c.created_at))/60)::int,0)::text as queue_wait,
+round((extract(epoch from (c.end_at -c.start_at))/60)::int,0)::text as duration_chat
+		from chat c
+		left join users u on c.user_id =u.user_id
+		,jsonb_array_elements(message) with ordinality arr(item_object, position)
+		group by c.chat_id,c.contact_no,c.email_id,c.customer_name,c.start_at,c.end_at,c.status,c.type,c.created_at,c.updated_at,c.access_no,c.category,c.id_value,u.first_name,u.last_name
+union 
+select chat_id::text,c.contact_no::text,c.email_id::text,customer_name::text,start_at::timestamp,end_at::timestamp,c.status,'''' as chat_msg
+,type::text as serviectype,c.created_at::timestamp,c.updated_at::timestamp,access_no::text,category::text,id_value::text, ''''as agent,
+round((extract(epoch from (c.start_at -c.created_at))/60)::int,0)::text as queue_wait,
+round((extract(epoch from (c.end_at -c.created_at))/60)::int,0)::text as duration_chat
+from chat c
+where c.status=''ABANDONED''
+order by chat_id desc
+';
+
+return query EXECUTE qry;
+END;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.is_null(i_value text)
+ RETURNS character varying
+ LANGUAGE plpgsql
+AS $function$
+--declare o_value text;
+begin
+--o_value:= coalesce(trim(i_value),'');
+
+return coalesce(trim(i_value),'');
+	END;
+$function$
+;
+
+CREATE OR REPLACE PROCEDURE imagine.post_check_cust_sync()
+ LANGUAGE sql
+AS $procedure$
+
+/*
+create table post_check_cust_sync_exception
+(
+entity_name varchar(100),
+Entity_Value varchar(100),
+exception_msg varchar(500),
+customer_id varchar(100),
+exception_count int,
+remarks varchar(100)
+)*/
+
+--------------------------------connection level exception check starts--------------------
+---query to check duplicates in services table 
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'identification_no',identification_no ,'Duplicate values in connection table',null,counts,
+'Service level exception'
+from
+(select connection_type,identification_no,account_id,status,address_id ,count(*)  as counts
+from connections
+group by connection_type,identification_no,account_id,status,account_id,address_id
+having(count(*))>1) t ;
+
+-----------------duplicate check ends------------
+
+
+
+------ query to check more than one status in services ---------------------
+---distinct of status 
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'identification_no',identification_no,'Identification no having more than one status',null,counts,
+'Service level exception' from 
+(
+select distinct identification_no,account_id,address_id,count(distinct(status)) as counts 
+from connections 
+group by identification_no,account_id,address_id having(count(distinct(status)))>1
+order by identification_no 
+) t;
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'identification_no',sub.identification_no,'connection_grp mismatch in connections',null,null,
+'Service level exception' from 
+(
+select c.identification_no ,c.migration_remarks, 
+c.connection_grp , t.connection_grp  from connections c, mig_connection_inter t
+where c.identification_no =t.identification_no 
+and c.account_id =t.account_id 
+and c.connection_grp <> t.connection_grp 
+and c.migration_remarks is not null
+)sub;
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'identification_no',sub.identification_no,'connection_type mismatch in connections',null,null,
+'Service level exception' from 
+(
+select c.identification_no ,c.account_id from connections c , mig_connection_inter t
+where c.identification_no =t.identification_no 
+and c.account_id =t.account_id 
+and c.connection_type <> t.connection_type 
+and c.migration_remarks is not null) sub;
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'identification_no',sub.identification_no,'is_ported  mismatch in connections',null,null,
+'Service level exception' from 
+(
+select c.identification_no ,c.account_id,
+c.is_ported , t.is_ported   from connections c, mig_connection_inter t
+where c.identification_no =t.identification_no 
+and c.account_id =t.account_id 
+and c.is_ported <> t.is_ported 
+and c.migration_remarks is not null) sub;
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'identification_no',sub.identification_no,'address id   mismatch in connections',null,null,
+'Service level exception' from 
+(
+select c.identification_no ,c.account_id,c.address_id  ,t.address_id   from connections c, mig_connection_inter t
+where c.identification_no =t.identification_no 
+and c.account_id =t.account_id 
+and c.status =t.status 
+and c.address_id  <> t.address_id  
+and c.migration_remarks is not null) sub;
+
+-----*******************************connection level exception check ends-************************--
+
+
+---*******************************customer level exception check starts ***************************************
+
+---checking the address id mappings in customers table 
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'crm customer no',t.crm_customer_no,'correct address id is not mapped in customer table',t.crm_customer_no,
+null,'custome level exception' from 
+(
+select distinct c.crm_customer_no  ,a.address_id,c.address_id  
+from customers c , mig_customer_inter a
+where c.crm_customer_no =a.crm_customer_no 
+and c.address_id <> a.address_id ) t;
+
+---checking contact id mappings with customer table 
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 
+'crm customer no',t.crm_customer_no,'correct contact id is not mapped in customer table',t.crm_customer_no,
+null,'customer level exception' from 
+(
+select distinct  c.crm_customer_no  ,c.contact_id ,a.contact_id 
+from customers c , mig_customer_inter a
+where c.crm_customer_no  =a.crm_customer_no 
+and c.contact_id <> a.contact_id ) t ;
+
+---checking null address_id in customers after insert and update 
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'crm_customer_no',t.crm_customer_no,'address id is null in customers',t.crm_customer_no,null,
+'customer level exception'
+from
+(
+select crm_customer_no from customers where address_id is null 
+and migration_remarks is not null) t ;
+
+
+
+--------contact id null check----------------------------------------------
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'crm_customer_no',t.crm_customer_no,'contact id is null in customers',t.crm_customer_no,null,
+'customer level exception'
+from
+(
+select crm_customer_no  from customers where contact_id is null 
+and migration_remarks is not null) t ;
+
+-------------------------------------------------------------------------------
+
+-----------------------customer type -------------------------------
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'crm_customer_no',t.crm_customer_no,'customer_type mismatch in customers',t.crm_customer_no,null,
+'customer level exception'
+from
+(
+
+select c.crm_customer_no from customers c , mig_customer_inter m
+where c.crm_customer_no =m.crm_customer_no 
+and c.cust_type <> m.bcae_customer_type ) t ;
+
+
+---------------------title,first_name,last_name check 
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'crm_customer_no',sub.crm_customer_no,'first_name mismatch in customers',sub.crm_customer_no,null,
+'customer level exception'
+from
+(
+select c.crm_customer_no from  customers c , mig_customer_inter   t
+where c.crm_customer_no =t.crm_customer_no 
+and c.first_name <> t.first_name ) sub ;
+
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'crm_customer_no',sub.crm_customer_no,'last name mismatch in customers',sub.crm_customer_no,null,
+'customer level exception'
+from
+(
+select c.crm_customer_no from  customers c , mig_customer_inter   t
+where c.crm_customer_no =t.crm_customer_no
+and c.first_name=t.first_name
+and c.last_name  <> t.last_name ) sub ;
+
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'crm_customer_no',sub.crm_customer_no,'title mismatch in customers',sub.crm_customer_no,null,
+'customer level exception'
+from
+(
+select c.crm_customer_no from  customers c , mig_customer_inter   t
+where c.crm_customer_no =t.crm_customer_no
+and c.first_name=t.first_name
+and c.last_name =t.last_name
+and c.title  <> t.title  
+) sub ;
+
+
+----------------------**************customer level exception end ***************************
+
+
+------------------email , alt email checks in contacts table ------------------
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'crm_contact_no',sub.crm_contact_id,'email mismatch in contacts',null,null,
+'contact level exception'
+from
+(
+select c.crm_contact_id from contacts  c , mig_contact_inter mci  
+where c.crm_contact_id::varchar=mci.crm_contact_id
+and c.email <> mci.email) sub ;
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'crm_contact_no',sub.crm_contact_id,'alt_email mismatch in contacts',null,null,
+'contact level exception'
+from
+(
+select c.crm_contact_id from contacts  c , mig_contact_inter mci  
+where c.crm_contact_id::varchar=mci.crm_contact_id
+and c.alt_email <> mci.alt_email) sub ;
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'crm_contact_no',sub.crm_contact_id,'first name  mismatch in contacts',null,null,
+'contact level exception'
+from
+(
+select c.crm_contact_id from contacts c , mig_contact_inter t
+where c.crm_contact_id =t.crm_contact_id::integer
+and c.first_name <> t.first_name) sub;
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'crm_contact_no',sub.crm_contact_id,'last name mismatch in contacts',null,null,
+'contact level exception'
+from
+(
+select c.crm_contact_id from contacts c , mig_contact_inter t
+where c.crm_contact_id =t.crm_contact_id::integer
+and c.first_name = t.first_name
+and  c.last_name <> t.last_name) sub;
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'crm_contact_no',sub.crm_contact_id,'title mismatch in contacts',null,null,
+'contact level exception'
+from
+(
+select c.crm_contact_id from contacts c , mig_contact_inter t
+where c.crm_contact_id =t.crm_contact_id::integer
+and c.first_name = t.first_name
+and  c.last_name = t.last_name
+and  c.title <> t.title) sub;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------
+
+---****************************Accounts*****************************
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'account no',sub.account_no ,'contact id null  in accounts',null,null,
+'accounts level exception'
+from
+(
+select account_no  from accounts where 
+ contact_id  is null  and migration_remarks is not null) sub ;
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'account no',sub.account_no ,'id_value mismatch  in accounts',null,null,
+'accounts level exception'
+from
+(
+select a.account_no  from accounts a ,mig_account_inter t
+where a.account_no =t.account_no 
+and a.id_value <> t.id_value 
+and a.migration_remarks  is not null) sub ;
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'account_no',sub.account_no,'first_name mismatch in accounts',null,null,
+'account level exception'
+from
+(
+select c.account_no from  accounts c , mig_account_inter   t
+where c.account_no =t.account_no
+and c.first_name <> t.first_name
+) sub ;
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'account_no',sub.account_no,'last name mismatch in accounts',null,null,
+'account level exception'
+from
+(
+select c.account_no from  accounts c , mig_account_inter   t
+where c.account_no =t.account_no
+and c.first_name = t.first_name
+and c.last_name <> t.last_name
+) sub ;
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 'account_no',sub.account_no,'title  mismatch in accounts',null,null,
+'account level exception'
+from
+(
+select c.account_no from  accounts c , mig_account_inter   t
+where c.account_no =t.account_no
+and c.first_name = t.first_name
+and c.last_name = t.last_name
+and c.title <> t.title
+) sub ;
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 
+'account no',t.account_no,'correct contact id is not mapped in accounts table',null,null,
+'account level exception' from 
+(
+select distinct  c.account_no ,c.contact_id ,a.contact_id 
+from accounts c , mig_account_inter a
+where c.account_no  =a.account_no  
+and c.contact_id <> a.contact_id ) t ;
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 
+'account no',t.account_no,'correct address id is not mapped in accounts table',null,null,
+'account level exception' from 
+(
+select distinct  c.account_no ,c.contact_id ,a.contact_id 
+from accounts c , mig_account_inter a
+where c.account_no  =a.account_no  
+and c.address_id  <> a.address_id ) t ;
+
+
+insert into post_check_cust_sync_exception(entity_name,Entity_Value,exception_msg,customer_id,exception_count,
+remarks
+)
+select 
+'account no',t.account_no,'correct address id is not mapped in accounts table',null,null,
+'account level exception' from 
+(
+select distinct  c.account_no ,c.contact_id ,a.contact_id 
+from accounts c , mig_account_inter a
+where c.account_no  =a.account_no  
+and c.customer_id =a.customer_id
+and c.address_id  <> a.address_id ) t ;
+
+
+
+
+
+
+
+
+
+/*select c.crm_contact_id,c.contact_no,t.contact_no  from contacts c , accounts_template_debug t
+where c.crm_contact_id::varchar =t.crm_contact_id 
+and c.contact_no::varchar <> t.contact_no 
+*/
+/*
+select distinct c.contact_no,t.contact_no  from contacts c , customer_template_debug t
+where c.crm_contact_id::varchar =t.crm_contact_id 
+and c.contact_no::varchar <> t.contact_no 
+*/
+
+
+
+/*update connections  c set address_id =t.address_id 
+from mig_connection_inter t
+where c.identification_no =t.identification_no 
+and c.status =t.status 
+and c.account_id = t.account_id 
+and c.address_id <> t.address_id 
+*/
+
+
+
+/*
+update accounts a  set contact_id =t.contact_id 
+from mig_account_inter t
+where a.account_no =t.account_no 
+and a.contact_id is null
+and a.migration_remarks ='2023-03-10-Updating latest account detail from cerillion'
+*/
+
+
+
+
+
+$procedure$
+;
+
+CREATE OR REPLACE PROCEDURE imagine.precheck_cust_sync()
+ LANGUAGE sql
+AS $procedure$
+  
+/*
+create table cust_sync_exception
+(
+entity_name varchar(100),
+Entity_Value varchar(100),
+description varchar(100),
+exception_msg varchar(500),
+exception_count int,
+remarks varchar(100)
+)*/
+
+
+
+--delete from cust_sync_exception;---161764
+
+--One active service number having more than one active plan.
+insert into cust_sync_exception (
+entity_name,Entity_Value,description,exception_msg,exception_count,remarks
+,customer_id,account_id,identification_id
+)
+select distinct 'identification_no',identification_no,plan_name,
+'One active service number having more than one active plan'
+,count(*),'Connection template exception'
+,t.crm_customer_no::int,t.crm_account_no::int,t.identification_no ::int 
+from connection_template_debug t
+where status='CU'
+group by identification_no,plan_name ,t.crm_customer_no,t.crm_account_no 
+having(count(*))>1
+;
+
+
+
+---One active service number  mapped with more than one account number
+insert into cust_sync_exception 
+(
+entity_name,Entity_Value,description,exception_msg,exception_count,remarks
+,customer_id,account_id,identification_id
+)
+select distinct 
+'identification_no',identification_no,crm_account_no,
+'One active service number mapped with more than one account number'
+,count(*),'Connection template exception' 
+,t.crm_customer_no::int,t.crm_account_no::int,t.identification_no ::int 
+from connection_template_debug  t
+where status='CU'
+group by identification_no,crm_account_no,crm_customer_no 
+having(count(*))>1
+;
+
+
+
+
+--One active service number cant be mapped with more than  one customer number
+insert into cust_sync_exception 
+(
+entity_name,Entity_Value,description,exception_msg,exception_count,remarks
+)
+select distinct 'identification_no',identification_no,crm_customer_no ,
+'One active service number mapped with more than one customer number',
+count(*),'Connection template exception'
+from connection_template_debug 
+where status='CU'
+group by identification_no,crm_customer_no having(count(*))>1
+order by identification_no;
+
+
+
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'identification_no',identification_no,
+'access number having blank crm_customer_no ','Connection template exception'
+from connection_template_debug 
+where COALESCE(crm_customer_no,'') = '';
+
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'identification_no',identification_no,
+'access number having blank account number','Connection template exception'
+from connection_template_debug 
+where COALESCE(crm_account_no::varchar,'') = '';
+
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'identification_no',identification_no,
+'access number having blank plan name ','Connection template exception'
+from connection_template_debug 
+where COALESCE(plan_name,'') = '';
+
+--'CATRFLB-F'  -- fixed line residential
+--'CATBFLB-F'  -- fixed line business
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'identification_no',identification_no,
+'access number having blank service address','Connection template exception'
+from connection_template_debug 
+where COALESCE(crm_address_id::varchar,'') = '' 
+and connection_type in ('CATRFLB-F','CATBFLB-F');
+
+
+------one access number having more than one status-------------------------------
+
+
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,exception_count,remarks
+,customer_id,account_id,identification_id  
+)
+select  
+'identification_no', identification_no,
+'one access number having more than one status',count(*),
+'Connection template exception',
+crm_customer_no::int,crm_account_no::int , identification_no 
+from 
+(
+select identification_no,t.crm_account_no ,t.crm_customer_no ,status 
+from connection_template_debug t
+)sub 
+group by identification_no,crm_account_no ,crm_customer_no
+having count(*) > 1;
+
+
+--select * from connection_template ct where identification_no  like 'B%'
+/*
+select  distinct 'identification_no', identification_no,
+'one access number having more than one status',count,
+'Connection template exception'
+from (
+select distinct identification_no,crm_Account_no,crm_customer_no
+,count(distinct(status)) as count
+from connection_template_debug
+group by identification_no,crm_Account_no,crm_customer_no having(count(distinct(status)))>1
+order by identification_no 
+)t;*/ 
+
+
+-------------------duplicacy check
+/*
+select  connection_type, connection_group, identification_no, 
+status, plan_name, crm_account_no, crm_customer_no, crm_address_id, 
+address_type, hno, block, building_name, street, road, city, town, 
+state, district, country, post_code, equipd, count(*)
+from connection_template_debug t
+group by  connection_type, connection_group, identification_no,  
+status, plan_name, crm_account_no, crm_customer_no, crm_address_id, 
+address_type, hno, block, building_name, street, road, city, town, 
+state, district, country, post_code, equipd 
+having (count(*))>1;
+*/
+
+
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,exception_count,remarks
+,customer_id,account_id,identification_id  
+)
+select  
+'identification_no', identification_no,
+'one access number having duplicate plan name with same status,account_no , customer_no',count(*),
+'Connection template exception',
+crm_customer_no::int,crm_account_no::int , identification_no 
+from 
+(
+select identification_no,t.crm_account_no ,t.crm_customer_no ,status ,plan_name
+from connection_template_debug t
+)sub 
+--where crm_customer_no::int not in (select customer_id from cust_sync_exception)
+group by identification_no,crm_account_no ,crm_customer_no
+having count(*) > 1;
+
+
+/*
+----------- access number having different plan_name or same plan name  , 
+--different status ,under same combination
+--of customer no ,acccount number , access number
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select  'identification_no', identification_no,
+'access number having different or same plan_name , different status under same combination of customer no
+ ,acccount number , access number','Connection template exception'
+from (
+select distinct 'identification_no',identification_no,connection_type,status,crm_account_no,
+crm_customer_no,plan_name  
+from connection_template 
+order by identification_no)t;
+
+*/
+
+
+-----------------------------------connection template exceptions ends--------------------------------------------------------
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,customer_id,remarks)
+select distinct 'crm_customer_no',crm_customer_no,
+'services are not present for available accounts numbers ',crm_customer_no::integer ,'account template exception'
+from accounts_template_debug a 
+where not  exists 
+(select  'x' from connection_template_debug c where 
+c.crm_customer_no =a.crm_customer_no 
+and c.crm_account_no=a.account_no 
+) ;
+
+
+
+
+
+
+--------accounts_template -- crm address id cannot be null
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select 'account_no',account_no,
+'account no having blank crm address id','Accounts template exception' 
+from accounts_template_debug at2  
+where coalesce(crm_address_id::varchar,'')='';
+
+
+---accounts_template ---crm_contact_id is not null 
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks,
+customer_id 
+)
+select 'account_no',account_no,
+'account no having blank contact_no ','Accounts template exception' ,
+at2.crm_customer_no::int  
+from accounts_template_debug at2  
+where coalesce(contact_no  ::varchar,'')='';
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select 'account_no',account_no,
+'account no having blank crm contact id ','Accounts template exception' from accounts_template_debug at2  
+where coalesce(crm_contact_id::varchar,'')='';
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,customer_id,remarks)
+select distinct 'crm_customer_no',crm_customer_no,
+'crm customer no is not present in accounts template',crm_customer_no::integer,'Customer_template_exception'
+from customer_template_debug c 
+where not exists 
+(select  'x' from accounts_template_debug a where 
+c.crm_customer_no =a.crm_customer_no 
+) ;
+
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,customer_id,remarks)
+select distinct 'crm_customer_no',crm_customer_no,'services do not have accounts',
+crm_customer_no::integer ,'connection template exception'
+from connection_template_Debug c 
+where not exists  
+(select 'x' from accounts_template_debug a
+where a.crm_customer_no=c.crm_customer_no
+and a.account_no=c.crm_account_no );
+
+
+
+
+-------customer cannot have null crm address id
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'crm customer no',crm_customer_no,
+'crm customer number having blank crm address id','Customer template exception'
+from customer_template_Debug 
+where coalesce(crm_address_id::varchar,'')=''; 
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks,
+customer_id 
+)
+select distinct 'crm customer no',crm_customer_no,
+'crm customer number having blank crm contact id','Customer template exception',
+t.crm_customer_no::int 
+from customer_template_debug t
+where coalesce(crm_contact_id::varchar,'')=''  and coalesce(account_contact_id ::varchar,'')='' 
+and crm_customer_no in
+(select crm_customer_no from connection_template_debug  where status = 'CU')
+
+/*
+select *
+from customer_template_debug t
+where coalesce(crm_contact_id::varchar,'')=''  
+and coalesce(account_contact_id ::varchar,'')='' 
+
+
+select * from connection_template_debug where  crm_customer_no in 
+(
+'99999998',
+'17',
+'3001',
+'16',
+'18',
+'424434')
+*/
+
+
+
+/*
+update accounts_template_debug set contact_no ='1111111'
+where coalesce(contact_no  ::varchar,'')='';
+
+update accounts_template_debug 
+set contact_type ='CNTMOB'
+where contact_type=''
+and contact_no ='1111111' 
+
+update customer_template_debug 
+set contact_type ='CNTMOB'
+where contact_type=''
+and contact_no ='1111111' 
+*/
+
+
+
+
+$procedure$
+;
+
+CREATE OR REPLACE PROCEDURE imagine.precheck_cust_sync_03march23()
+ LANGUAGE sql
+AS $procedure$
+  
+/*
+create table cust_sync_exception
+(
+entity_name varchar(100),
+Entity_Value varchar(100),
+description varchar(100),
+exception_msg varchar(500),
+exception_count int,
+remarks varchar(100)
+)*/
+
+
+update accounts_template_debug set contact_no ='1111111'
+where coalesce(contact_no  ::varchar,'')='';
+
+
+
+delete from cust_sync_exception;---161764
+
+--One active service number having more than one active plan.
+insert into cust_sync_exception (
+entity_name,Entity_Value,description,exception_msg,exception_count,remarks
+,customer_id,account_id,identification_id
+)
+select distinct 'identification_no',identification_no,plan_name,
+'One active service number having more than one active plan'
+,count(*),'Connection template exception'
+,t.crm_customer_no::int,t.crm_account_no::int,t.identification_no ::int 
+from connection_template_debug t
+where status='CU'
+group by identification_no,plan_name ,t.crm_customer_no,t.crm_account_no 
+having(count(*))>1
+;
+
+
+
+---One active service number  mapped with more than one account number
+insert into cust_sync_exception 
+(
+entity_name,Entity_Value,description,exception_msg,exception_count,remarks
+,customer_id,account_id,identification_id
+)
+select distinct 
+'identification_no',identification_no,crm_account_no,
+'One active service number mapped with more than one account number'
+,count(*),'Connection template exception' 
+,t.crm_customer_no::int,t.crm_account_no::int,t.identification_no ::int 
+from connection_template_debug  t
+where status='CU'
+group by identification_no,crm_account_no,crm_customer_no 
+having(count(*))>1
+;
+
+
+
+
+--One active service number cant be mapped with more than  one customer number
+insert into cust_sync_exception 
+(
+entity_name,Entity_Value,description,exception_msg,exception_count,remarks
+)
+select distinct 'identification_no',identification_no,crm_customer_no ,
+'One active service number mapped with more than one customer number',
+count(*),'Connection template exception'
+from connection_template_debug 
+where status='CU'
+group by identification_no,crm_customer_no having(count(*))>1
+order by identification_no;
+
+
+
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'identification_no',identification_no,
+'access number having blank crm_customer_no ','Connection template exception'
+from connection_template_debug 
+where COALESCE(crm_customer_no,'') = '';
+
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'identification_no',identification_no,
+'access number having blank account number','Connection template exception'
+from connection_template_debug 
+where COALESCE(crm_account_no::varchar,'') = '';
+
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'identification_no',identification_no,
+'access number having blank plan name ','Connection template exception'
+from connection_template_debug 
+where COALESCE(plan_name,'') = '';
+
+--'CATRFLB-F'  -- fixed line residential
+--'CATBFLB-F'  -- fixed line business
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'identification_no',identification_no,
+'access number having blank service address','Connection template exception'
+from connection_template_debug 
+where COALESCE(crm_address_id::varchar,'') = '' 
+and connection_type in ('CATRFLB-F','CATBFLB-F');
+
+
+------one access number having more than one status-------------------------------
+
+
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,exception_count,remarks
+,customer_id,account_id,identification_id  
+)
+select  
+'identification_no', identification_no,
+'one access number having more than one status',count(*),
+'Connection template exception',
+crm_customer_no::int,crm_account_no::int , identification_no 
+from 
+(
+select identification_no,t.crm_account_no ,t.crm_customer_no ,status 
+from connection_template_debug t
+)sub 
+group by identification_no,crm_account_no ,crm_customer_no
+having count(*) > 1;
+
+
+--select * from connection_template ct where identification_no  like 'B%'
+
+select  distinct 'identification_no', identification_no,
+'one access number having more than one status',count,
+'Connection template exception'
+from (
+select distinct identification_no,crm_Account_no,crm_customer_no
+,count(distinct(status)) as count
+from connection_template_debug
+group by identification_no,crm_Account_no,crm_customer_no having(count(distinct(status)))>1
+order by identification_no 
+)t; 
+
+
+-------------------duplicacy check
+select  connection_type, connection_group, identification_no, 
+status, plan_name, crm_account_no, crm_customer_no, crm_address_id, 
+address_type, hno, block, building_name, street, road, city, town, 
+state, district, country, post_code, equipd, count(*)
+from connection_template_debug t
+group by  connection_type, connection_group, identification_no,  
+status, plan_name, crm_account_no, crm_customer_no, crm_address_id, 
+address_type, hno, block, building_name, street, road, city, town, 
+state, district, country, post_code, equipd 
+having (count(*))>1;
+
+
+
+
+-----one access number having duplicate  plan name with same status,account_no , customer_no
+--insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,exception_count,remarks)
+--select  'identification_no', identification_no,
+--'one access number having duplicate plan name with same status,account_no , customer_no',count,
+--'Connection template exception'
+--from (
+--select distinct identification_no,connection_type,crm_customer_no,crm_account_no,plan_name,status,count(*) as count
+--from connection_template 
+--group by identification_no ,connection_type,crm_customer_no,crm_account_no,plan_name,status having(count(*))>1
+--order by identification_no 
+--) t ;
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,exception_count,remarks
+,customer_id,account_id,identification_id  
+)
+select  
+'identification_no', identification_no,
+'one access number having duplicate plan name with same status,account_no , customer_no',count(*),
+'Connection template exception',
+crm_customer_no::int,crm_account_no::int , identification_no 
+from 
+(
+select identification_no,t.crm_account_no ,t.crm_customer_no ,status ,plan_name
+from connection_template_debug t
+)sub 
+--where crm_customer_no::int not in (select customer_id from cust_sync_exception)
+group by identification_no,crm_account_no ,crm_customer_no
+having count(*) > 1;
+
+
+/*
+----------- access number having different plan_name or same plan name  , 
+--different status ,under same combination
+--of customer no ,acccount number , access number
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select  'identification_no', identification_no,
+'access number having different or same plan_name , different status under same combination of customer no
+ ,acccount number , access number','Connection template exception'
+from (
+select distinct 'identification_no',identification_no,connection_type,status,crm_account_no,
+crm_customer_no,plan_name  
+from connection_template 
+order by identification_no)t;
+
+*/
+
+
+-----------------------------------connection template exceptions ends--------------------------------------------------------
+
+--------accounts_template -- crm address id cannot be null
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select 'account_no',account_no,
+'account no having blank crm address id','Accounts template exception' 
+from accounts_template_debug at2  
+where coalesce(crm_address_id::varchar,'')='';
+
+
+---accounts_template ---crm_contact_id is not null 
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks,
+customer_id 
+)
+select 'account_no',account_no,
+'account no having blank contact_no ','Accounts template exception' ,
+at2.crm_customer_no::int  
+from accounts_template_debug at2  
+where coalesce(contact_no  ::varchar,'')='';
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select 'account_no',account_no,
+'account no having blank crm contact id ','Accounts template exception' from accounts_template_debug at2  
+where coalesce(crm_contact_id::varchar,'')='';
+
+
+
+-------customer cannot have null crm address id
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'crm customer no',crm_customer_no,
+'crm customer number having blank crm address id','Customer template exception'
+from customer_template_Debug 
+where coalesce(crm_address_id::varchar,'')=''; 
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks,
+customer_id 
+)
+select distinct 'crm customer no',crm_customer_no,
+'crm customer number having blank crm contact id','Customer template exception',
+t.crm_customer_no::int 
+from customer_template_debug t
+where coalesce(crm_contact_id::varchar,'')=''  and coalesce(account_contact_id ::varchar,'')='' 
+and crm_customer_no in
+(select crm_customer_no from connection_template_debug  where status = 'CU')
+
+/*
+select *
+from customer_template_debug t
+where coalesce(crm_contact_id::varchar,'')=''  
+and coalesce(account_contact_id ::varchar,'')='' 
+
+
+select * from connection_template_debug where  crm_customer_no in 
+(
+'99999998',
+'17',
+'3001',
+'16',
+'18',
+'424434')
+*/
+
+
+
+
+
+
+
+
+$procedure$
+;
+
+CREATE OR REPLACE PROCEDURE imagine.precheck_cust_sync_old()
+ LANGUAGE sql
+AS $procedure$
+  
+/*
+create table cust_sync_exception
+(
+entity_name varchar(100),
+Entity_Value varchar(100),
+description varchar(100),
+exception_msg varchar(500),
+exception_count int,
+remarks varchar(100)
+)*/
+
+
+
+--One active service number having more than one active plan.
+insert into cust_sync_exception (entity_name,Entity_Value,description,exception_msg,exception_count,remarks)
+select distinct 'identification_no',identification_no,plan_name,
+'One active service number having more than one active plan'
+,count(*),'Connection template exception'
+from connection_template 
+where status='CU'
+group by identification_no,plan_name having(count(*))>1
+order by identification_no; 
+
+
+
+---One active service number  mapped with more than one account number
+insert into cust_sync_exception (entity_name,Entity_Value,description,exception_msg,exception_count,remarks)
+select distinct 'identification_no',identification_no,crm_account_no,
+'One active service number mapped with more than one account number'
+,count(*),'Connection template exception' from connection_template 
+where status='CU'
+group by identification_no,crm_account_no having(count(*))>1
+order by identification_no;
+
+
+
+--One active service number cant be mapped with more than  one customer number
+insert into cust_sync_exception (entity_name,Entity_Value,description,exception_msg,exception_count,remarks)
+select distinct 'identification_no',identification_no,crm_customer_no ,
+'One active service number mapped with more than one customer number',
+count(*),'Connection template exception'
+from connection_template 
+where status='CU'
+group by identification_no,crm_customer_no having(count(*))>1
+order by identification_no;
+
+--One service number can't be without one customer, account, plan and service address.
+-- (Service address is applicable only for Fixedline service type)
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'identification_no',identification_no,
+'access number having blank crm_customer_no ','Connection template exception'
+from connection_template 
+where COALESCE(crm_customer_no,'') = '';
+
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'identification_no',identification_no,
+'access number having blank account number','Connection template exception'
+from connection_template 
+where COALESCE(crm_account_no::varchar,'') = '';
+
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'identification_no',identification_no,
+'access number having blank plan name ','Connection template exception'
+from connection_template 
+where COALESCE(plan_name,'') = '';
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'identification_no',identification_no,
+'access number having blank service address','Connection template exception'
+from connection_template 
+where COALESCE(crm_address_id::varchar,'') = '' 
+and connection_type in ('CATRFLB-F','CATBFLB-F');
+
+
+------one access number having more than one status-------------------------------
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,exception_count,remarks)
+select  'identification_no', identification_no,
+'one access number having more than one status',count,
+'Connection template exception'
+from (
+select distinct identification_no,crm_Account_no,crm_customer_no,count(distinct(status)) as count
+from connection_template 
+group by identification_no,crm_Account_no,crm_customer_no having(count(distinct(status)))>1
+order by identification_no )t; 
+
+
+-----one access number having duplicate  plan name with same status,account_no , customer_no
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,exception_count,remarks)
+select  'identification_no', identification_no,
+'one access number having duplicate plan name with same status,account_no , customer_no',count,
+'Connection template exception'
+from (
+select distinct identification_no,connection_type,crm_customer_no,crm_account_no,plan_name,status,count(*) as count
+from connection_template 
+group by identification_no ,connection_type,crm_customer_no,crm_account_no,plan_name,status having(count(*))>1
+order by identification_no 
+) t ;
+
+
+/*
+----------- access number having different plan_name or same plan name  , 
+--different status ,under same combination
+--of customer no ,acccount number , access number
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select  'identification_no', identification_no,
+'access number having different or same plan_name , different status under same combination of customer no
+ ,acccount number , access number','Connection template exception'
+from (
+select distinct 'identification_no',identification_no,connection_type,status,crm_account_no,
+crm_customer_no,plan_name  
+from connection_template 
+order by identification_no)t;
+
+*/
+
+
+-----------------------------------connection template exceptions ends--------------------------------------------------------
+
+
+-------customer cannot have null crm address id
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'crm customer no',crm_customer_no,
+'crm customer number having blank crm address id','Customer template exception'
+from customer_template 
+where coalesce(crm_address_id::varchar,'')=''; 
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select distinct 'crm customer no',crm_customer_no,
+'crm customer number having blank crm contact id','Customer template exception'
+from customer_template 
+where coalesce(crm_contact_id::varchar,'')=''; 
+
+
+
+
+
+
+--------accounts_template -- crm address id cannot be null
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select 'account_no',account_no,
+'account no having blank crm address id','Accounts template exception' from accounts_template at2  
+where coalesce(crm_address_id::varchar,'')='';
+
+
+---accounts_template ---crm_contact_id is not null 
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select 'account_no',account_no,
+'account no having blank contact_no ','Accounts template exception' from accounts_template at2  
+where coalesce(contact_no  ::varchar,'')='';
+
+insert into cust_sync_exception (entity_name,Entity_Value,exception_msg,remarks)
+select 'account_no',account_no,
+'account no having blank crm contact id ','Accounts template exception' from accounts_template at2  
+where coalesce(crm_contact_id::varchar,'')='';
+
+
+
+$procedure$
+;
+
+CREATE OR REPLACE FUNCTION imagine.role_desc(i_role_code integer)
+ RETURNS character varying
+ LANGUAGE plpgsql
+AS $function$
+declare v_cnt int;
+v_role_desc varchar(200);
+	BEGIN
+
+		select 	count(*) into v_cnt
+		from 	roles 
+		where   role_id = i_role_code;
+	
+	if v_cnt > 0
+	then
+		select 	role_name into v_role_desc
+		from 	roles 
+		where   role_id = i_role_code;
+	end if;
+	
+	--exception when others then v_role_desc = '';
+	return v_role_desc;
+	END;
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.user_desc(i_user_code integer)
+ RETURNS character varying
+ LANGUAGE plpgsql
+AS $function$
+declare v_cnt int;
+v_user_desc varchar(500);
+	BEGIN
+
+		select 	count(*) into v_cnt
+		from 	users 
+		where   user_id = i_user_code;
+	
+	if v_cnt > 0
+	then
+		select 	first_name  into v_user_desc
+		from 	users 
+		where   user_id = i_user_code;
+	end if;
+	
+	--exception when others then v_user_desc = null;
+	return v_user_desc;
+	END;
+$function$
+;
+
+CREATE OR REPLACE FUNCTION imagine.user_lname(i_user_code integer)
+ RETURNS character varying
+ LANGUAGE plpgsql
+AS $function$
+declare v_cnt int;
+v_first_name varchar(500);
+	BEGIN
+
+		select 	count(*) into v_cnt
+		from 	users usr
+		where   user_id = i_user_code;
+	
+	if v_cnt > 0
+	then
+		select 	loginid into v_first_name
+		from 	users usr
+		where   user_id = i_user_code;
+	end if;
+
+return v_first_name;
+	END;
+$function$
+;

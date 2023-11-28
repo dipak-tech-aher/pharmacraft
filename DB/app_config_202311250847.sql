@@ -1,0 +1,3 @@
+INSERT INTO imagine.app_config (app_name,config,created_by,created_at,updated_by,updated_at,image) VALUES
+	 ('Imagine','{"--white": "#ffffff;", "--fourtColor": "red;", "--thirdColor": "Green;", "--BorderColor": "orange;", "--primaryColor": "orange;", "--secondaryColor": "blue;"}',1,'2021-03-31 15:32:16.823+05:30',1,'2021-03-31 15:32:16.823+05:30','asdgfgnhfdsas'),
+	 ('Imagine','{"--white": "#ffffff;", "--fourtColor": "red;", "--thirdColor": "Green;", "--BorderColor": "orange;", "--primaryColor": "orange;", "--secondaryColor": "blue;"}',1,'2021-04-07 13:46:37.637+05:30',1,'2021-04-07 13:46:37.637+05:30','safdgshdfv32454dszd');

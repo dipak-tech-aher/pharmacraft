@@ -1,0 +1,791 @@
+-- imagine.accounts_account_id_seq definition
+
+-- DROP SEQUENCE imagine.accounts_account_id_seq;
+
+CREATE SEQUENCE imagine.accounts_account_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.accounts_debug_account_id_seq definition
+
+-- DROP SEQUENCE imagine.accounts_debug_account_id_seq;
+
+CREATE SEQUENCE imagine.accounts_debug_account_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.address_address_id_seq definition
+
+-- DROP SEQUENCE imagine.address_address_id_seq;
+
+CREATE SEQUENCE imagine.address_address_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.address_debug_address_id_seq definition
+
+-- DROP SEQUENCE imagine.address_debug_address_id_seq;
+
+CREATE SEQUENCE imagine.address_debug_address_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.aios_user_prod_13dec22_user_id_seq definition
+
+-- DROP SEQUENCE imagine.aios_user_prod_13dec22_user_id_seq;
+
+CREATE SEQUENCE imagine.aios_user_prod_13dec22_user_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.app_config_app_id_seq definition
+
+-- DROP SEQUENCE imagine.app_config_app_id_seq;
+
+CREATE SEQUENCE imagine.app_config_app_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.appointment_appointment_id_seq definition
+
+-- DROP SEQUENCE imagine.appointment_appointment_id_seq;
+
+CREATE SEQUENCE imagine.appointment_appointment_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.attachments_attachment_id_seq definition
+
+-- DROP SEQUENCE imagine.attachments_attachment_id_seq;
+
+CREATE SEQUENCE imagine.attachments_attachment_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.booster_plans_plan_id_seq definition
+
+-- DROP SEQUENCE imagine.booster_plans_plan_id_seq;
+
+CREATE SEQUENCE imagine.booster_plans_plan_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.booster_purchase_id_seq definition
+
+-- DROP SEQUENCE imagine.booster_purchase_id_seq;
+
+CREATE SEQUENCE imagine.booster_purchase_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.bots_steps_id_seq definition
+
+-- DROP SEQUENCE imagine.bots_steps_id_seq;
+
+CREATE SEQUENCE imagine.bots_steps_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.campaign_camp_id_seq definition
+
+-- DROP SEQUENCE imagine.campaign_camp_id_seq;
+
+CREATE SEQUENCE imagine.campaign_camp_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.chat_chat_id_seq definition
+
+-- DROP SEQUENCE imagine.chat_chat_id_seq;
+
+CREATE SEQUENCE imagine.chat_chat_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.chat_hdr_chat_id_seq definition
+
+-- DROP SEQUENCE imagine.chat_hdr_chat_id_seq;
+
+CREATE SEQUENCE imagine.chat_hdr_chat_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.chat_response_new_chat_id_seq definition
+
+-- DROP SEQUENCE imagine.chat_response_new_chat_id_seq;
+
+CREATE SEQUENCE imagine.chat_response_new_chat_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.connection_plan_conn_plan_id_seq definition
+
+-- DROP SEQUENCE imagine.connection_plan_conn_plan_id_seq;
+
+CREATE SEQUENCE imagine.connection_plan_conn_plan_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.connection_template_debug_id_seq definition
+
+-- DROP SEQUENCE imagine.connection_template_debug_id_seq;
+
+CREATE SEQUENCE imagine.connection_template_debug_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.connections_connection_id_seq definition
+
+-- DROP SEQUENCE imagine.connections_connection_id_seq;
+
+CREATE SEQUENCE imagine.connections_connection_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.connections_debug_connection_id_seq definition
+
+-- DROP SEQUENCE imagine.connections_debug_connection_id_seq;
+
+CREATE SEQUENCE imagine.connections_debug_connection_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.contacts_contact_id_seq definition
+
+-- DROP SEQUENCE imagine.contacts_contact_id_seq;
+
+CREATE SEQUENCE imagine.contacts_contact_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.contacts_debug_contact_id_seq definition
+
+-- DROP SEQUENCE imagine.contacts_debug_contact_id_seq;
+
+CREATE SEQUENCE imagine.contacts_debug_contact_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.customer_acc_contact_dtl_cust_acc_id_seq definition
+
+-- DROP SEQUENCE imagine.customer_acc_contact_dtl_cust_acc_id_seq;
+
+CREATE SEQUENCE imagine.customer_acc_contact_dtl_cust_acc_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.customers_customer_id_seq definition
+
+-- DROP SEQUENCE imagine.customers_customer_id_seq;
+
+CREATE SEQUENCE imagine.customers_customer_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.customers_debug_customer_id_seq definition
+
+-- DROP SEQUENCE imagine.customers_debug_customer_id_seq;
+
+CREATE SEQUENCE imagine.customers_debug_customer_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.email_template_template_id_seq definition
+
+-- DROP SEQUENCE imagine.email_template_template_id_seq;
+
+CREATE SEQUENCE imagine.email_template_template_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.inbound_messages_inbound_id_seq definition
+
+-- DROP SEQUENCE imagine.inbound_messages_inbound_id_seq;
+
+CREATE SEQUENCE imagine.inbound_messages_inbound_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.interaction_intxn_id_seq definition
+
+-- DROP SEQUENCE imagine.interaction_intxn_id_seq;
+
+CREATE SEQUENCE imagine.interaction_intxn_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.interaction_task_intxn_task_id_seq definition
+
+-- DROP SEQUENCE imagine.interaction_task_intxn_task_id_seq;
+
+CREATE SEQUENCE imagine.interaction_task_intxn_task_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.interaction_txn_txn_id_seq definition
+
+-- DROP SEQUENCE imagine.interaction_txn_txn_id_seq;
+
+CREATE SEQUENCE imagine.interaction_txn_txn_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.kiosk_reference_no_seq definition
+
+-- DROP SEQUENCE imagine.kiosk_reference_no_seq;
+
+CREATE SEQUENCE imagine.kiosk_reference_no_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.leads_lead_id_seq definition
+
+-- DROP SEQUENCE imagine.leads_lead_id_seq;
+
+CREATE SEQUENCE imagine.leads_lead_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.notes_notes_id_seq definition
+
+-- DROP SEQUENCE imagine.notes_notes_id_seq;
+
+CREATE SEQUENCE imagine.notes_notes_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.notifications_notification_id_seq definition
+
+-- DROP SEQUENCE imagine.notifications_notification_id_seq;
+
+CREATE SEQUENCE imagine.notifications_notification_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.otp_id_seq definition
+
+-- DROP SEQUENCE imagine.otp_id_seq;
+
+CREATE SEQUENCE imagine.otp_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.plan_booster_plan_id_seq definition
+
+-- DROP SEQUENCE imagine.plan_booster_plan_id_seq;
+
+CREATE SEQUENCE imagine.plan_booster_plan_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.plan_offer_mapping_plan_offer_id_seq definition
+
+-- DROP SEQUENCE imagine.plan_offer_mapping_plan_offer_id_seq;
+
+CREATE SEQUENCE imagine.plan_offer_mapping_plan_offer_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.plan_plan_id_seq definition
+
+-- DROP SEQUENCE imagine.plan_plan_id_seq;
+
+CREATE SEQUENCE imagine.plan_plan_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.plan_prod_27032023_plan_id_seq definition
+
+-- DROP SEQUENCE imagine.plan_prod_27032023_plan_id_seq;
+
+CREATE SEQUENCE imagine.plan_prod_27032023_plan_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.plan_upd_06dec2022_plan_id_seq definition
+
+-- DROP SEQUENCE imagine.plan_upd_06dec2022_plan_id_seq;
+
+CREATE SEQUENCE imagine.plan_upd_06dec2022_plan_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.plan_upd_tmp_06dec2022_plan_upd_id_seq definition
+
+-- DROP SEQUENCE imagine.plan_upd_tmp_06dec2022_plan_upd_id_seq;
+
+CREATE SEQUENCE imagine.plan_upd_tmp_06dec2022_plan_upd_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.roles_role_id_seq definition
+
+-- DROP SEQUENCE imagine.roles_role_id_seq;
+
+CREATE SEQUENCE imagine.roles_role_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.sales_target_target_id_seq definition
+
+-- DROP SEQUENCE imagine.sales_target_target_id_seq;
+
+CREATE SEQUENCE imagine.sales_target_target_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.screen_module_mapping_scr_mod_id_seq definition
+
+-- DROP SEQUENCE imagine.screen_module_mapping_scr_mod_id_seq;
+
+CREATE SEQUENCE imagine.screen_module_mapping_scr_mod_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.security_question_profile_id_seq definition
+
+-- DROP SEQUENCE imagine.security_question_profile_id_seq;
+
+CREATE SEQUENCE imagine.security_question_profile_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.selfcare_ref_no_seq definition
+
+-- DROP SEQUENCE imagine.selfcare_ref_no_seq;
+
+CREATE SEQUENCE imagine.selfcare_ref_no_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.tariff_mst_prod_27032023_tariff_id_seq definition
+
+-- DROP SEQUENCE imagine.tariff_mst_prod_27032023_tariff_id_seq;
+
+CREATE SEQUENCE imagine.tariff_mst_prod_27032023_tariff_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.tariff_mst_tariff_id_seq definition
+
+-- DROP SEQUENCE imagine.tariff_mst_tariff_id_seq;
+
+CREATE SEQUENCE imagine.tariff_mst_tariff_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.tariff_offer_mapping_tariff_offer_id_seq definition
+
+-- DROP SEQUENCE imagine.tariff_offer_mapping_tariff_offer_id_seq;
+
+CREATE SEQUENCE imagine.tariff_offer_mapping_tariff_offer_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.test_t_id_seq definition
+
+-- DROP SEQUENCE imagine.test_t_id_seq;
+
+CREATE SEQUENCE imagine.test_t_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.transitions_trans_id_seq definition
+
+-- DROP SEQUENCE imagine.transitions_trans_id_seq;
+
+CREATE SEQUENCE imagine.transitions_trans_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.user_session_session_id_seq definition
+
+-- DROP SEQUENCE imagine.user_session_session_id_seq;
+
+CREATE SEQUENCE imagine.user_session_session_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.user_tokens_id_seq definition
+
+-- DROP SEQUENCE imagine.user_tokens_id_seq;
+
+CREATE SEQUENCE imagine.user_tokens_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.users_user_id_seq definition
+
+-- DROP SEQUENCE imagine.users_user_id_seq;
+
+CREATE SEQUENCE imagine.users_user_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 2
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.whatsapp_chat_history_id_seq definition
+
+-- DROP SEQUENCE imagine.whatsapp_chat_history_id_seq;
+
+CREATE SEQUENCE imagine.whatsapp_chat_history_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.whatsapp_report_dtl_report_dtl_id_seq definition
+
+-- DROP SEQUENCE imagine.whatsapp_report_dtl_report_dtl_id_seq;
+
+CREATE SEQUENCE imagine.whatsapp_report_dtl_report_dtl_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.whatsapp_report_report_id_seq definition
+
+-- DROP SEQUENCE imagine.whatsapp_report_report_id_seq;
+
+CREATE SEQUENCE imagine.whatsapp_report_report_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.workflow_definition_workflow_id_seq definition
+
+-- DROP SEQUENCE imagine.workflow_definition_workflow_id_seq;
+
+CREATE SEQUENCE imagine.workflow_definition_workflow_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.workflow_defn_new_workflow_id_seq definition
+
+-- DROP SEQUENCE imagine.workflow_defn_new_workflow_id_seq;
+
+CREATE SEQUENCE imagine.workflow_defn_new_workflow_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.workflow_hdr_wf_hdr_id_seq definition
+
+-- DROP SEQUENCE imagine.workflow_hdr_wf_hdr_id_seq;
+
+CREATE SEQUENCE imagine.workflow_hdr_wf_hdr_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.workflow_mapping_mapping_id_seq definition
+
+-- DROP SEQUENCE imagine.workflow_mapping_mapping_id_seq;
+
+CREATE SEQUENCE imagine.workflow_mapping_mapping_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;
+
+
+-- imagine.workflow_txn_wf_txn_id_seq definition
+
+-- DROP SEQUENCE imagine.workflow_txn_wf_txn_id_seq;
+
+CREATE SEQUENCE imagine.workflow_txn_wf_txn_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START 1
+	CACHE 1
+	NO CYCLE;

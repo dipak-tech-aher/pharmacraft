@@ -1,0 +1,6120 @@
+-- imagine.access_no_max_equipd_id_3_mar_2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.access_no_max_equipd_id_3_mar_2023;
+
+CREATE TABLE imagine.access_no_max_equipd_id_3_mar_2023 (
+	equip_id varchar(10000) NULL,
+	customer_id varchar(1000) NULL,
+	account_id varchar(1000) NULL,
+	costing_end_dt varchar(1000) NULL,
+	contract_uid varchar(1000) NULL,
+	access_number varchar(1000) NULL,
+	account_first_name varchar(1000) NULL,
+	account_last_name varchar(1000) NULL,
+	connection_type_code varchar(1000) NULL,
+	connection_status varchar(1000) NULL,
+	creation_source_code varchar(1000) NULL,
+	connection_type varchar(1000) NULL,
+	connection_group varchar(1000) NULL,
+	tariff_code varchar(1000) NULL,
+	tariff_description varchar(1000) NULL,
+	tariff_group_code varchar(1000) NULL,
+	iccid varchar(1000) NULL,
+	imsi varchar(1000) NULL,
+	is_ported varchar(1000) NULL,
+	donor varchar(1000) NULL,
+	address_id varchar(1000) NULL,
+	contact_id varchar(1000) NULL
+);
+
+
+-- imagine.account_14feb2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.account_14feb2023;
+
+CREATE TABLE imagine.account_14feb2023 (
+	account_id int4 NULL,
+	account_cat varchar(20) NULL,
+	account_class varchar(20) NULL,
+	account_priority varchar(20) NULL,
+	title varchar(20) NULL,
+	first_name varchar(500) NULL,
+	last_name varchar(500) NULL,
+	gender bpchar(1) NULL,
+	birth_date date NULL,
+	registered_no varchar(20) NULL,
+	id_type varchar(20) NULL,
+	id_value varchar(20) NULL,
+	customer_id int4 NULL,
+	account_no int4 NULL,
+	contact_id int4 NULL,
+	address_id int4 NULL,
+	base_coll_plan varchar(20) NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	priority varchar(100) NULL,
+	bill_lang varchar(10) NULL,
+	bill_delivery_mthd varchar(10) NULL,
+	no_of_copies numeric NULL,
+	reg_date date NULL,
+	account_type varchar(20) NULL,
+	sq_ref_id int4 NULL,
+	created_dept_id text NULL,
+	created_role_id int4 NULL
+);
+
+
+-- imagine.account_address_details definition
+
+-- Drop table
+
+-- DROP TABLE imagine.account_address_details;
+
+CREATE TABLE imagine.account_address_details (
+	crm_customer_no varchar(32767) NULL,
+	address_id varchar(32767) NULL,
+	account_no varchar(32767) NULL,
+	address_type varchar(32767) NULL,
+	hno varchar(32767) NULL,
+	block varchar(32767) NULL,
+	building_name varchar(32767) NULL,
+	street varchar(32767) NULL,
+	road varchar(32767) NULL,
+	city varchar(32767) NULL,
+	town varchar(32767) NULL,
+	state varchar(32767) NULL,
+	district varchar(32767) NULL,
+	country varchar(32767) NULL,
+	post_code varchar(32767) NULL
+);
+
+
+-- imagine.account_address_map definition
+
+-- Drop table
+
+-- DROP TABLE imagine.account_address_map;
+
+CREATE TABLE imagine.account_address_map (
+	customer_id varchar(32767) NULL,
+	account_no varchar(32767) NULL,
+	address_id varchar(32767) NULL
+);
+
+
+-- imagine.account_address_upload_17022023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.account_address_upload_17022023;
+
+CREATE TABLE imagine.account_address_upload_17022023 (
+	customer_id int4 NULL,
+	account_id int4 NULL,
+	address_uid int4 NULL
+);
+
+
+-- imagine.account_contact_details definition
+
+-- Drop table
+
+-- DROP TABLE imagine.account_contact_details;
+
+CREATE TABLE imagine.account_contact_details (
+	customer_id varchar(32767) NULL,
+	contact_id varchar(32767) NULL,
+	contact_type varchar(32767) NULL,
+	contact_no varchar(32767) NULL,
+	contact_no_pfx varchar(32767) NULL,
+	alt_contact_no1 varchar(32767) NULL,
+	email varchar(32767) NULL,
+	alt_email varchar(32767) NULL
+);
+
+
+-- imagine.account_contact_map definition
+
+-- Drop table
+
+-- DROP TABLE imagine.account_contact_map;
+
+CREATE TABLE imagine.account_contact_map (
+	customer_id varchar(32767) NULL,
+	account__no varchar(32767) NULL,
+	contact_id varchar(32767) NULL
+);
+
+
+-- imagine.account_contact_upload_17022023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.account_contact_upload_17022023;
+
+CREATE TABLE imagine.account_contact_upload_17022023 (
+	customer_id int4 NULL,
+	account_id int4 NULL,
+	contact_id int4 NULL
+);
+
+
+-- imagine.account_full_address_upload_17022023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.account_full_address_upload_17022023;
+
+CREATE TABLE imagine.account_full_address_upload_17022023 (
+	customer_id varchar(1000) NULL,
+	account_id varchar(1000) NULL,
+	first_name varchar(1000) NULL,
+	last_name varchar(1000) NULL,
+	account_status varchar(1000) NULL,
+	address_uid varchar(1000) NULL,
+	address_type varchar(1000) NULL,
+	street_no varchar(1000) NULL,
+	flat_no varchar(1000) NULL,
+	"EXTENSION" varchar(1000) NULL,
+	area_name varchar(1000) NULL,
+	place_name varchar(1000) NULL,
+	street_name varchar(1000) NULL,
+	address_line1 varchar(1000) NULL,
+	district varchar(1000) NULL,
+	country varchar(1000) NULL,
+	post_code varchar(1000) NULL,
+	is_cust_addr varchar(1000) NULL,
+	is_bill_addr varchar(1000) NULL
+);
+
+
+-- imagine.account_full_contact_upload_17022023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.account_full_contact_upload_17022023;
+
+CREATE TABLE imagine.account_full_contact_upload_17022023 (
+	customer_id varchar(1000) NULL,
+	account_id varchar(1000) NULL,
+	contact_id varchar(1000) NULL,
+	title varchar(1000) NULL,
+	first_name varchar(1000) NULL,
+	last_name varchar(1000) NULL,
+	contact_type varchar(1000) NULL,
+	contact_no varchar(1000) NULL,
+	contact_no_2 varchar(1000) NULL,
+	email varchar(1000) NULL,
+	email_2 varchar(1000) NULL
+);
+
+
+-- imagine.account_id definition
+
+-- Drop table
+
+-- DROP TABLE imagine.account_id;
+
+CREATE TABLE imagine.account_id (
+	account_id int4 NULL
+);
+
+
+-- imagine.account_id_type definition
+
+-- Drop table
+
+-- DROP TABLE imagine.account_id_type;
+
+CREATE TABLE imagine.account_id_type (
+	account_no varchar(32767) NULL,
+	id_type varchar(32767) NULL
+);
+
+
+-- imagine.account_service definition
+
+-- Drop table
+
+-- DROP TABLE imagine.account_service;
+
+CREATE TABLE imagine.account_service (
+	account_id int4 NULL,
+	account_no int4 NULL,
+	identification_no varchar(32767) NULL
+);
+
+
+-- imagine.accounts_15feb2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.accounts_15feb2023;
+
+CREATE TABLE imagine.accounts_15feb2023 (
+	account_id int4 NULL,
+	account_cat varchar(20) NULL,
+	account_class varchar(20) NULL,
+	account_priority varchar(20) NULL,
+	title varchar(20) NULL,
+	first_name varchar(500) NULL,
+	last_name varchar(500) NULL,
+	gender bpchar(1) NULL,
+	birth_date date NULL,
+	registered_no varchar(20) NULL,
+	id_type varchar(20) NULL,
+	id_value varchar(20) NULL,
+	customer_id int4 NULL,
+	account_no int4 NULL,
+	contact_id int4 NULL,
+	address_id int4 NULL,
+	base_coll_plan varchar(20) NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	priority varchar(100) NULL,
+	bill_lang varchar(10) NULL,
+	bill_delivery_mthd varchar(10) NULL,
+	no_of_copies numeric NULL,
+	reg_date date NULL,
+	account_type varchar(20) NULL,
+	sq_ref_id int4 NULL,
+	created_dept_id text NULL,
+	created_role_id int4 NULL
+);
+
+
+-- imagine.accounts_debug definition
+
+-- Drop table
+
+-- DROP TABLE imagine.accounts_debug;
+
+CREATE TABLE imagine.accounts_debug (
+	account_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	account_cat varchar(20) NOT NULL,
+	account_class varchar(20) NOT NULL,
+	account_priority varchar(20) NOT NULL,
+	title varchar(20) NULL,
+	first_name varchar(500) NOT NULL,
+	last_name varchar(500) NULL,
+	gender bpchar(1) NULL,
+	birth_date date NULL,
+	registered_no varchar(20) NULL,
+	id_type varchar(20) NULL,
+	id_value varchar(20) NULL,
+	customer_id int4 NOT NULL,
+	account_no int4 NULL,
+	contact_id int4 NULL,
+	address_id int4 NOT NULL,
+	base_coll_plan varchar(22) NOT NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	priority varchar(100) NULL,
+	bill_lang varchar(10) NULL,
+	bill_delivery_mthd varchar(10) NULL,
+	no_of_copies numeric NOT NULL DEFAULT 1,
+	reg_date date NULL,
+	account_type varchar(20) NULL,
+	sq_ref_id int4 NULL,
+	crm_ref_id varchar(200) NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL
+);
+
+
+-- imagine.accounts_template definition
+
+-- Drop table
+
+-- DROP TABLE imagine.accounts_template;
+
+CREATE TABLE imagine.accounts_template (
+	account_no varchar(1000) NULL,
+	account_category varchar(1000) NULL,
+	account_class varchar(1000) NULL,
+	account_priority varchar(1000) NULL,
+	title varchar(1000) NULL,
+	first_name varchar(1000) NULL,
+	last_name varchar(1000) NULL,
+	gender varchar(1000) NULL,
+	birth_date varchar(1000) NULL,
+	registered_no varchar(1000) NULL,
+	id_type varchar(1000) NULL,
+	id_value varchar(1000) NULL,
+	base_coll_plan varchar(1000) NULL,
+	status varchar(1000) NULL,
+	bill_lang varchar(1000) NULL,
+	bill_delivery_mthd varchar(1000) NULL,
+	no_of_copies varchar(1000) NULL,
+	account_type varchar(1000) NULL,
+	crm_address_id varchar(1000) NULL,
+	address_type varchar(1000) NULL,
+	hno varchar(1000) NULL,
+	block varchar(1000) NULL,
+	building_name varchar(1000) NULL,
+	street varchar(1000) NULL,
+	road varchar(1000) NULL,
+	city varchar(1000) NULL,
+	town varchar(1000) NULL,
+	state varchar(1000) NULL,
+	district varchar(1000) NULL,
+	country varchar(1000) NULL,
+	post_code varchar(1000) NULL,
+	crm_contact_id varchar(1000) NULL,
+	contact_type varchar(1000) NULL,
+	contact_no varchar(1000) NULL,
+	contact_no_pfx varchar(1000) NULL,
+	alt_contact_no_1 varchar(1000) NULL,
+	email varchar(1000) NULL,
+	alt_email varchar(1000) NULL,
+	crm_customer_no varchar(1000) NULL,
+	address_insert_flag varchar(200) NULL,
+	contact_insert_flag varchar(200) NULL,
+	account_insert_flag varchar(200) NULL,
+	address_update_flag varchar(200) NULL,
+	contact_update_flag varchar(200) NULL,
+	account_update_flag varchar(200) NULL,
+	bcae_address_type varchar(200) NULL,
+	bcae_contact_type varchar(200) NULL,
+	bcae_account_category varchar(200) NULL,
+	bcae_account_class varchar(200) NULL,
+	bcae_account_priority varchar(200) NULL,
+	bcae_base_coll_plan varchar(200) NULL,
+	bcae_id_type varchar(200) NULL,
+	bcae_bill_delivery_method varchar(200) NULL
+);
+
+
+-- imagine.accounts_template_debug definition
+
+-- Drop table
+
+-- DROP TABLE imagine.accounts_template_debug;
+
+CREATE TABLE imagine.accounts_template_debug (
+	account_no varchar(1000) NULL,
+	account_category varchar(1000) NULL,
+	account_class varchar(1000) NULL,
+	account_priority varchar(1000) NULL,
+	title varchar(1000) NULL,
+	first_name varchar(1000) NULL,
+	last_name varchar(1000) NULL,
+	gender varchar(1000) NULL,
+	birth_date varchar(1000) NULL,
+	registered_no varchar(1000) NULL,
+	id_type varchar(1000) NULL,
+	id_value varchar(1000) NULL,
+	base_coll_plan varchar(1000) NULL,
+	status varchar(1000) NULL,
+	bill_lang varchar(1000) NULL,
+	bill_delivery_mthd varchar(1000) NULL,
+	no_of_copies varchar(1000) NULL,
+	account_type varchar(1000) NULL,
+	crm_address_id varchar(1000) NULL,
+	address_type varchar(1000) NULL,
+	hno varchar(1000) NULL,
+	block varchar(1000) NULL,
+	building_name varchar(1000) NULL,
+	street varchar(1000) NULL,
+	road varchar(1000) NULL,
+	city varchar(1000) NULL,
+	town varchar(1000) NULL,
+	state varchar(1000) NULL,
+	district varchar(1000) NULL,
+	country varchar(1000) NULL,
+	post_code varchar(1000) NULL,
+	crm_contact_id varchar(1000) NULL,
+	contact_type varchar(1000) NULL,
+	contact_no varchar(1000) NULL,
+	contact_no_pfx varchar(1000) NULL,
+	alt_contact_no_1 varchar(1000) NULL,
+	email varchar(1000) NULL,
+	alt_email varchar(1000) NULL,
+	crm_customer_no varchar(1000) NULL,
+	address_insert_flag varchar(200) NULL,
+	contact_insert_flag varchar(200) NULL,
+	account_insert_flag varchar(200) NULL,
+	address_update_flag varchar(200) NULL,
+	contact_update_flag varchar(200) NULL,
+	account_update_flag varchar(200) NULL,
+	bcae_address_type varchar(200) NULL,
+	bcae_contact_type varchar(200) NULL,
+	bcae_account_category varchar(200) NULL,
+	bcae_account_class varchar(200) NULL,
+	bcae_account_priority varchar(200) NULL,
+	bcae_base_coll_plan varchar(200) NULL,
+	bcae_id_type varchar(200) NULL,
+	bcae_bill_delivery_method varchar(200) NULL,
+	exception_flag varchar(2) NULL
+);
+
+
+-- imagine.address_14feb2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.address_14feb2023;
+
+CREATE TABLE imagine.address_14feb2023 (
+	address_id int4 NULL,
+	address_type varchar(20) NULL,
+	hno varchar(20) NULL,
+	block varchar(100) NULL,
+	building_name varchar(100) NULL,
+	street varchar(50) NULL,
+	road varchar(50) NULL,
+	city varchar(50) NULL,
+	town varchar(100) NULL,
+	state varchar(50) NULL,
+	district varchar(50) NULL,
+	country varchar(50) NULL,
+	latitude varchar(20) NULL,
+	longitude varchar(20) NULL,
+	post_code varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	zone_name varchar(20) NULL,
+	is_cust_addr bpchar(1) NULL,
+	is_bill_addr bpchar(1) NULL,
+	crm_addr_uid varchar NULL,
+	created_dept_id text NULL,
+	created_role_id int4 NULL,
+	account_id int4 NULL,
+	connection_id int4 NULL,
+	customer_id int4 NULL
+);
+
+
+-- imagine.address_debug definition
+
+-- Drop table
+
+-- DROP TABLE imagine.address_debug;
+
+CREATE TABLE imagine.address_debug (
+	address_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	address_type varchar(20) NOT NULL,
+	hno varchar(20) NOT NULL,
+	block varchar(100) NULL,
+	building_name varchar(100) NULL,
+	street varchar(50) NOT NULL,
+	road varchar(50) NOT NULL,
+	city varchar(50) NOT NULL,
+	town varchar(100) NOT NULL,
+	state varchar(50) NULL,
+	district varchar(50) NOT NULL,
+	country varchar(50) NOT NULL,
+	latitude varchar(20) NULL,
+	longitude varchar(20) NULL,
+	post_code varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	"zone" varchar(20) NULL,
+	is_cust_addr bpchar(1) NULL DEFAULT 'N'::bpchar,
+	is_bill_addr bpchar(1) NULL DEFAULT 'N'::bpchar,
+	crm_addr_uid varchar NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL,
+	crm_customer_id varchar(50) NULL,
+	crm_account_id int4 NULL
+);
+
+
+-- imagine.address_id_mapping definition
+
+-- Drop table
+
+-- DROP TABLE imagine.address_id_mapping;
+
+CREATE TABLE imagine.address_id_mapping (
+	aios_add_id int4 NULL,
+	cer_add_id int4 NULL
+);
+
+
+-- imagine.address_lookup definition
+
+-- Drop table
+
+-- DROP TABLE imagine.address_lookup;
+
+CREATE TABLE imagine.address_lookup (
+	post_code varchar(10) NULL,
+	adm_unit1 varchar(100) NULL,
+	district varchar(100) NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	block varchar(100) NULL,
+	building_name varchar(100) NULL,
+	state varchar(50) NULL,
+	latitude varchar(20) NULL,
+	longitude varchar(20) NULL,
+	"zone" varchar(20) NULL,
+	is_cust_addr bpchar(1) NULL,
+	is_bill_addr bpchar(1) NULL,
+	crm_addr_uid varchar NULL,
+	sub_district varchar(100) NULL
+);
+
+
+-- imagine.address_test definition
+
+-- Drop table
+
+-- DROP TABLE imagine.address_test;
+
+CREATE TABLE imagine.address_test (
+	address_id int4 NULL,
+	address_type varchar(20) NULL,
+	hno varchar(20) NULL,
+	block varchar(100) NULL,
+	building_name varchar(100) NULL,
+	street varchar(50) NULL,
+	road varchar(50) NULL,
+	city varchar(50) NULL,
+	town varchar(100) NULL,
+	state varchar(50) NULL,
+	district varchar(50) NULL,
+	country varchar(50) NULL,
+	latitude varchar(20) NULL,
+	longitude varchar(20) NULL,
+	post_code varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	"zone" varchar(20) NULL,
+	is_cust_addr bpchar(1) NULL,
+	is_bill_addr bpchar(1) NULL,
+	crm_addr_uid varchar NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL,
+	crm_customer_id varchar(50) NULL,
+	crm_account_id int4 NULL
+);
+
+
+-- imagine.addressmap definition
+
+-- Drop table
+
+-- DROP TABLE imagine.addressmap;
+
+CREATE TABLE imagine.addressmap (
+	auto_addressid varchar(32767) NULL,
+	address_uid varchar(32767) NULL
+);
+
+
+-- imagine.aios_export definition
+
+-- Drop table
+
+-- DROP TABLE imagine.aios_export;
+
+CREATE TABLE imagine.aios_export (
+	crm_customer_no varchar(20) NULL,
+	customer_name text NULL,
+	cust_type varchar(20) NULL,
+	email varchar(100) NULL,
+	contact_type varchar(10) NULL,
+	contact_no numeric NULL,
+	hno varchar(20) NULL,
+	block varchar(100) NULL,
+	building_name varchar(100) NULL,
+	street varchar(50) NULL,
+	road varchar(50) NULL,
+	district varchar(50) NULL,
+	state varchar(50) NULL,
+	town varchar(100) NULL,
+	city varchar(50) NULL,
+	post_code varchar(20) NULL,
+	country varchar(50) NULL,
+	customer_category varchar NULL,
+	customer_class varchar NULL,
+	acct_contact_no int4 NULL,
+	account_name text NULL,
+	birth_date date NULL,
+	gender bpchar(1) NULL,
+	account_id_type varchar NULL,
+	id_value varchar(20) NULL,
+	acct_email varchar(100) NULL,
+	acct_contact_typ varchar(10) NULL,
+	acc_contact_no numeric NULL,
+	account_priority varchar NULL,
+	acct_acount_name text NULL,
+	created_at timestamptz NULL,
+	bill_hno varchar(20) NULL,
+	bill_block varchar(100) NULL,
+	bill_building_name varchar(100) NULL,
+	bill_street varchar(50) NULL,
+	bill_road varchar(50) NULL,
+	bill_district varchar(50) NULL,
+	bill_state varchar(50) NULL,
+	bill_down varchar(100) NULL,
+	bill_city varchar(50) NULL,
+	bill_postal_code varchar(20) NULL,
+	bill_country varchar(50) NULL,
+	account_cat varchar(20) NULL,
+	account_class varchar(20) NULL,
+	base_coll_plan varchar(20) NULL,
+	bill_lang varchar(10) NULL,
+	no_of_copies numeric NULL,
+	acc_status varchar(20) NULL,
+	identification_no varchar(100) NULL,
+	plan_name varchar(200) NULL,
+	status varchar(20) NULL,
+	iccid varchar(20) NULL,
+	imsi varchar(20) NULL,
+	is_ported bpchar(1) NULL,
+	donor varchar(20) NULL
+);
+
+
+-- imagine.aios_prod_user definition
+
+-- Drop table
+
+-- DROP TABLE imagine.aios_prod_user;
+
+CREATE TABLE imagine.aios_prod_user (
+	user_id int4 NULL,
+	contact_no int4 NULL,
+	email varchar(64) NULL,
+	user_type varchar(16) NULL,
+	photo varchar(1) NULL,
+	title varchar(4) NULL,
+	first_name varchar(64) NULL,
+	last_name varchar(64) NULL,
+	gender varchar(8) NULL,
+	dob varchar(16) NULL,
+	office_no int4 NULL,
+	extn int4 NULL,
+	loginid varchar(32) NULL,
+	notification_type varchar(8) NULL,
+	bi_access varchar(1) NULL,
+	wa_access varchar(1) NULL,
+	login_password varchar(128) NULL,
+	status varchar(8) NULL,
+	created_by int4 NULL,
+	created_at varchar(32) NULL,
+	updated_by int4 NULL,
+	updated_at varchar(32) NULL,
+	mapping_payload varchar(1024) NULL,
+	invite_token varchar(64) NULL,
+	ic_number int4 NULL,
+	profile_picture varchar(262144) NULL,
+	"location" varchar(32) NULL,
+	one_time_password varchar(128) NULL,
+	country varchar(32) NULL,
+	crm_user_id varchar(8) NULL,
+	email_old varchar(64) NULL,
+	login_attempts int4 NULL,
+	admin_remark varchar(1) NULL,
+	activation_date varchar(1) NULL,
+	expiry_date varchar(1) NULL
+);
+
+
+-- imagine.aios_user_prod_13dec22 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.aios_user_prod_13dec22;
+
+CREATE TABLE imagine.aios_user_prod_13dec22 (
+	user_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	contact_no numeric NOT NULL,
+	email varchar(100) NOT NULL,
+	user_type varchar(20) NOT NULL,
+	photo varchar(100) NULL,
+	title varchar(10) NULL,
+	first_name varchar(100) NOT NULL,
+	last_name varchar(100) NOT NULL,
+	gender varchar(10) NULL,
+	dob date NULL,
+	office_no numeric NULL,
+	extn numeric NULL,
+	loginid varchar(100) NULL,
+	notification_type varchar(10) NULL,
+	bi_access bpchar(1) NOT NULL DEFAULT 'N'::bpchar,
+	wa_access bpchar(1) NOT NULL DEFAULT 'N'::bpchar,
+	login_password varchar(100) NOT NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	mapping_payload jsonb NULL,
+	invite_token varchar(500) NULL,
+	ic_number varchar(20) NULL,
+	profile_picture text NULL,
+	"location" varchar(100) NULL,
+	one_time_password varchar(100) NULL,
+	country varchar NULL,
+	crm_user_id varchar(20) NULL,
+	login_attempts int4 NULL,
+	admin_remark varchar(4000) NULL,
+	activation_date date NULL,
+	expiry_date date NULL
+);
+
+
+-- imagine.app_config definition
+
+-- Drop table
+
+-- DROP TABLE imagine.app_config;
+
+CREATE TABLE imagine.app_config (
+	app_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	app_name varchar(100) NULL,
+	config jsonb NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	image text NULL,
+	CONSTRAINT app_config_pk PRIMARY KEY (app_id)
+);
+
+
+-- imagine.appointment definition
+
+-- Drop table
+
+-- DROP TABLE imagine.appointment;
+
+CREATE TABLE imagine.appointment (
+	appointment_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	intxn_id int4 NOT NULL,
+	from_date date NULL,
+	from_time time NULL,
+	remarks varchar(200) NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	appointment_type varchar(20) NULL,
+	to_date date NULL,
+	to_time time NULL,
+	contact_person varchar(200) NULL,
+	contact_no numeric NULL
+);
+
+
+-- imagine.attachments definition
+
+-- Drop table
+
+-- DROP TABLE imagine.attachments;
+
+CREATE TABLE imagine.attachments (
+	attachment_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	file_name varchar(500) NOT NULL,
+	file_type varchar(500) NOT NULL,
+	entity_type varchar(500) NOT NULL,
+	entity_id varchar NOT NULL,
+	"content" text NOT NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	CONSTRAINT attachments_pk PRIMARY KEY (attachment_id)
+);
+
+
+-- imagine.booster_plans definition
+
+-- Drop table
+
+-- DROP TABLE imagine.booster_plans;
+
+CREATE TABLE imagine.booster_plans (
+	plan_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	product_code varchar(200) NULL,
+	product_desc varchar(900) NULL,
+	product_comercial_name varchar(900) NULL,
+	product_group varchar(900) NULL,
+	service_type varchar(900) NULL,
+	refill_id varchar(900) NULL,
+	price varchar(900) NULL,
+	charge_type varchar(900) NULL,
+	offer_id varchar(900) NULL,
+	unit varchar(10) NULL,
+	status varchar(10) NULL,
+	created_at timestamptz NULL,
+	updated_at time NULL,
+	created_by int2 NULL,
+	updatedby int2 NULL,
+	CONSTRAINT booster_plans_pk PRIMARY KEY (plan_id)
+);
+
+
+-- imagine.booster_purchase definition
+
+-- Drop table
+
+-- DROP TABLE imagine.booster_purchase;
+
+CREATE TABLE imagine.booster_purchase (
+	id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	access_number varchar(15) NULL,
+	customer_id int4 NULL,
+	customer_name varchar NULL,
+	contact_no varchar(500) NULL,
+	email_id varchar(200) NULL,
+	booster_name varchar(200) NULL,
+	purchase_date timestamptz NULL,
+	status varchar(20) NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_at timestamptz NULL,
+	updated_by int4 NULL,
+	created_by int4 NOT NULL
+);
+
+
+-- imagine.bots_steps definition
+
+-- Drop table
+
+-- DROP TABLE imagine.bots_steps;
+
+CREATE TABLE imagine.bots_steps (
+	id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	step_seq varchar(200) NULL,
+	step_name varchar(500) NULL,
+	step_status varchar(100) NULL,
+	message varchar(500) NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	CONSTRAINT bots_steps_pk PRIMARY KEY (id)
+);
+
+
+-- imagine.business_entity definition
+
+-- Drop table
+
+-- DROP TABLE imagine.business_entity;
+
+CREATE TABLE imagine.business_entity (
+	code varchar(20) NOT NULL,
+	description varchar(200) NOT NULL,
+	code_type varchar(100) NOT NULL,
+	mapping_payload jsonb NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	CONSTRAINT business_entity_pk PRIMARY KEY (code)
+);
+
+
+-- imagine.business_entity_05122022_prod definition
+
+-- Drop table
+
+-- DROP TABLE imagine.business_entity_05122022_prod;
+
+CREATE TABLE imagine.business_entity_05122022_prod (
+	code varchar(20) NOT NULL,
+	description varchar(200) NOT NULL,
+	code_type varchar(100) NOT NULL,
+	mapping_payload text NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL
+);
+
+
+-- imagine.business_entity_09122022_prod definition
+
+-- Drop table
+
+-- DROP TABLE imagine.business_entity_09122022_prod;
+
+CREATE TABLE imagine.business_entity_09122022_prod (
+	code varchar(20) NOT NULL,
+	description varchar(200) NOT NULL,
+	code_type varchar(100) NOT NULL,
+	mapping_payload text NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL
+);
+
+
+-- imagine.business_units_16052023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.business_units_16052023;
+
+CREATE TABLE imagine.business_units_16052023 (
+	unit_id varchar(100) NULL,
+	unit_name varchar(100) NULL,
+	unit_desc varchar(100) NULL,
+	unit_type varchar(100) NULL,
+	parent_unit varchar(100) NULL,
+	contact_id int4 NULL,
+	address_id int4 NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	mapping_payload jsonb NULL,
+	mapping_payload_old json NULL
+);
+
+
+-- imagine.catalog_master_19122022 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.catalog_master_19122022;
+
+CREATE TABLE imagine.catalog_master_19122022 (
+	package_code varchar(1000) NULL,
+	package_desc varchar(1000) NULL,
+	product_code varchar(1000) NULL,
+	tariff_des varchar(1000) NULL,
+	group_des varchar(1000) NULL,
+	product_group varchar(1000) NULL,
+	product_type_cd varchar(1000) NULL,
+	service_cd varchar(1000) NULL,
+	service_des varchar(1000) NULL,
+	tariff_sx varchar(1000) NULL,
+	sx_des varchar(1000) NULL,
+	tariff_charge varchar(1000) NULL
+);
+
+
+-- imagine.cerillion_access_numbers definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_access_numbers;
+
+CREATE TABLE imagine.cerillion_access_numbers (
+	equip_uid varchar(50) NOT NULL,
+	service_cd varchar(50) NULL,
+	access_no varchar(50) NULL,
+	pbx_sx varchar(50) NULL,
+	account_no varchar(50) NULL,
+	tariff_code varchar(50) NULL,
+	status_cd varchar(50) NULL,
+	reference_no varchar(50) NULL,
+	exchange_cd varchar(50) NULL,
+	line_tp_cd varchar(50) NULL,
+	usage_tp_cd varchar(50) NULL,
+	costing_start_dt varchar(50) NULL,
+	costing_end_dt varchar(50) NULL,
+	initial_install_dt varchar(50) NULL,
+	last_install_dt varchar(50) NULL,
+	install_addr_uid varchar(50) NULL,
+	recovery_dt varchar(50) NULL,
+	service_level varchar(50) NULL,
+	call_allow_used varchar(50) NULL,
+	breakdown_by_pbx_sx_yn varchar(50) NULL,
+	acd_service_yn varchar(50) NULL,
+	disc_duration varchar(50) NULL,
+	archive_yn varchar(50) NULL,
+	update_count varchar(50) NULL,
+	circuit_name varchar(500) NULL,
+	assoc_access_no varchar(50) NULL,
+	end_user_name varchar(50) NULL,
+	recovery_reason_cd varchar(50) NULL,
+	misc_discount_cd varchar(50) NULL,
+	partner_account_no varchar(50) NULL,
+	number_type_cd varchar(50) NULL,
+	interconnect_type_cd varchar(50) NULL,
+	domain_name_cd varchar(50) NULL,
+	recovery_mis_sell_cd varchar(50) NULL,
+	last_usage_dt varchar(50) NULL,
+	waive_breach_charges_yn varchar(50) NULL,
+	waive_breach_reason_cd varchar(50) NULL,
+	auto_prepaid_cd varchar(50) NULL,
+	auto_prepaid_dt varchar(50) NULL,
+	deposit_transfer_equip_uid varchar(50) NULL,
+	contract_uid varchar(50) NULL,
+	network_node_uid varchar(50) NULL,
+	pstn_access_no varchar(50) NULL,
+	portin_yn varchar(50) NULL,
+	portout_yn varchar(50) NULL,
+	porting_op_cd varchar(50) NULL,
+	donor_op_cd varchar(50) NULL,
+	recpt_op_cd varchar(50) NULL,
+	email_addr varchar(50) NULL,
+	phone_no varchar(50) NULL,
+	linked_dsl_yn varchar(50) NULL,
+	number_type varchar(50) NULL,
+	customer_id varchar(50) NULL,
+	old_account_number varchar(50) NULL,
+	mid_stage varchar(50) NULL
+);
+
+
+-- imagine.cerillion_addresses definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_addresses;
+
+CREATE TABLE imagine.cerillion_addresses (
+	prime_uid varchar(50) NOT NULL,
+	address_line1 varchar(50) NULL,
+	street_no varchar(50) NULL,
+	flat_no varchar(50) NULL,
+	street_name varchar(50) NULL,
+	place_name varchar(50) NULL,
+	area_name varchar(50) NULL,
+	country_name varchar(50) NULL,
+	post_code varchar(50) NULL,
+	disp_address_line1 varchar(50) NULL,
+	disp_street_no varchar(50) NULL,
+	disp_flat_no varchar(50) NULL,
+	disp_street_name varchar(50) NULL,
+	disp_place_name varchar(50) NULL,
+	disp_area_name varchar(50) NULL,
+	disp_country_name varchar(50) NULL,
+	disp_post_code varchar(50) NULL,
+	exchange_code varchar(50) NULL,
+	archive_yn varchar(50) NULL,
+	external_uid varchar(50) NULL,
+	address_line2 varchar(50) NULL,
+	entrance varchar(50) NULL,
+	"extension" varchar(50) NULL,
+	disp_address_line2 varchar(50) NULL,
+	disp_entrance varchar(50) NULL,
+	disp_extension varchar(50) NULL,
+	informal_address varchar(50) NULL,
+	additional_data_cd varchar(50) NULL,
+	delivery_point_id varchar(50) NULL,
+	pcode varchar(50) NULL,
+	address_profile_uid varchar(50) NULL,
+	manually_edited_yn varchar(50) NULL,
+	address_lookup_key varchar(50) NULL
+);
+
+
+-- imagine.cerillion_contact_association definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_contact_association;
+
+CREATE TABLE imagine.cerillion_contact_association (
+	contact_association_uid varchar(50) NOT NULL,
+	contact_uid varchar(50) NULL,
+	participant_cd varchar(50) NULL,
+	participant_uid varchar(50) NULL,
+	account_no varchar(50) NULL,
+	customer_uid varchar(50) NULL,
+	participant_uid_alias varchar(50) NULL,
+	contact_reason_cd varchar(50) NULL,
+	primary_contact_yn varchar(50) NULL,
+	update_count varchar(50) NULL
+);
+
+
+-- imagine.cerillion_contacts definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_contacts;
+
+CREATE TABLE imagine.cerillion_contacts (
+	contact_uid varchar(50) NOT NULL,
+	name_title varchar(50) NULL,
+	name_first varchar(50) NULL,
+	name_middle varchar(50) NULL,
+	name_last varchar(50) NULL,
+	company_name varchar(50) NULL,
+	"position" varchar(50) NULL,
+	department_name varchar(50) NULL,
+	office_name varchar(50) NULL,
+	address_uid varchar(50) NULL,
+	email_address varchar(50) NULL,
+	update_count varchar(50) NULL,
+	birth_dt varchar(50) NULL,
+	gender_cd varchar(50) NULL,
+	"password" varchar(50) NULL,
+	person_type_cd varchar(50) NULL,
+	id_number varchar(50) NULL,
+	information_1 varchar(50) NULL,
+	information_2 varchar(500) NULL,
+	phone_type_cd_1 varchar(50) NULL,
+	phone_number_1 varchar(50) NULL,
+	phone_type_cd_2 varchar(50) NULL,
+	phone_number_2 varchar(50) NULL,
+	phone_type_cd_3 varchar(50) NULL,
+	phone_number_3 varchar(50) NULL,
+	phone_type_cd_4 varchar(50) NULL,
+	phone_number_4 varchar(50) NULL,
+	email_address_2 varchar(50) NULL,
+	filing_reference_number varchar(50) NULL,
+	marital_status_cd varchar(50) NULL,
+	lock_yn varchar(50) NULL,
+	account_group_cd varchar(50) NULL,
+	account_sub_group_cd varchar(50) NULL,
+	dp_consent_yn varchar(50) NULL
+);
+
+
+-- imagine.cerillion_customers definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_customers;
+
+CREATE TABLE imagine.cerillion_customers (
+	customer_uid varchar(50) NOT NULL,
+	customer_status_cd varchar(50) NULL,
+	cust_level_security_yn varchar(50) NULL,
+	customer_name1 varchar(50) NULL,
+	customer_name2 varchar(50) NULL,
+	person_title varchar(50) NULL,
+	person_honours varchar(50) NULL,
+	corr_address_uid varchar(50) NULL,
+	importance_cd varchar(50) NULL,
+	importance_reason varchar(50) NULL,
+	update_count varchar(50) NULL,
+	class_1_type_cd varchar(50) NULL,
+	class_2_category_cd varchar(50) NULL,
+	class_3_class_cd varchar(50) NULL,
+	customer_name3 varchar(50) NULL,
+	person_salutation varchar(50) NULL,
+	letter_salutation varchar(50) NULL,
+	birth_dt varchar(50) NULL,
+	account_sub_group_cd varchar(50) NULL,
+	dp_consent_yn varchar(50) NULL
+);
+
+
+-- imagine.cerillion_prod_data definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_prod_data;
+
+CREATE TABLE imagine.cerillion_prod_data (
+	connection_id varchar(32767) NULL,
+	connection_name varchar(32767) NULL,
+	connection_type varchar(32767) NULL,
+	connection_grp varchar(32767) NULL,
+	exchng_code varchar(32767) NULL,
+	dealership varchar(32767) NULL,
+	identification_no varchar(32767) NULL,
+	iccid varchar(32767) NULL,
+	imsi varchar(32767) NULL,
+	credit_prof varchar(32767) NULL,
+	is_ported varchar(32767) NULL,
+	charge varchar(32767) NULL,
+	exclude_reason varchar(32767) NULL,
+	payment_method varchar(32767) NULL,
+	con_status varchar(32767) NULL,
+	con_created_by varchar(32767) NULL,
+	con_created_at varchar(32767) NULL,
+	con_updated_by varchar(32767) NULL,
+	con_updated_at varchar(32767) NULL,
+	connection_selection varchar(32767) NULL,
+	deposit varchar(32767) NULL,
+	con_address_id varchar(32767) NULL,
+	con_account_id varchar(32767) NULL,
+	donor varchar(32767) NULL,
+	mapping_payload varchar(32767) NULL,
+	assign_sim_later varchar(32767) NULL,
+	tariff_des varchar(32767) NULL,
+	tariff_group_code varchar(32767) NULL,
+	account_no varchar(32767) NULL,
+	account_id varchar(32767) NULL,
+	account_cat varchar(32767) NULL,
+	account_class varchar(32767) NULL,
+	account_priority varchar(32767) NULL,
+	acc_title varchar(32767) NULL,
+	acc_first_name varchar(32767) NULL,
+	acc_last_name varchar(32767) NULL,
+	gender varchar(32767) NULL,
+	birth_date varchar(32767) NULL,
+	acc_registered_no varchar(32767) NULL,
+	acc_id_type varchar(32767) NULL,
+	acc_id_value varchar(32767) NULL,
+	acc_customer_uid varchar(32767) NULL,
+	acc_account_no varchar(32767) NULL,
+	acc_contact_id varchar(32767) NULL,
+	acc_address_id varchar(32767) NULL,
+	base_coll_plan varchar(32767) NULL,
+	acc_status varchar(32767) NULL,
+	acc_created_by varchar(32767) NULL,
+	acc_created_at varchar(32767) NULL,
+	acc_updated_by varchar(32767) NULL,
+	acc_updated_at varchar(32767) NULL,
+	acc_priority varchar(32767) NULL,
+	bill_lang varchar(32767) NULL,
+	bill_delivery_mthd varchar(32767) NULL,
+	no_of_copies varchar(32767) NULL,
+	reg_date varchar(32767) NULL,
+	account_type varchar(32767) NULL,
+	sq_ref_id varchar(32767) NULL,
+	access_no varchar(32767) NULL,
+	customer_id varchar(32767) NULL,
+	title varchar(32767) NULL,
+	last_name varchar(32767) NULL,
+	first_name varchar(32767) NULL,
+	gender_cd varchar(32767) NULL,
+	birth_dt varchar(32767) NULL,
+	cust_registered_no varchar(32767) NULL,
+	id_type varchar(32767) NULL,
+	id_value varchar(32767) NULL,
+	contact_uid varchar(32767) NULL,
+	cust_type varchar(32767) NULL,
+	donotemail varchar(32767) NULL,
+	cust_status varchar(32767) NULL,
+	crm_customer_no varchar(32767) NULL,
+	customer_cat varchar(32767) NULL,
+	customer_class varchar(32767) NULL,
+	cust_address_uid varchar(32767) NULL,
+	cust_priority varchar(32767) NULL,
+	cust_created_by varchar(32767) NULL,
+	cust_created_at varchar(32767) NULL,
+	cust_updated_by varchar(32767) NULL,
+	cust_updated_at varchar(32767) NULL,
+	contact_id varchar(32767) NULL,
+	cont_title varchar(32767) NULL,
+	cont_first_name varchar(32767) NULL,
+	cont_last_name varchar(32767) NULL,
+	contact_type varchar(32767) NULL,
+	contact_no varchar(32767) NULL,
+	contact_no_pfx varchar(32767) NULL,
+	alt_contact_no1 varchar(32767) NULL,
+	alt_contact_no2 varchar(32767) NULL,
+	email varchar(32767) NULL,
+	alt_email varchar(32767) NULL,
+	status varchar(32767) NULL,
+	cont_created_by varchar(32767) NULL,
+	cont_created_at varchar(32767) NULL,
+	cont_updated_by varchar(32767) NULL,
+	cont_updated_at varchar(32767) NULL,
+	customer_uid varchar(32767) NULL,
+	address_uid varchar(32767) NULL,
+	address_type varchar(32767) NULL,
+	hno varchar(32767) NULL,
+	block varchar(32767) NULL,
+	building_name varchar(32767) NULL,
+	street varchar(32767) NULL,
+	road varchar(32767) NULL,
+	city varchar(32767) NULL,
+	town varchar(32767) NULL,
+	state varchar(32767) NULL,
+	district varchar(32767) NULL,
+	country varchar(32767) NULL,
+	latitude varchar(32767) NULL,
+	longitude varchar(32767) NULL,
+	post_code varchar(32767) NULL,
+	created_by varchar(32767) NULL,
+	created_at varchar(32767) NULL,
+	updated_by varchar(32767) NULL,
+	updated_at varchar(32767) NULL,
+	"zone" varchar(32767) NULL,
+	is_cust_addr varchar(32767) NULL,
+	is_bill_addr varchar(32767) NULL
+);
+
+
+-- imagine.cerillion_prod_overall_acct_address_data definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_prod_overall_acct_address_data;
+
+CREATE TABLE imagine.cerillion_prod_overall_acct_address_data (
+	address_uid varchar(32767) NULL,
+	address_type varchar(32767) NULL,
+	hno varchar(32767) NULL,
+	block varchar(32767) NULL,
+	building_name varchar(32767) NULL,
+	street varchar(32767) NULL,
+	road varchar(32767) NULL,
+	city varchar(32767) NULL,
+	town varchar(32767) NULL,
+	state varchar(32767) NULL,
+	district varchar(32767) NULL,
+	country varchar(32767) NULL,
+	latitude varchar(32767) NULL,
+	longitude varchar(32767) NULL,
+	post_code varchar(32767) NULL,
+	created_by varchar(32767) NULL,
+	created_at varchar(32767) NULL,
+	updated_by varchar(32767) NULL,
+	updated_at varchar(32767) NULL,
+	"zone" varchar(32767) NULL,
+	is_cust_addr varchar(32767) NULL,
+	is_bill_addr varchar(32767) NULL,
+	customer_uid varchar(32767) NULL,
+	valid_data varchar(5) NULL,
+	exception_remarks varchar(500) NULL
+);
+
+
+-- imagine.cerillion_prod_overall_acct_contact_data definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_prod_overall_acct_contact_data;
+
+CREATE TABLE imagine.cerillion_prod_overall_acct_contact_data (
+	contact_id varchar(32767) NULL,
+	cont_title varchar(32767) NULL,
+	cont_first_name varchar(32767) NULL,
+	cont_last_name varchar(32767) NULL,
+	contact_type varchar(32767) NULL,
+	contact_no varchar(32767) NULL,
+	contact_no_pfx varchar(32767) NULL,
+	alt_contact_no1 varchar(32767) NULL,
+	alt_contact_no2 varchar(32767) NULL,
+	email varchar(32767) NULL,
+	alt_email varchar(32767) NULL,
+	status varchar(32767) NULL,
+	cont_created_by varchar(32767) NULL,
+	cont_created_at varchar(32767) NULL,
+	cont_updated_by varchar(32767) NULL,
+	cont_updated_at varchar(32767) NULL,
+	customer_uid varchar(32767) NULL,
+	valid_data varchar(2) NULL,
+	exception_remarks varchar(500) NULL,
+	max_id varchar(2) NULL
+);
+
+
+-- imagine.cerillion_prod_overall_conn_address_data definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_prod_overall_conn_address_data;
+
+CREATE TABLE imagine.cerillion_prod_overall_conn_address_data (
+	address_uid varchar(32767) NULL,
+	address_type varchar(32767) NULL,
+	hno varchar(32767) NULL,
+	block varchar(32767) NULL,
+	building_name varchar(32767) NULL,
+	street varchar(32767) NULL,
+	road varchar(32767) NULL,
+	city varchar(32767) NULL,
+	town varchar(32767) NULL,
+	state varchar(32767) NULL,
+	district varchar(32767) NULL,
+	country varchar(32767) NULL,
+	latitude varchar(32767) NULL,
+	longitude varchar(32767) NULL,
+	post_code varchar(32767) NULL,
+	created_by varchar(32767) NULL,
+	created_at varchar(32767) NULL,
+	updated_by varchar(32767) NULL,
+	updated_at varchar(32767) NULL,
+	"zone" varchar(32767) NULL,
+	is_cust_addr varchar(32767) NULL,
+	is_bill_addr varchar(32767) NULL,
+	customer_uid varchar(32767) NULL,
+	valid_data varchar(5) NULL,
+	exception_remarks varchar(500) NULL
+);
+
+
+-- imagine.cerillion_prod_overall_conn_contact_data definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_prod_overall_conn_contact_data;
+
+CREATE TABLE imagine.cerillion_prod_overall_conn_contact_data (
+	contact_id varchar(32767) NULL,
+	cont_title varchar(32767) NULL,
+	cont_first_name varchar(32767) NULL,
+	cont_last_name varchar(32767) NULL,
+	contact_type varchar(32767) NULL,
+	contact_no varchar(32767) NULL,
+	contact_no_pfx varchar(32767) NULL,
+	alt_contact_no1 varchar(32767) NULL,
+	alt_contact_no2 varchar(32767) NULL,
+	email varchar(32767) NULL,
+	alt_email varchar(32767) NULL,
+	status varchar(32767) NULL,
+	cont_created_by varchar(32767) NULL,
+	cont_created_at varchar(32767) NULL,
+	cont_updated_by varchar(32767) NULL,
+	cont_updated_at varchar(32767) NULL,
+	customer_uid varchar(32767) NULL,
+	valid_data varchar(2) NULL,
+	exception_remarks varchar(500) NULL,
+	max_id varchar(2) NULL
+);
+
+
+-- imagine.cerillion_prod_overall_cust_address_data definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_prod_overall_cust_address_data;
+
+CREATE TABLE imagine.cerillion_prod_overall_cust_address_data (
+	address_uid varchar(32767) NULL,
+	address_type varchar(32767) NULL,
+	hno varchar(32767) NULL,
+	block varchar(32767) NULL,
+	building_name varchar(32767) NULL,
+	street varchar(32767) NULL,
+	road varchar(32767) NULL,
+	city varchar(32767) NULL,
+	town varchar(32767) NULL,
+	state varchar(32767) NULL,
+	district varchar(32767) NULL,
+	country varchar(32767) NULL,
+	latitude varchar(32767) NULL,
+	longitude varchar(32767) NULL,
+	post_code varchar(32767) NULL,
+	created_by varchar(32767) NULL,
+	created_at varchar(32767) NULL,
+	updated_by varchar(32767) NULL,
+	updated_at varchar(32767) NULL,
+	"zone" varchar(32767) NULL,
+	is_cust_addr varchar(32767) NULL,
+	is_bill_addr varchar(32767) NULL,
+	customer_uid varchar(32767) NULL,
+	address_uid_int int4 NULL,
+	valid_data varchar(5) NULL,
+	exception_remarks varchar(500) NULL
+);
+CREATE INDEX address_uid_indx ON imagine.cerillion_prod_overall_cust_address_data USING btree (address_uid);
+
+
+-- imagine.cerillion_prod_overall_cust_contact_data definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_prod_overall_cust_contact_data;
+
+CREATE TABLE imagine.cerillion_prod_overall_cust_contact_data (
+	contact_id varchar(32767) NULL,
+	cont_title varchar(32767) NULL,
+	cont_first_name varchar(32767) NULL,
+	cont_last_name varchar(32767) NULL,
+	contact_type varchar(32767) NULL,
+	contact_no varchar(32767) NULL,
+	contact_no_pfx varchar(32767) NULL,
+	alt_contact_no1 varchar(32767) NULL,
+	alt_contact_no2 varchar(32767) NULL,
+	email varchar(32767) NULL,
+	alt_email varchar(32767) NULL,
+	status varchar(32767) NULL,
+	cont_created_by varchar(32767) NULL,
+	cont_created_at varchar(32767) NULL,
+	cont_updated_by varchar(32767) NULL,
+	cont_updated_at varchar(32767) NULL,
+	customer_uid varchar(32767) NULL,
+	valid_data varchar(2) NULL,
+	exception_remarks varchar(500) NULL,
+	max_id varchar(2) NULL
+);
+CREATE INDEX contact_id_indx ON imagine.cerillion_prod_overall_cust_contact_data USING btree (contact_id);
+
+
+-- imagine.cerillion_prod_overall_data definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_prod_overall_data;
+
+CREATE TABLE imagine.cerillion_prod_overall_data (
+	connection_id varchar(32767) NULL,
+	connection_name varchar(32767) NULL,
+	connection_type varchar(32767) NULL,
+	connection_grp varchar(32767) NULL,
+	exchng_code varchar(32767) NULL,
+	dealership varchar(32767) NULL,
+	identification_no varchar(32767) NULL,
+	iccid varchar(32767) NULL,
+	imsi varchar(32767) NULL,
+	credit_prof varchar(32767) NULL,
+	is_ported varchar(32767) NULL,
+	charge varchar(32767) NULL,
+	exclude_reason varchar(32767) NULL,
+	payment_method varchar(32767) NULL,
+	con_status varchar(32767) NULL,
+	con_created_by varchar(32767) NULL,
+	con_created_at varchar(32767) NULL,
+	con_updated_by varchar(32767) NULL,
+	con_updated_at varchar(32767) NULL,
+	connection_selection varchar(32767) NULL,
+	deposit varchar(32767) NULL,
+	con_address_id varchar(32767) NULL,
+	con_account_id varchar(32767) NULL,
+	donor varchar(32767) NULL,
+	mapping_payload varchar(32767) NULL,
+	assign_sim_later varchar(32767) NULL,
+	tariff_des varchar(32767) NULL,
+	tariff_group_code varchar(32767) NULL,
+	account_no varchar(32767) NULL,
+	account_id varchar(32767) NULL,
+	account_cat varchar(32767) NULL,
+	account_class varchar(32767) NULL,
+	account_priority varchar(32767) NULL,
+	acc_title varchar(32767) NULL,
+	acc_first_name varchar(32767) NULL,
+	acc_last_name varchar(32767) NULL,
+	gender varchar(32767) NULL,
+	birth_date varchar(32767) NULL,
+	acc_registered_no varchar(32767) NULL,
+	acc_id_type varchar(32767) NULL,
+	acc_id_value varchar(32767) NULL,
+	acc_customer_uid varchar(32767) NULL,
+	acc_account_no varchar(32767) NULL,
+	acc_contact_id varchar(32767) NULL,
+	acc_address_id varchar(32767) NULL,
+	base_coll_plan varchar(32767) NULL,
+	acc_status varchar(32767) NULL,
+	acc_created_by varchar(32767) NULL,
+	acc_created_at varchar(32767) NULL,
+	acc_updated_by varchar(32767) NULL,
+	acc_updated_at varchar(32767) NULL,
+	acc_priority varchar(32767) NULL,
+	bill_lang varchar(32767) NULL,
+	bill_delivery_mthd varchar(32767) NULL,
+	no_of_copies varchar(32767) NULL,
+	reg_date varchar(32767) NULL,
+	account_type varchar(32767) NULL,
+	sq_ref_id varchar(32767) NULL,
+	access_no varchar(32767) NULL,
+	customer_id varchar(32767) NULL,
+	title varchar(32767) NULL,
+	last_name varchar(32767) NULL,
+	first_name varchar(32767) NULL,
+	gender_cd varchar(32767) NULL,
+	birth_dt varchar(32767) NULL,
+	cust_registered_no varchar(32767) NULL,
+	id_type varchar(32767) NULL,
+	id_value varchar(32767) NULL,
+	contact_uid varchar(32767) NULL,
+	cust_type varchar(32767) NULL,
+	donotemail varchar(32767) NULL,
+	cust_status varchar(32767) NULL,
+	crm_customer_no varchar(32767) NULL,
+	customer_cat varchar(32767) NULL,
+	customer_class varchar(32767) NULL,
+	cust_address_uid varchar(32767) NULL,
+	cust_priority varchar(32767) NULL,
+	cust_created_by varchar(32767) NULL,
+	cust_created_at varchar(32767) NULL,
+	cust_updated_by varchar(32767) NULL,
+	cust_updated_at varchar(32767) NULL,
+	contact_id varchar(32767) NULL,
+	cont_title varchar(32767) NULL,
+	cont_first_name varchar(32767) NULL,
+	cont_last_name varchar(32767) NULL,
+	contact_type varchar(32767) NULL,
+	contact_no varchar(32767) NULL,
+	contact_no_pfx varchar(32767) NULL,
+	alt_contact_no1 varchar(32767) NULL,
+	alt_contact_no2 varchar(32767) NULL,
+	email varchar(32767) NULL,
+	alt_email varchar(32767) NULL,
+	status varchar(32767) NULL,
+	cont_created_by varchar(32767) NULL,
+	cont_created_at varchar(32767) NULL,
+	cont_updated_by varchar(32767) NULL,
+	cont_updated_at varchar(32767) NULL,
+	customer_uid varchar(32767) NULL,
+	address_uid varchar(32767) NULL,
+	address_type varchar(32767) NULL,
+	hno varchar(32767) NULL,
+	block varchar(32767) NULL,
+	building_name varchar(32767) NULL,
+	street varchar(32767) NULL,
+	road varchar(32767) NULL,
+	city varchar(32767) NULL,
+	town varchar(32767) NULL,
+	state varchar(32767) NULL,
+	district varchar(32767) NULL,
+	country varchar(32767) NULL,
+	latitude varchar(32767) NULL,
+	longitude varchar(32767) NULL,
+	post_code varchar(32767) NULL,
+	created_by varchar(32767) NULL,
+	created_at varchar(32767) NULL,
+	updated_by varchar(32767) NULL,
+	updated_at varchar(32767) NULL,
+	"zone" varchar(32767) NULL,
+	is_cust_addr varchar(32767) NULL,
+	is_bill_addr varchar(32767) NULL,
+	address_valid_data varchar(5) NULL,
+	customer_valid_data varchar(5) NULL,
+	account_valid_data varchar(5) NULL,
+	connection_valid_data varchar(5) NULL,
+	exception_remarks_addr varchar(500) NULL,
+	exception_remarks_cust varchar(500) NULL,
+	exception_remarks_cnt varchar(500) NULL,
+	exception_remarks_acc varchar(500) NULL,
+	exception_remarks_conn varchar(500) NULL,
+	contact_valid_data varchar(2) NULL,
+	exception_overall_remarks varchar(100) NULL,
+	data_cor_remarks varchar(500) NULL,
+	contact_max_id varchar(2) NULL,
+	overall_exceptions text NULL,
+	overall_valid_data varchar(2) NULL
+);
+CREATE INDEX acc_account_no_indx ON imagine.cerillion_prod_overall_data USING btree (acc_account_no);
+CREATE INDEX crm_customer_no_indx ON imagine.cerillion_prod_overall_data USING btree (crm_customer_no);
+CREATE INDEX identification_no_indx ON imagine.cerillion_prod_overall_data USING btree (identification_no);
+
+
+-- imagine.cerillion_puk_details definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_puk_details;
+
+CREATE TABLE imagine.cerillion_puk_details (
+	iccid varchar(50) NULL,
+	puk varchar(50) NULL,
+	imsi varchar(50) NULL,
+	pin varchar(50) NULL,
+	access_number varchar(50) NULL,
+	dealer_cd varchar(50) NULL,
+	status_cd varchar(50) NULL,
+	ki varchar(50) NULL,
+	puk2 varchar(50) NULL,
+	pin2 varchar(50) NULL,
+	lost_reason_cd varchar(50) NULL,
+	kit_code varchar(50) NULL,
+	adm1 varchar(50) NULL,
+	kappli1 varchar(50) NULL,
+	adm2 varchar(50) NULL,
+	adm3 varchar(50) NULL,
+	adm4 varchar(50) NULL,
+	kappli2 varchar(50) NULL,
+	kappli3 varchar(50) NULL,
+	desindex varchar(50) NULL,
+	transport_kappli varchar(50) NULL,
+	algsel varchar(50) NULL,
+	access_control varchar(50) NULL,
+	otass1 varchar(50) NULL,
+	otass2 varchar(50) NULL,
+	iccid_full varchar(50) NULL,
+	process_log_dt varchar(50) NULL,
+	process_error varchar(50) NULL,
+	process_status_cd varchar(50) NULL,
+	file_name varchar(50) NULL,
+	manufacturers_name varchar(50) NULL,
+	key1 varchar(50) NULL,
+	key2 varchar(50) NULL
+);
+
+
+-- imagine.cerillion_subscribers definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_subscribers;
+
+CREATE TABLE imagine.cerillion_subscribers (
+	account_no varchar(50) NOT NULL,
+	account_class_cd varchar(50) NULL,
+	acc_category_cd varchar(50) NULL,
+	customer_id varchar(50) NULL,
+	account_name1 varchar(4000) NULL,
+	account_name2 varchar(100) NULL,
+	person_title varchar(50) NULL,
+	person_honours varchar(50) NULL,
+	bill_addr_uid varchar(50) NULL,
+	company_reg_no varchar(50) NULL,
+	company_reg_addr_uid varchar(50) NULL,
+	company_reg_dt varchar(50) NULL,
+	bt_account_no varchar(50) NULL,
+	cellular_account_no varchar(50) NULL,
+	status_cd varchar(50) NULL,
+	current_balance varchar(50) NULL,
+	ledger_balance varchar(50) NULL,
+	dispute_balance varchar(50) NULL,
+	last_pay_amount varchar(50) NULL,
+	last_pay_dt varchar(50) NULL,
+	last_pay_ar_uid varchar(50) NULL,
+	last_bill_uid varchar(50) NULL,
+	bill_cycle_code varchar(50) NULL,
+	late_payment_status_cd varchar(50) NULL,
+	bill_st_cd varchar(50) NULL,
+	late_payment_grace_period varchar(50) NULL,
+	bill_special_card_uid varchar(50) NULL,
+	bank_account_name varchar(50) NULL,
+	bank_account_no varchar(50) NULL,
+	bank_sort_code varchar(50) NULL,
+	credit_rating varchar(50) NULL,
+	base_collect_plan_code varchar(50) NULL,
+	col_plan_delay varchar(50) NULL,
+	current_action_seq_no varchar(50) NULL,
+	budget_pay_amount varchar(50) NULL,
+	budget_pay_day varchar(50) NULL,
+	fault_priority varchar(50) NULL,
+	tos_yn varchar(50) NULL,
+	directory_mail_yn varchar(50) NULL,
+	directory_mail_dt varchar(50) NULL,
+	contact_name varchar(50) NULL,
+	contact_phone_no varchar(50) NULL,
+	sales_bar_note_uid varchar(50) NULL,
+	sales_tax_yn varchar(50) NULL,
+	alarm_note_uid varchar(50) NULL,
+	guarantor_yn varchar(50) NULL,
+	faults_alarm_note_uid varchar(50) NULL,
+	marketing_note_uid varchar(50) NULL,
+	creation_source_cd varchar(50) NULL,
+	marketing_flag varchar(50) NULL,
+	identification_1 varchar(50) NULL,
+	identification_2 varchar(50) NULL,
+	identification_3 varchar(50) NULL,
+	account_sub_group_cd varchar(50) NULL,
+	next_letter_no varchar(50) NULL,
+	contract_id varchar(50) NULL,
+	payment_method_cd varchar(50) NULL,
+	contract_dt varchar(50) NULL,
+	discount_group_cd varchar(50) NULL,
+	bill_lang_cd varchar(50) NULL,
+	create_dt varchar(50) NULL,
+	archive_yn varchar(50) NULL,
+	update_count varchar(50) NULL,
+	bank_account_status_cd varchar(50) NULL,
+	agreement_use_date varchar(50) NULL,
+	agreement_cancel_date varchar(50) NULL,
+	alt_currency_cd varchar(50) NULL,
+	cust_level_sec_override_yn varchar(50) NULL,
+	security_question_profile_uid varchar(50) NULL,
+	tax_scheme_code varchar(50) NULL,
+	deposit_insure_yn varchar(50) NULL,
+	direct_debit_agree_ref varchar(50) NULL,
+	include_in_archiving_yn varchar(50) NULL,
+	suppressed_bill_count varchar(50) NULL,
+	last_billing_run_dt varchar(50) NULL,
+	account_review_date varchar(50) NULL,
+	dd_originator_reference_cd varchar(50) NULL,
+	debt_provision_cd varchar(50) NULL,
+	corres_addr_uid varchar(50) NULL,
+	next_bill_sequence_number varchar(50) NULL,
+	partner_type_cd varchar(50) NULL,
+	ann_comm_from_dt varchar(50) NULL,
+	high_spend_credit_limit varchar(50) NULL,
+	direct_debit_confirm_letter_dt varchar(50) NULL,
+	account_name3 varchar(50) NULL,
+	person_salutation varchar(50) NULL,
+	letter_salutation varchar(50) NULL,
+	prev_col_plan_code varchar(50) NULL,
+	prev_col_plan_start_dt varchar(50) NULL,
+	prev_col_plan_action_seq_no varchar(50) NULL,
+	prev_debt_provision_cd varchar(50) NULL,
+	pre_payment_balance varchar(50) NULL,
+	mig_stage varchar(50) NULL,
+	agreement_request_dt varchar(50) NULL,
+	agreement_sent_dt varchar(50) NULL,
+	agreement_cancel_request_dt varchar(50) NULL,
+	agreement_cancel_notify_dt varchar(50) NULL,
+	last_dd_file_submission_dt varchar(50) NULL,
+	cais_yn varchar(50) NULL,
+	replaced_bill_addr_uid varchar(50) NULL,
+	redirected_to_name varchar(50) NULL,
+	cais_flag_cd varchar(50) NULL,
+	redirected_yn varchar(50) NULL,
+	migrate_dt varchar(50) NULL,
+	credit_limit varchar(50) NULL,
+	spending_limit varchar(50) NULL,
+	billing_agreement_id varchar(50) NULL,
+	currency_code varchar(50) NULL,
+	fca_share_profile_cd varchar(50) NULL,
+	dp_consent_yn varchar(50) NULL
+);
+
+
+-- imagine.cerillion_tariff_headers definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cerillion_tariff_headers;
+
+CREATE TABLE imagine.cerillion_tariff_headers (
+	tariff_code varchar(50) NOT NULL,
+	tariff_group_code varchar(50) NULL,
+	tariff_des varchar(2000) NULL,
+	order11_code varchar(50) NULL,
+	usage_tp_cd varchar(50) NULL,
+	tele_service varchar(50) NULL,
+	subscription_group varchar(50) NULL,
+	enhance_yn varchar(50) NULL,
+	warranty_period varchar(50) NULL,
+	routine_maint_freq varchar(50) NULL,
+	service_yn varchar(50) NULL,
+	line_yn varchar(50) NULL,
+	adhoc_discount_yn varchar(50) NULL,
+	temp_yn varchar(50) NULL,
+	gsm_number_class varchar(50) NULL,
+	archive_yn varchar(50) NULL,
+	update_count varchar(50) NULL,
+	equipment_yn varchar(50) NULL,
+	tariff_action_cd varchar(50) NULL,
+	system_type_cd varchar(50) NULL,
+	ss_auto_deactivation_yn varchar(50) NULL,
+	package_yn varchar(50) NULL,
+	product_type_cd varchar(50) NULL,
+	service_cd varchar(50) NULL,
+	presentation_only_yn varchar(50) NULL,
+	dependent_tariff_action_cd varchar(50) NULL,
+	assoc_number_range_type_cd varchar(50) NULL,
+	number_plan_code varchar(50) NULL,
+	product_pack_quantity varchar(50) NULL,
+	alt_usage_pricing_cd varchar(50) NULL,
+	max_no_lines varchar(50) NULL,
+	credit_check_exempt_yn varchar(50) NULL,
+	line_plant_interface_yn varchar(50) NULL,
+	community_product_yn varchar(50) NULL,
+	manual_validation_reqd_yn varchar(50) NULL,
+	wo_interactive_prov_yn varchar(50) NULL,
+	service_quality_minimum varchar(50) NULL,
+	tariff_display_name varchar(50) NULL,
+	currency_code varchar(50) NULL,
+	max_community_members varchar(50) NULL,
+	community_expiry_days varchar(50) NULL,
+	community_type_code varchar(50) NULL,
+	comm_allowed_changes varchar(50) NULL,
+	comm_allowed_changes_days varchar(50) NULL,
+	device_profile_code varchar(50) NULL
+);
+
+
+-- imagine.chat definition
+
+-- Drop table
+
+-- DROP TABLE imagine.chat;
+
+CREATE TABLE imagine.chat (
+	chat_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	contact_no varchar(500) NULL,
+	email_id varchar(200) NULL,
+	customer_name varchar NULL,
+	bot_req text NULL,
+	start_at timestamptz NULL,
+	end_at timestamptz NULL,
+	status varchar(20) NOT NULL,
+	user_id int4 NULL,
+	socket_id varchar(100) NULL,
+	message jsonb NULL,
+	customer_info jsonb NULL,
+	"type" varchar(100) NULL,
+	created_at timestamptz NOT NULL,
+	updated_at timestamptz NULL,
+	updated_by int4 NULL,
+	created_by int4 NOT NULL,
+	access_no varchar(15) NULL,
+	category varchar(1000) NULL,
+	id_value varchar(20) NULL,
+	customer_close_at timestamptz NULL,
+	chat_language varchar(20) NULL,
+	identifier varchar(20) NULL,
+	created_date date NULL DEFAULT CURRENT_DATE,
+	abandoned_date timestamptz NULL
+);
+
+
+-- imagine.chat2us_workflow_defn_new_16112023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.chat2us_workflow_defn_new_16112023;
+
+CREATE TABLE imagine.chat2us_workflow_defn_new_16112023 (
+	workflow_id int4 NULL,
+	interaction_type varchar(20) NULL,
+	product_type varchar(20) NULL,
+	wf_definition jsonb NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	workflow_name varchar(200) NULL
+);
+
+
+-- imagine.chat_13_1_2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.chat_13_1_2023;
+
+CREATE TABLE imagine.chat_13_1_2023 (
+	chat_id int4 NULL,
+	contact_no varchar(500) NULL,
+	email_id varchar(200) NULL,
+	customer_name varchar NULL,
+	bot_req text NULL,
+	start_at timestamptz NULL,
+	end_at timestamptz NULL,
+	status varchar(20) NULL,
+	user_id int4 NULL,
+	socket_id varchar(100) NULL,
+	message jsonb NULL,
+	customer_info jsonb NULL,
+	"type" varchar(100) NULL,
+	created_at timestamptz NULL,
+	updated_at timestamptz NULL,
+	updated_by int4 NULL,
+	created_by int4 NULL,
+	access_no varchar(15) NULL,
+	category varchar(1000) NULL,
+	id_value varchar(20) NULL,
+	customer_close_at timestamptz NULL,
+	chat_language varchar(20) NULL,
+	identifier varchar(20) NULL
+);
+
+
+-- imagine.chat_hdr definition
+
+-- Drop table
+
+-- DROP TABLE imagine.chat_hdr;
+
+CREATE TABLE imagine.chat_hdr (
+	chat_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	contact_no int8 NULL,
+	email_id varchar(200) NULL,
+	bot_req text NOT NULL,
+	created_by text NOT NULL,
+	start_at time NULL,
+	end_at time NULL,
+	status varchar(20) NOT NULL,
+	created_at timestamptz NULL,
+	updated_at timestamptz NULL,
+	agent varchar(200) NULL,
+	socket_id varchar(100) NULL,
+	message varchar(50000) NULL,
+	customer_info jsonb NULL,
+	"type" varchar(100) NULL,
+	message_from varchar(5000) NULL,
+	CONSTRAINT chat_hdr_pk PRIMARY KEY (chat_id)
+);
+CREATE INDEX chat_hdr_socket_id_idx ON imagine.chat_hdr USING btree (socket_id);
+
+
+-- imagine.chat_response definition
+
+-- Drop table
+
+-- DROP TABLE imagine.chat_response;
+
+CREATE TABLE imagine.chat_response (
+	chat_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	menu_id varchar(20) NOT NULL,
+	menu_seq_no int4 NULL,
+	menu_description text NULL,
+	menu_title text NULL,
+	menu_status varchar(20) NULL,
+	menu_description_malay text NULL,
+	menu_title_malay text NULL,
+	created_by int4 NULL,
+	created_at timestamp NOT NULL,
+	update_by int4 NULL,
+	updated_at timestamp NOT NULL,
+	CONSTRAINT chat_response_pk PRIMARY KEY (chat_id)
+);
+
+
+-- imagine.chat_response_17nov22 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.chat_response_17nov22;
+
+CREATE TABLE imagine.chat_response_17nov22 (
+	menu_id varchar(20) NULL,
+	menu_description text NULL,
+	menu_title text NULL,
+	menu_status varchar(20) NULL,
+	created_at timestamp NULL,
+	updated_at timestamp NULL,
+	menu_description_malay text NULL,
+	menu_title_malay text NULL
+);
+
+
+-- imagine.chat_response_old definition
+
+-- Drop table
+
+-- DROP TABLE imagine.chat_response_old;
+
+CREATE TABLE imagine.chat_response_old (
+	menu_id varchar(20) NULL,
+	menu_description text NULL,
+	menu_title text NULL,
+	menu_status varchar(20) NULL,
+	created_at timestamp NULL,
+	updated_at timestamp NULL,
+	menu_description_malay text NULL,
+	menu_title_malay text NULL
+);
+
+
+-- imagine.conn_plan definition
+
+-- Drop table
+
+-- DROP TABLE imagine.conn_plan;
+
+CREATE TABLE imagine.conn_plan (
+	accessno varchar(32767) NULL,
+	tariffcode varchar(32767) NULL,
+	"Desc" varchar(32767) NULL,
+	status varchar(32767) NULL
+);
+
+
+-- imagine.conn_temp definition
+
+-- Drop table
+
+-- DROP TABLE imagine.conn_temp;
+
+CREATE TABLE imagine.conn_temp (
+	connection_type varchar(1000) NULL,
+	connection_group varchar(1000) NULL,
+	identification_no varchar(1000) NULL,
+	iccid varchar(1000) NULL,
+	imsi varchar(1000) NULL,
+	is_ported varchar(1000) NULL,
+	status varchar NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	address_id int4 NULL,
+	account_id int4 NULL,
+	plan_id jsonb NULL,
+	"current_date" date NULL,
+	migration_table text NULL,
+	migraton_remarks text NULL
+);
+
+
+-- imagine.conn_test definition
+
+-- Drop table
+
+-- DROP TABLE imagine.conn_test;
+
+CREATE TABLE imagine.conn_test (
+	connection_type varchar(1000) NULL,
+	connection_group varchar(1000) NULL,
+	identification_no varchar(1000) NULL,
+	iccid varchar(1000) NULL,
+	imsi varchar(1000) NULL,
+	is_ported varchar(1000) NULL,
+	status varchar NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	address_id int4 NULL,
+	account_id int4 NULL,
+	plan_id jsonb NULL,
+	"current_date" date NULL,
+	migration_table text NULL,
+	migration_remarks text NULL
+);
+
+
+-- imagine.connection_14feb2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connection_14feb2023;
+
+CREATE TABLE imagine.connection_14feb2023 (
+	connection_id int4 NULL,
+	connection_name varchar(100) NULL,
+	connection_type varchar(20) NULL,
+	connection_grp varchar(20) NULL,
+	exchng_code varchar(20) NULL,
+	dealership varchar(20) NULL,
+	identification_no varchar(100) NULL,
+	iccid varchar(20) NULL,
+	imsi varchar(20) NULL,
+	credit_prof varchar(20) NULL,
+	is_ported bpchar(1) NULL,
+	charge varchar(20) NULL,
+	exclude_reason varchar(1000) NULL,
+	payment_method varchar(20) NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	connection_selection varchar(20) NULL,
+	deposit varchar(20) NULL,
+	account_id int4 NULL,
+	donor varchar(20) NULL,
+	mapping_payload jsonb NULL,
+	assign_sim_later bpchar(1) NULL,
+	created_dept_id text NULL,
+	created_role_id int4 NULL,
+	address_id int4 NULL,
+	contact_id int4 NULL
+);
+
+
+-- imagine.connection_address_details definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connection_address_details;
+
+CREATE TABLE imagine.connection_address_details (
+	customer_id varchar(32767) NULL,
+	address_id varchar(32767) NULL,
+	account_no varchar(32767) NULL,
+	access_no varchar(32767) NULL,
+	address_type varchar(32767) NULL,
+	hno varchar(32767) NULL,
+	block varchar(32767) NULL,
+	building_name varchar(32767) NULL,
+	street varchar(32767) NULL,
+	road varchar(32767) NULL,
+	city varchar(32767) NULL,
+	town varchar(32767) NULL,
+	state varchar(32767) NULL,
+	district varchar(32767) NULL,
+	country varchar(32767) NULL,
+	post_code varchar(32767) NULL
+);
+
+
+-- imagine.connection_address_map definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connection_address_map;
+
+CREATE TABLE imagine.connection_address_map (
+	customer_id varchar(32767) NULL,
+	address_id varchar(32767) NULL,
+	account_no varchar(32767) NULL,
+	access_no varchar(32767) NULL
+);
+
+
+-- imagine.connection_address_mapping_17022023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connection_address_mapping_17022023;
+
+CREATE TABLE imagine.connection_address_mapping_17022023 (
+	customer_uid varchar(1000) NULL,
+	address_uid varchar(1000) NULL,
+	account_no varchar(1000) NULL,
+	access_no varchar(1000) NULL
+);
+
+
+-- imagine.connection_full_address_upload_17022023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connection_full_address_upload_17022023;
+
+CREATE TABLE imagine.connection_full_address_upload_17022023 (
+	customer_uid varchar(1000) NULL,
+	address_uid varchar(1000) NULL,
+	account_no varchar(1000) NULL,
+	access_no varchar(1000) NULL,
+	first_name varchar(1000) NULL,
+	last_name varchar(1000) NULL,
+	access_number_status varchar(1000) NULL,
+	address_type varchar(1000) NULL,
+	street_no varchar(1000) NULL,
+	flat_no varchar(1000) NULL,
+	"EXTENSION" varchar(1000) NULL,
+	area_name varchar(1000) NULL,
+	place_name varchar(1000) NULL,
+	street_name varchar(1000) NULL,
+	address_line1 varchar(1000) NULL,
+	address_line2 varchar(1000) NULL,
+	country varchar(1000) NULL,
+	post_code varchar(1000) NULL,
+	is_cust_addr varchar(1000) NULL,
+	is_bill_addr varchar(1000) NULL
+);
+
+
+-- imagine.connection_iccid definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connection_iccid;
+
+CREATE TABLE imagine.connection_iccid (
+	identification varchar(32767) NULL,
+	iccid varchar(32767) NULL,
+	imsi varchar(32767) NULL
+);
+
+
+-- imagine.connection_template definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connection_template;
+
+CREATE TABLE imagine.connection_template (
+	connection_name varchar(1000) NULL,
+	connection_type varchar(1000) NULL,
+	connection_group varchar(1000) NULL,
+	identification_no varchar(1000) NULL,
+	iccid varchar(1000) NULL,
+	imsi varchar(1000) NULL,
+	is_ported varchar(1000) NULL,
+	status varchar(1000) NULL,
+	plan_name varchar(1000) NULL,
+	crm_account_no varchar(1000) NULL,
+	crm_customer_no varchar(1000) NULL,
+	crm_address_id varchar(1000) NULL,
+	address_type varchar(1000) NULL,
+	hno varchar(1000) NULL,
+	block varchar(1000) NULL,
+	building_name varchar(1000) NULL,
+	street varchar(1000) NULL,
+	road varchar(1000) NULL,
+	city varchar(1000) NULL,
+	town varchar(1000) NULL,
+	state varchar(1000) NULL,
+	district varchar(1000) NULL,
+	country varchar(1000) NULL,
+	post_code varchar(1000) NULL,
+	connection_insert_flag varchar(5) NULL,
+	connection_plan_update_flag varchar(5) NULL,
+	connection_status_update_flag varchar(5) NULL,
+	bcae_address_type varchar(100) NULL,
+	bcae_connection_type varchar(100) NULL,
+	bcae_connection_group varchar(100) NULL,
+	donor varchar(100) NULL
+);
+
+
+-- imagine.connection_template_debug definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connection_template_debug;
+
+CREATE TABLE imagine.connection_template_debug (
+	connection_name varchar(1000) NULL,
+	connection_type varchar(1000) NULL,
+	connection_group varchar(1000) NULL,
+	identification_no varchar(1000) NULL,
+	iccid varchar(1000) NULL,
+	imsi varchar(1000) NULL,
+	is_ported varchar(1000) NULL,
+	status varchar(1000) NULL,
+	plan_name varchar(1000) NULL,
+	crm_account_no varchar(1000) NULL,
+	crm_customer_no varchar(1000) NULL,
+	crm_address_id varchar(1000) NULL,
+	address_type varchar(1000) NULL,
+	hno varchar(1000) NULL,
+	block varchar(1000) NULL,
+	building_name varchar(1000) NULL,
+	street varchar(1000) NULL,
+	road varchar(1000) NULL,
+	city varchar(1000) NULL,
+	town varchar(1000) NULL,
+	state varchar(1000) NULL,
+	district varchar(1000) NULL,
+	country varchar(1000) NULL,
+	post_code varchar(1000) NULL,
+	connection_insert_flag varchar(5) NULL,
+	connection_plan_update_flag varchar(5) NULL,
+	connection_status_update_flag varchar(5) NULL,
+	bcae_address_type varchar(100) NULL,
+	bcae_connection_type varchar(100) NULL,
+	bcae_connection_group varchar(100) NULL,
+	donor varchar(100) NULL,
+	exception_flag varchar(2) NULL,
+	plan_status varchar(50) NULL,
+	valid_value varchar(2) NULL,
+	equipd varchar(1000) NULL,
+	ranks int4 NULL,
+	id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	plan_id int4 NULL,
+	connection_type_des varchar(100) NULL,
+	creation_source_code varchar(20) NULL
+);
+
+
+-- imagine.connection_template_update definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connection_template_update;
+
+CREATE TABLE imagine.connection_template_update (
+	identification_no varchar(100) NULL,
+	account_no numeric NULL,
+	crm_customer_no varchar(100) NULL
+);
+
+
+-- imagine.connection_type_upload_08032023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connection_type_upload_08032023;
+
+CREATE TABLE imagine.connection_type_upload_08032023 (
+	customer_id varchar(1000) NULL,
+	account_id varchar(1000) NULL,
+	access_number varchar(1000) NULL,
+	account_first_name varchar(1000) NULL,
+	account_last_name varchar(1000) NULL,
+	connection_type_code varchar(1000) NULL,
+	connection_status varchar(1000) NULL,
+	creation_source_code varchar(1000) NULL,
+	connection_type varchar(1000) NULL,
+	connection_group varchar(1000) NULL,
+	tariff_code varchar(1000) NULL,
+	tariff_description varchar(1000) NULL,
+	tariff_group_code varchar(1000) NULL,
+	iccid varchar(1000) NULL,
+	imsi varchar(1000) NULL,
+	is_ported varchar(1000) NULL,
+	donor varchar(1000) NULL,
+	address_id varchar(1000) NULL,
+	contact_id varchar(1000) NULL
+);
+
+
+-- imagine.connection_upload_20012023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connection_upload_20012023;
+
+CREATE TABLE imagine.connection_upload_20012023 (
+	identification_no varchar(100) NULL,
+	status varchar(20) NULL,
+	plan_name varchar(200) NULL,
+	crm_customer_no varchar(20) NULL,
+	crm_account_no numeric NULL
+);
+
+
+-- imagine.connections_debug definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connections_debug;
+
+CREATE TABLE imagine.connections_debug (
+	connection_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	connection_name varchar(100) NULL,
+	connection_type varchar(20) NOT NULL,
+	connection_grp varchar(20) NOT NULL,
+	exchng_code varchar(20) NULL,
+	dealership varchar(20) NULL,
+	identification_no varchar(100) NULL,
+	iccid varchar(100) NULL,
+	imsi varchar(100) NULL,
+	credit_prof varchar(20) NULL,
+	is_ported bpchar(1) NULL DEFAULT 'N'::bpchar,
+	charge varchar(20) NULL,
+	exclude_reason varchar(1000) NULL,
+	payment_method varchar(20) NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	connection_selection varchar(20) NULL,
+	deposit varchar(20) NULL,
+	address_id int4 NULL,
+	account_id int4 NULL,
+	donor varchar(20) NULL,
+	mapping_payload jsonb NULL,
+	assign_sim_later bpchar(1) NULL DEFAULT 'N'::bpchar,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL
+);
+
+
+-- imagine.connections_test definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connections_test;
+
+CREATE TABLE imagine.connections_test (
+	connection_id int4 NULL,
+	connection_name varchar(100) NULL,
+	connection_type varchar(20) NULL,
+	connection_grp varchar(20) NULL,
+	exchng_code varchar(20) NULL,
+	dealership varchar(20) NULL,
+	identification_no varchar(100) NULL,
+	iccid varchar(20) NULL,
+	imsi varchar(20) NULL,
+	credit_prof varchar(20) NULL,
+	is_ported bpchar(1) NULL,
+	charge varchar(20) NULL,
+	exclude_reason varchar(1000) NULL,
+	payment_method varchar(20) NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	connection_selection varchar(20) NULL,
+	deposit varchar(20) NULL,
+	address_id int4 NULL,
+	account_id int4 NULL,
+	donor varchar(20) NULL,
+	mapping_payload jsonb NULL,
+	assign_sim_later bpchar(1) NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL
+);
+
+
+-- imagine.connectionstemp10jan23 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connectionstemp10jan23;
+
+CREATE TABLE imagine.connectionstemp10jan23 (
+	"Connection_Type" varchar(100) NULL,
+	"Connection_Grp" varchar(100) NULL,
+	"Identification_No" varchar(100) NULL,
+	"ICCID" varchar(100) NULL,
+	"IMSI" varchar(100) NULL,
+	"Is_Ported" varchar(100) NULL,
+	"Donor" varchar(100) NULL,
+	"Status" varchar(100) NULL,
+	"Plan_Name" varchar(100) NULL,
+	"Crm_Account_No" varchar(100) NULL,
+	"Crm_Customer_No" varchar(100) NULL,
+	"Crm_Address_Id" varchar(100) NULL,
+	"Address_Type" varchar(100) NULL,
+	"Hno" varchar(100) NULL,
+	"Block" varchar(100) NULL,
+	"Building_Name" varchar(100) NULL,
+	"Street" varchar(100) NULL,
+	"Road" varchar(100) NULL,
+	"City" varchar(100) NULL,
+	"Town" varchar(100) NULL,
+	"State" varchar(100) NULL,
+	"District" varchar(100) NULL,
+	"Country" varchar(100) NULL,
+	"Post_Code" varchar(100) NULL
+);
+
+
+-- imagine.connectionstempmap10jan23 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connectionstempmap10jan23;
+
+CREATE TABLE imagine.connectionstempmap10jan23 (
+	"CUSTOMER_UID" varchar(100) NULL,
+	address_uid varchar(100) NULL,
+	account_no varchar(100) NULL,
+	access_no varchar(100) NULL,
+	"PK" varchar(256) NULL
+);
+
+
+-- imagine.contacts_14feb2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.contacts_14feb2023;
+
+CREATE TABLE imagine.contacts_14feb2023 (
+	contact_id int4 NULL,
+	title varchar(20) NULL,
+	first_name varchar(500) NULL,
+	last_name varchar(500) NULL,
+	contact_type varchar(10) NULL,
+	contact_no numeric NULL,
+	contact_no_pfx numeric NULL,
+	alt_contact_no1 numeric NULL,
+	alt_contact_no2 numeric NULL,
+	email varchar(100) NULL,
+	alt_email varchar(100) NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	crm_contact_id int4 NULL,
+	created_dept_id text NULL,
+	created_role_id int4 NULL,
+	account_id int4 NULL,
+	customer_id int4 NULL,
+	connection_id int4 NULL
+);
+
+
+-- imagine.contacts_debug definition
+
+-- Drop table
+
+-- DROP TABLE imagine.contacts_debug;
+
+CREATE TABLE imagine.contacts_debug (
+	contact_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	title varchar(20) NULL,
+	first_name varchar(500) NOT NULL,
+	last_name varchar(500) NULL,
+	contact_type varchar(10) NOT NULL,
+	contact_no numeric NOT NULL,
+	contact_no_pfx numeric NULL,
+	alt_contact_no1 numeric NULL,
+	alt_contact_no2 numeric NULL,
+	email varchar(100) NULL,
+	alt_email varchar(100) NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	crm_contact_id int4 NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL,
+	service_number varchar(30) NULL,
+	crm_customer_id varchar(50) NULL,
+	crm_account_id int4 NULL
+);
+
+
+-- imagine.contacts_test definition
+
+-- Drop table
+
+-- DROP TABLE imagine.contacts_test;
+
+CREATE TABLE imagine.contacts_test (
+	contact_id int4 NULL,
+	title varchar(20) NULL,
+	first_name varchar(500) NULL,
+	last_name varchar(500) NULL,
+	contact_type varchar(10) NULL,
+	contact_no numeric NULL,
+	contact_no_pfx numeric NULL,
+	alt_contact_no1 numeric NULL,
+	alt_contact_no2 numeric NULL,
+	email varchar(100) NULL,
+	alt_email varchar(100) NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	crm_contact_id int4 NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL,
+	service_number varchar(30) NULL,
+	crm_customer_id varchar(50) NULL,
+	crm_account_id int4 NULL
+);
+
+
+-- imagine.cr_acc_dtl definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cr_acc_dtl;
+
+CREATE TABLE imagine.cr_acc_dtl (
+	crm_acc_no varchar(50) NOT NULL,
+	acc_status varchar(50) NULL,
+	crm_customer_no varchar(50) NULL,
+	acc_addr_id varchar(50) NULL,
+	acc_contact_id varchar(50) NULL,
+	acc_over_all_flag varchar(2) NULL,
+	acc_addr_flag varchar(2) NULL,
+	acc_contact_flag varchar(2) NULL,
+	acc_connection_flag varchar(2) NULL,
+	acc_remarks varchar(500) NULL,
+	CONSTRAINT cr_acc_dtl_pk PRIMARY KEY (crm_acc_no)
+);
+
+
+-- imagine.cr_conn_dtl definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cr_conn_dtl;
+
+CREATE TABLE imagine.cr_conn_dtl (
+	identification_no varchar(50) NULL,
+	conn_status varchar(50) NULL,
+	crm_customer_no varchar(50) NULL,
+	crm_acc_no varchar(50) NULL,
+	conn_addr_id varchar(50) NULL,
+	tariff_desc varchar(500) NULL,
+	conn_grp_type varchar(20) NULL,
+	conn_over_all_flag varchar(2) NULL,
+	conn_addr_flag varchar(2) NULL,
+	conn_remarks varchar(500) NULL
+);
+
+
+-- imagine.cr_cust_dtl definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cr_cust_dtl;
+
+CREATE TABLE imagine.cr_cust_dtl (
+	crm_customer_no varchar(50) NOT NULL,
+	cust_status varchar(50) NULL,
+	cust_addr_id varchar(50) NULL,
+	cust_contact_id varchar(50) NULL,
+	cust_over_all_flag varchar(2) NULL,
+	acc_flag varchar(2) NULL,
+	connection_flag varchar(2) NULL,
+	cust_addr_flag varchar(2) NULL,
+	contact_flag varchar(2) NULL,
+	cust_remarks varchar(500) NULL,
+	CONSTRAINT cr_cust_dtl_pk PRIMARY KEY (crm_customer_no)
+);
+
+
+-- imagine.cr_inter_cust_address definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cr_inter_cust_address;
+
+CREATE TABLE imagine.cr_inter_cust_address (
+	crm_addr_uid varchar NOT NULL,
+	crm_customer_no varchar(50) NOT NULL,
+	address_type varchar(20) NULL,
+	hno varchar(20) NULL,
+	block varchar(100) NULL,
+	building_name varchar(100) NULL,
+	street varchar(50) NULL,
+	road varchar(50) NULL,
+	city varchar(50) NULL,
+	town varchar(100) NULL,
+	state varchar(50) NULL,
+	district varchar(50) NULL,
+	country varchar(50) NULL,
+	post_code varchar(20) NULL,
+	ad_created_by int4 NULL,
+	ad_created_at timestamptz NULL,
+	is_cust_addr bpchar(1) NULL DEFAULT 'N'::bpchar,
+	is_bill_addr bpchar(1) NULL DEFAULT 'N'::bpchar,
+	guid varchar(100) NULL,
+	sync_date timestamp NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- imagine.cr_inter_cust_contact definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cr_inter_cust_contact;
+
+CREATE TABLE imagine.cr_inter_cust_contact (
+	crm_customer_no varchar(50) NOT NULL,
+	crm_contact_id int4 NOT NULL,
+	cn_title varchar(20) NULL,
+	cn_first_name varchar(500) NULL,
+	cn_last_name varchar(500) NULL,
+	cn_contact_type varchar(10) NULL,
+	cn_contact_no numeric NULL,
+	cn_contact_no_pfx numeric NULL,
+	cn_email varchar(100) NULL,
+	cn_status varchar(20) NULL,
+	cn_created_by int4 NULL,
+	cn_created_at timestamptz NULL,
+	migration_table varchar(40) NULL,
+	migration_date timestamp NULL,
+	migration_remarks varchar(500) NULL,
+	guid varchar(100) NULL,
+	sync_date timestamp NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- imagine.cr_inter_customer definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cr_inter_customer;
+
+CREATE TABLE imagine.cr_inter_customer (
+	crm_customer_no varchar(50) NOT NULL,
+	title varchar(20) NULL,
+	first_name varchar(500) NULL,
+	last_name varchar(500) NULL,
+	cust_type varchar(20) NULL,
+	status varchar(20) NULL,
+	customer_cat varchar(20) NULL,
+	customer_class varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	guid varchar(100) NULL,
+	sync_date timestamp NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+
+-- imagine.cr_intr_accounts definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cr_intr_accounts;
+
+CREATE TABLE imagine.cr_intr_accounts (
+	account_no int4 NULL,
+	account_cat varchar(20) NOT NULL,
+	account_class varchar(20) NOT NULL,
+	account_priority varchar(20) NOT NULL,
+	title varchar(20) NULL,
+	first_name varchar(500) NOT NULL,
+	last_name varchar(500) NULL,
+	gender bpchar(1) NULL,
+	birth_date date NULL,
+	registered_no varchar(20) NULL,
+	id_type varchar(20) NULL,
+	id_value varchar(20) NULL,
+	contact_id int4 NULL,
+	base_coll_plan varchar(20) NOT NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	priority varchar(100) NULL,
+	bill_lang varchar(10) NULL,
+	bill_delivery_mthd varchar(10) NULL,
+	no_of_copies numeric NOT NULL DEFAULT 1,
+	account_type varchar(20) NULL,
+	sq_ref_id int4 NULL,
+	customer_id int4 NOT NULL,
+	address_id int4 NOT NULL,
+	address_type varchar(20) NOT NULL,
+	hno varchar(20) NOT NULL,
+	block varchar(100) NULL,
+	building_name varchar(100) NULL,
+	street varchar(50) NOT NULL,
+	road varchar(50) NOT NULL,
+	city varchar(50) NOT NULL,
+	town varchar(100) NOT NULL,
+	state varchar(50) NULL,
+	district varchar(50) NOT NULL,
+	country varchar(50) NOT NULL,
+	post_code varchar(20) NOT NULL,
+	ad_created_by int4 NOT NULL,
+	ad_created_at timestamptz NOT NULL,
+	is_cust_addr bpchar(1) NULL DEFAULT 'N'::bpchar,
+	is_bill_addr bpchar(1) NULL DEFAULT 'N'::bpchar,
+	crm_addr_uid varchar NULL,
+	cn_title varchar(20) NULL,
+	cn_first_name varchar(500) NOT NULL,
+	cn_last_name varchar(500) NULL,
+	cn_contact_type varchar(10) NOT NULL,
+	cn_contact_no numeric NOT NULL,
+	cn_contact_no_pfx numeric NULL,
+	cn_email varchar(100) NULL,
+	cn_status varchar(20) NOT NULL,
+	cn_created_by int4 NOT NULL,
+	cn_created_at timestamptz NOT NULL,
+	cn_crm_contact_id int4 NULL,
+	migration_table varchar(40) NULL,
+	migration_date timestamp NULL,
+	migration_remarks varchar(500) NULL
+);
+
+
+-- imagine.cr_intr_connections definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cr_intr_connections;
+
+CREATE TABLE imagine.cr_intr_connections (
+	connection_type varchar(20) NOT NULL,
+	connection_grp varchar(20) NOT NULL,
+	identification_no varchar(100) NULL,
+	iccid varchar(20) NULL,
+	imsi varchar(20) NULL,
+	is_ported bpchar(1) NULL DEFAULT 'N'::bpchar,
+	exclude_reason varchar(1000) NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	connection_selection varchar(20) NULL,
+	deposit varchar(20) NULL,
+	address_id int4 NULL,
+	account_id int4 NULL,
+	donor varchar(20) NULL,
+	mapping_payload jsonb NULL,
+	address_type varchar(20) NOT NULL,
+	hno varchar(20) NOT NULL,
+	block varchar(100) NULL,
+	building_name varchar(100) NULL,
+	street varchar(50) NOT NULL,
+	road varchar(50) NOT NULL,
+	city varchar(50) NOT NULL,
+	town varchar(100) NOT NULL,
+	state varchar(50) NULL,
+	district varchar(50) NOT NULL,
+	country varchar(50) NOT NULL,
+	post_code varchar(20) NOT NULL,
+	ad_created_by int4 NOT NULL,
+	ad_created_at timestamptz NOT NULL,
+	is_cust_addr bpchar(1) NULL DEFAULT 'N'::bpchar,
+	is_bill_addr bpchar(1) NULL DEFAULT 'N'::bpchar,
+	crm_addr_uid varchar NULL,
+	cn_title varchar(20) NULL,
+	cn_first_name varchar(500) NOT NULL,
+	cn_last_name varchar(500) NULL,
+	cn_contact_type varchar(10) NOT NULL,
+	cn_contact_no numeric NOT NULL,
+	cn_contact_no_pfx numeric NULL,
+	cn_email varchar(100) NULL,
+	cn_status varchar(20) NOT NULL,
+	cn_created_by int4 NOT NULL,
+	cn_created_at timestamptz NOT NULL,
+	cn_crm_contact_id int4 NULL,
+	migration_table varchar(40) NULL,
+	migration_date timestamp NULL,
+	migration_remarks varchar(500) NULL
+);
+
+
+-- imagine.cust_sync_exception definition
+
+-- Drop table
+
+-- DROP TABLE imagine.cust_sync_exception;
+
+CREATE TABLE imagine.cust_sync_exception (
+	entity_name varchar(100) NULL,
+	entity_value varchar(100) NULL,
+	description varchar(100) NULL,
+	exception_msg varchar(500) NULL,
+	exception_count int4 NULL,
+	remarks varchar(100) NULL,
+	customer_id int4 NULL,
+	account_id int4 NULL,
+	identification_id varchar(100) NULL,
+	exception_msg2 varchar(500) NULL
+);
+
+
+-- imagine.customer_28122022 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_28122022;
+
+CREATE TABLE imagine.customer_28122022 (
+	customer_id varchar(100) NULL,
+	account_id varchar(100) NULL,
+	contact_no int8 NULL,
+	identification_no varchar(500) NULL,
+	plan_type varchar(100) NULL,
+	status varchar(100) NULL,
+	created_by varchar(100) NULL,
+	created_at varchar(100) NULL,
+	updated_by varchar(100) NULL,
+	updated_at varchar(100) NULL,
+	remarks varchar(1000) NULL,
+	ref_plan_code varchar(1000) NULL
+);
+
+
+-- imagine.customer_acc_contact_dtl definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_acc_contact_dtl;
+
+CREATE TABLE imagine.customer_acc_contact_dtl (
+	cust_acc_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	customer_id int4 NULL,
+	account_id int4 NOT NULL,
+	contact_id int4 NULL,
+	contact_no int8 NOT NULL,
+	identification_no varchar(100) NOT NULL,
+	plan_id int4 NULL,
+	plan_type varchar(100) NULL,
+	status varchar(50) NULL,
+	created_by varchar(200) NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by varchar(200) NULL,
+	updated_at timestamptz NULL,
+	remarks varchar(1000) NULL,
+	ref_plan_code varchar(100) NULL
+);
+
+
+-- imagine.customer_acc_contact_dtl_02032023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_acc_contact_dtl_02032023;
+
+CREATE TABLE imagine.customer_acc_contact_dtl_02032023 (
+	cust_acc_id int4 NULL,
+	customer_id int4 NULL,
+	account_id int4 NULL,
+	contact_id int4 NULL,
+	contact_no int8 NULL,
+	identification_no varchar(100) NULL,
+	plan_id int4 NULL,
+	plan_type varchar(100) NULL,
+	status varchar(50) NULL,
+	created_by varchar(200) NULL,
+	created_at timestamptz NULL,
+	updated_by varchar(200) NULL,
+	updated_at timestamptz NULL,
+	remarks varchar(1000) NULL,
+	ref_plan_code varchar(100) NULL
+);
+
+
+-- imagine.customer_address_map_csv definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_address_map_csv;
+
+CREATE TABLE imagine.customer_address_map_csv (
+	customer_id int4 NULL,
+	adddress_id int4 NULL
+);
+
+
+-- imagine.customer_address_upload_17022023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_address_upload_17022023;
+
+CREATE TABLE imagine.customer_address_upload_17022023 (
+	customer_id int4 NULL,
+	address_id int4 NULL
+);
+
+
+-- imagine.customer_contact_map_csv definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_contact_map_csv;
+
+CREATE TABLE imagine.customer_contact_map_csv (
+	customer_id int4 NULL,
+	contact_id int4 NULL
+);
+
+
+-- imagine.customer_contact_upload_17022023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_contact_upload_17022023;
+
+CREATE TABLE imagine.customer_contact_upload_17022023 (
+	customer_id int4 NULL,
+	contact_id int4 NULL
+);
+
+
+-- imagine.customer_full_address_17022023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_full_address_17022023;
+
+CREATE TABLE imagine.customer_full_address_17022023 (
+	customer_id varchar(1000) NULL,
+	first_name varchar(1000) NULL,
+	last_name varchar(1000) NULL,
+	customer_status varchar(1000) NULL,
+	address_id varchar(1000) NULL,
+	address_type varchar(1000) NULL,
+	street_no varchar(1000) NULL,
+	flat_no varchar(1000) NULL,
+	"EXTENSION" varchar(1000) NULL,
+	area_name varchar(1000) NULL,
+	place_name varchar(1000) NULL,
+	street_name varchar(1000) NULL,
+	address_line1 varchar(1000) NULL,
+	address_line2 varchar(1000) NULL,
+	country varchar(1000) NULL,
+	post_code varchar(1000) NULL,
+	is_cust_addr varchar(1000) NULL
+);
+
+
+-- imagine.customer_full_contact_upload_17022023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_full_contact_upload_17022023;
+
+CREATE TABLE imagine.customer_full_contact_upload_17022023 (
+	customer_id varchar(1000) NULL,
+	contact_id varchar(1000) NULL,
+	title varchar(1000) NULL,
+	first_name varchar(1000) NULL,
+	last_name varchar(1000) NULL,
+	contact_type varchar(1000) NULL,
+	contact_no varchar(1000) NULL,
+	contact_no_2 varchar(1000) NULL,
+	email varchar(1000) NULL,
+	email_2 varchar(1000) NULL
+);
+
+
+-- imagine.customer_sales_sync_history definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_sales_sync_history;
+
+CREATE TABLE imagine.customer_sales_sync_history (
+	customer_uid varchar(50) NULL,
+	customer_name1 varchar(50) NULL,
+	customer_name2 varchar(50) NULL,
+	account_no varchar(50) NULL,
+	phone_number_1 varchar(50) NULL,
+	access_no varchar(50) NULL,
+	status_cd varchar(50) NULL,
+	number_type varchar(50) NULL,
+	ref_guid varchar(100) NULL,
+	remarks varchar(500) NULL
+);
+
+
+-- imagine.customer_sync_21122022 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_sync_21122022;
+
+CREATE TABLE imagine.customer_sync_21122022 (
+	customer_id varchar(1000) NULL,
+	first_name varchar(1000) NULL,
+	"Last_name " varchar(1000) NULL,
+	account_no varchar(1000) NULL,
+	contact_number varchar(1000) NULL,
+	identification_no varchar(1000) NULL,
+	con_status varchar(1000) NULL,
+	plan_type varchar(500) NULL
+);
+
+
+-- imagine.customer_template definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_template;
+
+CREATE TABLE imagine.customer_template (
+	title varchar(1000) NULL,
+	first_name varchar(1000) NULL,
+	last_name varchar(1000) NULL,
+	gender varchar(1000) NULL,
+	birth_date varchar(1000) NULL,
+	id_type varchar(1000) NULL,
+	id_value varchar(1000) NULL,
+	customer_type varchar(1000) NULL,
+	status varchar(1000) NULL,
+	crm_customer_no varchar(1000) NULL,
+	customer_category varchar(1000) NULL,
+	customer_class varchar(1000) NULL,
+	crm_address_id varchar(1000) NULL,
+	address_type varchar(1000) NULL,
+	hno varchar(1000) NULL,
+	block varchar(1000) NULL,
+	building_name varchar(1000) NULL,
+	street varchar(1000) NULL,
+	road varchar(1000) NULL,
+	city varchar(1000) NULL,
+	town varchar(1000) NULL,
+	state varchar(1000) NULL,
+	district varchar(1000) NULL,
+	country varchar(1000) NULL,
+	post_code varchar(1000) NULL,
+	crm_contact_id varchar(1000) NULL,
+	contact_type varchar(1000) NULL,
+	contact_no varchar(1000) NULL,
+	contact_no_pfx varchar(1000) NULL,
+	alt_contact_no_1 varchar(1000) NULL,
+	email varchar(1000) NULL,
+	alt_email varchar(1000) NULL,
+	address_insert_flag varchar(5) NULL,
+	contact_insert_flag varchar(5) NULL,
+	customer_insert_flag varchar(5) NULL,
+	address_update_flag varchar(5) NULL,
+	contact_update_flag varchar(5) NULL,
+	customer_update_flag varchar(5) NULL,
+	bcae_address_type varchar(100) NULL,
+	bcae_customer_type varchar(100) NULL,
+	bcae_customer_category varchar(100) NULL,
+	bcae_customer_class varchar(100) NULL,
+	bcae_contact_type varchar(100) NULL,
+	bcae_id_type varchar(100) NULL,
+	acc_contact_id int4 NULL
+);
+
+
+-- imagine.customer_template_debug definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_template_debug;
+
+CREATE TABLE imagine.customer_template_debug (
+	title varchar(1000) NULL,
+	first_name varchar(1000) NULL,
+	last_name varchar(1000) NULL,
+	gender varchar(1000) NULL,
+	birth_date varchar(1000) NULL,
+	id_type varchar(1000) NULL,
+	id_value varchar(1000) NULL,
+	customer_type varchar(1000) NULL,
+	status varchar(1000) NULL,
+	crm_customer_no varchar(1000) NULL,
+	customer_category varchar(1000) NULL,
+	customer_class varchar(1000) NULL,
+	crm_address_id varchar(1000) NULL,
+	address_type varchar(1000) NULL,
+	hno varchar(1000) NULL,
+	block varchar(1000) NULL,
+	building_name varchar(1000) NULL,
+	street varchar(1000) NULL,
+	road varchar(1000) NULL,
+	city varchar(1000) NULL,
+	town varchar(1000) NULL,
+	state varchar(1000) NULL,
+	district varchar(1000) NULL,
+	country varchar(1000) NULL,
+	post_code varchar(1000) NULL,
+	crm_contact_id varchar(1000) NULL,
+	contact_type varchar(1000) NULL,
+	contact_no varchar(1000) NULL,
+	contact_no_pfx varchar(1000) NULL,
+	alt_contact_no_1 varchar(1000) NULL,
+	email varchar(1000) NULL,
+	alt_email varchar(1000) NULL,
+	address_insert_flag varchar(5) NULL,
+	contact_insert_flag varchar(5) NULL,
+	customer_insert_flag varchar(5) NULL,
+	address_update_flag varchar(5) NULL,
+	contact_update_flag varchar(5) NULL,
+	customer_update_flag varchar(5) NULL,
+	bcae_address_type varchar(100) NULL,
+	bcae_customer_type varchar(100) NULL,
+	bcae_customer_category varchar(100) NULL,
+	bcae_customer_class varchar(100) NULL,
+	bcae_contact_type varchar(100) NULL,
+	bcae_id_type varchar(100) NULL,
+	exception_flag varchar(2) NULL,
+	account_contact_id int4 NULL
+);
+
+
+-- imagine.customer_template_new definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_template_new;
+
+CREATE TABLE imagine.customer_template_new (
+	title varchar(20) NULL,
+	first_name varchar(500) NULL,
+	last_name varchar(500) NULL,
+	gender bpchar(1) NULL,
+	birth_date date NULL,
+	id_type varchar(50) NULL,
+	id_value varchar(20) NULL,
+	customer_type varchar(20) NULL,
+	status varchar(20) NULL,
+	crm_customer_no varchar(20) NULL,
+	customer_category varchar(20) NULL,
+	customer_class varchar(20) NULL,
+	address_type varchar(20) NULL,
+	hno varchar(20) NULL,
+	block varchar(200) NULL,
+	building_name varchar(200) NULL,
+	street varchar(200) NULL,
+	road varchar(200) NULL,
+	city varchar(200) NULL,
+	town varchar(200) NULL,
+	state varchar(200) NULL,
+	district varchar(200) NULL,
+	country varchar(200) NULL,
+	post_code varchar(50) NULL,
+	contact_type varchar(10) NULL,
+	contact_no varchar(50) NULL,
+	contact_no_pfx numeric NULL,
+	alt_contact_no1 varchar(50) NULL,
+	email varchar(100) NULL,
+	crm_address_id varchar(50) NULL,
+	crm_contact_id varchar(50) NULL,
+	address_insert_flag varchar(5) NULL,
+	contact_insert_flag varchar(5) NULL,
+	customer_insert_flag varchar(5) NULL,
+	address_update_flag varchar(5) NULL,
+	contact_update_flag varchar(5) NULL,
+	customer_update_flag varchar(5) NULL,
+	bcae_address_type varchar(100) NULL,
+	bcae_customer_type varchar(100) NULL,
+	address_contact_flag varchar(100) NULL,
+	bcae_customer_category varchar(100) NULL,
+	bcae_customer_class varchar(100) NULL,
+	alt_email varchar(32767) NULL
+);
+
+
+-- imagine.customer_upload_09feb23 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customer_upload_09feb23;
+
+CREATE TABLE imagine.customer_upload_09feb23 (
+	customer_id varchar(32767) NULL,
+	customer_address_id varchar(32767) NULL,
+	contact_uid varchar(32767) NULL,
+	title varchar(32767) NULL,
+	first_name varchar(32767) NULL,
+	last_name varchar(32767) NULL,
+	gender varchar(32767) NULL,
+	birth_date varchar(32767) NULL,
+	id_number varchar(32767) NULL,
+	customer_type varchar(32767) NULL,
+	customer_status varchar(32767) NULL,
+	customer_category varchar(32767) NULL,
+	customer_class varchar(32767) NULL,
+	address_id varchar(32767) NULL,
+	address_type varchar(32767) NULL,
+	street_no varchar(32767) NULL,
+	flat_no varchar(32767) NULL,
+	"EXTENSION" varchar(32767) NULL,
+	area_name varchar(32767) NULL,
+	place_name varchar(32767) NULL,
+	street_name varchar(32767) NULL,
+	address_line1 varchar(32767) NULL,
+	address_line2 varchar(32767) NULL,
+	country varchar(32767) NULL,
+	post_code varchar(32767) NULL,
+	is_cust_addr varchar(32767) NULL,
+	is_bill_addr varchar(32767) NULL,
+	contact_id varchar(32767) NULL,
+	contact_type varchar(32767) NULL,
+	contact_no varchar(32767) NULL,
+	contact_no_2 varchar(32767) NULL,
+	email varchar(32767) NULL,
+	email_2 varchar(32767) NULL,
+	account_id varchar(32767) NULL,
+	account_category_code varchar(32767) NULL,
+	account_category varchar(32767) NULL,
+	account_class_code varchar(32767) NULL,
+	account_class varchar(32767) NULL,
+	priority_code varchar(32767) NULL,
+	account_priority varchar(32767) NULL,
+	account_registration_no varchar(32767) NULL,
+	account_id_type varchar(32767) NULL,
+	account_id_value varchar(32767) NULL,
+	base_collect_plan_code varchar(32767) NULL,
+	base_collect_plan varchar(32767) NULL,
+	status_code varchar(32767) NULL,
+	billing_language varchar(32767) NULL,
+	connection_type_code varchar(32767) NULL,
+	connection_status varchar(32767) NULL,
+	connection_type varchar(32767) NULL,
+	connection_group varchar(32767) NULL,
+	tariff_code varchar(32767) NULL,
+	tariff_description varchar(32767) NULL,
+	tariff_group_code varchar(32767) NULL,
+	iccid varchar(32767) NULL,
+	imsi varchar(32767) NULL,
+	is_ported varchar(32767) NULL,
+	donor varchar(32767) NULL,
+	access_number varchar(32767) NULL
+);
+
+
+-- imagine.customers_14feb2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customers_14feb2023;
+
+CREATE TABLE imagine.customers_14feb2023 (
+	customer_id int4 NULL,
+	title varchar(20) NULL,
+	first_name varchar(500) NULL,
+	last_name varchar(500) NULL,
+	gender bpchar(1) NULL,
+	birth_date date NULL,
+	registered_no varchar(20) NULL,
+	id_type varchar(10) NULL,
+	id_value varchar(20) NULL,
+	cust_type varchar(20) NULL,
+	donotemail bpchar(1) NULL,
+	status varchar(20) NULL,
+	priority varchar(100) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	reg_date date NULL,
+	crm_customer_id varchar(20) NULL,
+	created_dept_id text NULL,
+	created_role_id int4 NULL,
+	address_id int4 NULL,
+	contact_id int4 NULL
+);
+
+
+-- imagine.customers_debug definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customers_debug;
+
+CREATE TABLE imagine.customers_debug (
+	customer_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	title varchar(20) NULL,
+	first_name varchar(500) NOT NULL,
+	last_name varchar(500) NULL,
+	gender bpchar(1) NULL,
+	birth_date date NULL,
+	registered_no varchar(20) NULL,
+	id_type varchar(10) NULL,
+	id_value varchar(20) NULL,
+	contact_id int4 NOT NULL,
+	cust_type varchar(20) NOT NULL,
+	donotemail bpchar(1) NULL DEFAULT 'Y'::bpchar,
+	status varchar(20) NOT NULL,
+	crm_customer_no varchar(20) NULL,
+	customer_cat varchar(20) NULL,
+	customer_class varchar(20) NULL,
+	address_id int4 NULL,
+	priority varchar(100) NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	reg_date date NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL,
+	chat_language varchar(30) NULL
+);
+
+
+-- imagine.customers_test definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customers_test;
+
+CREATE TABLE imagine.customers_test (
+	customer_id int4 NULL,
+	title varchar(20) NULL,
+	first_name varchar(500) NULL,
+	last_name varchar(500) NULL,
+	gender bpchar(1) NULL,
+	birth_date date NULL,
+	registered_no varchar(20) NULL,
+	id_type varchar(10) NULL,
+	id_value varchar(20) NULL,
+	contact_id int4 NULL,
+	cust_type varchar(20) NULL,
+	donotemail bpchar(1) NULL,
+	status varchar(20) NULL,
+	crm_customer_no varchar(20) NULL,
+	customer_cat varchar(20) NULL,
+	customer_class varchar(20) NULL,
+	address_id int4 NULL,
+	priority varchar(100) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	reg_date date NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL,
+	chat_language varchar(30) NULL
+);
+
+
+-- imagine.donor_values_29032023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.donor_values_29032023;
+
+CREATE TABLE imagine.donor_values_29032023 (
+	customer_id varchar(1000) NULL,
+	account_id varchar(1000) NULL,
+	access_number varchar(1000) NULL,
+	account_first_name varchar(1000) NULL,
+	account_last_name varchar(1000) NULL,
+	connection_type_code varchar(1000) NULL,
+	connection_status varchar(1000) NULL,
+	creation_source_code varchar(1000) NULL,
+	connection_type varchar(1000) NULL,
+	connection_group varchar(1000) NULL,
+	tariff_code varchar(1000) NULL,
+	tariff_description varchar(1000) NULL,
+	tariff_group_code varchar(1000) NULL,
+	iccid varchar(1000) NULL,
+	imsi varchar(1000) NULL,
+	is_ported varchar(1000) NULL,
+	donor varchar(1000) NULL,
+	address_id varchar(1000) NULL,
+	contact_id varchar(1000) NULL
+);
+
+
+-- imagine.email_template definition
+
+-- Drop table
+
+-- DROP TABLE imagine.email_template;
+
+CREATE TABLE imagine.email_template (
+	template_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	template_type varchar(25) NULL,
+	locale varchar(5) NOT NULL,
+	template_name varchar(100) NOT NULL,
+	subject varchar(240) NOT NULL,
+	body text NOT NULL,
+	template_status varchar(25) NOT NULL,
+	created_by varchar(100) NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by varchar(100) NOT NULL,
+	updated_at timestamptz NOT NULL,
+	mapping_payload jsonb NULL,
+	CONSTRAINT email_template_pkey PRIMARY KEY (template_id)
+);
+
+
+-- imagine.exception_table definition
+
+-- Drop table
+
+-- DROP TABLE imagine.exception_table;
+
+CREATE TABLE imagine.exception_table (
+	identification_no varchar(100) NULL,
+	connection_type varchar(100) NULL,
+	status varchar(100) NULL,
+	crm_customer_no varchar(100) NULL,
+	crm_account_no varchar(100) NULL,
+	plan_name varchar(100) NULL
+);
+
+
+-- imagine.imagine_latest_tables definition
+
+-- Drop table
+
+-- DROP TABLE imagine.imagine_latest_tables;
+
+CREATE TABLE imagine.imagine_latest_tables (
+	table_name information_schema."sql_identifier" NULL COLLATE "C",
+	column_name information_schema."sql_identifier" NULL COLLATE "C",
+	data_type information_schema."character_data" NULL COLLATE "C",
+	character_maximum_length information_schema."cardinal_number" NULL,
+	is_nullable information_schema."yes_or_no" NULL COLLATE "C"
+);
+
+
+-- imagine.imagine_missing_plan_master_19122022 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.imagine_missing_plan_master_19122022;
+
+CREATE TABLE imagine.imagine_missing_plan_master_19122022 (
+	refill_profile_id varchar(1000) NULL,
+	ref_plan_code varchar(1000) NULL,
+	plan_name varchar(1000) NULL,
+	comm_pack_name varchar(1000) NULL,
+	plan_category varchar(1000) NULL,
+	plan_type varchar(1000) NULL,
+	ocs_desc varchar(1000) NULL,
+	offer_id varchar(1000) NULL,
+	offer_type varchar(1000) NULL,
+	quota varchar(1000) NULL,
+	units varchar(1000) NULL,
+	prod_type varchar(1000) NULL,
+	network_type varchar(1000) NULL,
+	service_cls varchar(1000) NULL,
+	validity varchar(1000) NULL,
+	charge varchar(1000) NULL,
+	mrc varchar(1000) NULL,
+	nrc varchar(1000) NULL,
+	bandwidth varchar(1000) NULL,
+	contract varchar(1000) NULL
+);
+
+
+-- imagine.imagine_plan_master definition
+
+-- Drop table
+
+-- DROP TABLE imagine.imagine_plan_master;
+
+CREATE TABLE imagine.imagine_plan_master (
+	"REFILL_PROFILE_ID" varchar(100) NULL,
+	"TARIFF_CODE" varchar(100) NULL,
+	tariff_desc varchar(100) NULL,
+	comm_pack_name varchar(100) NULL,
+	plan_category varchar(100) NULL,
+	package_category varchar(100) NULL,
+	tariff_type varchar(100) NULL,
+	"OCS_DESC" varchar(100) NULL,
+	"OFFER_ID" varchar(100) NULL,
+	offer_type varchar(100) NULL,
+	"QUOTA" varchar(100) NULL,
+	"UNITS" varchar(100) NULL,
+	"PROD_TYPE" varchar(100) NULL,
+	"NETWORK_TYPE" varchar(100) NULL,
+	"SERVICE_CLS" varchar(100) NULL,
+	"VALIDITY" varchar(100) NULL,
+	"CHARGE" int4 NULL,
+	"MRC" int4 NULL,
+	"NRC" int4 NULL,
+	"BANDWIDTH" varchar(100) NULL,
+	"Contract" varchar(100) NULL
+);
+
+
+-- imagine.inbound_messages definition
+
+-- Drop table
+
+-- DROP TABLE imagine.inbound_messages;
+
+CREATE TABLE imagine.inbound_messages (
+	inbound_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	sms_message_sid varchar(500) NULL,
+	num_media varchar(10) NULL,
+	profile_name varchar(300) NULL,
+	wa_id varchar(200) NULL,
+	sms_status varchar(100) NULL,
+	body text NULL,
+	message_to varchar(100) NULL,
+	message_from varchar(100) NULL,
+	account_sid varchar(100) NULL,
+	menu_item varchar(1000) NULL,
+	menu_value varchar(5) NULL,
+	created_at timestamptz NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	updated_at timestamptz NULL,
+	updated_by int4 NULL,
+	next_value varchar(30) NULL,
+	flag varchar NULL,
+	chat_source varchar(20) NULL,
+	payload jsonb NULL
+);
+
+
+-- imagine.interaction20june2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.interaction20june2023;
+
+CREATE TABLE imagine.interaction20june2023 (
+	intxn_id int4 NULL,
+	parent_intxn int4 NULL,
+	subject varchar(200) NULL,
+	description text NULL,
+	curr_status varchar(20) NULL,
+	curr_user int4 NULL,
+	identification_no varchar(50) NULL,
+	plan_id int4 NULL,
+	assigned_date timestamp NULL,
+	intxn_type varchar(50) NULL,
+	intxn_cat_type varchar(20) NULL,
+	business_entity_code varchar(50) NULL,
+	problem_code varchar(20) NULL,
+	nature_code varchar(20) NULL,
+	cause_code varchar(20) NULL,
+	clear_code varchar(20) NULL,
+	wo_type varchar(20) NULL,
+	external_ref_no1 varchar(20) NULL,
+	comment_type varchar(80) NULL,
+	comment_cause varchar(80) NULL,
+	priority_code varchar(20) NULL,
+	created_entity varchar(100) NULL,
+	curr_entity varchar(100) NULL,
+	curr_role int4 NULL,
+	customer_id int4 NULL,
+	account_id int4 NULL,
+	address_id int4 NULL,
+	source_code varchar(100) NULL,
+	chnl_code varchar(20) NULL,
+	term_type varchar(20) NULL,
+	sla_code varchar(40) NULL,
+	alert_type varchar(30) NULL,
+	last_alert_date timestamp NULL,
+	cnt_prefer varchar(50) NULL,
+	asset_id varchar(20) NULL,
+	uid varchar(20) NULL,
+	expctd_date_cmpltn timestamp NULL,
+	is_rebound bpchar(1) NULL,
+	bill_amt numeric NULL,
+	is_valid bpchar(1) NULL,
+	ar_ref_no varchar(100) NULL,
+	ref_intxn_id varchar(100) NULL,
+	survey_req bpchar(1) NULL,
+	is_bot_req bpchar(1) NULL,
+	bot_process bpchar(1) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	connection_id int4 NULL,
+	external_ref_no2 varchar(20) NULL,
+	external_ref_no3 varchar(20) NULL,
+	external_ref_no4 varchar(20) NULL,
+	external_ref_sys1 varchar(30) NULL,
+	external_ref_sys2 varchar(30) NULL,
+	external_ref_sys3 varchar(30) NULL,
+	external_ref_sys4 varchar(30) NULL,
+	reason_code varchar(20) NULL,
+	plan_id_list varchar(100) NULL,
+	kiosk_ref_id int4 NULL,
+	existing_connection_id int4 NULL,
+	services varchar NULL,
+	terminate_reason varchar(20) NULL,
+	refund_deposit bpchar NULL,
+	contract_fees_waiver bpchar NULL,
+	"location" varchar(100) NULL,
+	activation_fee varchar(10) NULL,
+	cancelled_at timestamptz(0) NULL,
+	cancelled_by int4 NULL,
+	cancelled_reason varchar(20) NULL
+);
+
+
+-- imagine.invalid_package_csv definition
+
+-- Drop table
+
+-- DROP TABLE imagine.invalid_package_csv;
+
+CREATE TABLE imagine.invalid_package_csv (
+	package_code varchar(8) NULL,
+	package_desc varchar(64) NULL,
+	tariff_code varchar(8) NULL,
+	tariff_desc varchar(64) NULL
+);
+
+
+-- imagine.jason_to_text_30052023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.jason_to_text_30052023;
+
+CREATE TABLE imagine.jason_to_text_30052023 (
+	req_type varchar(10) NULL,
+	mapping_payload jsonb NULL
+);
+
+
+-- imagine.kiosk definition
+
+-- Drop table
+
+-- DROP TABLE imagine.kiosk;
+
+CREATE TABLE imagine.kiosk (
+	reference_no int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	customer_id int4 NULL,
+	account_id int4 NULL,
+	connection_id int4 NULL,
+	problem_type varchar(20) NULL,
+	product varchar(20) NULL,
+	title varchar(10) NULL,
+	first_name varchar(100) NOT NULL,
+	last_name varchar(100) NULL,
+	contact_no numeric(19) NULL,
+	"usage" numeric NULL,
+	speed numeric NULL,
+	assigned_user int4 NULL,
+	assigned_entity varchar(50) NULL,
+	assigned_role int4 NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	remarks varchar(500) NULL,
+	payload jsonb NULL,
+	CONSTRAINT kiosk_id_pk PRIMARY KEY (reference_no)
+);
+
+
+-- imagine.mig_account_inter definition
+
+-- Drop table
+
+-- DROP TABLE imagine.mig_account_inter;
+
+CREATE TABLE imagine.mig_account_inter (
+	account_cat varchar(100) NOT NULL,
+	account_class varchar(100) NOT NULL,
+	account_priority varchar(100) NOT NULL,
+	title varchar(100) NULL,
+	first_name varchar(500) NOT NULL,
+	last_name varchar(500) NULL,
+	gender bpchar(1) NULL,
+	birth_date date NULL,
+	registered_no varchar(100) NULL,
+	id_type varchar(100) NULL,
+	id_value varchar(100) NULL,
+	customer_id int4 NULL,
+	crm_customer_no varchar(100) NULL,
+	account_no int4 NULL,
+	contact_id int4 NULL,
+	crm_contact_id varchar(100) NULL,
+	address_id int4 NULL,
+	crm_address_id varchar(100) NULL,
+	base_coll_plan varchar(100) NOT NULL,
+	status varchar(100) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	priority varchar(100) NULL,
+	bill_lang varchar(10) NULL,
+	bill_delivery_mthd varchar(10) NULL,
+	no_of_copies numeric NOT NULL DEFAULT 1,
+	reg_date date NULL,
+	account_type varchar(20) NULL,
+	sq_ref_id int4 NULL,
+	crm_ref_id varchar(200) NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL
+);
+
+
+-- imagine.mig_address_inter definition
+
+-- Drop table
+
+-- DROP TABLE imagine.mig_address_inter;
+
+CREATE TABLE imagine.mig_address_inter (
+	bcae_address_type varchar(100) NULL,
+	hno varchar(1000) NULL,
+	block varchar(1000) NULL,
+	building_name varchar(1000) NULL,
+	street varchar(1000) NULL,
+	road varchar(1000) NULL,
+	city varchar(1000) NULL,
+	town varchar(1000) NULL,
+	state varchar(1000) NULL,
+	district varchar(1000) NULL,
+	country varchar(1000) NULL,
+	post_code varchar(1000) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	is_cust_addr text NULL,
+	is_bill_addr text NULL,
+	crm_address_id varchar(1000) NULL,
+	migration_date date NULL,
+	migration_table text NULL,
+	migration_remarks text NULL,
+	crm_customer_no varchar(1000) NULL,
+	crm_account_no text NULL,
+	identification_no text NULL
+);
+
+
+-- imagine.mig_connection_inter definition
+
+-- Drop table
+
+-- DROP TABLE imagine.mig_connection_inter;
+
+CREATE TABLE imagine.mig_connection_inter (
+	connection_name varchar(100) NULL,
+	connection_type varchar(20) NOT NULL,
+	connection_grp varchar(20) NOT NULL,
+	exchng_code varchar(20) NULL,
+	dealership varchar(20) NULL,
+	identification_no varchar(100) NULL,
+	iccid varchar(100) NULL,
+	imsi varchar(100) NULL,
+	credit_prof varchar(20) NULL,
+	is_ported bpchar(1) NULL DEFAULT 'N'::bpchar,
+	charge varchar(20) NULL,
+	exclude_reason varchar(1000) NULL,
+	payment_method varchar(20) NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	connection_selection varchar(20) NULL,
+	deposit varchar(20) NULL,
+	crm_address_id varchar(100) NULL,
+	address_id int4 NULL,
+	account_id int4 NULL,
+	crm_account_no varchar(100) NULL,
+	donor varchar(20) NULL,
+	plan_name varchar(1000) NULL,
+	assign_sim_later bpchar(1) NULL DEFAULT 'N'::bpchar,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	plan_status varchar(2) NULL,
+	plan_id int4 NULL,
+	exception_flag varchar(2) NULL,
+	update_flag varchar(2) NULL,
+	insert_flag varchar(2) NULL,
+	connection_type_des varchar(50) NULL,
+	crm_customer_no varchar(100) NULL,
+	customer_id int4 NULL
+);
+
+
+-- imagine.mig_contact_inter definition
+
+-- Drop table
+
+-- DROP TABLE imagine.mig_contact_inter;
+
+CREATE TABLE imagine.mig_contact_inter (
+	title varchar(50) NULL,
+	first_name varchar(1000) NULL,
+	last_name varchar(1000) NULL,
+	contact_type varchar(1000) NULL,
+	contact_no varchar(1000) NULL,
+	contact_no_pfx varchar(1000) NULL,
+	alt_contact_no1 varchar(1000) NULL,
+	email varchar(100) NULL,
+	alt_email varchar(100) NULL,
+	status varchar(100) NULL,
+	created_by int4 NULL,
+	created_at timestamp NULL,
+	updated_by int4 NULL,
+	updated_at timestamp NULL,
+	crm_customer_no varchar(100) NULL,
+	crm_account_no varchar(100) NULL,
+	identification_no varchar(100) NULL,
+	crm_contact_id varchar(100) NULL,
+	is_cust_contact varchar(2) NULL,
+	is_account_contact varchar(2) NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(100) NULL,
+	migration_remarks varchar(100) NULL
+);
+
+
+-- imagine.mig_customer_inter definition
+
+-- Drop table
+
+-- DROP TABLE imagine.mig_customer_inter;
+
+CREATE TABLE imagine.mig_customer_inter (
+	crm_customer_no varchar(1000) NULL,
+	status text NULL,
+	address_id int4 NULL,
+	contact_id int4 NULL,
+	title varchar(1000) NULL,
+	first_name varchar(1000) NULL,
+	last_name varchar(1000) NULL,
+	gender varchar(1000) NULL,
+	birth_date date NULL,
+	bcae_id_type varchar(100) NULL,
+	id_value varchar(1000) NULL,
+	bcae_customer_type varchar(100) NULL,
+	bcae_customer_category varchar(100) NULL,
+	bcae_customer_class varchar(100) NULL,
+	customer_insert_flag varchar(5) NULL,
+	customer_update_flag varchar(5) NULL,
+	inserted_dt timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	crm_contact_id varchar(100) NULL,
+	crm_address_id varchar(100) NULL
+);
+
+
+-- imagine.mig_customer_inter_replica definition
+
+-- Drop table
+
+-- DROP TABLE imagine.mig_customer_inter_replica;
+
+CREATE TABLE imagine.mig_customer_inter_replica (
+	crm_customer_no varchar(1000) NULL,
+	status text NULL,
+	address_id int4 NULL,
+	contact_id int4 NULL,
+	title varchar(1000) NULL,
+	first_name varchar(1000) NULL,
+	last_name varchar(1000) NULL,
+	gender varchar(1000) NULL,
+	birth_date date NULL,
+	bcae_id_type varchar(100) NULL,
+	id_value varchar(1000) NULL,
+	bcae_customer_type varchar(100) NULL,
+	bcae_customer_category varchar(100) NULL,
+	bcae_customer_class varchar(100) NULL,
+	customer_insert_flag varchar(5) NULL,
+	customer_update_flag varchar(5) NULL,
+	inserted_dt timestamp NULL
+);
+
+
+-- imagine.notes definition
+
+-- Drop table
+
+-- DROP TABLE imagine.notes;
+
+CREATE TABLE imagine.notes (
+	notes_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	notes varchar(200) NOT NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	CONSTRAINT notes_pk PRIMARY KEY (notes_id)
+);
+
+
+-- imagine.notifications definition
+
+-- Drop table
+
+-- DROP TABLE imagine.notifications;
+
+CREATE TABLE imagine.notifications (
+	notification_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	email text NULL,
+	mobile_no numeric(20) NULL,
+	notification_type varchar(20) NULL,
+	subject varchar(200) NOT NULL,
+	body text NOT NULL,
+	reference_id int4 NULL,
+	created_at timestamptz NOT NULL,
+	sent_at timestamptz NULL,
+	status varchar(20) NOT NULL,
+	retries int4 NULL,
+	user_id int4 NULL,
+	role_id int4 NULL,
+	department_id varchar(100) NULL,
+	"source" varchar(100) NULL,
+	is_viewed bpchar(1) NULL DEFAULT 'N'::bpchar,
+	markedusers jsonb NULL,
+	updated_at timestamptz NULL,
+	notify_created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT notification_id_pk PRIMARY KEY (notification_id)
+);
+CREATE INDEX notifications_department_id_idx ON imagine.notifications USING btree (department_id);
+CREATE INDEX notifications_email_idx ON imagine.notifications USING btree (email);
+CREATE INDEX notifications_mobile_no_idx ON imagine.notifications USING btree (mobile_no);
+CREATE INDEX notifications_role_id_idx ON imagine.notifications USING btree (role_id);
+CREATE INDEX notifications_status_idx ON imagine.notifications USING btree (status);
+CREATE INDEX notifications_user_id_idx ON imagine.notifications USING btree (user_id);
+
+
+-- imagine.notifications20june2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.notifications20june2023;
+
+CREATE TABLE imagine.notifications20june2023 (
+	notification_id int4 NULL,
+	email text NULL,
+	mobile_no numeric(20) NULL,
+	notification_type varchar(20) NULL,
+	subject varchar(200) NULL,
+	body text NULL,
+	reference_id int4 NULL,
+	created_at timestamptz NULL,
+	sent_at timestamptz NULL,
+	status varchar(20) NULL,
+	retries int4 NULL,
+	user_id int4 NULL,
+	role_id int4 NULL,
+	department_id varchar(100) NULL,
+	"source" varchar(100) NULL,
+	is_viewed bpchar(1) NULL,
+	markedusers jsonb NULL,
+	updated_at timestamptz NULL
+);
+
+
+-- imagine.o_export_tmp definition
+
+-- Drop table
+
+-- DROP TABLE imagine.o_export_tmp;
+
+CREATE TABLE imagine.o_export_tmp (
+	crm_customer_no varchar(32767) NULL,
+	customer_name text NULL,
+	cust_type varchar(32767) NULL,
+	email varchar(32767) NULL,
+	contact_type varchar(32767) NULL,
+	contact_no varchar(32767) NULL,
+	cust_status varchar(32767) NULL,
+	hno varchar(32767) NULL,
+	block varchar(32767) NULL,
+	building_name varchar(32767) NULL,
+	street varchar(32767) NULL,
+	road varchar(32767) NULL,
+	district varchar(32767) NULL,
+	state varchar(32767) NULL,
+	town varchar(32767) NULL,
+	city varchar(32767) NULL,
+	post_code varchar(32767) NULL,
+	country varchar(32767) NULL,
+	customer_category varchar NULL,
+	customer_class varchar NULL,
+	account_no varchar(32767) NULL,
+	account_name text NULL,
+	birth_date varchar(32767) NULL,
+	gender varchar(32767) NULL,
+	account_id_type varchar NULL,
+	acc_id_value varchar(32767) NULL,
+	acct_email varchar(32767) NULL,
+	acct_contact_type varchar(32767) NULL,
+	acct_contact_no varchar(32767) NULL,
+	account_priority varchar NULL,
+	acct_acount_name text NULL,
+	acc_created_at varchar(32767) NULL,
+	bill_hno varchar(32767) NULL,
+	bill_block varchar(32767) NULL,
+	bill_building_name varchar(32767) NULL,
+	bill_street varchar(32767) NULL,
+	bill_road varchar(32767) NULL,
+	bill_district varchar(32767) NULL,
+	bill_state varchar(32767) NULL,
+	bill_town varchar(32767) NULL,
+	bill_city varchar(32767) NULL,
+	bill_postal_code varchar(32767) NULL,
+	bill_country varchar(32767) NULL,
+	account_cat varchar(32767) NULL,
+	account_class varchar(32767) NULL,
+	base_coll_plan varchar(32767) NULL,
+	bill_lang varchar(32767) NULL,
+	no_of_copies varchar(32767) NULL,
+	acc_status varchar(32767) NULL,
+	access_no varchar(32767) NULL,
+	tariff_des varchar(32767) NULL,
+	con_status varchar(32767) NULL,
+	iccid varchar(32767) NULL,
+	imsi varchar(32767) NULL,
+	is_ported varchar(32767) NULL,
+	donor varchar(32767) NULL
+);
+
+
+-- imagine.o_test definition
+
+-- Drop table
+
+-- DROP TABLE imagine.o_test;
+
+CREATE TABLE imagine.o_test (
+	title varchar(32767) NULL,
+	first_name varchar(32767) NULL,
+	last_name varchar(32767) NULL,
+	contact_id int4 NULL,
+	address_id int4 NULL,
+	cust_type varchar(32767) NULL,
+	status varchar(32767) NULL,
+	crm_customer_no varchar(32767) NULL,
+	customer_cat varchar(32767) NULL,
+	customer_class varchar(32767) NULL,
+	"?column?" int4 NULL,
+	cust_created_at timestamptz NULL,
+	"current_timestamp" timestamptz NULL,
+	remarks text NULL,
+	flag text NULL
+);
+
+
+-- imagine.otp definition
+
+-- Drop table
+
+-- DROP TABLE imagine.otp;
+
+CREATE TABLE imagine.otp (
+	id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	reference varchar(200) NULL,
+	otp numeric(6) NULL,
+	sent_at timestamptz NOT NULL,
+	status varchar(20) NOT NULL,
+	CONSTRAINT otp_id_pk PRIMARY KEY (id)
+);
+
+
+-- imagine.package_tariff_mapping definition
+
+-- Drop table
+
+-- DROP TABLE imagine.package_tariff_mapping;
+
+CREATE TABLE imagine.package_tariff_mapping (
+	package_code varchar(8) NULL,
+	package_desc varchar(64) NULL,
+	tariff_code varchar(8) NULL
+);
+
+
+-- imagine.plan_09122022_prod definition
+
+-- Drop table
+
+-- DROP TABLE imagine.plan_09122022_prod;
+
+CREATE TABLE imagine.plan_09122022_prod (
+	plan_id int4 NOT NULL,
+	prod_type varchar(20) NOT NULL,
+	plan_name varchar(200) NOT NULL,
+	bandwidth int4 NULL,
+	network_type varchar(20) NULL,
+	charge float8 NULL,
+	refill_profile_id varchar(20) NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	ref_plan_code varchar(20) NULL,
+	plan_type varchar(20) NULL,
+	validity varchar(20) NULL,
+	mrc bpchar(1) NULL,
+	nrc bpchar(1) NULL,
+	plan_category varchar(20) NULL,
+	prod_cat_type varchar(50) NULL,
+	comm_pack_name varchar(50) NULL,
+	ocs_desc varchar(50) NULL,
+	service_cls varchar(50) NULL
+);
+
+
+-- imagine.plan_booster definition
+
+-- Drop table
+
+-- DROP TABLE imagine.plan_booster;
+
+CREATE TABLE imagine.plan_booster (
+	plan_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	product_code varchar(200) NULL,
+	product_desc varchar(900) NULL,
+	product_comercial_name varchar(900) NULL,
+	product_group varchar(900) NULL,
+	service_type varchar(900) NULL,
+	refill_id varchar(900) NULL,
+	price varchar(900) NULL,
+	charge_type varchar(900) NULL,
+	offer_id varchar(900) NULL,
+	unit varchar(10) NULL,
+	status varchar(10) NULL,
+	created_at timestamptz NULL,
+	updated_at time NULL,
+	created_by int2 NULL,
+	updatedby int2 NULL,
+	CONSTRAINT plan_booster_pk PRIMARY KEY (plan_id)
+);
+
+
+-- imagine.plan_connection definition
+
+-- Drop table
+
+-- DROP TABLE imagine.plan_connection;
+
+CREATE TABLE imagine.plan_connection (
+	account_no varchar(200) NULL,
+	access_no varchar(200) NULL,
+	tarrif_code varchar(200) NULL,
+	tarrif_des varchar(200) NULL,
+	status_dt varchar(200) NULL,
+	last_install_dt varchar(200) NULL,
+	recovery_dt varchar(200) NULL
+);
+
+
+-- imagine.plan_debug definition
+
+-- Drop table
+
+-- DROP TABLE imagine.plan_debug;
+
+CREATE TABLE imagine.plan_debug (
+	plan_id int4 NULL,
+	prod_type varchar(20) NULL,
+	plan_name varchar(200) NULL,
+	bandwidth int4 NULL,
+	network_type varchar(20) NULL,
+	charge float8 NULL,
+	refill_profile_id varchar(20) NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	ref_plan_code varchar(20) NULL,
+	plan_type varchar(20) NULL,
+	validity varchar(20) NULL,
+	mrc varchar(20) NULL,
+	nrc varchar(20) NULL,
+	plan_category varchar(20) NULL,
+	prod_cat_type varchar(50) NULL,
+	comm_pack_name varchar(100) NULL,
+	ocs_desc varchar(50) NULL,
+	service_cls varchar(50) NULL,
+	contract varchar(100) NULL
+);
+
+
+-- imagine.plan_id definition
+
+-- Drop table
+
+-- DROP TABLE imagine.plan_id;
+
+CREATE TABLE imagine.plan_id (
+	plan_id text NULL
+);
+
+
+-- imagine.plan_offer_mapping definition
+
+-- Drop table
+
+-- DROP TABLE imagine.plan_offer_mapping;
+
+CREATE TABLE imagine.plan_offer_mapping (
+	plan_offer_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	plan_id int4 NOT NULL,
+	quota numeric NULL,
+	offer_id varchar(20) NULL,
+	units varchar(20) NULL,
+	offer_type varchar(20) NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	CONSTRAINT plan_offer_map_pk PRIMARY KEY (plan_offer_id)
+);
+
+
+-- imagine.plan_tariff_update12dec2022 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.plan_tariff_update12dec2022;
+
+CREATE TABLE imagine.plan_tariff_update12dec2022 (
+	product_code varchar(20) NULL,
+	product_description varchar(100) NULL,
+	tariff_code varchar(20) NULL,
+	tariff_description varchar(100) NULL
+);
+
+
+-- imagine.plan_upd_06dec2022 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.plan_upd_06dec2022;
+
+CREATE TABLE imagine.plan_upd_06dec2022 (
+	plan_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	prod_type varchar(20) NOT NULL,
+	plan_name varchar(200) NOT NULL,
+	bandwidth int4 NULL,
+	network_type varchar(20) NULL,
+	charge float8 NULL,
+	refill_profile_id varchar(20) NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	ref_plan_code varchar(20) NULL,
+	plan_type varchar(20) NULL,
+	validity varchar(20) NULL,
+	mrc bpchar(1) NULL,
+	nrc bpchar(1) NULL,
+	plan_category varchar(20) NULL,
+	prod_cat_type varchar(50) NULL,
+	comm_pack_name varchar(50) NULL,
+	ocs_desc varchar(50) NULL,
+	service_cls varchar(50) NULL,
+	column6 varchar(50) NULL,
+	offer_id varchar(50) NULL,
+	offer_type varchar(50) NULL,
+	quota int4 NULL,
+	units varchar(50) NULL,
+	contract varchar(50) NULL,
+	CONSTRAINT plan_upd_06dec2022_pk PRIMARY KEY (plan_id)
+);
+
+
+-- imagine.plan_upd_tmp_06dec2022 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.plan_upd_tmp_06dec2022;
+
+CREATE TABLE imagine.plan_upd_tmp_06dec2022 (
+	plan_upd_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	refill_profile_id varchar(20) NULL,
+	ref_plan_code varchar(20) NULL,
+	plan_name varchar(200) NULL,
+	comm_pack_name varchar(100) NULL,
+	plan_category varchar(20) NULL,
+	plan_type varchar(20) NULL,
+	ocs_desc varchar(50) NULL,
+	offer_id varchar(20) NULL,
+	offer_type varchar(20) NULL,
+	quota varchar(20) NULL,
+	units varchar(20) NULL,
+	prod_type varchar(20) NULL,
+	network_type varchar(20) NULL,
+	service_cls varchar(50) NULL,
+	charge float8 NULL,
+	mrc varchar(20) NULL,
+	nrc varchar(20) NULL,
+	bandwidth int4 NULL,
+	contract varchar(50) NULL,
+	bundle_category varchar(50) NULL,
+	validity varchar(50) NULL,
+	prod_cat_type_cd varchar(100) NULL,
+	plan_category_cd varchar(100) NULL
+);
+
+
+-- imagine.post_check_cust_sync_exception definition
+
+-- Drop table
+
+-- DROP TABLE imagine.post_check_cust_sync_exception;
+
+CREATE TABLE imagine.post_check_cust_sync_exception (
+	entity_name varchar(100) NULL,
+	entity_value varchar(100) NULL,
+	exception_msg varchar(500) NULL,
+	customer_id varchar(100) NULL,
+	exception_count int4 NULL,
+	remarks varchar(100) NULL
+);
+
+
+-- imagine.roles_16052023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.roles_16052023;
+
+CREATE TABLE imagine.roles_16052023 (
+	role_id int4 NULL,
+	role_name varchar(100) NULL,
+	role_desc varchar(100) NULL,
+	is_admin varchar(100) NULL,
+	parent_role int4 NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	mapping_payload jsonb NULL
+);
+
+
+-- imagine.sales_sync_history definition
+
+-- Drop table
+
+-- DROP TABLE imagine.sales_sync_history;
+
+CREATE TABLE imagine.sales_sync_history (
+	access_no varchar(1000) NULL,
+	account_no varchar(1000) NULL,
+	subscribers_name varchar(1000) NULL,
+	product_des varchar(1000) NULL,
+	plan_des varchar(1000) NULL,
+	status varchar(1000) NULL,
+	initial_install_dt varchar(1000) NULL,
+	costing_start_dt varchar(1000) NULL,
+	stype varchar(100) NULL,
+	first_sales_person varchar(1000) NULL,
+	last_sales_person varchar(1000) NULL,
+	clear_user varchar(1000) NULL,
+	portin varchar(20) NULL,
+	bundle varchar(20) NULL,
+	upgrade varchar(20) NULL,
+	new_con varchar(20) NULL,
+	order_type varchar(50) NULL,
+	application_date varchar(100) NULL,
+	create_date varchar(100) NULL,
+	sync_date_time timestamp NULL,
+	remarks varchar(100) NULL,
+	ref_guid varchar(100) NULL
+);
+
+
+-- imagine.sales_target definition
+
+-- Drop table
+
+-- DROP TABLE imagine.sales_target;
+
+CREATE TABLE imagine.sales_target (
+	locations varchar(1000) NULL,
+	service_type varchar(1000) NULL,
+	target_count numeric NULL,
+	target_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	target_month date NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL
+);
+
+
+-- imagine.sales_target_upload definition
+
+-- Drop table
+
+-- DROP TABLE imagine.sales_target_upload;
+
+CREATE TABLE imagine.sales_target_upload (
+	locations varchar(1000) NULL,
+	service_type varchar(1000) NULL,
+	target_count numeric NULL,
+	target_id int4 NULL,
+	target_month date NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL
+);
+
+
+-- imagine.tariff_offer_mapping definition
+
+-- Drop table
+
+-- DROP TABLE imagine.tariff_offer_mapping;
+
+CREATE TABLE imagine.tariff_offer_mapping (
+	tariff_offer_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	tariff_id int4 NOT NULL,
+	quota numeric NULL,
+	offer_id varchar(20) NULL,
+	units varchar(20) NULL,
+	offer_type varchar(20) NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	CONSTRAINT tariff_offer_mapping_pk PRIMARY KEY (tariff_offer_id)
+);
+
+
+-- imagine."temp" definition
+
+-- Drop table
+
+-- DROP TABLE imagine."temp";
+
+CREATE TABLE imagine."temp" (
+	val text NULL
+);
+
+
+-- imagine.temp21june2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.temp21june2023;
+
+CREATE TABLE imagine.temp21june2023 (
+	interaction_id int4 NULL
+);
+
+
+-- imagine.temp_address_dtl definition
+
+-- Drop table
+
+-- DROP TABLE imagine.temp_address_dtl;
+
+CREATE TABLE imagine.temp_address_dtl (
+	address_id text NULL,
+	address_type text NULL,
+	hno text NULL,
+	block text NULL,
+	street text NULL,
+	road text NULL,
+	city text NULL,
+	town text NULL,
+	state text NULL,
+	district text NULL,
+	country text NULL,
+	post_code text NULL,
+	created_by text NULL,
+	created_at text NULL,
+	updated_by text NULL,
+	updated_at text NULL,
+	is_cust_addr text NULL,
+	is_bill_addr text NULL
+);
+
+
+-- imagine.test definition
+
+-- Drop table
+
+-- DROP TABLE imagine.test;
+
+CREATE TABLE imagine.test (
+	t_id serial4 NOT NULL,
+	f_name varchar(200) NULL,
+	l_name varchar(200) NULL,
+	created_at timestamptz NULL,
+	updated_at timestamptz NULL,
+	CONSTRAINT test_pkey PRIMARY KEY (t_id)
+);
+
+
+-- imagine.tmp_ref_pl_code definition
+
+-- Drop table
+
+-- DROP TABLE imagine.tmp_ref_pl_code;
+
+CREATE TABLE imagine.tmp_ref_pl_code (
+	ref_plan_code varchar(20) NULL
+);
+
+
+-- imagine.transitions definition
+
+-- Drop table
+
+-- DROP TABLE imagine.transitions;
+
+CREATE TABLE imagine.transitions (
+	trans_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	trans_code varchar(20) NOT NULL,
+	from_unit varchar(50) NOT NULL,
+	from_role varchar(20) NOT NULL,
+	to_unit varchar(50) NOT NULL,
+	to_role varchar(20) NOT NULL,
+	from_status varchar(20) NULL,
+	to_status varchar(20) NOT NULL,
+	task_mapping varchar(3000) NULL,
+	trans_status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL
+);
+
+
+-- imagine.type_code_lu definition
+
+-- Drop table
+
+-- DROP TABLE imagine.type_code_lu;
+
+CREATE TABLE imagine.type_code_lu (
+	code_type varchar(20) NOT NULL,
+	code varchar(50) NOT NULL,
+	description varchar(100) NOT NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	CONSTRAINT type_code_lu_pk PRIMARY KEY (code)
+);
+
+
+-- imagine.user_role_remove definition
+
+-- Drop table
+
+-- DROP TABLE imagine.user_role_remove;
+
+CREATE TABLE imagine.user_role_remove (
+	user_id int4 NULL,
+	email varchar(100) NULL,
+	"roleId" varchar NULL,
+	"unitId" varchar NULL
+);
+
+
+-- imagine.user_role_remove_final definition
+
+-- Drop table
+
+-- DROP TABLE imagine.user_role_remove_final;
+
+CREATE TABLE imagine.user_role_remove_final (
+	user_id int4 NULL,
+	email varchar(100) NULL,
+	roleid varchar NULL,
+	unitid varchar NULL,
+	final_mapping_payload text NULL
+);
+
+
+-- imagine.user_tokens definition
+
+-- Drop table
+
+-- DROP TABLE imagine.user_tokens;
+
+CREATE TABLE imagine.user_tokens (
+	user_id varchar NULL,
+	"token" text NULL,
+	status varchar NULL,
+	created_at timestamp NULL,
+	id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	updated_at timestamp NULL
+);
+
+
+-- imagine.userrole definition
+
+-- Drop table
+
+-- DROP TABLE imagine.userrole;
+
+CREATE TABLE imagine.userrole (
+	userid text NULL,
+	email text NULL,
+	rolename text NULL,
+	roleshort text NULL
+);
+
+
+-- imagine.users_16052023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.users_16052023;
+
+CREATE TABLE imagine.users_16052023 (
+	user_id int4 NULL,
+	contact_no numeric NULL,
+	email varchar(100) NULL,
+	user_type varchar(20) NULL,
+	photo varchar(100) NULL,
+	title varchar(10) NULL,
+	first_name varchar(100) NULL,
+	last_name varchar(100) NULL,
+	gender varchar(10) NULL,
+	dob date NULL,
+	office_no numeric NULL,
+	extn numeric NULL,
+	loginid varchar(100) NULL,
+	notification_type varchar(10) NULL,
+	bi_access bpchar(1) NULL,
+	wa_access bpchar(1) NULL,
+	login_password varchar(100) NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	mapping_payload jsonb NULL,
+	invite_token varchar(500) NULL,
+	ic_number varchar(20) NULL,
+	profile_picture text NULL,
+	"location" varchar(100) NULL,
+	one_time_password varchar(100) NULL,
+	country varchar NULL,
+	crm_user_id varchar(20) NULL,
+	email_old varchar(200) NULL,
+	login_attempts int4 NULL,
+	admin_remark varchar(4000) NULL,
+	activation_date date NULL,
+	expiry_date date NULL
+);
+
+
+-- imagine.whatsapp_chat_history definition
+
+-- Drop table
+
+-- DROP TABLE imagine.whatsapp_chat_history;
+
+CREATE TABLE imagine.whatsapp_chat_history (
+	id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	report_id int4 NULL,
+	from_msg varchar NULL,
+	to_msg varchar NULL,
+	message varchar NULL,
+	"source" varchar NULL,
+	status varchar(20) NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_at timestamptz NULL,
+	updated_by int4 NULL,
+	created_by int4 NOT NULL,
+	CONSTRAINT whatsapp_chat_history_pk PRIMARY KEY (id)
+);
+
+
+-- imagine.whatsapp_report definition
+
+-- Drop table
+
+-- DROP TABLE imagine.whatsapp_report;
+
+CREATE TABLE imagine.whatsapp_report (
+	report_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	whatsapp_number varchar(20) NULL,
+	contact_number numeric(20) NULL,
+	access_number varchar(20) NULL,
+	service_type varchar NULL,
+	status varchar(20) NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_at timestamptz NULL,
+	updated_by int4 NULL,
+	created_by int4 NOT NULL,
+	end_at timestamptz NULL,
+	CONSTRAINT whatsapp_report_pk PRIMARY KEY (report_id)
+);
+
+
+-- imagine.whatsapp_report_dtl definition
+
+-- Drop table
+
+-- DROP TABLE imagine.whatsapp_report_dtl;
+
+CREATE TABLE imagine.whatsapp_report_dtl (
+	report_dtl_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	whatsapp_number varchar NULL,
+	contact_number numeric NULL,
+	access_number varchar NULL,
+	intxn_id int4 NULL,
+	report_id int4 NULL,
+	service_type varchar NULL,
+	status varchar(20) NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_at timestamptz NULL,
+	updated_by int4 NULL,
+	created_by int4 NOT NULL,
+	end_at timestamptz NULL,
+	created_date date NULL DEFAULT CURRENT_DATE,
+	end_date date NULL DEFAULT CURRENT_DATE,
+	CONSTRAINT whatsapp_report_dtl_pk PRIMARY KEY (report_dtl_id)
+);
+
+
+-- imagine.whatsup_plan definition
+
+-- Drop table
+
+-- DROP TABLE imagine.whatsup_plan;
+
+CREATE TABLE imagine.whatsup_plan (
+	refill_profile_id varchar(100) NULL,
+	ref_plan_code varchar(100) NULL,
+	plan_name varchar(100) NULL,
+	comm_pack_name varchar(100) NULL,
+	plan_category varchar(100) NULL,
+	package_category varchar(100) NULL,
+	plan_type varchar(100) NULL,
+	ocs_desc varchar(100) NULL,
+	offer_id varchar(100) NULL,
+	offer_type varchar(100) NULL,
+	quota varchar(100) NULL,
+	units varchar(100) NULL,
+	prod_type varchar(100) NULL,
+	network_type varchar(100) NULL,
+	service_cls varchar(100) NULL,
+	validity varchar(100) NULL,
+	charge varchar(100) NULL,
+	mrc varchar(100) NULL,
+	nrc varchar(100) NULL,
+	bandwidth varchar(100) NULL,
+	contract varchar(100) NULL,
+	plan_category_cd varchar(50) NULL,
+	prod_cat_type_cd varchar(50) NULL
+);
+
+
+-- imagine.workflow_definition290823 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_definition290823;
+
+CREATE TABLE imagine.workflow_definition290823 (
+	workflow_id int4 NULL,
+	interaction_type varchar(20) NULL,
+	product_type varchar(20) NULL,
+	wf_definition jsonb NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL
+);
+
+
+-- imagine.workflow_definition_02may2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_definition_02may2023;
+
+CREATE TABLE imagine.workflow_definition_02may2023 (
+	workflow_id int4 NULL,
+	interaction_type varchar(20) NULL,
+	product_type varchar(20) NULL,
+	wf_definition jsonb NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL
+);
+
+
+-- imagine.workflow_definition_12may2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_definition_12may2023;
+
+CREATE TABLE imagine.workflow_definition_12may2023 (
+	workflow_id int4 NULL,
+	interaction_type varchar(20) NULL,
+	product_type varchar(20) NULL,
+	wf_definition jsonb NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL
+);
+
+
+-- imagine.workflow_definition_16052023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_definition_16052023;
+
+CREATE TABLE imagine.workflow_definition_16052023 (
+	workflow_id int4 NULL,
+	interaction_type varchar(20) NULL,
+	product_type varchar(20) NULL,
+	wf_definition jsonb NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL
+);
+
+
+-- imagine.workflow_definition_31032023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_definition_31032023;
+
+CREATE TABLE imagine.workflow_definition_31032023 (
+	workflow_id int4 NULL,
+	interaction_type varchar(20) NULL,
+	product_type varchar(20) NULL,
+	wf_definition jsonb NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL
+);
+
+
+-- imagine.workflow_definition_hist_14may2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_definition_hist_14may2023;
+
+CREATE TABLE imagine.workflow_definition_hist_14may2023 (
+	workflow_id int4 NULL,
+	interaction_type varchar(20) NULL,
+	product_type varchar(20) NULL,
+	wf_definition jsonb NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL
+);
+
+
+-- imagine.workflow_definition_new290823 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_definition_new290823;
+
+CREATE TABLE imagine.workflow_definition_new290823 (
+	workflow_id int4 NULL,
+	interaction_type varchar(20) NULL,
+	product_type varchar(20) NULL,
+	wf_definition jsonb NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL
+);
+
+
+-- imagine.workflow_definition_uat_02may2023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_definition_uat_02may2023;
+
+CREATE TABLE imagine.workflow_definition_uat_02may2023 (
+	workflow_id int4 NULL,
+	interaction_type varchar(20) NULL,
+	product_type varchar(20) NULL,
+	wf_definition jsonb NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL
+);
+
+
+-- imagine.workflow_defn_new definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_defn_new;
+
+CREATE TABLE imagine.workflow_defn_new (
+	workflow_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	interaction_type varchar(20) NULL,
+	product_type varchar(20) NULL,
+	wf_definition jsonb NOT NULL,
+	status varchar(20) NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	workflow_name varchar(200) NULL,
+	CONSTRAINT workflow_defn_new_pk PRIMARY KEY (workflow_id)
+);
+
+
+-- imagine.workflow_defn_new_chat2us_13112023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_defn_new_chat2us_13112023;
+
+CREATE TABLE imagine.workflow_defn_new_chat2us_13112023 (
+	workflow_id int4 NULL,
+	interaction_type varchar(20) NULL,
+	product_type varchar(20) NULL,
+	wf_definition jsonb NULL,
+	status varchar(20) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	workflow_name varchar(200) NULL
+);
+
+
+-- imagine.workflow_hdr definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_hdr;
+
+CREATE TABLE imagine.workflow_hdr (
+	wf_hdr_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	wf_defn_id int4 NOT NULL,
+	entity varchar(100) NOT NULL,
+	entity_id varchar(200) NOT NULL,
+	next_activity_id varchar(100) NULL,
+	next_task_id varchar(100) NULL,
+	wf_context jsonb NOT NULL,
+	wf_status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	created_date date NULL DEFAULT CURRENT_DATE,
+	CONSTRAINT wf_hdr_pk PRIMARY KEY (wf_hdr_id)
+);
+
+
+-- imagine.workflow_mapping definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_mapping;
+
+CREATE TABLE imagine.workflow_mapping (
+	mapping_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	mapping_name varchar NULL,
+	"module" varchar NULL,
+	workflow_id int4 NULL,
+	"mapping" jsonb NULL,
+	status varchar NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_at timestamptz NULL,
+	updated_by int4 NULL
+);
+
+
+-- imagine.workorder_overall_new definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workorder_overall_new;
+
+CREATE TABLE imagine.workorder_overall_new (
+	access_no varchar(1000) NOT NULL,
+	account_no varchar(1000) NULL,
+	subscribers_name varchar(1000) NULL,
+	product_des varchar(1000) NULL,
+	plan_des varchar(1000) NULL,
+	status varchar(1000) NULL,
+	initial_install_dt date NULL,
+	costing_start_dt varchar(1000) NULL,
+	stype varchar(100) NULL,
+	first_sales_person varchar(1000) NULL,
+	last_sales_person varchar(1000) NULL,
+	clear_user varchar(1000) NULL,
+	portin varchar(20) NULL,
+	bundle varchar(20) NULL,
+	upgrade varchar(20) NULL,
+	new_con varchar(20) NULL,
+	order_type varchar(50) NULL,
+	application_date varchar(100) NULL,
+	create_date date NULL,
+	ref_guid varchar(100) NULL
+);
+
+
+-- imagine.plan definition
+
+-- Drop table
+
+-- DROP TABLE imagine.plan;
+
+CREATE TABLE imagine.plan (
+	plan_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	prod_type varchar(20) NOT NULL,
+	plan_name varchar(200) NOT NULL,
+	bandwidth int4 NULL,
+	network_type varchar(20) NULL,
+	charge float8 NULL,
+	refill_profile_id varchar(20) NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	ref_plan_code varchar(20) NULL,
+	plan_type varchar(20) NULL,
+	validity varchar(20) NULL,
+	mrc varchar(20) NULL,
+	nrc varchar(20) NULL,
+	plan_category varchar(20) NULL,
+	prod_cat_type varchar(50) NULL,
+	comm_pack_name varchar(100) NULL,
+	ocs_desc varchar(50) NULL,
+	service_cls varchar(50) NULL,
+	contract varchar(100) NULL,
+	CONSTRAINT plan_pk PRIMARY KEY (plan_id),
+	CONSTRAINT plan_fk FOREIGN KEY (prod_type) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT,
+	CONSTRAINT plan_fk_2 FOREIGN KEY (status) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT,
+	CONSTRAINT plan_fk_prod_cat FOREIGN KEY (prod_cat_type) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+
+-- imagine.plan_prod_27032023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.plan_prod_27032023;
+
+CREATE TABLE imagine.plan_prod_27032023 (
+	plan_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	prod_type varchar(20) NOT NULL,
+	plan_name varchar(200) NOT NULL,
+	bandwidth int4 NULL,
+	network_type varchar(20) NULL,
+	charge float8 NULL,
+	refill_profile_id varchar(20) NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	ref_plan_code varchar(50) NULL,
+	plan_type varchar(20) NULL,
+	validity varchar(20) NULL,
+	mrc bpchar(20) NULL,
+	nrc bpchar(20) NULL,
+	plan_category varchar(20) NULL,
+	prod_cat_type varchar(50) NULL,
+	comm_pack_name varchar(100) NULL,
+	ocs_desc varchar(50) NULL,
+	service_cls varchar(50) NULL,
+	CONSTRAINT plan_prd_pk PRIMARY KEY (plan_id),
+	CONSTRAINT plan_fk_prd FOREIGN KEY (prod_type) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT,
+	CONSTRAINT plan_fk_prd_2 FOREIGN KEY (status) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT,
+	CONSTRAINT plan_fk_prd_prod_cat FOREIGN KEY (prod_cat_type) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+
+-- imagine.tariff_mst definition
+
+-- Drop table
+
+-- DROP TABLE imagine.tariff_mst;
+
+CREATE TABLE imagine.tariff_mst (
+	tariff_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	tariff_code varchar(50) NOT NULL,
+	tariff_desc varchar(200) NOT NULL,
+	tariff_type varchar(20) NOT NULL,
+	package_code varchar(50) NULL,
+	package_desc varchar(200) NULL,
+	package_category varchar(50) NULL,
+	bandwidth int4 NULL,
+	network_type varchar(20) NULL,
+	charge float8 NULL,
+	refill_profile_id varchar(20) NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	validity varchar(20) NULL,
+	mrc varchar(20) NULL,
+	nrc varchar(20) NULL,
+	plan_category varchar(20) NULL,
+	prod_cat_type varchar(50) NULL,
+	comm_pack_name varchar(100) NULL,
+	ocs_desc varchar(50) NULL,
+	service_cls varchar(50) NULL,
+	contract varchar(100) NULL,
+	CONSTRAINT tariff_mst_pk PRIMARY KEY (tariff_id),
+	CONSTRAINT tariff_mst_fk_2 FOREIGN KEY (status) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT
+);
+
+
+-- imagine.tariff_mst_prod_27032023 definition
+
+-- Drop table
+
+-- DROP TABLE imagine.tariff_mst_prod_27032023;
+
+CREATE TABLE imagine.tariff_mst_prod_27032023 (
+	tariff_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	tariff_code varchar(50) NOT NULL,
+	tariff_desc varchar(200) NOT NULL,
+	tariff_type varchar(20) NOT NULL,
+	package_code varchar(50) NULL,
+	package_desc varchar(200) NULL,
+	package_category varchar(50) NULL,
+	bandwidth int4 NULL,
+	network_type varchar(20) NULL,
+	charge float8 NULL,
+	refill_profile_id varchar(20) NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	validity varchar(20) NULL,
+	mrc varchar(20) NULL,
+	nrc varchar(20) NULL,
+	plan_category varchar(20) NULL,
+	prod_cat_type varchar(50) NULL,
+	comm_pack_name varchar(100) NULL,
+	ocs_desc varchar(50) NULL,
+	service_cls varchar(50) NULL,
+	contract varchar(100) NULL,
+	CONSTRAINT tariff_mst_prd_pk PRIMARY KEY (tariff_id),
+	CONSTRAINT tariff_mst_prd_fk_2 FOREIGN KEY (status) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT
+);
+
+
+-- imagine.users definition
+
+-- Drop table
+
+-- DROP TABLE imagine.users;
+
+CREATE TABLE imagine.users (
+	user_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	contact_no numeric NOT NULL,
+	email varchar(100) NULL,
+	user_type varchar(20) NOT NULL,
+	photo varchar(100) NULL,
+	title varchar(10) NULL,
+	first_name varchar(100) NOT NULL,
+	last_name varchar(100) NOT NULL,
+	gender varchar(10) NULL,
+	dob date NULL,
+	office_no numeric NULL,
+	extn numeric NULL,
+	loginid varchar(100) NULL,
+	notification_type varchar(10) NULL,
+	bi_access bpchar(1) NOT NULL DEFAULT 'N'::bpchar,
+	wa_access bpchar(1) NOT NULL DEFAULT 'N'::bpchar,
+	login_password varchar(100) NOT NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	mapping_payload jsonb NULL,
+	invite_token varchar(500) NULL,
+	ic_number varchar(20) NULL,
+	profile_picture text NULL,
+	"location" varchar(100) NULL,
+	one_time_password varchar(100) NULL,
+	country varchar NULL,
+	crm_user_id varchar(20) NULL,
+	email_old varchar(200) NULL,
+	login_attempts int4 NULL,
+	admin_remark varchar(4000) NULL,
+	activation_date date NULL,
+	expiry_date date NULL,
+	CONSTRAINT users_pk PRIMARY KEY (user_id),
+	CONSTRAINT users_fk_status FOREIGN KEY (status) REFERENCES imagine.business_entity(code)
+);
+CREATE INDEX users_email_idx ON imagine.users USING btree (email);
+CREATE INDEX users_loginid_idx ON imagine.users USING btree (loginid);
+
+
+-- imagine.workflow_definition definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_definition;
+
+CREATE TABLE imagine.workflow_definition (
+	workflow_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	interaction_type varchar(20) NOT NULL,
+	product_type varchar(20) NOT NULL,
+	wf_definition jsonb NOT NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	CONSTRAINT workflow_definition_pk PRIMARY KEY (workflow_id),
+	CONSTRAINT wf_def_fk_intxn_type FOREIGN KEY (interaction_type) REFERENCES imagine.business_entity(code),
+	CONSTRAINT wf_def_fk_prod_type FOREIGN KEY (product_type) REFERENCES imagine.business_entity(code),
+	CONSTRAINT wf_def_fk_status FOREIGN KEY (status) REFERENCES imagine.business_entity(code)
+);
+
+
+-- imagine.workflow_txn definition
+
+-- Drop table
+
+-- DROP TABLE imagine.workflow_txn;
+
+CREATE TABLE imagine.workflow_txn (
+	wf_txn_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	wf_hdr_id int4 NOT NULL,
+	activity_id varchar(100) NULL,
+	task_id varchar(100) NULL,
+	wf_txn_status varchar(20) NOT NULL,
+	txn_context jsonb NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	curr_user int4 NULL,
+	curr_entity varchar(100) NULL,
+	curr_role int4 NULL,
+	user_status varchar(20) NULL,
+	from_user int4 NULL,
+	from_entity varchar NULL,
+	from_role int4 NULL,
+	from_user_status varchar NULL,
+	payload jsonb NULL,
+	CONSTRAINT wf_txn_pk PRIMARY KEY (wf_txn_id),
+	CONSTRAINT workflow_txn_fk FOREIGN KEY (wf_txn_status) REFERENCES imagine.business_entity(code)
+);
+
+
+-- imagine.address definition
+
+-- Drop table
+
+-- DROP TABLE imagine.address;
+
+CREATE TABLE imagine.address (
+	address_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	address_type varchar(20) NOT NULL,
+	hno varchar(20) NOT NULL,
+	block varchar(100) NULL,
+	building_name varchar(100) NULL,
+	street varchar(50) NOT NULL,
+	road varchar(50) NOT NULL,
+	city varchar(50) NOT NULL,
+	town varchar(100) NOT NULL,
+	state varchar(50) NULL,
+	district varchar(50) NOT NULL,
+	country varchar(50) NOT NULL,
+	latitude varchar(20) NULL,
+	longitude varchar(20) NULL,
+	post_code varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	"zone" varchar(20) NULL,
+	is_cust_addr bpchar(1) NULL DEFAULT 'N'::bpchar,
+	is_bill_addr bpchar(1) NULL DEFAULT 'N'::bpchar,
+	crm_addr_uid varchar NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL,
+	crm_customer_id varchar(50) NULL,
+	crm_account_id int4 NULL,
+	CONSTRAINT address_pk PRIMARY KEY (address_id),
+	CONSTRAINT address_fk_created_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT address_fk_updated_by FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id)
+);
+CREATE INDEX address_crm_addr_uid_idx ON imagine.address USING btree (crm_addr_uid);
+
+
+-- imagine.business_units definition
+
+-- Drop table
+
+-- DROP TABLE imagine.business_units;
+
+CREATE TABLE imagine.business_units (
+	unit_id varchar(100) NOT NULL,
+	unit_name varchar(100) NOT NULL,
+	unit_desc varchar(100) NOT NULL,
+	unit_type varchar(100) NULL,
+	parent_unit varchar(100) NULL,
+	contact_id int4 NULL,
+	address_id int4 NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	mapping_payload jsonb NULL,
+	mapping_payload_old json NULL,
+	CONSTRAINT business_units_pk PRIMARY KEY (unit_id),
+	CONSTRAINT business_units_created_fk FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT business_units_fk_status FOREIGN KEY (status) REFERENCES imagine.business_entity(code),
+	CONSTRAINT business_units_mod_fk FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT business_units_parent_fk FOREIGN KEY (parent_unit) REFERENCES imagine.business_units(unit_id) ON DELETE RESTRICT
+);
+
+
+-- imagine.campaign definition
+
+-- Drop table
+
+-- DROP TABLE imagine.campaign;
+
+CREATE TABLE imagine.campaign (
+	camp_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	camp_name varchar(50) NOT NULL,
+	service_no varchar(20) NOT NULL,
+	camp_description varchar(1000) NULL,
+	camp_validity date NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	valid_from timestamptz(0) NULL,
+	valid_to timestamptz(0) NULL,
+	CONSTRAINT campaign_pk PRIMARY KEY (camp_id),
+	CONSTRAINT campaign_fk_created_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT campaign_fk_updated_by FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id)
+);
+
+
+-- imagine.contacts definition
+
+-- Drop table
+
+-- DROP TABLE imagine.contacts;
+
+CREATE TABLE imagine.contacts (
+	contact_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	title varchar(20) NULL,
+	first_name varchar(500) NOT NULL,
+	last_name varchar(500) NULL,
+	contact_type varchar(10) NOT NULL,
+	contact_no numeric NOT NULL,
+	contact_no_pfx numeric NULL,
+	alt_contact_no1 numeric NULL,
+	alt_contact_no2 numeric NULL,
+	email varchar(100) NULL,
+	alt_email varchar(100) NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	crm_contact_id int4 NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL,
+	service_number varchar(30) NULL,
+	crm_customer_id varchar(50) NULL,
+	crm_account_id int4 NULL,
+	CONSTRAINT contacts_pk PRIMARY KEY (contact_id),
+	CONSTRAINT contacts_create_fk FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT contacts_mod_fk FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT contacts_statusfk FOREIGN KEY (status) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT
+);
+
+
+-- imagine.customers definition
+
+-- Drop table
+
+-- DROP TABLE imagine.customers;
+
+CREATE TABLE imagine.customers (
+	customer_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	title varchar(20) NULL,
+	first_name varchar(500) NOT NULL,
+	last_name varchar(500) NULL,
+	gender bpchar(1) NULL,
+	birth_date date NULL,
+	registered_no varchar(20) NULL,
+	id_type varchar(10) NULL,
+	id_value varchar(20) NULL,
+	contact_id int4 NOT NULL,
+	cust_type varchar(20) NOT NULL,
+	donotemail bpchar(1) NULL DEFAULT 'Y'::bpchar,
+	status varchar(20) NOT NULL,
+	crm_customer_no varchar(20) NULL,
+	customer_cat varchar(20) NULL,
+	customer_class varchar(20) NULL,
+	address_id int4 NULL,
+	priority varchar(100) NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	reg_date date NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL,
+	chat_language varchar(30) NULL,
+	CONSTRAINT customers_pk PRIMARY KEY (customer_id),
+	CONSTRAINT customers_fk FOREIGN KEY (status) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT,
+	CONSTRAINT customers_fk_address_id FOREIGN KEY (address_id) REFERENCES imagine.address(address_id),
+	CONSTRAINT customers_fk_contact_id FOREIGN KEY (contact_id) REFERENCES imagine.contacts(contact_id),
+	CONSTRAINT customers_fk_created_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT customers_fk_cust_type FOREIGN KEY (cust_type) REFERENCES imagine.business_entity(code),
+	CONSTRAINT customers_fk_customer_cat FOREIGN KEY (customer_cat) REFERENCES imagine.business_entity(code),
+	CONSTRAINT customers_fk_customer_class FOREIGN KEY (customer_class) REFERENCES imagine.business_entity(code),
+	CONSTRAINT customers_fk_id_type FOREIGN KEY (id_type) REFERENCES imagine.business_entity(code),
+	CONSTRAINT customers_fk_updated_by FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id)
+);
+CREATE INDEX customers_address_id_idx ON imagine.customers USING btree (address_id);
+CREATE INDEX customers_contact_id_idx ON imagine.customers USING btree (contact_id);
+CREATE UNIQUE INDEX customers_crm_customer_no_idx ON imagine.customers USING btree (crm_customer_no);
+
+
+-- imagine.interaction definition
+
+-- Drop table
+
+-- DROP TABLE imagine.interaction;
+
+CREATE TABLE imagine.interaction (
+	intxn_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	parent_intxn int4 NULL,
+	subject varchar(200) NULL,
+	description text NOT NULL,
+	curr_status varchar(20) NOT NULL,
+	curr_user int4 NULL,
+	identification_no varchar(50) NULL,
+	plan_id int4 NULL,
+	assigned_date timestamp NOT NULL,
+	intxn_type varchar(50) NOT NULL,
+	intxn_cat_type varchar(20) NULL,
+	business_entity_code varchar(50) NOT NULL,
+	problem_code varchar(20) NULL,
+	nature_code varchar(20) NULL,
+	cause_code varchar(20) NULL,
+	clear_code varchar(20) NULL,
+	wo_type varchar(20) NULL,
+	external_ref_no1 varchar(20) NULL,
+	comment_type varchar(80) NULL,
+	comment_cause varchar(80) NULL,
+	priority_code varchar(20) NULL,
+	created_entity varchar(100) NOT NULL,
+	curr_entity varchar(100) NOT NULL,
+	curr_role int4 NOT NULL,
+	customer_id int4 NULL,
+	account_id int4 NULL,
+	address_id int4 NULL,
+	source_code varchar(100) NULL,
+	chnl_code varchar(20) NULL,
+	term_type varchar(20) NULL,
+	sla_code varchar(40) NULL,
+	alert_type varchar(30) NULL,
+	last_alert_date timestamp NULL,
+	cnt_prefer varchar(50) NULL,
+	asset_id varchar(20) NULL,
+	uid varchar(20) NULL,
+	expctd_date_cmpltn timestamp NULL,
+	is_rebound bpchar(1) NULL,
+	bill_amt numeric NULL,
+	is_valid bpchar(1) NULL,
+	ar_ref_no varchar(100) NULL,
+	ref_intxn_id varchar(100) NULL,
+	survey_req bpchar(1) NULL DEFAULT 'N'::bpchar,
+	is_bot_req bpchar(1) NULL DEFAULT 'N'::bpchar,
+	bot_process bpchar(1) NULL DEFAULT 'N'::bpchar,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	connection_id int4 NULL,
+	external_ref_no2 varchar(20) NULL,
+	external_ref_no3 varchar(20) NULL,
+	external_ref_no4 varchar(20) NULL,
+	external_ref_sys1 varchar(30) NULL,
+	external_ref_sys2 varchar(30) NULL,
+	external_ref_sys3 varchar(30) NULL,
+	external_ref_sys4 varchar(30) NULL,
+	reason_code varchar(20) NULL,
+	plan_id_list varchar(100) NULL,
+	kiosk_ref_id int4 NULL,
+	existing_connection_id int4 NULL,
+	services varchar NULL,
+	terminate_reason varchar(20) NULL,
+	refund_deposit bpchar NULL,
+	contract_fees_waiver bpchar NULL,
+	"location" varchar(100) NULL,
+	activation_fee varchar(10) NULL,
+	cancelled_at timestamptz(0) NULL,
+	cancelled_by int4 NULL,
+	cancelled_reason varchar(20) NULL,
+	CONSTRAINT interaction_pk PRIMARY KEY (intxn_id),
+	CONSTRAINT interaction_un UNIQUE (ref_intxn_id),
+	CONSTRAINT interaction_fk FOREIGN KEY (priority_code) REFERENCES imagine.business_entity(code),
+	CONSTRAINT interaction_fk_alert_type FOREIGN KEY (alert_type) REFERENCES imagine.business_entity(code),
+	CONSTRAINT interaction_fk_cause_code FOREIGN KEY (cause_code) REFERENCES imagine.business_entity(code),
+	CONSTRAINT interaction_fk_chennal_code FOREIGN KEY (chnl_code) REFERENCES imagine.business_entity(code),
+	CONSTRAINT interaction_fk_clear_code FOREIGN KEY (clear_code) REFERENCES imagine.business_entity(code),
+	CONSTRAINT interaction_fk_created_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT interaction_fk_curr_user FOREIGN KEY (curr_user) REFERENCES imagine.users(user_id),
+	CONSTRAINT interaction_fk_intxntype FOREIGN KEY (intxn_type) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT,
+	CONSTRAINT interaction_fk_kiosk_ref_id FOREIGN KEY (kiosk_ref_id) REFERENCES imagine.kiosk(reference_no),
+	CONSTRAINT interaction_fk_nature_code FOREIGN KEY (nature_code) REFERENCES imagine.business_entity(code),
+	CONSTRAINT interaction_fk_problem_cause FOREIGN KEY (problem_code) REFERENCES imagine.business_entity(code),
+	CONSTRAINT interaction_fk_reason_code FOREIGN KEY (reason_code) REFERENCES imagine.business_entity(code),
+	CONSTRAINT interaction_fk_source_code FOREIGN KEY (source_code) REFERENCES imagine.business_entity(code),
+	CONSTRAINT interaction_fk_updated_by FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT interaction_fk_wotype FOREIGN KEY (wo_type) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT
+);
+CREATE INDEX interaction_account_id_idx ON imagine.interaction USING btree (account_id);
+CREATE INDEX interaction_connection_id_idx ON imagine.interaction USING btree (connection_id);
+CREATE INDEX interaction_customer_id_idx ON imagine.interaction USING btree (customer_id);
+CREATE INDEX interaction_identification_no_idx ON imagine.interaction USING btree (identification_no);
+
+
+-- imagine.interaction_task definition
+
+-- Drop table
+
+-- DROP TABLE imagine.interaction_task;
+
+CREATE TABLE imagine.interaction_task (
+	intxn_task_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	intxn_id int4 NOT NULL,
+	task_id varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz(0) NOT NULL,
+	status varchar NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz(0) NOT NULL,
+	message varchar(500) NULL,
+	payload jsonb NULL,
+	retry_count int4 NULL,
+	CONSTRAINT interaction_task_pk PRIMARY KEY (intxn_task_id),
+	CONSTRAINT interaction_task_fk_created_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT interaction_task_fk_intxn_id FOREIGN KEY (intxn_id) REFERENCES imagine.interaction(intxn_id),
+	CONSTRAINT interaction_task_fk_status FOREIGN KEY (status) REFERENCES imagine.business_entity(code),
+	CONSTRAINT interaction_task_fk_task_id FOREIGN KEY (task_id) REFERENCES imagine.business_entity(code),
+	CONSTRAINT interaction_task_fk_updated_by FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id)
+);
+
+
+-- imagine.intg_dropthought_results definition
+
+-- Drop table
+
+-- DROP TABLE imagine.intg_dropthought_results;
+
+CREATE TABLE imagine.intg_dropthought_results (
+	intxn_id int4 NOT NULL,
+	call_result jsonb NULL,
+	call_message jsonb NULL,
+	call_status bpchar(1) NOT NULL,
+	call_time timestamptz NOT NULL,
+	created_by int4 NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	CONSTRAINT intg_dropthought_results_pk PRIMARY KEY (intxn_id),
+	CONSTRAINT intg_dropthought_results_fk FOREIGN KEY (intxn_id) REFERENCES imagine.interaction(intxn_id)
+);
+
+
+-- imagine.leads definition
+
+-- Drop table
+
+-- DROP TABLE imagine.leads;
+
+CREATE TABLE imagine.leads (
+	lead_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	cust_name varchar(50) NULL,
+	cust_cat varchar(20) NULL,
+	contact_no numeric NULL,
+	email_id varchar(100) NULL,
+	service_type varchar(20) NULL,
+	product_enquired varchar(50) NULL,
+	contact_preference varchar(20) NULL,
+	remarks varchar(500) NULL,
+	created_by int4 NULL,
+	created_at timestamptz NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	CONSTRAINT leads_pk PRIMARY KEY (lead_id),
+	CONSTRAINT leads_fk_contact_preference FOREIGN KEY (contact_preference) REFERENCES imagine.business_entity(code),
+	CONSTRAINT leads_fk_created_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT leads_fk_cust_cat FOREIGN KEY (cust_cat) REFERENCES imagine.business_entity(code),
+	CONSTRAINT leads_fk_updated_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id)
+);
+
+
+-- imagine.roles definition
+
+-- Drop table
+
+-- DROP TABLE imagine.roles;
+
+CREATE TABLE imagine.roles (
+	role_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	role_name varchar(100) NOT NULL,
+	role_desc varchar(100) NOT NULL,
+	is_admin varchar(100) NULL,
+	parent_role int4 NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	mapping_payload jsonb NULL,
+	CONSTRAINT roles_pk PRIMARY KEY (role_id),
+	CONSTRAINT roles_fk FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT roles_fk_1 FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT roles_fk_2 FOREIGN KEY (status) REFERENCES imagine.business_entity(code),
+	CONSTRAINT roles_fk_3 FOREIGN KEY (parent_role) REFERENCES imagine.roles(role_id)
+);
+
+
+-- imagine.screen_module_mapping definition
+
+-- Drop table
+
+-- DROP TABLE imagine.screen_module_mapping;
+
+CREATE TABLE imagine.screen_module_mapping (
+	scr_mod_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	module_name varchar(50) NOT NULL,
+	screen_name varchar(50) NOT NULL,
+	api varchar(300) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	"method" varchar(50) NULL,
+	"[method]" varchar(50) NULL,
+	status varchar(10) NULL,
+	CONSTRAINT scr_mod_pk PRIMARY KEY (scr_mod_id),
+	CONSTRAINT screen_module_mapping_fk_created_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT screen_module_mapping_fk_updated_by FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id)
+);
+
+
+-- imagine.security_question definition
+
+-- Drop table
+
+-- DROP TABLE imagine.security_question;
+
+CREATE TABLE imagine.security_question (
+	profile_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	profile_name varchar(50) NULL,
+	profile_value varchar(100) NULL,
+	ref_id int4 NULL,
+	created_by int4 NOT NULL DEFAULT 1,
+	created_at timestamptz(0) NOT NULL DEFAULT '2021-05-03 00:00:00+05:30'::timestamp with time zone,
+	updated_by int4 NOT NULL DEFAULT 1,
+	updated_at timestamptz(0) NOT NULL DEFAULT '2021-05-03 00:00:00+05:30'::timestamp with time zone,
+	CONSTRAINT security_question_pk PRIMARY KEY (profile_id),
+	CONSTRAINT security_question_fk_created_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT security_question_fk_updated_by FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id)
+);
+
+
+-- imagine.selfcare definition
+
+-- Drop table
+
+-- DROP TABLE imagine.selfcare;
+
+CREATE TABLE imagine.selfcare (
+	ref_no int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	cust_name varchar(50) NOT NULL,
+	service_type varchar(20) NOT NULL,
+	ic_no numeric NOT NULL,
+	contact_no numeric NOT NULL,
+	problem_code varchar(20) NOT NULL,
+	usage_type varchar(20) NOT NULL,
+	quota varchar(20) NOT NULL,
+	bandwidth varchar(20) NOT NULL,
+	remarks varchar(50) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	CONSTRAINT selfcare_pk PRIMARY KEY (ref_no),
+	CONSTRAINT selfcare_fk_ceated_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT selfcare_fk_problem_code FOREIGN KEY (problem_code) REFERENCES imagine.business_entity(code),
+	CONSTRAINT selfcare_fk_service_type FOREIGN KEY (service_type) REFERENCES imagine.business_entity(code),
+	CONSTRAINT selfcare_fk_updated_by FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id)
+);
+
+
+-- imagine.user_session definition
+
+-- Drop table
+
+-- DROP TABLE imagine.user_session;
+
+CREATE TABLE imagine.user_session (
+	session_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	user_id int4 NOT NULL,
+	access_token jsonb NULL,
+	payload jsonb NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NOT NULL,
+	updated_at timestamptz NOT NULL,
+	permissions jsonb NULL,
+	curr_role varchar(100) NULL,
+	curr_dept varchar(100) NULL,
+	curr_role_id int4 NULL,
+	curr_dept_id varchar(100) NULL,
+	created_date date NULL DEFAULT CURRENT_DATE,
+	CONSTRAINT user_session_pk PRIMARY KEY (session_id),
+	CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES imagine.users(user_id)
+);
+
+
+-- imagine.accounts definition
+
+-- Drop table
+
+-- DROP TABLE imagine.accounts;
+
+CREATE TABLE imagine.accounts (
+	account_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	account_cat varchar(20) NOT NULL,
+	account_class varchar(20) NOT NULL,
+	account_priority varchar(20) NOT NULL,
+	title varchar(20) NULL,
+	first_name varchar(500) NOT NULL,
+	last_name varchar(500) NULL,
+	gender bpchar(1) NULL,
+	birth_date date NULL,
+	registered_no varchar(50) NULL,
+	id_type varchar(20) NULL,
+	id_value varchar(20) NULL,
+	customer_id int4 NOT NULL,
+	account_no int4 NULL,
+	contact_id int4 NULL,
+	address_id int4 NOT NULL,
+	base_coll_plan varchar(50) NOT NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	priority varchar(100) NULL,
+	bill_lang varchar(10) NULL,
+	bill_delivery_mthd varchar(10) NULL,
+	no_of_copies numeric NOT NULL DEFAULT 1,
+	reg_date date NULL,
+	account_type varchar(20) NULL,
+	sq_ref_id int4 NULL,
+	crm_ref_id varchar(200) NULL,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL,
+	CONSTRAINT accounts_pk PRIMARY KEY (account_id),
+	CONSTRAINT accounts_un UNIQUE (account_no),
+	CONSTRAINT accounts_fk_account_priority FOREIGN KEY (account_priority) REFERENCES imagine.business_entity(code),
+	CONSTRAINT accounts_fk_address_id FOREIGN KEY (address_id) REFERENCES imagine.address(address_id),
+	CONSTRAINT accounts_fk_bill_lang FOREIGN KEY (bill_lang) REFERENCES imagine.business_entity(code),
+	CONSTRAINT accounts_fk_contact_id FOREIGN KEY (contact_id) REFERENCES imagine.contacts(contact_id),
+	CONSTRAINT accounts_fk_created_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT accounts_fk_customer_id FOREIGN KEY (customer_id) REFERENCES imagine.customers(customer_id),
+	CONSTRAINT accounts_fk_id_type FOREIGN KEY (id_type) REFERENCES imagine.business_entity(code),
+	CONSTRAINT accounts_fk_sq_red_id FOREIGN KEY (sq_ref_id) REFERENCES imagine.security_question(profile_id),
+	CONSTRAINT accounts_fk_updated_by FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id)
+);
+CREATE INDEX accounts_customer_id_idx ON imagine.accounts USING btree (customer_id);
+
+
+-- imagine.connections definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connections;
+
+CREATE TABLE imagine.connections (
+	connection_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	connection_name varchar(100) NULL,
+	connection_type varchar(20) NOT NULL,
+	connection_grp varchar(20) NOT NULL,
+	exchng_code varchar(20) NULL,
+	dealership varchar(20) NULL,
+	identification_no varchar(100) NULL,
+	iccid varchar(50) NULL,
+	imsi varchar(20) NULL,
+	credit_prof varchar(20) NULL,
+	is_ported bpchar(1) NULL DEFAULT 'N'::bpchar,
+	charge varchar(20) NULL,
+	exclude_reason varchar(1000) NULL,
+	payment_method varchar(20) NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	connection_selection varchar(20) NULL,
+	deposit varchar(20) NULL,
+	address_id int4 NULL,
+	account_id int4 NULL,
+	donor varchar(20) NULL,
+	mapping_payload jsonb NULL,
+	assign_sim_later bpchar(1) NULL DEFAULT 'N'::bpchar,
+	migration_date timestamp NULL,
+	migration_table varchar(40) NULL,
+	migration_remarks varchar(500) NULL,
+	validation_data varchar(20) NULL,
+	CONSTRAINT connections_pk PRIMARY KEY (connection_id),
+	CONSTRAINT connections_fk FOREIGN KEY (status) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT,
+	CONSTRAINT connections_fk_account_id FOREIGN KEY (account_id) REFERENCES imagine.accounts(account_id),
+	CONSTRAINT connections_fk_address_id FOREIGN KEY (address_id) REFERENCES imagine.address(address_id),
+	CONSTRAINT connections_fk_charge FOREIGN KEY (charge) REFERENCES imagine.business_entity(code),
+	CONSTRAINT connections_fk_connection_grp FOREIGN KEY (connection_grp) REFERENCES imagine.business_entity(code),
+	CONSTRAINT connections_fk_connection_type FOREIGN KEY (connection_type) REFERENCES imagine.business_entity(code),
+	CONSTRAINT connections_fk_created_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT connections_fk_credit_prof FOREIGN KEY (credit_prof) REFERENCES imagine.business_entity(code),
+	CONSTRAINT connections_fk_dealership FOREIGN KEY (dealership) REFERENCES imagine.business_entity(code),
+	CONSTRAINT connections_fk_exhange_code FOREIGN KEY (exchng_code) REFERENCES imagine.business_entity(code),
+	CONSTRAINT connections_fk_payment_method FOREIGN KEY (payment_method) REFERENCES imagine.business_entity(code),
+	CONSTRAINT connections_fk_updated_by FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id)
+);
+CREATE INDEX connections_account_id_idx ON imagine.connections USING btree (account_id);
+CREATE INDEX connections_address_id_idx ON imagine.connections USING btree (address_id);
+CREATE INDEX connections_identification_no_idx ON imagine.connections USING btree (identification_no);
+
+
+-- imagine.interaction_txn definition
+
+-- Drop table
+
+-- DROP TABLE imagine.interaction_txn;
+
+CREATE TABLE imagine.interaction_txn (
+	txn_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	intxn_id int4 NOT NULL,
+	from_entity varchar(100) NULL,
+	from_role int4 NULL,
+	from_user int4 NULL,
+	to_entity varchar(100) NULL,
+	to_role int4 NULL,
+	to_user int4 NULL,
+	intxn_status varchar(20) NOT NULL,
+	flw_id varchar(20) NOT NULL,
+	flw_created_at timestamptz NULL,
+	flw_created_by int4 NULL,
+	flw_action varchar(50) NULL,
+	priority_code varchar(20) NULL,
+	business_entity_code varchar(50) NULL,
+	problem_code varchar(20) NULL,
+	nature_code varchar(20) NULL,
+	cause_code varchar(20) NULL,
+	is_flw_bypssd bpchar(1) NULL,
+	sla_code varchar(40) NULL,
+	expctd_date_cmpltn timestamp NULL,
+	remarks text NULL,
+	is_followup bpchar(1) NULL,
+	CONSTRAINT interaction_txn_pk PRIMARY KEY (txn_id),
+	CONSTRAINT interaction_txn_fk FOREIGN KEY (intxn_id) REFERENCES imagine.interaction(intxn_id) ON DELETE RESTRICT,
+	CONSTRAINT interaction_txn_froment_fk FOREIGN KEY (from_entity) REFERENCES imagine.business_units(unit_id) ON DELETE RESTRICT,
+	CONSTRAINT interaction_txn_fromrole_fk FOREIGN KEY (from_role) REFERENCES imagine.roles(role_id) ON DELETE RESTRICT,
+	CONSTRAINT interaction_txn_fromuser_fk FOREIGN KEY (from_user) REFERENCES imagine.users(user_id),
+	CONSTRAINT interaction_txn_status_fk FOREIGN KEY (intxn_status) REFERENCES imagine.business_entity(code) ON DELETE RESTRICT,
+	CONSTRAINT interaction_txn_toent_fk FOREIGN KEY (to_entity) REFERENCES imagine.business_units(unit_id) ON DELETE RESTRICT,
+	CONSTRAINT interaction_txn_torole_fk FOREIGN KEY (to_role) REFERENCES imagine.roles(role_id) ON DELETE RESTRICT,
+	CONSTRAINT interaction_txn_touser_fk FOREIGN KEY (to_user) REFERENCES imagine.users(user_id)
+);
+CREATE INDEX interaction_txn_flw_action_idx ON imagine.interaction_txn USING btree (flw_action);
+CREATE INDEX interaction_txn_flw_created_at_idx ON imagine.interaction_txn USING btree (flw_created_at);
+CREATE INDEX interaction_txn_flw_id_idx ON imagine.interaction_txn USING btree (flw_id);
+CREATE INDEX interaction_txn_intxn_id_idx ON imagine.interaction_txn USING btree (intxn_id);
+
+
+-- imagine.connection_plan definition
+
+-- Drop table
+
+-- DROP TABLE imagine.connection_plan;
+
+CREATE TABLE imagine.connection_plan (
+	conn_plan_id int4 NOT NULL GENERATED BY DEFAULT AS IDENTITY,
+	connection_id int4 NOT NULL,
+	prod_catalogue varchar(20) NOT NULL,
+	plan_id int4 NOT NULL,
+	quota numeric NULL,
+	bandwidth numeric NULL,
+	status varchar(20) NOT NULL,
+	created_by int4 NOT NULL,
+	created_at timestamptz NOT NULL,
+	updated_by int4 NULL,
+	updated_at timestamptz NULL,
+	txn_reference varchar NULL,
+	payment_type varchar(50) NULL,
+	payment_method varchar(50) NULL,
+	CONSTRAINT connection_plan_pk PRIMARY KEY (conn_plan_id),
+	CONSTRAINT connection_plan_fk_connection_id FOREIGN KEY (connection_id) REFERENCES imagine.connections(connection_id),
+	CONSTRAINT connection_plan_fk_created_by FOREIGN KEY (created_by) REFERENCES imagine.users(user_id),
+	CONSTRAINT connection_plan_fk_plan_id FOREIGN KEY (plan_id) REFERENCES imagine.plan(plan_id),
+	CONSTRAINT connection_plan_fk_status FOREIGN KEY (status) REFERENCES imagine.business_entity(code),
+	CONSTRAINT connection_plan_fk_updated_by FOREIGN KEY (updated_by) REFERENCES imagine.users(user_id)
+);
