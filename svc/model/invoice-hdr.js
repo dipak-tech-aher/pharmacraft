@@ -11,7 +11,10 @@ module.exports = function (sequelize, DataType) {
     invFromId: {
       type: DataType.INTEGER
     },
-    invToId: {
+    invBillToId: {
+      type: DataType.INTEGER
+    },
+    invShipToId: {
       type: DataType.INTEGER
     },
     invTotalQty: {
@@ -123,8 +126,12 @@ module.exports = function (sequelize, DataType) {
       as: 'fromDetails'
     })
     models.InvoiceHdr.belongsTo(models.Company, {
-      foreignKey: 'invToId',
-      as: 'toDetails'
+      foreignKey: 'invBillToId',
+      as: 'billToDetails'
+    })
+    models.InvoiceHdr.belongsTo(models.Company, {
+      foreignKey: 'invShipToId',
+      as: 'shipToDetails'
     })
     models.InvoiceHdr.belongsTo(models.User, {
       foreignKey: 'createdBy',

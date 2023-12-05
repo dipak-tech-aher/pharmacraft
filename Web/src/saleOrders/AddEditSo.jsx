@@ -118,7 +118,11 @@ const AddEditSo = (props) => {
     };
 
     const handlePoToInputChange = (e) => {
-        setCategoryData({ ...categoryData, soToId: e });
+        setCategoryData({ ...categoryData, soBillToId: e });
+    };
+
+    const handleSoShippedToInputChange = (e) => {
+        setCategoryData({ ...categoryData, soShipToId: e });
     };
 
     const addRow = () => {
@@ -158,7 +162,8 @@ const AddEditSo = (props) => {
                 soIgstPercentage: Number(categoryData?.soIgstPercentage),
                 soOtherCharges: Number(categoryData?.soOtherCharges),
                 soFromId: categoryData?.soFromId?.value,
-                soToId: categoryData?.soToId?.value,
+                soBillToId: categoryData?.soBillToId?.value,
+                soShipToId: categoryData?.soShipToId?.value,
                 soNumber: categoryData?.soNumber,
                 soMrpNumber: categoryData?.soMrpNumber,
                 soTransporter: categoryData?.soTransporter,
@@ -208,16 +213,41 @@ const AddEditSo = (props) => {
                                 </div>
 
                                 <div className="col-md-4 p-1">
-                                    <label>So To</label>
+                                    <label>So Date</label>
+                                    <input
+                                        type="date"
+                                        name="soDate"
+                                        value={categoryData.soDate}
+                                        onChange={handleInputChange}
+                                        className={errors.soDate ? 'form-control error' : 'form-control'}
+                                    />
+                                    {errors.soDate && <p className="error-msg">{errors.soDate}</p>}
+                                </div>
+
+                                <div className="col-md-4 p-1">
+                                    <label>So Billed To</label>
                                     <Select
                                         closeMenuOnSelect={false}
-                                        value={categoryData?.soToId}
+                                        value={categoryData?.soBillToId}
                                         options={toCompanyData}
                                         onChange={handlePoToInputChange}
                                         isClearable
-                                        name="soToId"
+                                        name="soBillToId"
                                     />
-                                    {errors.soToId && <p className="error-msg">{errors.soToId}</p>}
+                                    {errors.soBillToId && <p className="error-msg">{errors.soBillToId}</p>}
+                                </div>
+
+                                <div className="col-md-4 p-1">
+                                    <label>So Shipped To</label>
+                                    <Select
+                                        closeMenuOnSelect={false}
+                                        value={categoryData?.soShipToId}
+                                        options={toCompanyData}
+                                        onChange={handleSoShippedToInputChange}
+                                        isClearable
+                                        name="soShipToId"
+                                    />
+                                    {errors.soShipToId && <p className="error-msg">{errors.soShipToId}</p>}
                                 </div>
 
                                 <div className="col-md-4 p-1">
@@ -285,7 +315,7 @@ const AddEditSo = (props) => {
                                     {errors.soNumber && <p className="error-msg">{errors.soNumber}</p>}
                                 </div>
 
-                                <div className="col-md-4 p-1">
+                                {/* <div className="col-md-4 p-1">
                                     <label>Mrp Number</label>
                                     <input
                                         type="text"
@@ -296,7 +326,7 @@ const AddEditSo = (props) => {
                                         className={errors.soMrpNumber ? 'form-control error' : 'form-control'}
                                     />
                                     {errors.soMrpNumber && <p className="error-msg">{errors.soMrpNumber}</p>}
-                                </div>
+                                </div> */}
 
                                 <div className="col-md-4 p-1">
                                     <label>Transporter</label>
@@ -363,19 +393,7 @@ const AddEditSo = (props) => {
                                     {errors.soInsurance && <p className="error-msg">{errors.soInsurance}</p>}
                                 </div>
 
-                                <div className="col-md-4 p-1">
-                                    <label>So Date</label>
-                                    <input
-                                        type="date"
-                                        name="soDate"
-                                        value={categoryData.soDate}
-                                        onChange={handleInputChange}
-                                        className={errors.soDate ? 'form-control error' : 'form-control'}
-                                    />
-                                    {errors.soDate && <p className="error-msg">{errors.soDate}</p>}
-                                </div>
-
-                                <div className="col-md-4 p-1">
+                                {/* <div className="col-md-4 p-1">
                                     <label>Mrp Date</label>
                                     <input
                                         type="date"
@@ -385,7 +403,7 @@ const AddEditSo = (props) => {
                                         className={errors.soMrpDate ? 'form-control error' : 'form-control'}
                                     />
                                     {errors.soMrpDate && <p className="error-msg">{errors.soMrpDate}</p>}
-                                </div>
+                                </div> */}
 
                                 <div className="col-md-4 p-1">
                                     <label>Scheduled Delivery Date</label>

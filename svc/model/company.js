@@ -26,6 +26,9 @@ module.exports = function (sequelize, DataType) {
     cPhone: {
       type: DataType.STRING
     },
+    cEmail: {
+      type: DataType.STRING
+    },
     cFax: {
       type: DataType.STRING
     },

@@ -1,3 +1,4 @@
+import './table.css';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { AppContext } from "../AppContext";
 import logoSM from '../assets/images/logos/Logo.jpeg';
@@ -16,7 +17,7 @@ const ViewInvoices = (props) => {
     const history = useHistory();
     const { auth } = useContext(AppContext);
     const [tableRowData, setTableRowData] = useState([]);
-
+    const [invoiceCopyType, setInvoiceCopyType] = useState("ORIGINAL");
 
     const componentRef = useRef();
     const handlePrint = useReactToPrint({
@@ -147,7 +148,7 @@ const ViewInvoices = (props) => {
         if (cell.column.id === "action") {
             return (<>
                 <button className='btn btn-primary' onClick={(e) => preview(row?.original)}>
-                    <i className="fas fa-eye"></i> Download
+                    <i className="fas fa-eye"></i> View & Download
                 </button>
             </>)
         }
@@ -231,6 +232,23 @@ const ViewInvoices = (props) => {
         }
     ]
 
+    const handleClickAndDownload = (e) => {
+        const { value } = e?.target;
+        setInvoiceCopyType(value)
+        if (value !== "") {
+            setTimeout(() => {
+                handlePrint();
+            }, 2000)
+        } else {
+            toast.error("Please select copy type")
+        }
+    }
+
+    const handleOnClose = ()=>{
+        setOpenPreviewViewModal(false)
+        setInvoiceCopyType("ORIGINAL");
+    }
+
     return (
         <div className="container-fluid">
             <div className="col-12">
@@ -253,39 +271,56 @@ const ViewInvoices = (props) => {
             </div>
             <Modal isOpen={openPreviewViewModal}>
                 <div style={{ display: 'flex' }}>
-                    <button className='btn btn-primary' onClick={handlePrint}>Download</button>
-                    <button style={{ marginLeft: 'auto' }} className="btn btn-primary" onClick={() => setOpenPreviewViewModal(false)}>
+                    <select name="" id="" onChange={(e) => handleClickAndDownload(e)} className='form-control'>
+                        <option value="">Select Invoice copy type to download</option>
+                        <option value="ORIGINAL">Original Copy</option>
+                        <option value="DUPLICATE">Duplicate Copy</option>
+                        <option value="TRIPLICATE">Triplicate Copy</option>
+                        <option value="EXTRA">Extra Copy</option>
+                    </select>
+                    {/* <button className='btn btn-primary' >Download</button> */}
+                    <button style={{ marginLeft: 'auto' }} className="btn btn-primary" onClick={() => handleOnClose()}>
                         <i className="fas fa-times"></i>
                     </button>
                 </div>
                 <div className="container" ref={componentRef}>
                     <div className="row">
-                        <div className="col-sm-6">
+                        <div className="col-sm-3">
                             <img src={logoSM} alt="" />
                         </div>
-                        <div className="col-sm-6 text-right">
-                            {console.log('previewData------------->', previewData)}
+                        <div className="col-sm-5">
+                            <h4 className='text-center'>TAX INVOICE</h4>
+                            <span className='text-center'>
+                                <p><h3><b>{previewData?.fromDetails?.cName}</b></h3>
+                                    {previewData?.fromDetails?.cAddress + ', ' + previewData?.fromDetails?.cCountry}<br />
+                                    <b>{previewData?.fromDetails?.cEmail} {previewData?.fromDetails?.cPhone}</b><br />
+                                    {previewData?.fromDetails?.cWebsite}</p>
+                            </span>
+                        </div>
+                        <div className="col-sm-4 text-right">
+                            <h4><i>{invoiceCopyType === "ORIGINAL" ? "Original Copy" : invoiceCopyType === "DUPLICATE" ? "Duplicate Copy" : invoiceCopyType === "TRIPLICATE" ? "Triplicate Copy" : "Extra Copy"}</i></h4>
                             <h4>Invoice# INV{previewData?.invId}</h4>
                             <h4>Invoice Date {moment(previewData?.invDate).format('DD-MM-YYYY')}</h4>
+                            <h4>GST IN: {previewData?.fromDetails?.cGst}</h4>
                         </div>
                     </div>
                     <hr />
                     <div className="row">
                         <div className="col-sm-6">
-                            <h4>Invoice By</h4>
-                            <p>{previewData?.fromDetails?.cName}</p>
-                            <p>{previewData?.fromDetails?.cPhone}</p>
-                            <p>{previewData?.fromDetails?.cWebsite}</p>
-                            <p>{previewData?.fromDetails?.cAddress + ', ' + previewData?.fromDetails?.cCountry}</p>
-                            <p>{previewData?.fromDetails?.cGst}</p>
+                            <h4>Billed To</h4>
+                            <p>{previewData?.billToDetails?.cName}</p>
+                            <p>{previewData?.billToDetails?.cPhone}</p>
+                            <p>{previewData?.billToDetails?.cWebsite}</p>
+                            <p>{previewData?.billToDetails?.cAddress + ', ' + previewData?.billToDetails?.cCountry}</p>
+                            <p>{previewData?.billToDetails?.cGst}</p>
                         </div>
                         <div className="col-sm-6 text-right">
-                            <h4>Invoice To</h4>
-                            <p>{previewData?.toDetails?.cName}</p>
-                            <p>{previewData?.toDetails?.cPhone}</p>
-                            <p>{previewData?.toDetails?.cWebsite}</p>
-                            <p>{previewData?.toDetails?.cAddress + ', ' + previewData?.toDetails?.cCountry}</p>
-                            <p>{previewData?.fromDetails?.cGst}</p>
+                            <h4>Shipped To</h4>
+                            <p>{previewData?.shipToDetails?.cName}</p>
+                            <p>{previewData?.shipToDetails?.cPhone}</p>
+                            <p>{previewData?.shipToDetails?.cWebsite}</p>
+                            <p>{previewData?.shipToDetails?.cAddress + ', ' + previewData?.shipToDetails?.cCountry}</p>
+                            <p>{previewData?.shipToDetails?.cGst}</p>
                         </div>
                     </div>
                     <hr />
@@ -298,45 +333,45 @@ const ViewInvoices = (props) => {
                         </div>
                     </div>
                     <hr />
-                    <table className="table table-bordered">
+                    <table className="table">
                         <thead>
-                            <tr>
-                                <th>Sr.no</th>
-                                <th>Item</th>
-                                <th>HSN/SAC</th>
-                                <th>Description</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Total</th>
+                            <tr >
+                                <th >Sr.no</th>
+                                <th >Item</th>
+                                <th >HSN/SAC</th>
+                                <th >Description</th>
+                                <th >Quantity</th>
+                                <th >Price</th>
+                                <th >Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {previewData && Object.keys(previewData)?.length > 0 && previewData?.invoiceTxnDetails?.map((ele, index) => (<tr>
-                                <td>{index + 1}</td>
-                                <td>{ele?.categoryDetails?.catName}</td>
-                                <td>{ele?.categoryDetails?.catHsnSac}</td>
-                                <td>{ele?.categoryDetails?.catDesc}</td>
-                                <td>{ele?.invQty}</td>
-                                <td>{ele?.invRate}</td>
-                                <td>{Number(ele?.invQty) * Number(ele?.invRate)}</td>
+                            {previewData && Object.keys(previewData)?.length > 0 && previewData?.invoiceTxnDetails?.map((ele, index) => (<tr style={{ borderBottomColor: "white" }}>
+                                <td style={{ borderBottomColor: "white" }}>{index + 1}</td>
+                                <td style={{ borderBottomColor: "white" }}>{ele?.categoryDetails?.catName}</td>
+                                <td style={{ borderBottomColor: "white" }}>{ele?.categoryDetails?.catHsnSac}</td>
+                                <td style={{ borderBottomColor: "white" }}>{ele?.categoryDetails?.catDesc}</td>
+                                <td style={{ borderBottomColor: "white" }}>{ele?.invQty}</td>
+                                <td style={{ borderBottomColor: "white" }}>{ele?.invRate}</td>
+                                <td style={{ borderBottomColor: "white" }}>{Number(ele?.invQty) * Number(ele?.invRate)}</td>
                             </tr>))}
-                            <tr>
-                                <td colSpan="6" className="text-right">Other Charges</td>
-                                <td>{previewData?.invOtherCharges?.toFixed(2)}</td>
+                            <tr style={{ borderBottomColor: "white" }}>
+                                <td style={{ borderBottomColor: "white" }} colSpan="6" className="text-right">Other Charges</td>
+                                <td style={{ borderBottomColor: "white" }}>{previewData?.invOtherCharges?.toFixed(2)}</td>
                             </tr>
-                            <tr>
-                                <td colSpan="6" className="text-right">Subtotal</td>
-                                <td>{previewData?.invSubTotal?.toFixed(2)}</td>
+                            <tr style={{ borderBottomColor: "white" }}>
+                                <td style={{ borderBottomColor: "white" }} colSpan="6" className="text-right">Subtotal</td>
+                                <td style={{ borderBottomColor: "white" }}>{previewData?.invSubTotal?.toFixed(2)}</td>
                             </tr>
-                            <tr>
-                                <td colSpan="6" className="text-right">Tax</td>
-                                <td>{previewData?.totaltax?.toFixed(2)}</td>
+                            <tr style={{ borderBottomColor: "white" }}>
+                                <td style={{ borderBottomColor: "white" }} colSpan="6" className="text-right">Tax</td>
+                                <td style={{ borderBottomColor: "white" }}>{previewData?.totaltax?.toFixed(2)}</td>
                             </tr>
-                            <tr>
+                            <tr style={{ borderBottomColor: "white" }}>
                                 <td colSpan="6" className="text-right">Total</td>
-                                <td>{previewData?.invTotal?.toFixed(2)}</td>
+                                <td >{previewData?.invTotal?.toFixed(2)}</td>
                             </tr>
-                            <tr>
+                            <tr >
                                 <td colSpan="7" className="text-left" style={{ fontWeight: "bolder" }}>Amount (In Words): {convertAmountToWords(previewData?.invTotal?.toFixed(2))}</td>
                             </tr>
 
@@ -346,24 +381,32 @@ const ViewInvoices = (props) => {
                                 <th scope="col" colSpan={2}>State Tax</th>
                                 <th scope="col">Total Tax Amount</th>
                             </tr>
-                            <tr>
-                                <td colSpan={2}></td>
-                                <th scope="col">Rate</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Rate</th>
-                                <th scope="col">Amount</th>
-                                <td></td>
+                            <tr style={{ borderBottomColor: "white" }}>
+                                <td style={{ borderBottomColor: "white" }} colSpan={2}></td>
+                                <th style={{ borderBottomColor: "white" }} scope="col">Rate</th>
+                                <th style={{ borderBottomColor: "white" }} scope="col">Amount</th>
+                                <th style={{ borderBottomColor: "white" }} scope="col">Rate</th>
+                                <th style={{ borderBottomColor: "white" }} scope="col">Amount</th>
+                                <td style={{ borderBottomColor: "white" }}></td>
                             </tr>
-                            <tr>
+                            <tr >
                                 <td colSpan={2}>{previewData?.invSubTotal}</td>
                                 <td scope="col">{previewData?.invCgstPercentage}%</td>
                                 <td scope="col">{previewData?.invTotalCgst?.toFixed(2)}</td>
                                 <td scope="col">{previewData?.invSgstPercentage}%</td>
                                 <td scope="col">{previewData?.invTotalSgst?.toFixed(2)}</td>
-                                <td>{previewData?.totaltax?.toFixed(2)}</td>
+                                <td >{previewData?.totaltax?.toFixed(2)}</td>
+                            </tr>
+                            <tr >
+                                <td colSpan="7" className="text-left" style={{ fontWeight: "bolder" }}>Tax Amount (In Words): {convertAmountToWords(previewData?.totaltax?.toFixed(2))}</td>
                             </tr>
                             <tr>
-                                <td colSpan="7" className="text-left" style={{ fontWeight: "bolder" }}>Tax Amount (In Words): {convertAmountToWords(previewData?.totaltax?.toFixed(2))}</td>
+                                <td colSpan="2" className="text-left" style={{ fontWeight: "bolder" }}>Company's bank details</td>
+                                <td colSpan={5} className="text-left" style={{ fontWeight: "bolder" }}>Bank Name: {previewData?.fromDetails?.cBankName}<br />
+                                    Account No:    {previewData?.fromDetails?.cAccountNo}<br />
+                                    Branch Name: {previewData?.fromDetails?.cBranchName}<br />
+                                    Ifsc: {previewData?.fromDetails?.cIfsc}
+                                </td>
                             </tr>
 
                         </tbody>
@@ -372,7 +415,7 @@ const ViewInvoices = (props) => {
                     <p><i> Computer generated invoice, no signature required.</i></p>
                 </div>
             </Modal>
-        </div>
+        </div >
     )
 }
 

@@ -66,7 +66,8 @@ export class BillingService {
         invOtherCharges: invoice?.invOtherCharges,
         invSoId: invoice?.soId,
         invFromId: invoice?.soFromId,
-        invToId: invoice?.soToId,
+        invBillToId: invoice?.soBillToId,
+        invShipToId: invoice?.soShipToId,
         invTotalQty: updatedInvoiceItems?.reduce((total, ele) => total + (Number(ele?.soQtyToBilled) || 0), 0),
         invCgstPercentage: invoice?.soCgstPercentage,
         invSgstPercentage: invoice?.soSgstPercentage,
@@ -368,7 +369,8 @@ export class BillingService {
       const invoices = await InvoiceHdr.findAll({
         include: [
           { model: Company, as: 'fromDetails' },
-          { model: Company, as: 'toDetails' },
+          { model: Company, as: 'billToDetails' },
+          { model: Company, as: 'shipToDetails' },
           { model: User, as: 'createdByDetails', attributes: ['firstName', 'lastName'] },
           { model: User, as: 'updatedByDetails', attributes: ['firstName', 'lastName'] },
           {

@@ -279,7 +279,8 @@ export class SoService {
           { model: User, as: 'createdByDetails', attributes: ['firstName', 'lastName'] },
           { model: User, as: 'updatedByDetails', attributes: ['firstName', 'lastName'] },
           { model: Company, as: 'fromDetails' },
-          { model: Company, as: 'toDetails' },
+          { model: Company, as: 'billToDetails' },
+          { model: Company, as: 'shipToDetails' },
           {
             model: SalesOrderTxn, as: 'soTxnDetails',
             include: [

@@ -368,7 +368,7 @@ const GenerateInvoice = (props) => {
                     </div>
                 </div>
             </div>
-            <Modal isOpen={openPreviewViewModal}>
+            {/* <Modal isOpen={openPreviewViewModal}>
                 <div style={{ display: 'flex' }}>
                     <button className='btn btn-primary' onClick={handlePrint}>Download</button>
                     <button style={{ marginLeft: 'auto' }} className="btn btn-primary" onClick={() => setOpenPreviewViewModal(false)}>
@@ -408,8 +408,6 @@ const GenerateInvoice = (props) => {
                     <hr />
                     <div className="row">
                         <div className="col-sm-6">
-                            {/* <h4>Date</h4>
-                            <p>Due Date: 24/08/2021</p> */}
                         </div>
                         <div className="col-sm-6 text-right">
                             <h4>Payment Method</h4>
@@ -447,21 +445,6 @@ const GenerateInvoice = (props) => {
                                 <td colSpan="6" className="text-right">Subtotal</td>
                                 <td>{previewData?.invSubTotal?.toFixed(2)}</td>
                             </tr>
-                            {/* {previewData?.soCgstPercentage && <tr>
-                                <td colSpan="5" className="text-right">CGST</td>
-                                <td colSpan="1">{previewData?.soCgstPercentage}%</td>
-                                <td colSpan="1">{previewData?.invTotalCgst?.toFixed(2)}</td>
-                            </tr>}
-                            {previewData?.soSgstPercentage && <tr>
-                                <td colSpan="5" className="text-right">SGST</td>
-                                <td colSpan="1">{previewData?.soSgstPercentage}%</td>
-                                <td colSpan="1">{previewData?.invTotalSgst?.toFixed(2)}</td>
-                            </tr>}
-                            {previewData?.soIgstPercentage && <tr>
-                                <td colSpan="5" className="text-right">IGST</td>
-                                <td colSpan="1">{previewData?.soIgstPercentage}%</td>
-                                <td colSpan="1">{previewData?.invTotalIgst?.toFixed(2)}</td>
-                            </tr>} */}
                             <tr>
                                 <td colSpan="6" className="text-right">Tax</td>
                                 <td>{previewData?.totaltax?.toFixed(2)}</td>
@@ -498,6 +481,144 @@ const GenerateInvoice = (props) => {
                             </tr>
                             <tr>
                                 <td colSpan="7" className="text-left" style={{ fontWeight: "bolder" }}>Tax Amount (In Words): {convertAmountToWords(previewData?.totaltax?.toFixed(2))}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <hr />
+                    <p><i> Computer generated invoice, no signature required.</i></p>
+                </div>
+            </Modal> */}
+            <Modal isOpen={openPreviewViewModal}>
+                <div style={{ display: 'flex' }}>
+                    <button className='btn btn-primary' onClick={handlePrint}>Download</button>
+                    <button style={{ marginLeft: 'auto' }} className="btn btn-primary" onClick={() => setOpenPreviewViewModal(false)}>
+                        <i className="fas fa-times"></i>
+                    </button>
+                </div>
+                <div className="container" ref={componentRef}>
+                    <div className="row">
+                        <div className="col-sm-3">
+                            <img src={logoSM} alt="" />
+                        </div>
+                        <div className="col-sm-5">
+                            <h4 className='text-center'>TAX INVOICE</h4>
+                            <span className='text-center'>
+                                <p><h3><b>{previewData?.fromDetails?.cName}</b></h3>
+                                    {previewData?.fromDetails?.cAddress + ', ' + previewData?.fromDetails?.cCountry}<br />
+                                    <b>{previewData?.fromDetails?.cEmail} {previewData?.fromDetails?.cPhone}</b><br />
+                                    {previewData?.fromDetails?.cWebsite}</p>
+                            </span>
+                        </div>
+                        <div className="col-sm-4 text-right">
+                            <h4>Invoice# INV{previewData?.soId}</h4>
+                            <h4>Invoice Date {moment(previewData?.soDate).format('DD-MM-YYYY')}</h4>
+                            <h4>GST IN: {previewData?.fromDetails?.cGst}</h4>
+                        </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                        <div className="col-sm-6">
+                            <h4>Billed To</h4>
+                            <p>{soData?.billToDetails?.cName}</p>
+                            <p>{soData?.billToDetails?.cPhone}</p>
+                            <p>{soData?.billToDetails?.cWebsite}</p>
+                            <p>{soData?.billToDetails?.cAddress + ', ' + soData?.billToDetails?.cCountry}</p>
+                            <p>{soData?.billToDetails?.cGst}</p>
+                        </div>
+                        <div className="col-sm-6 text-right">
+                            <h4>Shipped To</h4>
+                            <p>{soData?.shipToDetails?.cName}</p>
+                            <p>{soData?.shipToDetails?.cPhone}</p>
+                            <p>{soData?.shipToDetails?.cWebsite}</p>
+                            <p>{soData?.shipToDetails?.cAddress + ', ' + soData?.shipToDetails?.cCountry}</p>
+                            <p>{soData?.shipToDetails?.cGst}</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                        <div className="col-sm-6">
+                        </div>
+                        <div className="col-sm-6 text-right">
+                            <h4>Payment Method</h4>
+                            <p>{soData?.soPaymentTerms}</p>
+                        </div>
+                    </div>
+                    <hr />
+                    <table className="table">
+                        <thead>
+                            <tr >
+                                <th >Sr.no</th>
+                                <th >Item</th>
+                                <th >HSN/SAC</th>
+                                <th >Description</th>
+                                <th >Quantity</th>
+                                <th >Price</th>
+                                <th >Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {previewData && Object.keys(previewData)?.length > 0 && previewData?.items?.map((ele, index) => (<tr style={{ borderBottomColor: "white" }}>
+                                <td style={{ borderBottomColor: "white" }}>{index + 1}</td>
+                                <td style={{ borderBottomColor: "white" }}>{ele?.categoryDetails?.catName}</td>
+                                <td style={{ borderBottomColor: "white" }}>{ele?.categoryDetails?.catHsnSac}</td>
+                                <td style={{ borderBottomColor: "white" }}>{ele?.categoryDetails?.catDesc}</td>
+                                <td style={{ borderBottomColor: "white" }}>{ele?.soQtyToBilled}</td>
+                                <td style={{ borderBottomColor: "white" }}>{ele?.soRate}</td>
+                                <td style={{ borderBottomColor: "white" }}>{Number(ele?.soQtyToBilled) * Number(ele?.soRate)}</td>
+                            </tr>))}
+                            <tr style={{ borderBottomColor: "white" }}>
+                                <td style={{ borderBottomColor: "white" }} colSpan="6" className="text-right">Other Charges</td>
+                                <td style={{ borderBottomColor: "white" }}>{previewData?.soOtherCharges?.toFixed(2)}</td>
+                            </tr>
+                            <tr style={{ borderBottomColor: "white" }}>
+                                <td style={{ borderBottomColor: "white" }} colSpan="6" className="text-right">Subtotal</td>
+                                <td style={{ borderBottomColor: "white" }}>{previewData?.invSubTotal?.toFixed(2)}</td>
+                            </tr>
+                            <tr style={{ borderBottomColor: "white" }}>
+                                <td style={{ borderBottomColor: "white" }} colSpan="6" className="text-right">Tax</td>
+                                <td style={{ borderBottomColor: "white" }}>{previewData?.totaltax?.toFixed(2)}</td>
+                            </tr>
+                            <tr style={{ borderBottomColor: "white" }}>
+                                <td colSpan="6" className="text-right">Total</td>
+                                <td >{previewData?.invTotal?.toFixed(2)}</td>
+                            </tr>
+                            <tr >
+                                <td colSpan="7" className="text-left" style={{ fontWeight: "bolder" }}>Amount (In Words): {convertAmountToWords(previewData?.invTotal?.toFixed(2))}</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="col" colSpan={2}>Taxable Value</th>
+                                <th scope="col" colSpan={2}>Central Tax</th>
+                                <th scope="col" colSpan={2}>State Tax</th>
+                                <th scope="col">Total Tax Amount</th>
+                            </tr>
+                            <tr style={{ borderBottomColor: "white" }}>
+                                <td style={{ borderBottomColor: "white" }} colSpan={2}></td>
+                                <th style={{ borderBottomColor: "white" }} scope="col">Rate</th>
+                                <th style={{ borderBottomColor: "white" }} scope="col">Amount</th>
+                                <th style={{ borderBottomColor: "white" }} scope="col">Rate</th>
+                                <th style={{ borderBottomColor: "white" }} scope="col">Amount</th>
+                                <td style={{ borderBottomColor: "white" }}></td>
+                            </tr>
+                            <tr >
+                                <td colSpan={2}>{previewData?.invSubTotal}</td>
+                                <td scope="col">{previewData?.soCgstPercentage}%</td>
+                                <td scope="col">{previewData?.invTotalCgst?.toFixed(2)}</td>
+                                <td scope="col">{previewData?.soSgstPercentage}%</td>
+                                <td scope="col">{previewData?.invTotalSgst?.toFixed(2)}</td>
+                                <td >{previewData?.totaltax?.toFixed(2)}</td>
+                            </tr>
+                            <tr >
+                                <td colSpan="7" className="text-left" style={{ fontWeight: "bolder" }}>Tax Amount (In Words): {convertAmountToWords(previewData?.totaltax?.toFixed(2))}</td>
+                            </tr>
+                            <tr>
+                                <td colSpan="2" className="text-left" style={{ fontWeight: "bolder" }}>Company's bank details</td>
+                                <td colSpan={5} className="text-left" style={{ fontWeight: "bolder" }}>Bank Name: {previewData?.fromDetails?.cBankName}<br />
+                                    Account No:    {previewData?.fromDetails?.cAccountNo}<br />
+                                    Branch Name: {previewData?.fromDetails?.cBranchName}<br />
+                                    Ifsc: {previewData?.fromDetails?.cIfsc}
+                                </td>
                             </tr>
 
                         </tbody>
