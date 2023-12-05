@@ -77,6 +77,12 @@ import ViewPo from "./purchaseOrders/ViewPo";
 import ViewSo from "./saleOrders/ViewSo";
 import AddEditSo from "./saleOrders/AddEditSo";
 
+import ViewBill from "./billing/ViewBill";
+import InvoicePrint from "./billing/InvoicePrint";
+import ViewInvoices from "./billing/ViewInvoices";
+import AddEditBill from "./billing/AddEditBill";
+import GenerateInvoice from "./billing/GenerateInvoice";
+
 function App() {
   return (
     <Router history={history} basename={`${process.env.REACT_APP_BASE}`}>
@@ -99,6 +105,11 @@ function App() {
 
         <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/so-search`} component={ViewSo} />
         <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/so-create`} component={AddEditSo} />
+
+        <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/bill-view`} component={ViewBill} />
+        <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/generate-invoice`} component={GenerateInvoice} />
+        <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/invoice-search`} component={InvoicePrint} />
+        <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/bill-create`} component={AddEditBill} />
 
         <PublicRoute exact path={`${process.env.REACT_APP_BASE}/wf-modeler`} component={WFModeler} />
         <PublicRoute exact path={`${process.env.REACT_APP_BASE}/wf-viewer`} component={WFViewer} />

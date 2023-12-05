@@ -8,6 +8,8 @@ export const properties = {
   CATEGORY_API: "/api/category",
   INVENTORY_API: "/api/inventory",
   PURCHASE_ORDER_API: "/api/purchase-order",
+  SALES_ORDER_API: "/api/sale-orders",
+  BILING_API: "/api/billing",
   CUSTOMER_API: "/api/customer",
   ACCESS_NUMBER: "/api/accessNumber",
   BUSINESS_ENTITY_API: '/api/lookup/business-entity',

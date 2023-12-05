@@ -5,7 +5,7 @@ import { showSpinner, hideSpinner } from '../common/spinner';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
 
-const AddEditSo = (props) => {
+const AddEditBill = (props) => {
     const [data, setData] = useState([]);
     const [fromCompanyData, setFromCompanyData] = useState([]);
     const [toCompanyData, setToCompanyData] = useState([]);
@@ -30,13 +30,13 @@ const AddEditSo = (props) => {
             .then((resp) => {
                 if (resp.data) {
                     let formCompanyArr = []
-                    resp.data?.filter((ele) => ele?.cType === "COMPANY").map((e) => {
+                    resp.data?.filter((ele) => ele?.cType === "SUPLIER").map((e) => {
                         formCompanyArr.push({ label: e?.cName, value: e?.cId })
                     })
                     setFromCompanyData(formCompanyArr);
 
                     let toCompanyArr = []
-                    resp.data?.filter((ele) => ele?.cType === "BUYER").map((e) => {
+                    resp.data?.filter((ele) => ele?.cType === "COMPANY").map((e) => {
                         toCompanyArr.push({ label: e?.cName, value: e?.cId })
                     })
                     setToCompanyData(toCompanyArr)
@@ -79,10 +79,7 @@ const AddEditSo = (props) => {
         {
             soCatId: "",
             soRate: "",
-            soQty: "",
-            // soCgstPercentage: "",
-            // soSgstPercentage: "",
-            // soIgstPercentage: "",
+            soQty: ""
         }
     ]);
 
@@ -208,7 +205,7 @@ const AddEditSo = (props) => {
                                 </div>
 
                                 <div className="col-md-4 p-1">
-                                    <label>So To</label>
+                                    <label>Po To</label>
                                     <Select
                                         closeMenuOnSelect={false}
                                         value={categoryData?.soToId}
@@ -259,7 +256,7 @@ const AddEditSo = (props) => {
                                     {errors.soIgstPercentage && <p className="error-msg">{errors.soIgstPercentage}</p>}
                                 </div>
 
-                                {/* <div className="col-md-4 p-1">
+                                <div className="col-md-4 p-1">
                                     <label>Other charges</label>
                                     <input
                                         type="text"
@@ -270,7 +267,7 @@ const AddEditSo = (props) => {
                                         className={errors.soOtherCharges ? 'form-control error' : 'form-control'}
                                     />
                                     {errors.soOtherCharges && <p className="error-msg">{errors.soOtherCharges}</p>}
-                                </div> */}
+                                </div>
 
                                 <div className="col-md-4 p-1">
                                     <label>So Number</label>
@@ -523,4 +520,4 @@ const AddEditSo = (props) => {
     );
 };
 
-export default AddEditSo;
+export default AddEditBill;

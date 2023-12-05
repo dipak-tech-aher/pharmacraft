@@ -271,6 +271,23 @@ const MainMenu = () => {
                                                 </li>
                                             </ul>
                                         </li>
+                                        <li className="dropdown">
+                                            <span className="nav-link dropdown-toggle arrow-none" id="topnav-apps" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i className="fe-grid mr-1"></i> Billing <div className="arrow-down"></div>
+                                            </span>
+                                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <Link to={`${process.env.REACT_APP_BASE}/invoice-search`} className="dropdown-item">
+                                                        <i className="fe-search"></i> Search
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to={`${process.env.REACT_APP_BASE}/bill-view`} className="dropdown-item">
+                                                        <i className="fe-search"></i> Create
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </div>
                             </nav>

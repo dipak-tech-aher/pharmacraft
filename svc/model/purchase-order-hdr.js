@@ -14,6 +14,15 @@ module.exports = function (sequelize, DataType) {
     poTotalQty: {
       type: DataType.INTEGER
     },
+    poCgstPercentage: {
+      type: DataType.INTEGER
+    },
+    poSgstPercentage: {
+      type: DataType.INTEGER
+    },
+    poIgstPercentage: {
+      type: DataType.INTEGER
+    },
     poTotalSgst: {
       type: DataType.INTEGER
     },
@@ -21,6 +30,9 @@ module.exports = function (sequelize, DataType) {
       type: DataType.INTEGER
     },
     poTotalIgst: {
+      type: DataType.INTEGER
+    },
+    poOtherCharges: {
       type: DataType.INTEGER
     },
     poTotal: {
@@ -52,6 +64,15 @@ module.exports = function (sequelize, DataType) {
     },
     poDate: {
       type: DataType.DATE
+    },
+    poDeliveryNoteDate: {
+      type: DataType.DATE
+    },
+    poDeliveryNote: {
+      type: DataType.STRING
+    },
+    poPaymentTerms: {
+      type: DataType.STRING
     },
     poMrpDate: {
       type: DataType.DATE

@@ -1,26 +1,32 @@
 module.exports = function (sequelize, DataType) {
-  const PurchaseOrderTxn = sequelize.define('PurchaseOrderTxn', {
-    poTxnId: {
+  const SalesOrderTxn = sequelize.define('SalesOrderTxn', {
+    soTxnId: {
       type: DataType.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    poId: {
+    soId: {
       type: DataType.INTEGER
     },
-    poCatId: {
+    soCatId: {
       type: DataType.INTEGER
     },
-    poRecievedQty: {
+    soBilledQty: {
       type: DataType.INTEGER
     },
-    poRate: {
+    soStatus: {
+      type: DataType.STRING//OPEN, BILLED
+    },
+    soRecievedQty: {
       type: DataType.INTEGER
     },
-    poQty: {
+    soRate: {
       type: DataType.INTEGER
     },
-    poTotalRate: {
+    soQty: {
+      type: DataType.INTEGER
+    },
+    soTotalRate: {
       type: DataType.INTEGER
     },
     createdBy: {
@@ -39,14 +45,14 @@ module.exports = function (sequelize, DataType) {
     {
       timestamps: true,
       underscored: true,
-      tableName: 'purchase_order_txn'
+      tableName: 'sales_order_txn'
     }
   )
-  PurchaseOrderTxn.associate = function (models) {
-    models.PurchaseOrderTxn.belongsTo(models.Category, {
-      foreignKey: 'poCatId',
+  SalesOrderTxn.associate = function (models) {
+    models.SalesOrderTxn.belongsTo(models.Category, {
+      foreignKey: 'soCatId',
       as: 'categoryDetails'
     })
   }
-  return PurchaseOrderTxn
+  return SalesOrderTxn
 }

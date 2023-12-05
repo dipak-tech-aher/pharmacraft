@@ -1,7 +1,7 @@
 import { logger } from '../config/logger'
 import { ResponseHelper } from '../utils'
 import {
-  Category, sequelize, BusinessEntity,User
+  Category, sequelize, BusinessEntity, User
 } from '../model'
 import { defaultMessage } from '../utils/constant'
 import { get, isEmpty } from 'lodash'
@@ -65,169 +65,20 @@ export class CategoryService {
 
 
   async updateCategory(req, res) {
-    const t = await sequelize.transaction()
+    const t = await sequelize.transaction();
     try {
-      logger.debug('Updating customer data')
-      const customer = req.body
-      const userId = req.userId
-      const { id } = req.params
-      const response = {}
-      if (!customer && !id) {
-        return this.responseHelper.validationError(res, new Error(defaultMessage.MANDATORY_FIELDS_MISSING))
-      }
-      let addressId
-      const customerId = id
-      // Getting customer info
-      const customerInfo = await Customer.findOne({
-        where: {
-          customerId: id
-        }
-      })
-      if (!customerInfo) {
-        logger.debug(defaultMessage.NOT_FOUND)
-        return this.responseHelper.notFound(res, new Error(defaultMessage.NOT_FOUND))
-      }
-      const contactId = customerInfo.contactId
-      // If user has address we will update or we will create
-      if (customerInfo.addressId && Array.isArray(customer.address)) {
-        const address = get(customer, 'address[0]', '')
-        addressId = customerInfo.addressId
-        if (address) {
-          await updateAddress(address, addressId, userId, t)
-        }
-      } else if (Array.isArray(customer.address)) {
-        const address = get(customer, 'address[0]', '')
-        if (address) {
-          const data = await createAddress(address, userId, t)
-          if (data) {
-            addressId = data.addressId
-          }
-        }
-      }
-      await updateContact(customer, contactId, userId, t)
-      // Updating customer data
-      const customerData = await updateCustomer(customer, userId, addressId, contactId, customerId, t)
-      if (!customerData) {
-        return this.responseHelper.onError(res, new Error('Error while updating customer'))
-      }
-      response.customerId = customerId
-      // Updating account data
-      if (Array.isArray(customer.account)) {
-        for (const accounts of customer.account) {
-          let accountAddressId
-          let accountContactId
-          if (accounts.accountId) {
-            response.accountId = accounts.accountId
-            const accountInfo = await Account.findOne({
-              where: {
-                accountId: accounts.accountId,
-                customerId
-              }
-            })
-            if (!accountInfo) {
-              return this.responseHelper.notFound(res, new Error(defaultMessage.NOT_FOUND))
-            }
-            // If user has address we will update or we will create
-            if (accounts.billingAddress && accounts.billingAddress.sameAsCustomerAddress === 'yes') {
-              accountAddressId = accountInfo.addressId
-              accountContactId = accountInfo.contactId
-              await updateAddress(accounts.billingAddress, accountAddressId, userId, t)
-              await updateContact(accounts, accountContactId, userId, t)
-            } else if (accounts.billingAddress && accounts.billingAddress.sameAsCustomerAddress === 'no') {
-              const address = await createAddress(accounts.billingAddress, userId, t)
-              if (address) {
-                accountAddressId = address.addressId
-              }
-              const contact = await createContact(accounts, userId, t)
-              if (contact) {
-                accountContactId = contact.contactId
-              }
-            }
-            // Updating account data
-            await updateAccount(customerInfo.customerType, accounts, customerId, accountAddressId, accountContactId, userId, accounts.accountId, t)
-
-            const securityQuestion = await SecurityQuestion.findOne({
-              accountId: accounts.accountId
-            })
-            // If user has SecurityQuestion we will update or we will create
-            if (securityQuestion && accounts.security) {
-              await updateSecurityQuestion(accounts.security, accounts.accountId, securityQuestion.profileId)
-            } else {
-              await createSecurityQuestion(accounts.security, accounts.accountId)
-            }
-            // Updating service data
-            if (Array.isArray(accounts.service)) {
-              for (const service of accounts.service) {
-                if (service.serviceId) {
-                  let serviceAddressId
-                  const serviceInfo = await Connection.findOne({
-                    where: {
-                      connectionId: service.serviceId,
-                      accountId: accounts.accountId
-                    }
-                  })
-                  if (!serviceInfo) {
-                    return this.responseHelper.notFound(res, new Error(defaultMessage.NOT_FOUND))
-                  }
-                  const connectionId = service.serviceId
-                  // If user has address we will update or we will create
-                  if (Array.isArray(service.serviceAddress)) {
-                    for (const address of service.serviceAddress) {
-                      if (serviceAddressId && address.sameAsBillingAddress === 'yes') {
-                        serviceAddressId = serviceInfo.addressId
-                        await updateAddress(address, serviceAddressId, userId, t)
-                      } else if (address.sameAsBillingAddress === 'no') {
-                        const addressInfo = await createAddress(address, userId, t)
-                        if (addressInfo) {
-                          serviceAddressId = addressInfo.addressId
-                        }
-                      }
-                    }
-                  }
-
-                  const planId = get(service, 'product', '')
-                  const connectionPlanInfo = await ConnectionPlan.findOne({
-                    where: {
-                      connectionId
-                    }
-                  })
-                  if (connectionPlanInfo) {
-                    // If user has selected new plan then need to update the connection plan table
-                    if (planId !== connectionPlanInfo.planId) {
-                      const plan = await Plan.findOne({
-                        where: {
-                          planId: get(service, 'product', '')
-                        }
-                      })
-                      const prodCatalogue = get(service, 'catalog', '')
-                      await updateConnectionPlan(plan, userId, connectionId, connectionPlanInfo.connPlanId, prodCatalogue, t)
-                    }
-                  }
-                  // Updating Service data
-                  const connection = await updateConnection(service, serviceAddressId, userId, connectionId, accounts.accountId, t)
-                  if (connection) {
-                    response.serviceId = connection.connectionId
-                  }
-
-                  // const serviceRequest = await createServiceRequest(customerId, accountInfo.accountId, plan, userId, t)
-                  // if (serviceRequest) {
-                  //   response.serviceRequest = serviceRequest
-                  // }
-                }
-              }
-            }
-          }
-        }
-      }
+      console.log("req body........>", req.body)
+      console.log("req params.......>", req.params)
+      const response = await Category.update(req.body, { where: { catId: req?.params?.id }, transaction: t })
       await t.commit()
-      logger.debug('Customer data updated successfully')
-      return this.responseHelper.onSuccess(res, 'customer updated successfully', response)
+      logger.debug('category updated successfully')
+      return this.responseHelper.onSuccess(res, 'category updated successfully', response)
     } catch (error) {
       if (error.response && error.response.status === 404) {
         return this.responseHelper.notFound(res, defaultMessage.NOT_FOUND)
       } else {
         logger.error(error, defaultMessage.ERROR)
-        return this.responseHelper.onError(res, new Error('Error while updating customer'))
+        return this.responseHelper.onError(res, new Error('Error while creating customer'))
       }
     } finally {
       if (t && !t.finished) {

@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { post } from '../util/restUtil';
+import { post,put } from '../util/restUtil';
 import { properties } from '../properties';
 import { showSpinner, hideSpinner } from '../common/spinner';
 import { toast } from 'react-toastify';
 
 const AddEditCategory = (props) => {
+
+    console.log("props.....................>", props)
+
+    const data = props?.location?.state?.data?.rowData
+    const action = props?.location?.state?.data?.action
+    console.log(data);
+    console.log("action........>",action);
+    // console.log("acrtion.....>",props?.location?.state?.data?.action)
     const [status, setStatus] = useState([]);
     const [units, setUnits] = useState([]);
     const [categoryData, setCategoryData] = useState({
@@ -16,6 +24,24 @@ const AddEditCategory = (props) => {
         catHsnSac: '',
         catSize: '',
     });
+
+
+    useEffect(() => {
+
+        if (data) {
+
+            setCategoryData({
+                catName: data?.catName ?? '',
+                catNumber: data?.catNumber ?? '',
+                catDesc: data?.catDesc ?? '',
+                catUnit: data?.catUnit ?? '',
+                catStatus: data?.catStatus ?? '',
+                catHsnSac: data?.catHsnSac ?? '',
+                catSize: data?.catSize ?? '',
+            })
+        }
+    },[props])
+
 
     useEffect(() => {
         showSpinner();
@@ -76,7 +102,8 @@ const AddEditCategory = (props) => {
             };
             console.log('complaint---------->', complaint)
 
-            post(properties?.CATEGORY_API, { ...complaint })
+            if(action=== 'UPDATE'){
+                put(`${properties?.CATEGORY_API}/${data?.catId}`, { ...complaint })
                 .then((response) => {
                     toast.success(`${response.message}`);
                     props.history.push(`${process.env.REACT_APP_BASE}/category-search`);
@@ -84,6 +111,17 @@ const AddEditCategory = (props) => {
                 .finally(() => {
                     hideSpinner();
                 });
+            }else{
+
+                post(properties?.CATEGORY_API, { ...complaint })
+                .then((response) => {
+                    toast.success(`${response.message}`);
+                    props.history.push(`${process.env.REACT_APP_BASE}/category-search`);
+                })
+                .finally(() => {
+                    hideSpinner();
+                });
+            }
         }
     };
 

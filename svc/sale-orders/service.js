@@ -1,14 +1,14 @@
 import { logger } from '../config/logger'
 import { ResponseHelper } from '../utils'
 import {
-  Category, sequelize, BusinessEntity, po, PurchaseOrderHdr, PurchaseOrderTxn, User, Company, Inventory
+  Category, sequelize, BusinessEntity, SalesOrderHdr, SalesOrderTxn, User, Company, Inventory
 } from '../model'
 import { defaultMessage } from '../utils/constant'
 import { get, isEmpty } from 'lodash'
 import { QueryTypes, Op } from 'sequelize'
 import { camelCaseConversion } from '../utils/string'
 
-export class PoService {
+export class SoService {
   constructor() {
     this.responseHelper = new ResponseHelper()
   }
@@ -16,37 +16,39 @@ export class PoService {
   async create(req, res) {
     const t = await sequelize.transaction();
     try {
-      logger.info('Creating new po');
-      const po = req.body;
+      logger.info('Creating new so');
+      const so = req.body;
       const { userId } = req;
-      let poItems = po?.items;
-      console.log('po----------->', po)
+      let soItems = so?.items;
+      console.log('so----------->', so)
       // Function to calculate GST amount based on percentage and total rate
       function calculateGst(percentage, totalRate) {
         return (Number(percentage) / 100) * totalRate;
       }
 
-      const updatedPoItems = poItems?.map((ele) => {
-        const poTotalRate = Number(ele?.poQty) * Number(ele?.poRate);
-        const poRecievedQty = po?.poStatus === "CLS" ? Number(ele?.poQty) : 0
-        const poQty = po?.poStatus === "CLS" ? 0 : Number(ele?.poQty)
+      const updatedSoItems = soItems?.map((ele) => {
+        const soTotalRate = Number(ele?.soQty) * Number(ele?.soRate);
+        // const poCgst = ele?.soCgstPercentage ? calculateGst(ele?.soCgstPercentage, soTotalRate) : 0;
+        // const poSgst = ele?.soSgstPercentage ? calculateGst(ele?.soSgstPercentage, soTotalRate) : 0;
+        // const poIgst = ele?.poIgstPercentage ? calculateGst(ele?.poIgstPercentage, soTotalRate) : 0;
 
         return {
           ...ele,
-          poTotalRate,
-          poRecievedQty,
-          poQty
+          soTotalRate,
+          // poCgst,
+          // poSgst,
+          // poIgst,
         };
       });
 
 
       // Check if 'po' is falsy or 'poItems' is not an array
-      if (!po || !Array.isArray(updatedPoItems)) {
+      if (!so || !Array.isArray(updatedSoItems)) {
         return this.responseHelper.validationError(res, new Error(defaultMessage.MANDATORY_FIELDS_MISSING));
       }
 
       // Remove 'items' property from 'po' as it is being handled separately
-      delete po.items;
+      delete so.items;
 
       const commonAttributes = {
         createdBy: userId,
@@ -54,87 +56,47 @@ export class PoService {
         updatedBy: userId,
         updatedAt: new Date(),
       };
-      let poSubTotal = updatedPoItems?.reduce((total, ele) => total + (Number(ele?.poTotalRate) || 0), 0);
-      const poOtherCharges = po?.poOtherCharges ? Number(po?.poOtherCharges) : 0
-      poSubTotal = poSubTotal + poOtherCharges
+      let soSubTotal = updatedSoItems?.reduce((total, ele) => total + (Number(ele?.soTotalRate) || 0), 0);
+      console.log('soSubTotal----------->', soSubTotal)
+      const soOtherCharges = so?.soOtherCharges ? Number(so?.soOtherCharges) : 0
+      soSubTotal = soSubTotal + soOtherCharges
+      console.log('soSubTotal----xx------->', soSubTotal)
 
-      let poTotalCgst = po?.poCgstPercentage ? calculateGst(po?.poCgstPercentage, poSubTotal) : 0;
-      let poTotalSgst = po?.poSgstPercentage ? calculateGst(po?.poSgstPercentage, poSubTotal) : 0;
-      let poTotalIgst = po?.poIgstPercentage ? calculateGst(po?.poIgstPercentage, poSubTotal) : 0;
-      let poTotal = Number(poSubTotal) + Number(poTotalSgst) + Number(poTotalCgst) + Number(poTotalIgst)
+      let soTotalCgst = so?.soCgstPercentage ? calculateGst(so?.soCgstPercentage, soSubTotal) : 0;
+      let soTotalSgst = so?.soSgstPercentage ? calculateGst(so?.soSgstPercentage, soSubTotal) : 0;
+      let soTotalIgst = so?.soIgstPercentage ? calculateGst(so?.soIgstPercentage, soSubTotal) : 0;
+      let soTotal = Number(soSubTotal) + Number(soTotalSgst) + Number(soTotalCgst) + Number(soTotalIgst)
+      // Create a new SalesOrderHdr
 
-      const newPo = await PurchaseOrderHdr.create({
-        ...po,
-        poTotalSgst,
-        poTotalCgst,
-        poTotalIgst,
-        poTotal,
-        poSubTotal,
-        poTotalQty: updatedPoItems?.reduce((total, ele) => total + (po?.poStatus === "CLS" ? Number(ele?.poRecievedQty) : Number(ele?.poQty) || 0), 0),
+      console.log('soTotalCgst--------->', soTotalCgst)
+      console.log('soTotalSgst--------->', soTotalSgst)
+      console.log('soTotalIgst--------->', soTotalIgst)
+      console.log('soTotal--------->', soTotal)
+
+      const newSo = await SalesOrderHdr.create({
+        ...so,
+        soTotalSgst,
+        soTotalCgst,
+        soTotalIgst,
+        soTotal,
+        soSubTotal,
+        soTotalQty: updatedSoItems?.reduce((total, ele) => total + (ele?.soQty || 0), 0),
         ...commonAttributes,
       }, { transaction: t });
 
-      // Map 'poItems' to include 'poId' and common attributes
-      console.log('updatedPoItems-------->', updatedPoItems)
-
-      const items = await PurchaseOrderTxn.bulkCreate(updatedPoItems.map(item => ({
+      // Map 'soItems' to include 'soId' and common attributes
+      console.log('updatedSoItems-------->', updatedSoItems)
+      const items = await SalesOrderTxn.bulkCreate(updatedSoItems.map(item => ({
         ...item,
         ...commonAttributes,
-        poId: newPo?.dataValues?.poId ?? newPo?.poId
+        soId: newSo?.dataValues?.soId ?? newSo?.soId
       })), { transaction: t });
-
-      if (po?.poStatus === "CLS") {
-        for (const ele of updatedPoItems) {
-          try {
-            const invExist = await Inventory.findOne({
-              where: {
-                invCatId: ele?.poCatId
-              }
-            });
-            console.log('invExist------->', invExist)
-            console.log('invExist?.dataValues?.invId ?? invExist.invId------->', invExist?.dataValues?.invId ?? invExist?.invId)
-            if (invExist) {
-              // Use sequelize.literal to perform an addition operation on invQty
-              await Inventory.update(
-                {
-                  invCompanyId: po?.poFromId,
-                  invQty: sequelize.literal(`inv_qty + ${ele?.poRecievedQty}`),
-                  invStatus: 'AC',
-                  ...commonAttributes
-                },
-                {
-                  where: {
-                    invId: invExist?.dataValues?.invId ?? invExist.invId
-                  },
-                  transaction: t
-                }
-              );
-            } else {
-              // If inventory doesn't exist, create a new inventory item
-              await Inventory.create(
-                {
-                  invCatId: ele?.poCatId,
-                  invQty: ele?.poRecievedQty,
-                  invStatus: 'AC',
-                  invCompanyId: po?.poFromId,
-                  ...commonAttributes
-                },
-                { transaction: t }
-              );
-            }
-          } catch (error) {
-            await t.rollback();
-            console.log('error-------->', error)
-            return this.responseHelper.onError(res, new Error('Error while updating inventory'));
-          }
-        }
-      }
 
       // Commit the transaction
       await t.commit();
-      logger.debug('New po created successfully');
+      logger.debug('New so created successfully');
 
-      return this.responseHelper.onSuccess(res, 'po created successfully', newPo);
+      return this.responseHelper.onSuccess(res, 'so created successfully', newSo);
     } catch (error) {
       // Handle specific Sequelize errors
       if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
@@ -162,7 +124,7 @@ export class PoService {
         return this.responseHelper.validationError(res, new Error(defaultMessage.MANDATORY_FIELDS_MISSING))
       }
 
-      const poInfo = await PurchaseOrderHdr.findOne({
+      const poInfo = await SalesOrderHdr.findOne({
         where: {
           invId
         }
@@ -175,7 +137,7 @@ export class PoService {
         updatedBy: userId,
         updatedAt: new Date(),
       };
-      await PurchaseOrderHdr.update({ ...po, ...commonAttributes }, {
+      await SalesOrderHdr.update({ ...po, ...commonAttributes }, {
         where: {
           invId
         },
@@ -218,7 +180,7 @@ export class PoService {
 
       const invExist = await Inventory.findOne({
         where: {
-          invCatId: po?.poCatId
+          invCatId: po?.soCatId
         }
       });
 
@@ -240,7 +202,7 @@ export class PoService {
       } else {
         await Inventory.create(
           {
-            invCatId: po?.poCatId,
+            invCatId: po?.soCatId,
             invQty: po?.recievedQty,
             invStatus: 'AC',
             ...commonAttributes
@@ -249,9 +211,9 @@ export class PoService {
         );
       }
 
-      await PurchaseOrderTxn.update(
+      await SalesOrderTxn.update(
         {
-          poQty: sequelize.literal(`coalesce(po_qty, 0)  - ${po?.recievedQty}`),
+          soQty: sequelize.literal(`coalesce(po_qty, 0)  - ${po?.recievedQty}`),
           poRecievedQty: sequelize.literal(`coalesce(po_recieved_qty, 0) + ${po?.recievedQty}`),
           ...commonAttributes
         },
@@ -288,7 +250,7 @@ export class PoService {
         return this.responseHelper.validationError(res, new Error(defaultMessage.MANDATORY_FIELDS_MISSING))
       }
       let response = {}
-      const po = await PurchaseOrderHdr.findOne({
+      const po = await SalesOrderHdr.findOne({
         include: [{ model: Category, as: 'categoryDetails' },
         { model: BusinessEntity, as: 'statusDesc', attributes: ['code', 'description'] }],
         where: {
@@ -308,25 +270,32 @@ export class PoService {
     }
   }
 
-  async getPos(req, res) {
+  async getSos(req, res) {
     try {
-      logger.debug('Getting po')
+      logger.debug('Getting so')
 
-      const po = await PurchaseOrderHdr.findAll({
+      const po = await SalesOrderHdr.findAll({
         include: [
           { model: User, as: 'createdByDetails', attributes: ['firstName', 'lastName'] },
           { model: User, as: 'updatedByDetails', attributes: ['firstName', 'lastName'] },
+          { model: Company, as: 'fromDetails' },
+          { model: Company, as: 'toDetails' },
           {
-            model: PurchaseOrderTxn, as: 'poTxnDetails',
+            model: SalesOrderTxn, as: 'soTxnDetails',
             include: [
               {
-                model: Category, as: 'categoryDetails'
+                model: Category, as: 'categoryDetails',
+                include: [
+                  {
+                    model: Inventory, as: 'invDetails'
+                  }
+                ]
               }
             ]
           },
           { model: BusinessEntity, as: 'statusDesc', attributes: ['code', 'description'] }
         ],
-        order: [['poId', 'DESC']]
+        order: [['soId', 'DESC']]
         // where: {
         //   poStatus: ['AC', 'ACTIVE']
         // }

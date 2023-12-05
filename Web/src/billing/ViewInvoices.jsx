@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 import moment from 'moment';
 import Modal from 'react-modal'
 
-const ViewSo = (props) => {
+const ViewInvoices = (props) => {
     const history = useHistory();
     const { auth } = useContext(AppContext);
     const [recievedQty, setRecievedQty] = useState()
@@ -247,12 +247,13 @@ const ViewSo = (props) => {
     return (
         <div className="container-fluid">
             <div className="col-12">
-                <h1 className="title bold">View so's</h1>
+                <h1 className="title bold">View bills</h1>
             </div>
             <div className="row mt-1">
                 <div className="col-lg-12">
                     <div className="card-box">
-                        <DynamicTable
+                        Bills coming soon..
+                        {/* <DynamicTable
                             row={tableRowData}
                             header={columns}
                             itemsPerPage={10}
@@ -260,33 +261,13 @@ const ViewSo = (props) => {
                                 handleCellRender: handleCellRender,
                                 handleLinkClick: handleCellLinkClick
                             }}
-                        />
+                        /> */}
                     </div>
                 </div>
             </div>
-            <Modal isOpen={openViewModal}>
-                <div style={{ display: 'flex' }}>
-                    <h4>View po details</h4>
-                    <button style={{ marginLeft: 'auto' }} className="btn btn-primary" onClick={onClose}>
-                        <i className="fas fa-times"></i>
-                    </button>
-                </div>
-                <div className="row">
-                    <div className="col-md-12">
-                        <DynamicTable
-                            row={tableViewRowData}
-                            header={viewColumns}
-                            itemsPerPage={10}
-                            handler={{
-                                handleCellRender: handleViewCellRender,
-                                handleLinkClick: handleViewCellLinkClick
-                            }}
-                        />
-                    </div>
-                </div>
-            </Modal>
+
         </div>
     )
 }
 
-export default ViewSo;
+export default ViewInvoices;

@@ -51,6 +51,11 @@ module.exports = function (sequelize, DataType) {
       foreignKey: 'catStatus',
       as: 'statusDesc'
     })
+    models.Category.hasOne(models.Inventory, {
+      foreignKey: 'invCatId',
+      sourceKey: 'catId',
+      as: 'invDetails'
+    })
     models.Category.belongsTo(models.User, {
       foreignKey: 'createdBy',
       as: 'createdByDetails'

@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 import moment from 'moment';
 import Modal from 'react-modal'
 
-const ViewSo = (props) => {
+const ViewBill = (props) => {
     const history = useHistory();
     const { auth } = useContext(AppContext);
     const [recievedQty, setRecievedQty] = useState()
@@ -28,9 +28,13 @@ const ViewSo = (props) => {
             .finally(hideSpinner)
     }, [isRefresh])
 
-    const handleOpenModal = (rows) => {
-        setOpenViewModal(true);
-        setTableViewRowData(rows)
+    const handleOpenModal = (soData) => {
+        history.push(`${process.env.REACT_APP_BASE}/generate-invoice`, {
+            data: {
+                rows: soData?.soTxnDetails,
+                soData
+            }
+        })
     }
 
     const onClose = () => {
@@ -42,13 +46,18 @@ const ViewSo = (props) => {
     const handleCellRender = (cell, row) => {
         if (cell.column.id === "action") {
             return (<>
-                <button className='btn btn-primary' onClick={(e) => handleOpenModal(row?.original?.poTxnDetails)}>
-                    <i className="fas fa-eye"></i> Get Entry
+                <button className='btn btn-primary' onClick={(e) => handleOpenModal(row?.original)}>
+                    <i className="fas fa-eye"></i> Generate Invoice
                 </button>
             </>)
         }
         if (cell.column.id === "poId") {
             return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{cell.value}</span>)
+        }
+        if (cell.column.id === "soItemsYetToBill") {
+            return (<span className="text-primary cursor-pointer">{
+                Number(row.original?.soTotalQty) - Number(row.original?.soBilledQty)
+            }</span>)
         }
         if (cell.column.id === "itemsCount") {
             return (<span className="text-primary cursor-pointer">{row.original?.soTxnDetails?.length}</span>)
@@ -95,19 +104,33 @@ const ViewSo = (props) => {
             id: "action"
         },
         {
-            Header: "Items Count",
+            Header: "Items count",
             accessor: "itemsCount",
             disableFilters: true,
             click: true,
             id: "itemsCount"
         },
-        // {
-        //     Header: "Po Id",
-        //     accessor: "poId",
-        //     disableFilters: true,
-        //     click: true,
-        //     id: "poId"
-        // },
+        {
+            Header: "Total requested Qty",
+            accessor: "soTotalQty",
+            disableFilters: true,
+            click: true,
+            id: "soTotalQty"
+        },
+        {
+            Header: "Items Billed Qty",
+            accessor: "soBilledQty",
+            disableFilters: true,
+            click: true,
+            id: "soBilledQty"
+        },
+        {
+            Header: "Items yet to bill",
+            accessor: "soItemsYetToBill",
+            disableFilters: true,
+            click: true,
+            id: "soItemsYetToBill"
+        },     
         {
             Header: "So Number",
             accessor: "soNumber",
@@ -247,7 +270,7 @@ const ViewSo = (props) => {
     return (
         <div className="container-fluid">
             <div className="col-12">
-                <h1 className="title bold">View so's</h1>
+                <h1 className="title bold">View sales orders</h1>
             </div>
             <div className="row mt-1">
                 <div className="col-lg-12">
@@ -266,7 +289,7 @@ const ViewSo = (props) => {
             </div>
             <Modal isOpen={openViewModal}>
                 <div style={{ display: 'flex' }}>
-                    <h4>View po details</h4>
+                    <h4>View so details</h4>
                     <button style={{ marginLeft: 'auto' }} className="btn btn-primary" onClick={onClose}>
                         <i className="fas fa-times"></i>
                     </button>
@@ -289,4 +312,4 @@ const ViewSo = (props) => {
     )
 }
 
-export default ViewSo;
+export default ViewBill;

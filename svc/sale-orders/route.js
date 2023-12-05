@@ -6,11 +6,11 @@ const soRouter = express.Router()
 const soService = new SoService()
 
 soRouter
-  .post('/', validateToken, soService.create.bind(soService))
+  .post('/', soService.create.bind(soService))
   .put('/:id', validateToken, soService.update.bind(soService))
   .post('/add-stock-entry', validateToken, soService.addStockEntry.bind(soService))
   .get('/:id', validateToken, soService.get.bind(soService))
-  .get('/', validateToken, soService.getPos.bind(soService))
+  .get('/', validateToken, soService.getSos.bind(soService))
   .post('/company', validateToken, soService.getCompany.bind(soService))
 
 module.exports = soRouter

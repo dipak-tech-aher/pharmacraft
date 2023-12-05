@@ -62,9 +62,10 @@ const AddEditPo = (props) => {
     const validateForm = () => {
         let formIsValid = true;
         let newErrors = {};
-
         Object.keys(categoryData).forEach((key) => {
-            if (key !== 'selectedCategory' && !categoryData[key]) {
+            console.log('categoryData[key]------->', categoryData[key])
+
+            if (key !== "poOtherCharges" && key !== 'selectedCategory' && !categoryData[key]) {
                 formIsValid = false;
                 newErrors[key] = `This field is mandatory`;
             }
@@ -80,9 +81,9 @@ const AddEditPo = (props) => {
             poCatId: "",
             poRate: "",
             poQty: "",
-            poCgstPercentage: "",
-            poSgstPercentage: "",
-            poIgstPercentage: "",
+            // poCgstPercentage: "",
+            // poSgstPercentage: "",
+            // poIgstPercentage: "",
         }
     ]);
 
@@ -126,9 +127,9 @@ const AddEditPo = (props) => {
             poCatId: "",
             poRate: "",
             poQty: "",
-            poCgstPercentage: "",
-            poSgstPercentage: "",
-            poIgstPercentage: ""
+            // poCgstPercentage: "",
+            // poSgstPercentage: "",
+            // poIgstPercentage: ""
         }]);
     };
 
@@ -148,14 +149,21 @@ const AddEditPo = (props) => {
                         poCatId: Number(ele?.poCatId?.value),
                         poRate: Number(ele?.poRate),
                         poQty: Number(ele?.poQty),
-                        poCgstPercentage: Number(ele?.poCgstPercentage),
-                        poSgstPercentage: Number(ele?.poSgstPercentage),
-                        poIgstPercentage: Number(ele?.poIgstPercentage)
+                        // poCgstPercentage: Number(ele?.poCgstPercentage),
+                        // poSgstPercentage: Number(ele?.poSgstPercentage),
+                        // poIgstPercentage: Number(ele?.poIgstPercentage)
                     };
                 }),
+                poCgstPercentage: Number(categoryData?.poCgstPercentage),
+                poSgstPercentage: Number(categoryData?.poSgstPercentage),
+                poIgstPercentage: Number(categoryData?.poIgstPercentage),
                 poFromId: categoryData?.poFromId?.value,
                 poToId: categoryData?.poToId?.value,
                 poNumber: categoryData?.poNumber,
+                poOtherCharges: categoryData?.poOtherCharges,
+                poDeliveryNoteDate: categoryData?.poDeliveryNoteDate,
+                poDeliveryNote: categoryData?.poDeliveryNote,
+                poPaymentTerms: categoryData?.poPaymentTerms,
                 poMrpNumber: categoryData?.poMrpNumber,
                 poTransporter: categoryData?.poTransporter,
                 poTransportMode: categoryData?.poTransportMode,
@@ -171,7 +179,7 @@ const AddEditPo = (props) => {
             post(properties?.PURCHASE_ORDER_API, { ...poPayload })
                 .then((response) => {
                     toast.success(`${response.message}`);
-                    props.history.push(`${process.env.REACT_APP_BASE}/po-search`);
+                    // props.history.push(`${process.env.REACT_APP_BASE}/po-search`);
                 })
                 .finally(() => {
                     hideSpinner();
@@ -191,7 +199,7 @@ const AddEditPo = (props) => {
 
                             <div className="row">
                                 <div className="col-md-4 p-1">
-                                    <label>Po From</label>
+                                    <label>Order From</label>
                                     <Select
                                         closeMenuOnSelect={false}
                                         value={categoryData?.poFromId}
@@ -204,7 +212,7 @@ const AddEditPo = (props) => {
                                 </div>
 
                                 <div className="col-md-4 p-1">
-                                    <label>Po To</label>
+                                    <label>Order To</label>
                                     <Select
                                         closeMenuOnSelect={false}
                                         value={categoryData?.poToId}
@@ -217,7 +225,7 @@ const AddEditPo = (props) => {
                                 </div>
 
                                 <div className="col-md-4 p-1">
-                                    <label>Po Number</label>
+                                    <label>Order Number</label>
                                     <input
                                         type="text"
                                         name="poNumber"
@@ -240,6 +248,96 @@ const AddEditPo = (props) => {
                                         className={errors.poMrpNumber ? 'form-control error' : 'form-control'}
                                     />
                                     {errors.poMrpNumber && <p className="error-msg">{errors.poMrpNumber}</p>}
+                                </div>
+
+                                <div className="col-md-4 p-1">
+                                    <label>Other charges</label>
+                                    <input
+                                        type="text"
+                                        name="poOtherCharges"
+                                        placeholder='Enter Other charges'
+                                        value={categoryData.poOtherCharges}
+                                        onChange={handleInputChange}
+                                        className={errors.poOtherCharges ? 'form-control error' : 'form-control'}
+                                    />
+                                    {errors.poOtherCharges && <p className="error-msg">{errors.poOtherCharges}</p>}
+                                </div>
+
+                                <div className="col-md-4 p-1">
+                                    <label>CGST%</label>
+                                    <input
+                                        type="text"
+                                        name="poCgstPercentage"
+                                        placeholder='CGST %'
+                                        value={categoryData?.poCgstPercentage}
+                                        onChange={handleInputChange}
+                                        className={errors.poCgstPercentage ? 'form-control error' : 'form-control'}
+                                    />
+                                    {errors.poCgstPercentage && <p className="error-msg">{errors.poCgstPercentage}</p>}
+                                </div>
+
+                                <div className="col-md-4 p-1">
+                                    <label>SGST%</label>
+                                    <input
+                                        type="text"
+                                        name="poSgstPercentage"
+                                        placeholder='SGST%'
+                                        value={categoryData?.poSgstPercentage}
+                                        onChange={handleInputChange}
+                                        className={errors.poSgstPercentage ? 'form-control error' : 'form-control'}
+                                    />
+                                    {errors.poSgstPercentage && <p className="error-msg">{errors.poSgstPercentage}</p>}
+                                </div>
+
+                                <div className="col-md-4 p-1">
+                                    <label>IGST%</label>
+                                    <input
+                                        type="text"
+                                        name="poIgstPercentage"
+                                        placeholder='IGST%'
+                                        value={categoryData?.poIgstPercentage}
+                                        onChange={handleInputChange}
+                                        className={errors.poIgstPercentage ? 'form-control error' : 'form-control'}
+                                    />
+                                    {errors.poIgstPercentage && <p className="error-msg">{errors.poIgstPercentage}</p>}
+                                </div>
+
+                                <div className="col-md-4 p-1">
+                                    <label>Delivery Note Date</label>
+                                    <input
+                                        type="date"
+                                        name="poDeliveryNoteDate"
+                                        value={categoryData.poDeliveryNoteDate}
+                                        onChange={handleInputChange}
+                                        className={errors.poDeliveryNoteDate ? 'form-control error' : 'form-control'}
+                                    />
+                                    {errors.poDeliveryNoteDate && <p className="error-msg">{errors.poDeliveryNoteDate}</p>}
+                                </div>
+
+                                <div className="col-md-4 p-1">
+                                    <label>Delivery Note</label>
+                                    <input
+                                        type="text"
+                                        name="poDeliveryNote"
+                                        placeholder='Enter Mrp Number'
+                                        value={categoryData.poDeliveryNote}
+                                        onChange={handleInputChange}
+                                        className={errors.poDeliveryNote ? 'form-control error' : 'form-control'}
+                                    />
+                                    {errors.poDeliveryNote && <p className="error-msg">{errors.poDeliveryNote}</p>}
+                                </div>
+
+                                <div className="col-md-4 p-1">
+                                    <label>Payment terms/mode</label>
+                                    <input
+                                        type="text"
+                                        name="poPaymentTerms"
+                                        placeholder='Enter payment terms/mode'
+                                        value={categoryData.poPaymentTerms}
+                                        onChange={handleInputChange}
+                                        className={errors.poPaymentTerms ? 'form-control error' : 'form-control'}
+                                    />
+                                    {errors.poPaymentTerms && <p className="error-msg">{errors.poPaymentTerms}</p>}
                                 </div>
 
                                 <div className="col-md-4 p-1">
@@ -308,7 +406,7 @@ const AddEditPo = (props) => {
                                 </div>
 
                                 <div className="col-md-4 p-1">
-                                    <label>Po Date</label>
+                                    <label>Order Date</label>
                                     <input
                                         type="date"
                                         name="poDate"
@@ -398,45 +496,6 @@ const AddEditPo = (props) => {
                                                     className={errors.poRate ? 'form-control error' : 'form-control'}
                                                 />
                                                 {errors.poRate && <p className="error-msg">{errors.poRate}</p>}
-                                            </div>
-
-                                            <div className="col-md-2 p-1">
-                                                <label>CGST%</label>
-                                                <input
-                                                    type="text"
-                                                    name="poCgstPercentage"
-                                                    placeholder='CGST %'
-                                                    value={item.poCgstPercentage}
-                                                    onChange={(e) => handleChangeItem(index, 'poCgstPercentage', e)}
-                                                    className={errors.poCgstPercentage ? 'form-control error' : 'form-control'}
-                                                />
-                                                {errors.poCgstPercentage && <p className="error-msg">{errors.poCgstPercentage}</p>}
-                                            </div>
-
-                                            <div className="col-md-1 p-1">
-                                                <label>SGST%</label>
-                                                <input
-                                                    type="text"
-                                                    name="poSgstPercentage"
-                                                    placeholder='SGST%'
-                                                    value={item.poSgstPercentage}
-                                                    onChange={(e) => handleChangeItem(index, 'poSgstPercentage', e)}
-                                                    className={errors.poSgstPercentage ? 'form-control error' : 'form-control'}
-                                                />
-                                                {errors.poSgstPercentage && <p className="error-msg">{errors.poSgstPercentage}</p>}
-                                            </div>
-
-                                            <div className="col-md-1 p-1">
-                                                <label>IGST%</label>
-                                                <input
-                                                    type="text"
-                                                    name="poIgstPercentage"
-                                                    placeholder='IGST%'
-                                                    value={item.poIgstPercentage}
-                                                    onChange={(e) => handleChangeItem(index, 'poIgstPercentage', e)}
-                                                    className={errors.poIgstPercentage ? 'form-control error' : 'form-control'}
-                                                />
-                                                {errors.poIgstPercentage && <p className="error-msg">{errors.poIgstPercentage}</p>}
                                             </div>
 
                                             <div className="col-md-2 mt-3">

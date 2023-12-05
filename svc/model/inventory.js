@@ -14,12 +14,6 @@ module.exports = function (sequelize, DataType) {
     invQty: {
       type: DataType.INTEGER
     },
-    invHsnCat: {
-      type: DataType.STRING
-    },
-    invSize: {
-      type: DataType.STRING
-    },
     invStatus: {
       type: DataType.STRING
     },
@@ -46,10 +40,6 @@ module.exports = function (sequelize, DataType) {
     models.Inventory.belongsTo(models.BusinessEntity, {
       foreignKey: 'invStatus',
       as: 'statusDesc'
-    })
-    models.Inventory.belongsTo(models.Category, {
-      foreignKey: 'invCatId',
-      as: 'categoryDetails'
     })
     models.Inventory.belongsTo(models.Company, {
       foreignKey: 'invCompanyId',

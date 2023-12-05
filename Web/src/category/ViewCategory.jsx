@@ -49,7 +49,10 @@ const ViewCategory = (props) => {
         const { catId } = rowData;
         history.push(`${process.env.REACT_APP_BASE}/category-create`, {
             data: {
-                catId
+                catId,
+                rowData,
+                action:"UPDATE"
+
             }
         })
     }

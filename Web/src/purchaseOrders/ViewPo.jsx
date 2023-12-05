@@ -176,7 +176,7 @@ const ViewPo = (props) => {
             disableFilters: true
         },
         {
-            Header: "Qty",
+            Header: "Items yet to be recieved",
             accessor: "poQty",
             disableFilters: true,
             id: "poQty"
