@@ -1,6 +1,6 @@
 {
-    "name": "aios-web",
-    "homepage": "/aios",
+    "name": "pharmakraft-web",
+    "homepage": "/pharmakraft",
     "version": "0.1.0",
     "private": true,
     "dependencies": {

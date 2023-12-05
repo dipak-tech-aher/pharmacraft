@@ -45,6 +45,10 @@ module.exports = function (sequelize, DataType) {
       foreignKey: 'invCompanyId',
       as: 'companyDetails'
     })
+    models.Inventory.belongsTo(models.Category, {
+      foreignKey: 'invCatId',
+      as: 'categoryDetails'
+    })
     models.Inventory.belongsTo(models.User, {
       foreignKey: 'createdBy',
       as: 'createdByDetails'

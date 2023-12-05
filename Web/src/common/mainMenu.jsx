@@ -215,7 +215,7 @@ const MainMenu = () => {
                                                 </li>
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/category-create`} className="dropdown-item">
-                                                        <i className="fe-search"></i> Create
+                                                        <i className="fe-plus"></i> Create
                                                     </Link>
                                                 </li>
                                             </ul>
@@ -232,7 +232,7 @@ const MainMenu = () => {
                                                 </li>
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/inventory-create`} className="dropdown-item">
-                                                        <i className="fe-search"></i> Create
+                                                        <i className="fe-plus"></i> Create
                                                     </Link>
                                                 </li>
                                             </ul>
@@ -249,31 +249,31 @@ const MainMenu = () => {
                                                 </li>
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/po-create`} className="dropdown-item">
-                                                        <i className="fe-search"></i> Create
+                                                        <i className="fe-plus"></i> Create
                                                     </Link>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li className="dropdown">
                                             <span className="nav-link dropdown-toggle arrow-none" id="topnav-apps" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i className="fe-grid mr-1"></i> Manage Sale Order <div className="arrow-down"></div>
+                                                <i className="fe-grid mr-1"></i> Manage Sales <div className="arrow-down"></div>
                                             </span>
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/so-search`} className="dropdown-item">
-                                                        <i className="fe-search"></i> Search
+                                                        <i className="fe-search"></i> View
                                                     </Link>
                                                 </li>
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/so-create`} className="dropdown-item">
-                                                        <i className="fe-search"></i> Create
+                                                        <i className="fe-plus"></i> Create
                                                     </Link>
                                                 </li>
                                             </ul>
                                         </li>
                                         <li className="dropdown">
                                             <span className="nav-link dropdown-toggle arrow-none" id="topnav-apps" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i className="fe-grid mr-1"></i> Billing <div className="arrow-down"></div>
+                                                <i className="fe-grid mr-1"></i> Manage Billing <div className="arrow-down"></div>
                                             </span>
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
@@ -283,7 +283,7 @@ const MainMenu = () => {
                                                 </li>
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/bill-view`} className="dropdown-item">
-                                                        <i className="fe-search"></i> Create
+                                                        <i className="fe-plus"></i> Create
                                                     </Link>
                                                 </li>
                                             </ul>

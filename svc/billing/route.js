@@ -10,7 +10,7 @@ billingRouter
   .put('/:id', validateToken, billingService.update.bind(billingService))
   .post('/add-stock-entry', validateToken, billingService.addStockEntry.bind(billingService))
   .get('/:id', validateToken, billingService.get.bind(billingService))
-  .get('/', validateToken, billingService.getSos.bind(billingService))
+  .get('/', validateToken, billingService.getBills.bind(billingService))
   .post('/company', validateToken, billingService.getCompany.bind(billingService))
 
 module.exports = billingRouter

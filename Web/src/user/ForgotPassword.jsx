@@ -6,7 +6,7 @@ import { showSpinner, hideSpinner } from "../common/spinner";
 import { AppContext } from "../AppContext";
 import { string, object } from "yup";
 import { useTranslation } from "react-i18next";
-import logoLight from '../assets/images/logo-light.png';
+import logoLight from '../assets/images/logos/Logo.jpeg';
 import forgotpasswordImage from '../assets/images/forgot_password_image.jpg'
 import { toast } from "react-toastify";
 import Captcha from "demos-react-captcha";
@@ -147,8 +147,6 @@ const ForgotPassword = (props) => {
                                             </Link>
                                         </div>
                                         <hr className="mt-2" />
-
-
                                     </div>
                                     <div className="col-12 mt-2 p-0 border ">
                                         <h4 className="text-center p-0">Change Password</h4>

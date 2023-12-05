@@ -4,7 +4,7 @@ import { useHistory, Link } from "react-router-dom";
 import { properties } from "../properties";
 import { get, post } from "../util/restUtil";
 import { showSpinner, hideSpinner } from "../common/spinner";
-import logoLight from '../assets/images/logo-light.png';
+import logoLight from '../assets/images/logos/Logo.jpeg';
 import registerimg from '../assets/images/register.png';
 import Select from 'react-select';
 import { string, object } from "yup";
@@ -196,7 +196,7 @@ const RegisterVerify = (props) => {
                                             <div className="auth-logo">
                                                 <Link to="#" className="logo text-left">
                                                     <span className="logo-lg">
-                                                        <img src={logoLight} alt="" height="50" />
+                                                        <center><img src={logoLight} alt="" height="50" /></center>
                                                     </span>
                                                 </Link>
                                             </div>

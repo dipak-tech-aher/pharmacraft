@@ -12,11 +12,12 @@ import { unstable_batchedUpdates } from 'react-dom';
 import DynamicTable from '../common/table/DynamicTable';
 import { useHistory } from "react-router-dom";
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 const GenerateInvoice = (props) => {
     const rowsData = props?.location?.state?.data?.rows;
     const soData = props?.location?.state?.data?.soData;
-    console.log('soId---------->', soData)
+
     const history = useHistory();
     const { auth } = useContext(AppContext);
     const [tableRowData, setTableRowData] = useState(rowsData);
@@ -90,16 +91,26 @@ const GenerateInvoice = (props) => {
         return filteredObject
     }
 
-
     const handleGenerate = () => {
-        showSpinner();
-        const filteredObject = getData();
-        post(`${properties.BILING_API}`, { ...filteredObject })
-            .then((response) => {
-                toast.success(`${response.message}`);
-                history.push(`${process.env.REACT_APP_BASE}/bill-view`)
-            })
-            .finally(hideSpinner)
+        Swal.fire({
+            title: 'Are you sure want to generate invoice? generated invoices you cant edit!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                showSpinner();
+                const filteredObject = getData();
+                post(`${properties.BILING_API}`, { ...filteredObject })
+                    .then((response) => {
+                        toast.success(`${response.message}`);
+                        history.push(`${process.env.REACT_APP_BASE}/bill-view`)
+                    })
+                    .finally(hideSpinner)
+            }
+        })
     }
 
     const handleCellRender = (cell, row) => {
@@ -238,14 +249,15 @@ const GenerateInvoice = (props) => {
 
         let invSubTotal = updatedInvoiceItems.reduce((total, ele) => total + (Number(ele?.invTotalRate) || 0), 0);
 
-        const invOtherCharges = data?.invOtherCharges ? Number(data?.invOtherCharges) : 0
+        const invOtherCharges = data?.invOtherCharges ? Number(data?.invOtherCharges) : 0;
+        invSubTotal = Number(invSubTotal) + Number(invOtherCharges);
+
         let invTotalCgst = data?.soCgstPercentage ? calculateGst(data?.soCgstPercentage, invSubTotal) : 0;
         let invTotalSgst = data?.soSgstPercentage ? calculateGst(data?.soSgstPercentage, invSubTotal) : 0;
         let invTotalIgst = data?.soIgstPercentage ? calculateGst(data?.soIgstPercentage, invSubTotal) : 0;
 
         const totaltax = Number(invTotalSgst) + Number(invTotalCgst) + Number(invTotalIgst)
 
-        invSubTotal = Number(invSubTotal) + Number(invOtherCharges);
         let invTotal = Number(invSubTotal) + Number(totaltax);
 
         data = {
@@ -324,9 +336,6 @@ const GenerateInvoice = (props) => {
         return result.trim();
     }
 
-
-
-
     return (
         <div className="container-fluid">
             <div className="col-12" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -374,7 +383,7 @@ const GenerateInvoice = (props) => {
                         <div className="col-sm-6 text-right">
                             {console.log('previewData------------->', previewData)}
                             <h4>Invoice# {previewData?.soNumber}</h4>
-                            <h4>Invoice Date {previewData?.soDate}</h4>
+                            <h4>Invoice Date {moment(previewData?.soDate).format('DD-MM-YYYY')}</h4>
                         </div>
                     </div>
                     <hr />
@@ -385,6 +394,7 @@ const GenerateInvoice = (props) => {
                             <p>{soData?.fromDetails?.cPhone}</p>
                             <p>{soData?.fromDetails?.cWebsite}</p>
                             <p>{soData?.fromDetails?.cAddress + ', ' + soData?.fromDetails?.cCountry}</p>
+                            <p>{soData?.fromDetails?.cGst}</p>
                         </div>
                         <div className="col-sm-6 text-right">
                             <h4>Invoice To</h4>
@@ -392,17 +402,18 @@ const GenerateInvoice = (props) => {
                             <p>{soData?.toDetails?.cPhone}</p>
                             <p>{soData?.toDetails?.cWebsite}</p>
                             <p>{soData?.toDetails?.cAddress + ', ' + soData?.toDetails?.cCountry}</p>
+                            <p>{soData?.fromDetails?.cGst}</p>
                         </div>
                     </div>
                     <hr />
                     <div className="row">
                         <div className="col-sm-6">
-                            <h4>Date</h4>
-                            <p>Due Date: 24/08/2021</p>
+                            {/* <h4>Date</h4>
+                            <p>Due Date: 24/08/2021</p> */}
                         </div>
                         <div className="col-sm-6 text-right">
                             <h4>Payment Method</h4>
-                            <p>Credit Card</p>
+                            <p>{soData?.soPaymentTerms}</p>
                         </div>
                     </div>
                     <hr />
@@ -411,6 +422,7 @@ const GenerateInvoice = (props) => {
                             <tr>
                                 <th>Sr.no</th>
                                 <th>Item</th>
+                                <th>HSN/SAC</th>
                                 <th>Description</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
@@ -421,49 +433,77 @@ const GenerateInvoice = (props) => {
                             {previewData && Object.keys(previewData)?.length > 0 && previewData?.items?.map((ele, index) => (<tr>
                                 <td>{index + 1}</td>
                                 <td>{ele?.categoryDetails?.catName}</td>
+                                <td>{ele?.categoryDetails?.catHsnSac}</td>
                                 <td>{ele?.categoryDetails?.catDesc}</td>
                                 <td>{ele?.soQtyToBilled}</td>
                                 <td>{ele?.soRate}</td>
                                 <td>{Number(ele?.soQtyToBilled) * Number(ele?.soRate)}</td>
                             </tr>))}
                             <tr>
-                                <td colSpan="5" className="text-right">Other Charges</td>
+                                <td colSpan="6" className="text-right">Other Charges</td>
                                 <td>{previewData?.invOtherCharges?.toFixed(2)}</td>
                             </tr>
                             <tr>
-                                <td colSpan="5" className="text-right">Subtotal</td>
+                                <td colSpan="6" className="text-right">Subtotal</td>
                                 <td>{previewData?.invSubTotal?.toFixed(2)}</td>
                             </tr>
-                            <tr>
-                                <td colSpan="3" className="text-right">CGST</td>
-                                <td colSpan="2">{previewData?.soCgstPercentage}%</td>
+                            {/* {previewData?.soCgstPercentage && <tr>
+                                <td colSpan="5" className="text-right">CGST</td>
+                                <td colSpan="1">{previewData?.soCgstPercentage}%</td>
                                 <td colSpan="1">{previewData?.invTotalCgst?.toFixed(2)}</td>
-                            </tr>
-                            <tr>
-                                <td colSpan="3" className="text-right">SGST</td>
-                                <td colSpan="2">{previewData?.soSgstPercentage}%</td>
+                            </tr>}
+                            {previewData?.soSgstPercentage && <tr>
+                                <td colSpan="5" className="text-right">SGST</td>
+                                <td colSpan="1">{previewData?.soSgstPercentage}%</td>
                                 <td colSpan="1">{previewData?.invTotalSgst?.toFixed(2)}</td>
-                            </tr>
-                            <tr>
-                                <td colSpan="3" className="text-right">IGST</td>
-                                <td colSpan="2">{previewData?.soIgstPercentage}%</td>
+                            </tr>}
+                            {previewData?.soIgstPercentage && <tr>
+                                <td colSpan="5" className="text-right">IGST</td>
+                                <td colSpan="1">{previewData?.soIgstPercentage}%</td>
                                 <td colSpan="1">{previewData?.invTotalIgst?.toFixed(2)}</td>
-                            </tr>
-                            {/* <tr>
-                                <td colSpan="5" className="text-right">Tax</td>
-                                <td>{previewData?.totaltax?.toFixed(2)}</td>
-                            </tr> */}
+                            </tr>} */}
                             <tr>
-                                <td colSpan="5" className="text-right">Total</td>
+                                <td colSpan="6" className="text-right">Tax</td>
+                                <td>{previewData?.totaltax?.toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td colSpan="6" className="text-right">Total</td>
                                 <td>{previewData?.invTotal?.toFixed(2)}</td>
                             </tr>
                             <tr>
-                                <td colSpan="6" className="text-left" style={{ fontWeight: "bolder" }}>Amount (In Words): {convertAmountToWords(previewData?.invTotal?.toFixed(2))}</td>
+                                <td colSpan="7" className="text-left" style={{ fontWeight: "bolder" }}>Amount (In Words): {convertAmountToWords(previewData?.invTotal?.toFixed(2))}</td>
                             </tr>
+
+                            <tr>
+                                <th scope="col" colSpan={2}>Taxable Value</th>
+                                <th scope="col" colSpan={2}>Central Tax</th>
+                                <th scope="col" colSpan={2}>State Tax</th>
+                                <th scope="col">Total Tax Amount</th>
+                            </tr>
+                            <tr>
+                                <td colSpan={2}></td>
+                                <th scope="col">Rate</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Rate</th>
+                                <th scope="col">Amount</th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td colSpan={2}>{previewData?.invSubTotal}</td>
+                                <td scope="col">{previewData?.soCgstPercentage}%</td>
+                                <td scope="col">{previewData?.invTotalCgst?.toFixed(2)}</td>
+                                <td scope="col">{previewData?.soSgstPercentage}%</td>
+                                <td scope="col">{previewData?.invTotalSgst?.toFixed(2)}</td>
+                                <td>{previewData?.totaltax?.toFixed(2)}</td>
+                            </tr>
+                            <tr>
+                                <td colSpan="7" className="text-left" style={{ fontWeight: "bolder" }}>Tax Amount (In Words): {convertAmountToWords(previewData?.totaltax?.toFixed(2))}</td>
+                            </tr>
+
                         </tbody>
                     </table>
                     <hr />
-                    <p>Thank you for your business!</p>
+                    <p><i> Computer generated invoice, no signature required.</i></p>
                 </div>
             </Modal>
         </div>

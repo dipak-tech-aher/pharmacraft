@@ -63,6 +63,7 @@ export class BillingService {
       // Create a new InvoiceHdr
 
       const newInvoice = await InvoiceHdr.create({
+        invOtherCharges: invoice?.invOtherCharges,
         invSoId: invoice?.soId,
         invFromId: invoice?.soFromId,
         invToId: invoice?.soToId,
@@ -73,7 +74,6 @@ export class BillingService {
         invTotalSgst: invoice?.soTotalSgst,
         invTotalCgst: invoice?.soTotalCgst,
         invTotalIgst: invoice?.soTotalIgst,
-        invOtherCharges: invoice?.soOtherCharges,
         invTotal: invoice?.soTotal,
         invSubTotal: invoice?.soSubTotal,
         invNumber: invoice?.soNumber,
@@ -137,7 +137,6 @@ export class BillingService {
                 transaction: t
               }
             );
-            
 
             // Update Sale Order hdr
             await SalesOrderHdr.update(
@@ -362,16 +361,19 @@ export class BillingService {
     }
   }
 
-  async getSos(req, res) {
+  async getBills(req, res) {
     try {
-      logger.debug('Getting so')
+      logger.debug('Getting bills')
 
-      const po = await InvoiceHdr.findAll({
+      const invoices = await InvoiceHdr.findAll({
         include: [
+          { model: Company, as: 'fromDetails' },
+          { model: Company, as: 'toDetails' },
           { model: User, as: 'createdByDetails', attributes: ['firstName', 'lastName'] },
           { model: User, as: 'updatedByDetails', attributes: ['firstName', 'lastName'] },
           {
-            model: InvoiceTxn, as: 'soTxnDetails',
+            model: SalesOrderHdr, as: 'soHdrDetails',
+            model: InvoiceTxn, as: 'invoiceTxnDetails',
             include: [
               {
                 model: Category, as: 'categoryDetails',
@@ -385,20 +387,20 @@ export class BillingService {
           },
           { model: BusinessEntity, as: 'statusDesc', attributes: ['code', 'description'] }
         ],
-        order: [['soId', 'DESC']]
+        order: [['invId', 'DESC']]
         // where: {
         //   poStatus: ['AC', 'ACTIVE']
         // }
       })
-      if (!po || po?.length === 0) {
+      if (!invoices || invoices?.length === 0) {
         logger.debug(defaultMessage.NOT_FOUND)
         return this.responseHelper.notFound(res, new Error(defaultMessage.NOT_FOUND))
       }
-      logger.debug('Successfully fetch po data')
-      return this.responseHelper.onSuccess(res, defaultMessage.SUCCESS, po)
+      logger.debug('Successfully fetch invoices data')
+      return this.responseHelper.onSuccess(res, defaultMessage.SUCCESS, invoices)
     } catch (error) {
       logger.error(error, 'Error while fetching po data')
-      return this.responseHelper.onError(res, new Error('Error while fetching po data'))
+      return this.responseHelper.onError(res, new Error('Error while fetching invoices data'))
     }
   }
 

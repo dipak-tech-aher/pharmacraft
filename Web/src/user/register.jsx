@@ -6,7 +6,7 @@ import { get, post } from "../util/restUtil";
 import { showSpinner, hideSpinner } from "../common/spinner";
 import { string, object } from "yup";
 import { useTranslation } from "react-i18next";
-import logoLight from '../assets/images/logo-light.png';
+import logoLight from '../assets/images/logos/Logo.jpeg';
 import registerimg from '../assets/images/register.png'
 import { toast } from "react-toastify";
 import NumberFormat from "react-number-format";
@@ -246,7 +246,7 @@ const Register = (props) => {
                                         <div className="auth-logo">
                                             <Link to="#" className="logo text-center">
                                                 <span className="logo-lg">
-                                                    <img src={logoLight} alt="" height="50" />
+                                                    <center> <img src={logoLight} alt="" height="50" /></center>
                                                 </span>
                                             </Link>
                                         </div>

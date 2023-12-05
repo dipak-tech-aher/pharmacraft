@@ -29,6 +29,7 @@ const ViewSo = (props) => {
     }, [isRefresh])
 
     const handleOpenModal = (rows) => {
+        console.log('rows------------------->', rows)
         setOpenViewModal(true);
         setTableViewRowData(rows)
     }
@@ -42,8 +43,8 @@ const ViewSo = (props) => {
     const handleCellRender = (cell, row) => {
         if (cell.column.id === "action") {
             return (<>
-                <button className='btn btn-primary' onClick={(e) => handleOpenModal(row?.original?.poTxnDetails)}>
-                    <i className="fas fa-eye"></i> Get Entry
+                <button className='btn btn-primary' onClick={(e) => handleOpenModal(row?.original?.soTxnDetails)}>
+                    <i className="fas fa-eye"></i> View So Details
                 </button>
             </>)
         }
@@ -101,13 +102,6 @@ const ViewSo = (props) => {
             click: true,
             id: "itemsCount"
         },
-        // {
-        //     Header: "Po Id",
-        //     accessor: "poId",
-        //     disableFilters: true,
-        //     click: true,
-        //     id: "poId"
-        // },
         {
             Header: "So Number",
             accessor: "soNumber",
@@ -180,26 +174,15 @@ const ViewSo = (props) => {
             Header: "Qty",
             accessor: "soQty",
             disableFilters: true,
-            id: "poQty"
+            id: "soQty"
         },
         {
             Header: "In Hand Stock",
-            accessor: "soRecievedQty",
+            accessor: "categoryDetails.invDetails.invQty",
             disableFilters: true,
-            id: "poRecievedQty"
+            id: "soRecievedQty"
         },
-        {
-            Header: "Recieved Qty",
-            accessor: "recievedPoQty",
-            disableFilters: true,
-            id: "recievedPoQty"
-        },
-        {
-            Header: "Action",
-            accessor: "recievedPoQty",
-            disableFilters: true,
-            id: "action"
-        }
+       
     ]
 
     const handleSubmitEntry = (rows) => {
@@ -224,15 +207,7 @@ const ViewSo = (props) => {
     }
 
     const handleViewCellRender = (cell, row) => {
-        if (cell.column.id === "recievedPoQty") {
-            return (<><center>{Number(row?.original?.poQty) !== 0 ? <input type="text" className='form-control' onChange={(e) => setRecievedQty(e?.target?.value)} placeholder='Recieved Qty' style={{ "width": "50%" }} /> : <span>Item already Recieved</span>}</center></>)
-        }
-        if (cell.column.id === "action") {
-            return (<><button type='button' className='btn btn-primary' onClick={(e) => handleSubmitEntry(row?.original)}>Update</button></>)
-        }
-        else {
-            return (<span>{cell.value}</span>)
-        }
+        return (<span>{cell.value}</span>)
     }
 
     const handleViewCellLinkClick = (e, rowData) => {
@@ -266,7 +241,7 @@ const ViewSo = (props) => {
             </div>
             <Modal isOpen={openViewModal}>
                 <div style={{ display: 'flex' }}>
-                    <h4>View po details</h4>
+                    <h4>View so details</h4>
                     <button style={{ marginLeft: 'auto' }} className="btn btn-primary" onClick={onClose}>
                         <i className="fas fa-times"></i>
                     </button>

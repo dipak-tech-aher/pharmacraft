@@ -6,7 +6,7 @@ import { showSpinner, hideSpinner } from "../common/spinner";
 import { AppContext } from "../AppContext";
 import { string, object } from "yup";
 import { useTranslation } from "react-i18next";
-import logoLight from '../assets/images/logo-light.png';
+import logoLight from '../assets/images/logos/Logo.jpeg';
 import loginimg from '../assets/images/loginimg.jpg';
 import Captcha from "demos-react-captcha";
 import { toast } from "react-toastify";
@@ -47,7 +47,7 @@ const LoginToForgot = (props) => {
         }
     };
 
-   
+
 
     const handleSubmit = () => {
         setApiMessage("");
@@ -55,7 +55,7 @@ const LoginToForgot = (props) => {
         if (error) return;
         if (validCaptcha === false) {
             toast.error("Please Enter Correct Captcha");
-            return ;
+            return;
         }
         showSpinner();
         post(properties.USER_API + "/send-forgot-password-link", userCred)
@@ -102,7 +102,7 @@ const LoginToForgot = (props) => {
                                         <div className="auth-logo">
                                             <Link to="#" className="logo text-left">
                                                 <span className="logo-lg">
-                                                    <img src={logoLight} alt="" height="50" />
+                                                    <center><img src={logoLight} alt="" height="50" /></center>
                                                 </span>
                                             </Link>
 
@@ -140,12 +140,12 @@ const LoginToForgot = (props) => {
                                             </div>
 
                                             <div className="form-group mb-3"
-                                             onKeyPress={(e) => {
-                                                if (e.key === "Enter") handleSubmit();
-                                            }}
-                                            tabIndex="0">
+                                                onKeyPress={(e) => {
+                                                    if (e.key === "Enter") handleSubmit();
+                                                }}
+                                                tabIndex="0">
 
-                                                <Captcha  onChange={(e) => setValidCaptcha(e)} placeholder="Enter captcha" length={6} />
+                                                <Captcha onChange={(e) => setValidCaptcha(e)} placeholder="Enter captcha" length={6} />
 
                                             </div>
 

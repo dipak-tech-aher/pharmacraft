@@ -6,7 +6,7 @@ import { showSpinner, hideSpinner } from "../common/spinner";
 import { AppContext } from "../AppContext";
 import { string, object } from "yup";
 import { useTranslation } from "react-i18next";
-import logoLight from '../assets/images/logo-light.png';
+import logoLight from '../assets/images/logos/Logo.jpeg';
 import loginimg from '../assets/images/loginimg.jpg';
 import Captcha from "demos-react-captcha";
 import { toast } from "react-toastify";
@@ -123,7 +123,7 @@ const Login = () => {
                     <div className="auth-logo">
                       <Link to="#" className="logo text-left">
                         <span className="logo-lg">
-                          <img src={logoLight} alt="" height="50" />
+                         <center><img src={logoLight} alt="" height="50" /></center>
                         </span>
                       </Link>
 

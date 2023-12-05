@@ -44,6 +44,18 @@ module.exports = function (sequelize, DataType) {
     cStatus: {
       type: DataType.STRING
     },
+    cBankName: {
+      type: DataType.STRING
+    },
+    cAccountNo: {
+      type: DataType.STRING
+    },
+    cBranchName: {
+      type: DataType.STRING
+    },
+    cIfsc: {
+      type: DataType.STRING
+    },
     createdBy: {
       type: DataType.STRING
     },
