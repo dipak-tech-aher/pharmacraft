@@ -38,12 +38,25 @@ const ViewPo = (props) => {
         setTableViewRowData([])
         setIsRefresh(!isRefresh)
     }
-
+    
+    const handleForm=(rowData)=>{
+       console.log("data...............>",rowData);
+        history.push(`${process.env.REACT_APP_BASE}/po-create`,{
+            data:{
+                rowData,
+                action:"UPDATE"
+            }
+        })
+}
     const handleCellRender = (cell, row) => {
         if (cell.column.id === "action") {
             return (<>
                 <button className='btn btn-primary' onClick={(e) => handleOpenModal(row?.original?.poTxnDetails)}>
                     <i className="fas fa-eye"></i> Get Entry
+                </button>
+                <span style={{ margin: '0 5px' }}></span>
+                <button className='btn btn-primary' onClick={(e) => handleForm(row?.original)}>
+                 Update
                 </button>
             </>)
         }
@@ -80,7 +93,8 @@ const ViewPo = (props) => {
         const { invId } = rowData;
         history.push(`${process.env.REACT_APP_BASE}/inventory-create`, {
             data: {
-                invId
+                invId,
+                rowData
             }
         })
     }

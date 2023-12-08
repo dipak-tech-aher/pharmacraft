@@ -40,11 +40,26 @@ const ViewSo = (props) => {
         setIsRefresh(!isRefresh)
     }
 
+    const handleForm=(rowData)=>{
+        console.log("data...............>",rowData);
+        history.push(`${process.env.REACT_APP_BASE}/so-create`,{
+            data:{
+                rowData,
+                action:"UPDATE"
+            }
+        })
+
+    }
+
     const handleCellRender = (cell, row) => {
         if (cell.column.id === "action") {
             return (<>
                 <button className='btn btn-primary' onClick={(e) => handleOpenModal(row?.original?.soTxnDetails)}>
                     <i className="fas fa-eye"></i> View So Details
+                </button>
+                <span style={{ margin: '0 5px' }}></span>
+                <button className='btn btn-primary' onClick={(e) => handleForm(row?.original)}>
+                    <i className="fas fa-items"></i> Update
                 </button>
             </>)
         }
@@ -82,7 +97,8 @@ const ViewSo = (props) => {
         const { invId } = rowData;
         history.push(`${process.env.REACT_APP_BASE}/inventory-create`, {
             data: {
-                invId
+                invId,
+                
             }
         })
     }

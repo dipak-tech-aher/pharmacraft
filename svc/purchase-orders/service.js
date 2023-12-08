@@ -153,18 +153,18 @@ export class PoService {
   async update(req, res) {
     const t = await sequelize.transaction()
     try {
-      logger.debug('Updating inventry data')
+      logger.debug('Updating po data')
       const po = req.body
       const userId = req.userId
-      const { invId } = req.params
+      const { poId } = req.params
       const response = {}
-      if (!po && !invId) {
+      if (!po && !poId) {
         return this.responseHelper.validationError(res, new Error(defaultMessage.MANDATORY_FIELDS_MISSING))
       }
 
       const poInfo = await PurchaseOrderHdr.findOne({
         where: {
-          invId
+          poId
         }
       })
       if (!poInfo) {
@@ -177,7 +177,7 @@ export class PoService {
       };
       await PurchaseOrderHdr.update({ ...po, ...commonAttributes }, {
         where: {
-          invId
+          poId
         },
         transaction: t
       });
@@ -316,6 +316,8 @@ export class PoService {
         include: [
           { model: User, as: 'createdByDetails', attributes: ['firstName', 'lastName'] },
           { model: User, as: 'updatedByDetails', attributes: ['firstName', 'lastName'] },
+          { model: Company, as: 'fromDetails' },
+          { model: Company, as: 'toDetails' },
           {
             model: PurchaseOrderTxn, as: 'poTxnDetails',
             include: [

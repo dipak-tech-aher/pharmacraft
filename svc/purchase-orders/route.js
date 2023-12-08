@@ -7,7 +7,7 @@ const poService = new PoService()
 
 poRouter
   .post('/', validateToken, poService.create.bind(poService))
-  .put('/:id', validateToken, poService.update.bind(poService))
+  .put('/:poId', validateToken, poService.update.bind(poService))
   .post('/add-stock-entry', validateToken, poService.addStockEntry.bind(poService))
   .get('/:id', validateToken, poService.get.bind(poService))
   .get('/', validateToken, poService.getPos.bind(poService))

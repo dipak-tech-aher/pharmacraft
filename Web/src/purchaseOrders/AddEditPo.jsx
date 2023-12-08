@@ -1,16 +1,86 @@
 import React, { useEffect, useState } from 'react';
-import { post, get } from '../util/restUtil';
+import { post, get, put } from '../util/restUtil';
 import { properties } from '../properties';
 import { showSpinner, hideSpinner } from '../common/spinner';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
+import moment from 'moment';
 
 const AddEditPo = (props) => {
+    console.log("props..................>", props)
+    const dataPo = props?.location?.state?.data?.rowData
+    console.log("dataPo----------->", dataPo)
+    const action = props?.location?.state?.data?.action
     const [data, setData] = useState([]);
     const [fromCompanyData, setFromCompanyData] = useState([]);
     const [toCompanyData, setToCompanyData] = useState([]);
     const [status, setStatus] = useState([]);
-    const [categoryData, setCategoryData] = useState({});
+    const [categoryData, setCategoryData] = useState({
+        poCgstPercentage: '',
+        poSgstPercentage: '',
+        poIgstPercentage: '',
+        poFromId: { label: "", value: "" },
+        poToId: { label: "", value: "" },
+        poNumber: '',
+        poOtherCharges: '',
+        poDeliveryNoteDate: '',
+        poDeliveryNote: '',
+        poPaymentTerms: '',
+        poMrpNumber: '',
+        poTransporter: '',
+        poTransportMode: '',
+        poFriegth: '',
+        poPackingForwarding: '',
+        poInsurance: '',
+        poDate: '',
+        poMrpDate: '',
+        poDeliveryDate: '',
+        poStatus: { label: "", value: "" }
+    });
+
+    const [items, setItems] = useState([
+        {
+            poCatId: { label: "", value: "" },
+            poRate: "",
+            poQty: ""
+        }
+    ]);
+
+    useEffect(() => {
+        const poItems = dataPo?.poTxnDetails;
+        const poTxnDetails = poItems?.map((ele) => {
+            return {
+                poCatId: { label: ele?.categoryDetails?.catName, value: ele?.categoryDetails?.catId },
+                poRate: ele?.poRate,
+                poQty: ele?.poQty
+            }
+        })
+        setItems(poTxnDetails)
+        if (dataPo) {
+            setCategoryData({
+                poCgstPercentage: dataPo?.poCgstPercentage ?? '',
+                poSgstPercentage: dataPo?.poSgstPercentage ?? '',
+                poIgstPercentage: dataPo?.poIgstPercentage ?? '',
+                poFromId: { label: dataPo?.fromDetails?.cName, value: dataPo?.fromDetails?.cId },
+                poToId: { label: dataPo?.toDetails?.cName, value: dataPo?.toDetails?.cId },
+                poNumber: dataPo?.poNumber ?? '',
+                poOtherCharges: dataPo?.poOtherCharges ?? '',
+                poDeliveryNoteDate: dataPo?.poDeliveryNoteDate ?? '',
+                poDeliveryNote: dataPo?.poDeliveryNote ?? '',
+                poPaymentTerms: dataPo?.poPaymentTerms ?? '',
+                poMrpNumber: dataPo?.poMrpNumber ?? '',
+                poTransporter: dataPo?.poTransporter ?? '',
+                poTransportMode: dataPo?.poTransportMode ?? '',
+                poFriegth: dataPo?.poFriegth ?? '',
+                poPackingForwarding: dataPo?.poPackingForwarding ?? '',
+                poInsurance: dataPo?.poInsurance ?? '',
+                poDate: moment(dataPo?.poDate)?.format('YYYY-MM-DD') ?? '',
+                poMrpDate: moment(dataPo?.poMrpDate)?.format('YYYY-MM-DD') ?? '',
+                poDeliveryDate: moment(dataPo?.poDeliveryNoteDate)?.format('YYYY-MM-DD') ?? '',
+                poStatus: { label: dataPo?.statusDesc?.description, value: dataPo?.statusDesc?.code } ?? ''
+            })
+        }
+    }, [props])
 
     useEffect(() => {
         showSpinner();
@@ -63,29 +133,14 @@ const AddEditPo = (props) => {
         let formIsValid = true;
         let newErrors = {};
         Object.keys(categoryData).forEach((key) => {
-            console.log('categoryData[key]------->', categoryData[key])
-
             if (key !== "poOtherCharges" && key !== 'selectedCategory' && !categoryData[key]) {
                 formIsValid = false;
                 newErrors[key] = `This field is mandatory`;
             }
         });
-
         setErrors(newErrors);
         return formIsValid;
     };
-
-
-    const [items, setItems] = useState([
-        {
-            poCatId: "",
-            poRate: "",
-            poQty: "",
-            // poCgstPercentage: "",
-            // poSgstPercentage: "",
-            // poIgstPercentage: "",
-        }
-    ]);
 
     const handleChangeItem = (index, name, e) => {
         const value = e?.target?.value;
@@ -124,12 +179,9 @@ const AddEditPo = (props) => {
 
     const addRow = () => {
         setItems([...items, {
-            poCatId: "",
+            poCatId: { label: "", value: "" },
             poRate: "",
-            poQty: "",
-            // poCgstPercentage: "",
-            // poSgstPercentage: "",
-            // poIgstPercentage: ""
+            poQty: ""
         }]);
     };
 
@@ -148,10 +200,7 @@ const AddEditPo = (props) => {
                     return {
                         poCatId: Number(ele?.poCatId?.value),
                         poRate: Number(ele?.poRate),
-                        poQty: Number(ele?.poQty),
-                        // poCgstPercentage: Number(ele?.poCgstPercentage),
-                        // poSgstPercentage: Number(ele?.poSgstPercentage),
-                        // poIgstPercentage: Number(ele?.poIgstPercentage)
+                        poQty: Number(ele?.poQty)
                     };
                 }),
                 poCgstPercentage: Number(categoryData?.poCgstPercentage),
@@ -175,15 +224,27 @@ const AddEditPo = (props) => {
                 poDeliveryDate: categoryData?.poDeliveryDate,
                 poStatus: categoryData?.poStatus?.value
             };
-            console.log('poPayload--------->', poPayload)
-            post(properties?.PURCHASE_ORDER_API, { ...poPayload })
-                .then((response) => {
-                    toast.success(`${response.message}`);
-                    // props.history.push(`${process.env.REACT_APP_BASE}/po-search`);
-                })
-                .finally(() => {
-                    hideSpinner();
-                });
+            if (action === 'UPDATE') {
+                put(`${properties?.PURCHASE_ORDER_API}/${dataPo?.poId}`, { ...poPayload })
+                    .then((response) => {
+                        toast.success(`${response.message}`);
+                        if (response?.status === 200) {
+                            props.history.push(`${process.env.REACT_APP_BASE}/po-search`);
+                        }
+                    })
+                    .finally(() => {
+                        hideSpinner();
+                    });
+            } else {
+                post(properties?.PURCHASE_ORDER_API, { ...poPayload })
+                    .then((response) => {
+                        toast.success(`${response.message}`);
+                        // props.history.push(`${process.env.REACT_APP_BASE}/po-search`);
+                    })
+                    .finally(() => {
+                        hideSpinner();
+                    });
+            }
         }
     };
 
@@ -407,6 +468,7 @@ const AddEditPo = (props) => {
 
                                 <div className="col-md-4 p-1">
                                     <label>Order Date</label>
+                                    {console.log('categoryData.poDate----------->', categoryData.poDate)}
                                     <input
                                         type="date"
                                         name="poDate"
@@ -431,6 +493,7 @@ const AddEditPo = (props) => {
 
                                 <div className="col-md-4 p-1">
                                     <label>Scheduled Delivery Date</label>
+                                    {console.log('categoryData.poDeliveryDate---------->', categoryData.poDeliveryDate)}
                                     <input
                                         type="date"
                                         name="poDeliveryDate"
@@ -457,7 +520,7 @@ const AddEditPo = (props) => {
 
                             <div className="row">
                                 <div className="col-md-12">
-                                    {items.map((item, index) => (
+                                    {items?.map((item, index) => (
                                         <div className='row' key={index}>
                                             <div className="col-md-2 p-1">
                                                 <label>Category</label>

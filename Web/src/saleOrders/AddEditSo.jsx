@@ -6,11 +6,88 @@ import { toast } from 'react-toastify';
 import Select from 'react-select';
 
 const AddEditSo = (props) => {
+    console.log("props......................>",props)
+    const dataSo=props?.location?.state?.data?.rowData
+
+
+    console.log("dataSo.............>",dataSo);
+    const action=props?.location?.state?.data?.action
+    console.log(action);
     const [data, setData] = useState([]);
     const [fromCompanyData, setFromCompanyData] = useState([]);
     const [toCompanyData, setToCompanyData] = useState([]);
     const [status, setStatus] = useState([]);
-    const [categoryData, setCategoryData] = useState({});
+    const [categoryData, setCategoryData] = useState({
+        soCgstPercentage:'',
+        soSgstPercentage:'',
+        soIgstPercentage:'',
+        soOtherCharges:'',
+        soFromId:'',
+        soBillToId:'',
+        soShipToId:'',
+        soNumber:'',
+        soMrpNumber:'',
+        soTransporter:'',
+        soTransportMode:'',
+        soFriegth:'',
+        soPackingForwarding:'',
+        soInsurance:'',
+        soDate:'',
+        soMrpDate:'',
+        soDeliveryDate:'',
+        soStatus:''
+});
+
+
+    useEffect(()=>{
+
+
+
+
+        if(dataSo){
+            setCategoryData({
+                soCgstPercentage:dataSo?.soCgstPercentage ?? '',
+
+                soSgstPercentage:dataSo?.soSgstPercentage ?? '',
+                soIgstPercentage:dataSo?.soIgstPercentage ?? '',
+                soOtherCharges:dataSo?.soOtherCharges ?? '',
+                soFromId:dataSo?.soFromId ?? '',
+
+                soBillToId:dataSo?.soBillToId ?? '',
+
+                soShipToId:dataSo?.soShipToId ?? '',
+
+                soNumber:dataSo?.soNumber ?? '',
+
+                soMrpNumber:dataSo?.soMrpNumber ?? '',
+                soTransporter:dataSo?.soTransporter ?? '',
+
+                soTransportMode:dataSo?.soTransportMode ?? '',
+
+                soFriegth:dataSo?. soFriegth ?? '',
+
+                soPackingForwarding:dataSo?.soPackingForwarding ?? '',
+
+                soInsurance:dataSo?.soInsurance ?? '',
+                soDate:dataSo?.soDate ?? '',
+                soMrpDate:dataSo?. soMrpDate ?? '',
+
+                soDeliveryDate:dataSo?.soDeliveryDate ?? '',
+
+                soStatus:dataSo?.soStatus ?? ''
+            })
+
+        }
+    },[])
+
+
+
+
+
+
+
+
+
 
     useEffect(() => {
         showSpinner();
