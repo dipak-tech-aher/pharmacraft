@@ -198,14 +198,31 @@ const MainMenu = () => {
                                 </button>
                                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul className="navbar-nav">
-                                        <li className="nav-item dropdown">
+                                        {/* <li className="nav-item dropdown">
                                             <Link className="nav-link dropdown-toggle arrow-none active" to="/" id="topnav-dashboard">
                                                 <i className="fe-airplay mr-1"></i> Dashboard
                                             </Link>
+                                        </li> */}
+                                        <li className="dropdown">
+                                            <span className="nav-link dropdown-toggle arrow-none" id="topnav-apps" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i className="fe-grid mr-1"></i> Company's <div className="arrow-down"></div>
+                                            </span>
+                                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <Link to={`${process.env.REACT_APP_BASE}/company-search`} className="dropdown-item">
+                                                        <i className="fe-search"></i> Search
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to={`${process.env.REACT_APP_BASE}/company-create`} className="dropdown-item">
+                                                        <i className="fe-plus"></i> Create
+                                                    </Link>
+                                                </li>
+                                            </ul>
                                         </li>
                                         <li className="dropdown">
                                             <span className="nav-link dropdown-toggle arrow-none" id="topnav-apps" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i className="fe-grid mr-1"></i> Manage Item <div className="arrow-down"></div>
+                                                <i className="fe-grid mr-1"></i> Item's <div className="arrow-down"></div>
                                             </span>
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
@@ -222,7 +239,7 @@ const MainMenu = () => {
                                         </li>
                                         <li className="dropdown">
                                             <span className="nav-link dropdown-toggle arrow-none" id="topnav-apps" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i className="fe-grid mr-1"></i> Manage Inventory <div className="arrow-down"></div>
+                                                <i className="fe-grid mr-1"></i> Inventory <div className="arrow-down"></div>
                                             </span>
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
@@ -239,7 +256,7 @@ const MainMenu = () => {
                                         </li>
                                         <li className="dropdown">
                                             <span className="nav-link dropdown-toggle arrow-none" id="topnav-apps" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i className="fe-grid mr-1"></i> Manage Purchase <div className="arrow-down"></div>
+                                                <i className="fe-grid mr-1"></i> Purchase Order <div className="arrow-down"></div>
                                             </span>
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
@@ -256,7 +273,7 @@ const MainMenu = () => {
                                         </li>
                                         <li className="dropdown">
                                             <span className="nav-link dropdown-toggle arrow-none" id="topnav-apps" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i className="fe-grid mr-1"></i> Manage Sales <div className="arrow-down"></div>
+                                                <i className="fe-grid mr-1"></i> Sales Order<div className="arrow-down"></div>
                                             </span>
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
@@ -273,7 +290,7 @@ const MainMenu = () => {
                                         </li>
                                         <li className="dropdown">
                                             <span className="nav-link dropdown-toggle arrow-none" id="topnav-apps" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i className="fe-grid mr-1"></i> Manage Billing <div className="arrow-down"></div>
+                                                <i className="fe-grid mr-1"></i> Billing <div className="arrow-down"></div>
                                             </span>
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
@@ -283,6 +300,23 @@ const MainMenu = () => {
                                                 </li>
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/bill-view`} className="dropdown-item">
+                                                        <i className="fe-plus"></i> Create
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li className="dropdown">
+                                            <span className="nav-link dropdown-toggle arrow-none" id="topnav-apps" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i className="fe-grid mr-1"></i> AR <div className="arrow-down"></div>
+                                            </span>
+                                            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li>
+                                                    <Link to={`${process.env.REACT_APP_BASE}/ar-search`} className="dropdown-item">
+                                                        <i className="fe-search"></i> Search
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to={`${process.env.REACT_APP_BASE}/ar-create`} className="dropdown-item">
                                                         <i className="fe-plus"></i> Create
                                                     </Link>
                                                 </li>

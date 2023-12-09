@@ -1,60 +1,59 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { AppContext } from "../AppContext";
 import { get, post } from "../util/restUtil";
-import { string, object } from "yup";
 import { properties } from "../properties";
 import { showSpinner, hideSpinner } from "../common/spinner";
 import { toast } from 'react-toastify';
 import { unstable_batchedUpdates } from 'react-dom';
+import DynamicTable from '../common/table/DynamicTable';
 import { useHistory } from "react-router-dom";
 import moment from 'moment';
-import DynamicTable from '../common/table/DynamicTable';
 
-const ViewCategory = (props) => {
+const ViewCompany = (props) => {
     const history = useHistory();
     const { auth } = useContext(AppContext);
 
     const [tableRowData, setTableRowData] = useState([]);
     useEffect(() => {
         showSpinner();
-        get(`${properties.CATEGORY_API}`)
+        get(`${properties.COMPANY_API}`)
             .then((response) => {
                 setTableRowData(response.data)
             })
             .finally(hideSpinner)
     }, [])
 
-    const handleForm=(rowData)=>{
-        console.log("data...............>",rowData);
-        history.push(`${process.env.REACT_APP_BASE}/category-create`,{
-            data:{
+    const handleForm = (rowData) => {
+        console.log("data...............>", rowData);
+        history.push(`${process.env.REACT_APP_BASE}/company-create`, {
+            data: {
                 rowData,
-                action:"UPDATE"
+                action: "UPDATE"
             }
         })
 
     }
     const handleCellRender = (cell, row) => {
-        if (cell.column.id === "action"){
-            return(<>
-             <button className='btn btn-primary' onClick={(e) => handleForm(row?.original)}>
+        if (cell.column.id === "action") {
+            return (<>
+                <button className='btn btn-primary' onClick={(e) => handleForm(row?.original)}>
                     <i className="fas fa-items"></i> Update
                 </button></>)
         }
-        if (cell.column.id === "catId") {
-            return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{cell.value}</span>)
+        if (cell.column.id === "cId") {
+            return (<span >COMP00{cell.value}</span>)
         }
         if (cell.column.id === "createdAt") {
-            return (<span>{moment(cell.value)?.format('DD-MM-YYYY')}</span>);
+            return (<span>{cell.value ? moment(cell.value)?.format('DD-MM-YYYY') : '-'}</span>);
         }
         if (cell.column.id === "updatedAt") {
-            return (<span>{moment(cell.value)?.format('DD-MM-YYYY')}</span>);
+            return (<span>{cell.value ? moment(cell.value)?.format('DD-MM-YYYY') : '-'}</span>);
         }
         if (cell.column.id === "CreatedBy") {
-            return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{row.original?.createdByDetails?.firstName + ' ' + row.original?.createdByDetails?.lastName}</span>)
+            return (<span >{row.original?.createdByDetails?.firstName + ' ' + row.original?.createdByDetails?.lastName}</span>)
         }
         if (cell.column.id === "UpdatedBy") {
-            return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{row.original?.updatedByDetails?.firstName + ' ' + row.original?.updatedByDetails?.lastName}</span>)
+            return (<span >{row.original?.updatedByDetails?.firstName + ' ' + row.original?.updatedByDetails?.lastName}</span>)
         }
         else {
             return (<span>{cell.value}</span>)
@@ -62,13 +61,12 @@ const ViewCategory = (props) => {
     }
 
     const handleCellLinkClick = (e, rowData) => {
-        const { catId } = rowData;
-        history.push(`${process.env.REACT_APP_BASE}/category-create`, {
+        const { cId } = rowData;
+        history.push(`${process.env.REACT_APP_BASE}/company-create`, {
             data: {
-                catId,
+                cId,
                 rowData,
-                action:"UPDATE"
-
+                action: "UPDATE"
             }
         })
     }
@@ -82,41 +80,25 @@ const ViewCategory = (props) => {
             id: "action"
         },
         {
-            Header: "Category Id",
-            accessor: "catId",
+            Header: "Company Id",
+            accessor: "cId",
             disableFilters: true,
             click: true,
-            id: "catId"
+            id: "cId"
         },
         {
-            Header: "Category Number",
-            accessor: "catNumber",
+            Header: "Name",
+            accessor: "cName",
             disableFilters: true
         },
         {
-            Header: "Category Description",
-            accessor: "catDesc",
-            disableFilters: true,
-            id: "email Id"
-        },
-        {
-            Header: "Unit",
-            accessor: "catUnit",
-            disableFilters: true,
-        },
-         {
-            Header: "HSN/SAC",
-            accessor: "catHsnSac",
-            disableFilters: true,
-        },
-        {
-            Header: "Size",
-            accessor: "catSize",
+            Header: "Type",
+            accessor: "typeDesc.description",
             disableFilters: true
         },
         {
             Header: "status",
-            accessor: "catStatus",
+            accessor: "statusDesc.description",
             disableFilters: true,
         },
         {
@@ -148,7 +130,7 @@ const ViewCategory = (props) => {
     return (
         <div className="container-fluid">
             <div className="col-12">
-                <h1 className="title bold">View category</h1>
+                <h1 className="title bold">View company's</h1>
             </div>
             <div className="row mt-1">
                 <div className="col-lg-12">
@@ -171,4 +153,4 @@ const ViewCategory = (props) => {
     )
 }
 
-export default ViewCategory;
+export default ViewCompany;

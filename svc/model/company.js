@@ -87,6 +87,18 @@ module.exports = function (sequelize, DataType) {
       foreignKey: 'cType',
       as: 'typeDesc'
     })
+    models.Company.belongsTo(models.BusinessEntity, {
+      foreignKey: 'cCountry',
+      as: 'cCountryDesc'
+    })
+    models.Company.belongsTo(models.User, {
+      foreignKey: 'createdBy',
+      as: 'createdByDetails'
+    })
+    models.Company.belongsTo(models.User, {
+      foreignKey: 'updatedBy',
+      as: 'updatedByDetails'
+    })
   }
   return Company
 }

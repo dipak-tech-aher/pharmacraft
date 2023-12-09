@@ -7,7 +7,7 @@ const inventoryService = new InventoryService()
 
 inventoryRouter
   .post('/', validateToken, inventoryService.create.bind(inventoryService))
-  .put('/:id', validateToken, inventoryService.update.bind(inventoryService))
+  .put('/:invId', validateToken, inventoryService.update.bind(inventoryService))
   .get('/:id', validateToken, inventoryService.get.bind(inventoryService))
   .get('/', validateToken, inventoryService.getInventories.bind(inventoryService))
 

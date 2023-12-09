@@ -1,23 +1,22 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { AppContext } from "../AppContext";
 import { get, post } from "../util/restUtil";
-import { string, object } from "yup";
 import { properties } from "../properties";
 import { showSpinner, hideSpinner } from "../common/spinner";
 import { toast } from 'react-toastify';
 import { unstable_batchedUpdates } from 'react-dom';
+import DynamicTable from '../common/table/DynamicTable';
 import { useHistory } from "react-router-dom";
 import moment from 'moment';
-import DynamicTable from '../common/table/DynamicTable';
 
-const ViewCategory = (props) => {
+const ViewAr = (props) => {
     const history = useHistory();
     const { auth } = useContext(AppContext);
 
     const [tableRowData, setTableRowData] = useState([]);
     useEffect(() => {
         showSpinner();
-        get(`${properties.CATEGORY_API}`)
+        get(`${properties.INVENTORY_API}`)
             .then((response) => {
                 setTableRowData(response.data)
             })
@@ -26,7 +25,7 @@ const ViewCategory = (props) => {
 
     const handleForm=(rowData)=>{
         console.log("data...............>",rowData);
-        history.push(`${process.env.REACT_APP_BASE}/category-create`,{
+        history.push(`${process.env.REACT_APP_BASE}/inventory-create`,{
             data:{
                 rowData,
                 action:"UPDATE"
@@ -35,13 +34,13 @@ const ViewCategory = (props) => {
 
     }
     const handleCellRender = (cell, row) => {
-        if (cell.column.id === "action"){
+        if(cell.column.id === "action"){
             return(<>
-             <button className='btn btn-primary' onClick={(e) => handleForm(row?.original)}>
-                    <i className="fas fa-items"></i> Update
-                </button></>)
+                <button className='btn btn-primary' onClick={(e) => handleForm(row?.original)}>
+                       <i className="fas fa-items"></i> Update
+                   </button></>)
         }
-        if (cell.column.id === "catId") {
+        if (cell.column.id === "invId") {
             return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{cell.value}</span>)
         }
         if (cell.column.id === "createdAt") {
@@ -62,13 +61,12 @@ const ViewCategory = (props) => {
     }
 
     const handleCellLinkClick = (e, rowData) => {
-        const { catId } = rowData;
-        history.push(`${process.env.REACT_APP_BASE}/category-create`, {
+        const { invId } = rowData;
+        history.push(`${process.env.REACT_APP_BASE}/inventory-create`, {
             data: {
-                catId,
+                invId,
                 rowData,
                 action:"UPDATE"
-
             }
         })
     }
@@ -82,41 +80,43 @@ const ViewCategory = (props) => {
             id: "action"
         },
         {
-            Header: "Category Id",
-            accessor: "catId",
+            Header: "Inventory Id",
+            accessor: "invId",
             disableFilters: true,
             click: true,
-            id: "catId"
+            id: "invId"
         },
         {
-            Header: "Category Number",
-            accessor: "catNumber",
+            Header: "Category Name",
+            accessor: "categoryDetails.catName",
             disableFilters: true
         },
         {
-            Header: "Category Description",
-            accessor: "catDesc",
+            Header: "Quantity",
+            accessor: "invQty",
             disableFilters: true,
             id: "email Id"
         },
         {
             Header: "Unit",
-            accessor: "catUnit",
+            accessor: "categoryDetails.catUnit",
             disableFilters: true,
+            id: "email Id1"
         },
-         {
-            Header: "HSN/SAC",
-            accessor: "catHsnSac",
-            disableFilters: true,
-        },
-        {
-            Header: "Size",
-            accessor: "catSize",
-            disableFilters: true
-        },
+        // {
+        //     Header: "HSN/SAC",
+        //     accessor: "invHsnCat",
+        //     disableFilters: true,
+        // },
+        // {
+        //     Header: "Size",
+        //     accessor: "invSize",
+        //     disableFilters: true,
+        //     id: "Contact No"
+        // },
         {
             Header: "status",
-            accessor: "catStatus",
+            accessor: "invStatus",
             disableFilters: true,
         },
         {
@@ -148,7 +148,7 @@ const ViewCategory = (props) => {
     return (
         <div className="container-fluid">
             <div className="col-12">
-                <h1 className="title bold">View category</h1>
+                <h1 className="title bold">View inventory</h1>
             </div>
             <div className="row mt-1">
                 <div className="col-lg-12">
@@ -171,4 +171,4 @@ const ViewCategory = (props) => {
     )
 }
 
-export default ViewCategory;
+export default ViewAr;

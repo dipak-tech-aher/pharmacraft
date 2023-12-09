@@ -128,7 +128,7 @@ const AddEditCategory = (props) => {
     return (
         <div className="container-fluid">
             <div className="col-12">
-                <h1 className="title bold">Create item</h1>
+                <h1 className="title bold">{action === "UPDATE" ? "Update" :"Create"} item</h1>
             </div>
             <div className="row mt-1">
                 <div className="col-lg-12 ">

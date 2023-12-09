@@ -1,93 +1,88 @@
 import React, { useEffect, useState } from 'react';
-import { post, get } from '../util/restUtil';
+import { post, get, put } from '../util/restUtil';
 import { properties } from '../properties';
 import { showSpinner, hideSpinner } from '../common/spinner';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
+import moment from 'moment';
+
 
 const AddEditSo = (props) => {
-    console.log("props......................>",props)
-    const dataSo=props?.location?.state?.data?.rowData
+    console.log("props......................>", props)
+    const dataSo = props?.location?.state?.data?.rowData
 
 
-    console.log("dataSo.............>",dataSo);
-    const action=props?.location?.state?.data?.action
+    console.log("dataSo.............>", dataSo);
+    const action = props?.location?.state?.data?.action
     console.log(action);
     const [data, setData] = useState([]);
     const [fromCompanyData, setFromCompanyData] = useState([]);
     const [toCompanyData, setToCompanyData] = useState([]);
     const [status, setStatus] = useState([]);
     const [categoryData, setCategoryData] = useState({
-        soCgstPercentage:'',
-        soSgstPercentage:'',
-        soIgstPercentage:'',
-        soOtherCharges:'',
-        soFromId:'',
-        soBillToId:'',
-        soShipToId:'',
-        soNumber:'',
-        soMrpNumber:'',
-        soTransporter:'',
-        soTransportMode:'',
-        soFriegth:'',
-        soPackingForwarding:'',
-        soInsurance:'',
-        soDate:'',
-        soMrpDate:'',
-        soDeliveryDate:'',
-        soStatus:''
-});
-
-
-    useEffect(()=>{
-
-
-
-
-        if(dataSo){
-            setCategoryData({
-                soCgstPercentage:dataSo?.soCgstPercentage ?? '',
-
-                soSgstPercentage:dataSo?.soSgstPercentage ?? '',
-                soIgstPercentage:dataSo?.soIgstPercentage ?? '',
-                soOtherCharges:dataSo?.soOtherCharges ?? '',
-                soFromId:dataSo?.soFromId ?? '',
-
-                soBillToId:dataSo?.soBillToId ?? '',
-
-                soShipToId:dataSo?.soShipToId ?? '',
-
-                soNumber:dataSo?.soNumber ?? '',
-
-                soMrpNumber:dataSo?.soMrpNumber ?? '',
-                soTransporter:dataSo?.soTransporter ?? '',
-
-                soTransportMode:dataSo?.soTransportMode ?? '',
-
-                soFriegth:dataSo?. soFriegth ?? '',
-
-                soPackingForwarding:dataSo?.soPackingForwarding ?? '',
-
-                soInsurance:dataSo?.soInsurance ?? '',
-                soDate:dataSo?.soDate ?? '',
-                soMrpDate:dataSo?. soMrpDate ?? '',
-
-                soDeliveryDate:dataSo?.soDeliveryDate ?? '',
-
-                soStatus:dataSo?.soStatus ?? ''
-            })
-
+        soCgstPercentage: '',
+        soSgstPercentage: '',
+        soIgstPercentage: '',
+        // soOtherCharges: '',
+        soFromId: '',
+        soBillToId: '',
+        soShipToId: '',
+        soNumber: '',
+        // soMrpNumber: '',
+        soTransporter: '',
+        soTransportMode: '',
+        soFriegth: '',
+        soPackingForwarding: '',
+        soInsurance: '',
+        soDate: '',
+        // soMrpDate: '',
+        soDeliveryDate: '',
+        soStatus: ''
+    });
+    const [items, setItems] = useState([
+        {
+            soCatId: { label: "", value: "" },
+            soRate: "",
+            soQty: "",
+            soTxnId: ""
         }
-    },[])
+    ]);
+    useEffect(() => {
 
+        const soItems = dataSo?.soTxnDetails;
+        const soTxnDetails = soItems?.map((ele) => {
+            return {
+                soCatId: { label: ele?.categoryDetails?.catName, value: ele?.categoryDetails?.catId },
+                soRate: ele?.soRate,
+                soQty: ele?.soQty,
+                soTxnId: ele?.soTxnId
+            }
+        })
 
-
-
-
-
-
-
-
+        setItems(soTxnDetails)
+        if (dataSo) {
+            setCategoryData({
+                soCgstPercentage: dataSo?.soCgstPercentage ?? '',
+                soSgstPercentage: dataSo?.soSgstPercentage ?? '',
+                soIgstPercentage: dataSo?.soIgstPercentage ?? '',
+                // soOtherCharges: dataSo?.soOtherCharges ?? '',
+                soFromId: { label: dataSo?.fromDetails?.cName, value: dataSo?.fromDetails?.cId },
+                soBillToId: { label: dataSo?.billToDetails?.cName, value: dataSo?.billToDetails?.cId },
+                soShipToId: { label: dataSo?.shipToDetails?.cName, value: dataSo?.shipToDetails?.cId },
+                soNumber: dataSo?.soNumber ?? '',
+                // soMrpNumber: dataSo?.soMrpNumber ?? '',
+                soTransporter: dataSo?.soTransporter ?? '',
+                soTransportMode: dataSo?.soTransportMode ?? '',
+                soFriegth: dataSo?.soFriegth ?? '',
+                soPackingForwarding: dataSo?.soPackingForwarding ?? '',
+                soInsurance: dataSo?.soInsurance ?? '',
+                soDate: moment(dataSo?.soDate)?.format('YYYY-MM-DD') ?? '',
+                // soMrpDate: moment(dataSo?.soMrpDate)?.format('YYYY-MM-DD') ?? '',
+                soDeliveryDate: moment(dataSo?.soDeliveryDate)?.format('YYYY-MM-DD') ?? '',
+                soStatus: { label: dataSo?.statusDesc?.description, value: dataSo?.statusDesc?.code } ?? ''
+            })
+        }
+    }, [])
 
     useEffect(() => {
         showSpinner();
@@ -137,31 +132,23 @@ const AddEditSo = (props) => {
     const [errors, setErrors] = useState({});
 
     const validateForm = () => {
+        console.log("i am heree in validate form");
         let formIsValid = true;
         let newErrors = {};
-
+        console.log("categoryData.....>", categoryData);
         Object.keys(categoryData).forEach((key) => {
+            console.log("categoryData key", categoryData[key]);
             if (key !== 'selectedCategory' && !categoryData[key]) {
                 formIsValid = false;
+
                 newErrors[key] = `This field is mandatory`;
             }
         });
-
+        console.log("newErrors", newErrors);
+        console.log("formIsValid.....", formIsValid);
         setErrors(newErrors);
         return formIsValid;
     };
-
-
-    const [items, setItems] = useState([
-        {
-            soCatId: "",
-            soRate: "",
-            soQty: "",
-            // soCgstPercentage: "",
-            // soSgstPercentage: "",
-            // soIgstPercentage: "",
-        }
-    ]);
 
     const handleChangeItem = (index, name, e) => {
         const value = e?.target?.value;
@@ -207,9 +194,7 @@ const AddEditSo = (props) => {
             soCatId: "",
             soRate: "",
             soQty: "",
-            // soCgstPercentage: "",
-            // soSgstPercentage: "",
-            // soIgstPercentage: ""
+            soTxnId: ""
         }]);
     };
 
@@ -229,46 +214,58 @@ const AddEditSo = (props) => {
                         soCatId: Number(ele?.soCatId?.value),
                         soRate: Number(ele?.soRate),
                         soQty: Number(ele?.soQty),
-                        // soCgstPercentage: Number(ele?.soCgstPercentage),
-                        // soSgstPercentage: Number(ele?.soSgstPercentage),
-                        // soIgstPercentage: Number(ele?.soIgstPercentage)
+                        soTxnId: Number(ele?.soTxnId),
                     };
                 }),
                 soCgstPercentage: Number(categoryData?.soCgstPercentage),
                 soSgstPercentage: Number(categoryData?.soSgstPercentage),
                 soIgstPercentage: Number(categoryData?.soIgstPercentage),
-                soOtherCharges: Number(categoryData?.soOtherCharges),
+                // soOtherCharges: Number(categoryData?.soOtherCharges),
                 soFromId: categoryData?.soFromId?.value,
                 soBillToId: categoryData?.soBillToId?.value,
                 soShipToId: categoryData?.soShipToId?.value,
                 soNumber: categoryData?.soNumber,
-                soMrpNumber: categoryData?.soMrpNumber,
+                // soMrpNumber: categoryData?.soMrpNumber,
                 soTransporter: categoryData?.soTransporter,
                 soTransportMode: categoryData?.soTransportMode,
                 soFriegth: categoryData?.soFriegth,
                 soPackingForwarding: categoryData?.soPackingForwarding,
                 soInsurance: categoryData?.soInsurance,
                 soDate: categoryData?.soDate,
-                soMrpDate: categoryData?.soMrpDate,
+                // soMrpDate: categoryData?.soMrpDate,
                 soDeliveryDate: categoryData?.soDeliveryDate,
                 soStatus: categoryData?.soStatus?.value
             };
-            console.log('soPayload--------->', soPayload)
-            post(properties?.SALES_ORDER_API, { ...soPayload })
-                .then((response) => {
-                    toast.success(`${response.message}`);
-                    props.history.push(`${process.env.REACT_APP_BASE}/so-search`);
-                })
-                .finally(() => {
-                    hideSpinner();
-                });
+            console.log("action....>", action);
+            if (action === 'UPDATE') {
+                console.log("i am heree");
+                put(`${properties?.SALES_ORDER_API}/${dataSo?.soId}`, { ...soPayload })
+                    .then((response) => {
+                        toast.success(`${response.message}`);
+                        if (response?.status === 200) {
+                            props.history.push(`${process.env.REACT_APP_BASE}/so-search`);
+                        }
+                    })
+                    .finally(() => {
+                        hideSpinner();
+                    });
+            } else {
+                post(properties?.SALES_ORDER_API, { ...soPayload })
+                    .then((response) => {
+                        toast.success(`${response.message}`);
+                        // props.history.push(`${process.env.REACT_APP_BASE}/so-search`);
+                    })
+                    .finally(() => {
+                        hideSpinner();
+                    });
+            }
         }
     };
 
     return (
         <div className="container-fluid">
             <div className="col-12">
-                <h1 className="title bold">Create Sale order</h1>
+                <h1 className="title bold">{action === "UPDATE" ? "Update Sale order" : "Create Sale order"}</h1>
             </div>
             <div className="row mt-1">
                 <div className="col-lg-12">
@@ -510,7 +507,7 @@ const AddEditSo = (props) => {
 
                             <div className="row">
                                 <div className="col-md-12">
-                                    {items.map((item, index) => (
+                                    {items?.map((item, index) => (
                                         <div className='row' key={index}>
                                             <div className="col-md-2 p-1">
                                                 <label>Category</label>

@@ -5,7 +5,7 @@ import { showSpinner, hideSpinner } from '../common/spinner';
 import { toast } from 'react-toastify';
 import Select from 'react-select';
 
-const AddEditInventory = (props) => {
+const AddEditAr = (props) => {
     console.log("props",props);
     const invData=props?.location?.state?.data?.rowData
     const action=props?.location?.state?.data?.action
@@ -218,4 +218,4 @@ const AddEditInventory = (props) => {
     );
 };
 
-export default AddEditInventory;
+export default AddEditAr;

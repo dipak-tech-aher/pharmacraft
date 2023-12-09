@@ -42,7 +42,8 @@ const AddEditPo = (props) => {
         {
             poCatId: { label: "", value: "" },
             poRate: "",
-            poQty: ""
+            poQty: "",
+            poTxnId: ""
         }
     ]);
 
@@ -52,7 +53,8 @@ const AddEditPo = (props) => {
             return {
                 poCatId: { label: ele?.categoryDetails?.catName, value: ele?.categoryDetails?.catId },
                 poRate: ele?.poRate,
-                poQty: ele?.poQty
+                poQty: ele?.poQty,
+                poTxnId: ele?.poTxnId
             }
         })
         setItems(poTxnDetails)
@@ -181,7 +183,8 @@ const AddEditPo = (props) => {
         setItems([...items, {
             poCatId: { label: "", value: "" },
             poRate: "",
-            poQty: ""
+            poQty: "",
+            poTxnId: ""
         }]);
     };
 
@@ -200,7 +203,8 @@ const AddEditPo = (props) => {
                     return {
                         poCatId: Number(ele?.poCatId?.value),
                         poRate: Number(ele?.poRate),
-                        poQty: Number(ele?.poQty)
+                        poQty: Number(ele?.poQty),
+                        poTxnId: Number(ele?.poTxnId),
                     };
                 }),
                 poCgstPercentage: Number(categoryData?.poCgstPercentage),
@@ -251,7 +255,8 @@ const AddEditPo = (props) => {
     return (
         <div className="container-fluid">
             <div className="col-12">
-                <h1 className="title bold">Create purchase order</h1>
+                <h1 className="title bold">{action === "UPDATE" ? "Update purchase order" : "Create purchase order"
+                }</h1>
             </div>
             <div className="row mt-1">
                 <div className="col-lg-12">

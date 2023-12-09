@@ -113,52 +113,55 @@ export class SoService {
   }
 
   async update(req, res) {
-    const t = await sequelize.transaction()
+    const t = await sequelize.transaction();
+    
     try {
-      logger.debug('Updating inventry data')
-      const po = req.body
-      const userId = req.userId
-      const { invId } = req.params
-      const response = {}
-      if (!po && !invId) {
-        return this.responseHelper.validationError(res, new Error(defaultMessage.MANDATORY_FIELDS_MISSING))
-      }
+        logger.debug('Updating inventory data');
 
-      const poInfo = await SalesOrderHdr.findOne({
-        where: {
-          invId
+        const { userId } = req;
+        const { soId } = req.params;
+        const { body: so } = req;
+
+        if (!so || !soId) {
+            return this.responseHelper.validationError(res, new Error(defaultMessage.MANDATORY_FIELDS_MISSING));
         }
-      })
-      if (!poInfo) {
-        logger.debug(defaultMessage.NOT_FOUND)
-        return this.responseHelper.notFound(res, new Error(defaultMessage.NOT_FOUND))
-      }
-      const commonAttributes = {
-        updatedBy: userId,
-        updatedAt: new Date(),
-      };
-      await SalesOrderHdr.update({ ...po, ...commonAttributes }, {
-        where: {
-          invId
-        },
-        transaction: t
-      });
-      await t.commit()
-      logger.debug('po data updated successfully')
-      return this.responseHelper.onSuccess(res, 'po updated successfully', response)
+
+        const soInfo = await SalesOrderHdr.findOne({ where: { soId } });
+        if (!soInfo) {
+            logger.debug(defaultMessage.NOT_FOUND);
+            return this.responseHelper.notFound(res, new Error(defaultMessage.NOT_FOUND));
+        }
+
+        const commonAttributes = {
+            updatedBy: userId,
+            updatedAt: new Date(),
+        };
+
+        await SalesOrderHdr.update({ ...so, ...commonAttributes }, { where: { soId }, transaction: t });
+
+        await Promise.all(so.items.map(async (ele) => {
+            const obj = { soCatId: ele.soCatId, soRate: ele.soRate, soQty: ele.soQty, ...commonAttributes };
+            console.log("ele..", ele);
+            await SalesOrderTxn.update(obj, { where: { soTxnId: ele.soTxnId }, transaction: t });
+        }));
+
+        await t.commit();
+        logger.debug('Sales order data updated successfully');
+        return this.responseHelper.onSuccess(res, 'Sales order updated successfully');
     } catch (error) {
-      if (error.response && error.response.status === 404) {
-        return this.responseHelper.notFound(res, defaultMessage.NOT_FOUND)
-      } else {
-        logger.error(error, defaultMessage.ERROR)
-        return this.responseHelper.onError(res, new Error('Error while updating po'))
-      }
+        if (error.response && error.response.status === 404) {
+            return this.responseHelper.notFound(res, defaultMessage.NOT_FOUND);
+        } else {
+            logger.error(error, defaultMessage.ERROR);
+            return this.responseHelper.onError(res, new Error('Error while updating sales order'));
+        }
     } finally {
-      if (t && !t.finished) {
-        await t.rollback()
-      }
+        if (t && !t.finished) {
+            await t.rollback();
+        }
     }
-  }
+}
+
 
   async addStockEntry(req, res) {
     const t = await sequelize.transaction()

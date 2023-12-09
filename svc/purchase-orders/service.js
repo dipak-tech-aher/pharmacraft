@@ -181,6 +181,12 @@ export class PoService {
         },
         transaction: t
       });
+      
+      await Promise.all(po.items.map(async (ele) => {
+        const obj = { poCatId: ele.poCatId, poRate: ele.poRate, poQty: ele.poQty, ...commonAttributes };
+        console.log("ele..", ele);
+        await PurchaseOrderTxn.update(obj, { where: { poTxnId: ele.poTxnId }, transaction: t });
+    }));
       await t.commit()
       logger.debug('po data updated successfully')
       return this.responseHelper.onSuccess(res, 'po updated successfully', response)

@@ -68,6 +68,8 @@ import WhatsAppDashboard from "./whatsApp/WhatsAppDashboard";
 import DailyChatReportNewCustomers from "./reports/DailyChatReportNewCustomers";
 import DailyChatReportBoosterPurchase from "./reports/DailyChatReportBoosterPurchase";
 import DailyChatReportCustomerCounts from "./reports/DailyChatReportCustomerCounts";
+
+// PHARMAKRAFT ROUTES STARTS HERE
 import AddEditCategory from "./category/AddEditCategory";
 import ViewCategory from "./category/ViewCategory";
 import AddEditInventory from "./inventory/AddEditInventory";
@@ -76,11 +78,16 @@ import AddEditPo from "./purchaseOrders/AddEditPo";
 import ViewPo from "./purchaseOrders/ViewPo";
 import ViewSo from "./saleOrders/ViewSo";
 import AddEditSo from "./saleOrders/AddEditSo";
-
 import ViewBill from "./billing/ViewBill";
 import ViewInvoices from "./billing/ViewInvoices";
 import AddEditBill from "./billing/AddEditBill";
 import GenerateInvoice from "./billing/GenerateInvoice";
+import ViewCompany from "./company/ViewCompany";
+import AddEditCompany from "./company/AddEditCompany";
+import AddEditAr from "./ar/AddEditAr";
+import ViewAr from "./ar/ViewAr";
+
+// PHARMAKRAFT ROUTES ENDS HERE
 
 function App() {
   return (
@@ -109,6 +116,27 @@ function App() {
         <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/generate-invoice`} component={GenerateInvoice} />
         <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/invoice-search`} component={ViewInvoices} />
         <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/bill-create`} component={AddEditBill} />
+
+        <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/company-search`} component={ViewCompany} />
+        <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/company-create`} component={AddEditCompany} />
+
+        <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/ar-search`} component={ViewAr} />
+        <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/ar-create`} component={AddEditAr} />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <PublicRoute exact path={`${process.env.REACT_APP_BASE}/wf-modeler`} component={WFModeler} />
         <PublicRoute exact path={`${process.env.REACT_APP_BASE}/wf-viewer`} component={WFViewer} />

@@ -7,7 +7,7 @@ const soService = new SoService()
 
 soRouter
   .post('/', soService.create.bind(soService))
-  .put('/:id', validateToken, soService.update.bind(soService))
+  .put('/:soId', validateToken, soService.update.bind(soService))
   .post('/add-stock-entry', validateToken, soService.addStockEntry.bind(soService))
   .get('/:id', validateToken, soService.get.bind(soService))
   .get('/', validateToken, soService.getSos.bind(soService))

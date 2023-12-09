@@ -23,7 +23,23 @@ const ViewInventory = (props) => {
             .finally(hideSpinner)
     }, [])
 
+    const handleForm=(rowData)=>{
+        console.log("data...............>",rowData);
+        history.push(`${process.env.REACT_APP_BASE}/inventory-create`,{
+            data:{
+                rowData,
+                action:"UPDATE"
+            }
+        })
+
+    }
     const handleCellRender = (cell, row) => {
+        if(cell.column.id === "action"){
+            return(<>
+                <button className='btn btn-primary' onClick={(e) => handleForm(row?.original)}>
+                       <i className="fas fa-items"></i> Update
+                   </button></>)
+        }
         if (cell.column.id === "invId") {
             return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{cell.value}</span>)
         }
@@ -48,12 +64,21 @@ const ViewInventory = (props) => {
         const { invId } = rowData;
         history.push(`${process.env.REACT_APP_BASE}/inventory-create`, {
             data: {
-                invId
+                invId,
+                rowData,
+                action:"UPDATE"
             }
         })
     }
 
     const columns = [
+        {
+            Header: "Action",
+            accessor: "action",
+            disableFilters: true,
+            click: true,
+            id: "action"
+        },
         {
             Header: "Inventory Id",
             accessor: "invId",
@@ -71,6 +96,12 @@ const ViewInventory = (props) => {
             accessor: "invQty",
             disableFilters: true,
             id: "email Id"
+        },
+        {
+            Header: "Unit",
+            accessor: "categoryDetails.catUnit",
+            disableFilters: true,
+            id: "email Id1"
         },
         // {
         //     Header: "HSN/SAC",

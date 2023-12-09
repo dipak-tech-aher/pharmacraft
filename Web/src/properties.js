@@ -9,10 +9,13 @@ export const properties = {
   INVENTORY_API: "/api/inventory",
   PURCHASE_ORDER_API: "/api/purchase-order",
   SALES_ORDER_API: "/api/sale-orders",
+  COMPANY_API: "/api/company",
   BILING_API: "/api/billing",
+  BUSINESS_ENTITY_API: '/api/lookup/business-entity',
+
+
   CUSTOMER_API: "/api/customer",
   ACCESS_NUMBER: "/api/accessNumber",
-  BUSINESS_ENTITY_API: '/api/lookup/business-entity',
   BUSINESS_PARAMETER_API: '/api/business-parameter',
   ADDRESS_LOOKUP_API: '/api/lookup/address-lookup',
   ORGANIZATION: '/api/organization',

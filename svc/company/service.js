@@ -1,38 +1,37 @@
 import { logger } from '../config/logger'
 import { ResponseHelper } from '../utils'
 import {
-  Category, sequelize, BusinessEntity, User
+  Company, sequelize, BusinessEntity, User
 } from '../model'
 import { defaultMessage } from '../utils/constant'
 import { get, isEmpty } from 'lodash'
 import { QueryTypes, Op } from 'sequelize'
 import { camelCaseConversion } from '../utils/string'
 
-export class CategoryService {
+export class CompanyService {
   constructor() {
     this.responseHelper = new ResponseHelper()
   }
 
-  async createCategory(req, res) {
+  async create(req, res) {
     const t = await sequelize.transaction();
     try {
-      logger.info('Creating new category');
-      const category = req.body;
+      logger.info('Creating new company');
+      const company = req.body;
       const { userId } = req;
 
-      if (!category) {
+      if (!company) {
         return this.responseHelper.validationError(res, new Error(defaultMessage.MANDATORY_FIELDS_MISSING));
       }
 
-      const categoryInfo = await Category.findAll({
+      const companyInfo = await Company.findAll({
         where: {
-          catName: category.catName,
-          catNumber: category.catNumber,
+          cName: company.cName
         },
       });
 
-      if (categoryInfo.length > 0) {
-        return this.responseHelper.conflict(res, new Error('Category already exists in the System'));
+      if (companyInfo.length > 0) {
+        return this.responseHelper.conflict(res, new Error('Company already exists in the System'));
       }
 
       const commonAttributes = {
@@ -42,14 +41,14 @@ export class CategoryService {
         updatedAt: new Date(),
       };
 
-      const newCategory = await Category.create({
-        ...category,
+      const newCompany = await Company.create({
+        ...company,
         ...commonAttributes,
       }, { transaction: t });
 
       await t.commit();
-      logger.debug('New category created successfully');
-      return this.responseHelper.onSuccess(res, 'Category created successfully', newCategory);
+      logger.debug('New company created successfully');
+      return this.responseHelper.onSuccess(res, 'Company created successfully', newCompany);
     } catch (error) {
       if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
         return this.responseHelper.validationError(res, error);
@@ -58,27 +57,26 @@ export class CategoryService {
       } else {
         logger.error(error, defaultMessage.ERROR);
         await t.rollback();
-        return this.responseHelper.onError(res, new Error('Error while creating category'));
+        return this.responseHelper.onError(res, new Error('Error while creating company'));
       }
     }
   }
 
-
-  async updateCategory(req, res) {
+  async update(req, res) {
     const t = await sequelize.transaction();
     try {
       console.log("req body........>", req.body)
       console.log("req params.......>", req.params)
-      const response = await Category.update(req.body, { where: { catId: req?.params?.id }, transaction: t })
+      const response = await Company.update(req.body, { where: { cId: req?.params?.cId }, transaction: t })
       await t.commit()
-      logger.debug('category updated successfully')
-      return this.responseHelper.onSuccess(res, 'category updated successfully', response)
+      logger.debug('company updated successfully')
+      return this.responseHelper.onSuccess(res, 'company updated successfully', response)
     } catch (error) {
       if (error.response && error.response.status === 404) {
         return this.responseHelper.notFound(res, defaultMessage.NOT_FOUND)
       } else {
         logger.error(error, defaultMessage.ERROR)
-        return this.responseHelper.onError(res, new Error('Error while creating customer'))
+        return this.responseHelper.onError(res, new Error('Error while updating company'))
       }
     } finally {
       if (t && !t.finished) {
@@ -87,7 +85,7 @@ export class CategoryService {
     }
   }
 
-  async getCategory(req, res) {
+  async get(req, res) {
     try {
       logger.debug('Getting Customer details by ID')
       const { id } = req.params
@@ -96,7 +94,7 @@ export class CategoryService {
         return this.responseHelper.validationError(res, new Error(defaultMessage.MANDATORY_FIELDS_MISSING))
       }
       let response = {}
-      const customer = await Customer.findOne({
+      const customer = await Company.findOne({
         include: [{ model: Address, as: 'address' },
         {
           model: Contact,
@@ -107,7 +105,7 @@ export class CategoryService {
         },
 
         { model: BusinessEntity, as: 'class', attributes: ['code', 'description'] },
-        { model: BusinessEntity, as: 'category', attributes: ['code', 'description'] }],
+        { model: BusinessEntity, as: 'company', attributes: ['code', 'description'] }],
         where: {
           customerId: id
         }
@@ -117,55 +115,6 @@ export class CategoryService {
         return this.responseHelper.notFound(res, new Error(defaultMessage.NOT_FOUND))
       }
       response = customer.dataValues
-      // Get the single account details
-      // let account = await Account.findOne({
-      //   include: [{ model: Address, as: 'address' }, { model: Contact, as: 'contact' }],
-      //   where: {
-      //     customerId: id
-      //   }
-      // })
-      // const accountId = account.accountId
-      // if (account) {
-      //   const securityQuestion = await SecurityQuestion.findOne({
-      //     where: {
-      //       refId: accountId
-      //     }
-      //   })
-      //   if (securityQuestion) {
-      //     account = {
-      //       ...account.dataValues,
-      //       securityQuestion
-      //     }
-      //   }
-      //   const whereClause = {
-      //     accountId
-      //   }
-      //   if (serviceId) {
-      //     whereClause.connectionId = serviceId
-      //   }
-      //   // Get the single service details
-      //   const service = await Connection.findOne({
-      //     include: [
-      //       { model: Address, as: 'address' },
-      //       {
-      //         model: ConnectionPlan,
-      //         as: 'conn_plan',
-      //         include: [{ model: Plan, as: 'plan' }]
-      //       }
-      //     ],
-      //     where: whereClause
-      //   })
-      //   if (service) {
-      //     account = {
-      //       ...account,
-      //       service: [service]
-      //     }
-      //   }
-      //   response = {
-      //     ...response,
-      //     account: [account]
-      //   }
-      // }
       response = transformCustomerResponse(response)
       logger.debug('Successfully fetch customer data')
       return this.responseHelper.onSuccess(res, defaultMessage.SUCCESS, response)
@@ -175,30 +124,32 @@ export class CategoryService {
     }
   }
 
-  async getCategories(req, res) {
+  async getCompanies(req, res) {
     try {
-      logger.debug('Getting Categories')
+      logger.debug('Getting Companies')
 
-      const categories = await Category.findAll({
+      const companies = await Company.findAll({
         include: [
           { model: User, as: 'createdByDetails', attributes: ['firstName', 'lastName'] },
           { model: User, as: 'updatedByDetails', attributes: ['firstName', 'lastName'] },
-          { model: BusinessEntity, as: 'statusDesc', attributes: ['code', 'description'] }
+          { model: BusinessEntity, as: 'statusDesc', attributes: ['code', 'description'] },
+          { model: BusinessEntity, as: 'typeDesc', attributes: ['code', 'description'] },
+          { model: BusinessEntity, as: 'cCountryDesc', attributes: ['code', 'description', 'mappingPayload'] }
         ],
         where: {
-          catStatus: ['AC', 'ACTIVE']
+          cStatus: ['AC', 'ACTIVE']
         },
-        order: [["catId", "DESC"]]
+        order: [["cId", "DESC"]]
       })
-      if (!categories || categories?.length === 0) {
+      if (!companies || companies?.length === 0) {
         logger.debug(defaultMessage.NOT_FOUND)
         return this.responseHelper.notFound(res, new Error(defaultMessage.NOT_FOUND))
       }
-      logger.debug('Successfully fetch Categories data')
-      return this.responseHelper.onSuccess(res, defaultMessage.SUCCESS, categories)
+      logger.debug('Successfully fetch Companies data')
+      return this.responseHelper.onSuccess(res, defaultMessage.SUCCESS, companies)
     } catch (error) {
-      logger.error(error, 'Error while fetching Categories data')
-      return this.responseHelper.onError(res, new Error('Error while fetching Categories data'))
+      logger.error(error, 'Error while fetching Companies data')
+      return this.responseHelper.onError(res, new Error('Error while fetching Companies data'))
     }
   }
 }

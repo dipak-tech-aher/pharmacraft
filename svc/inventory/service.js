@@ -125,7 +125,7 @@ export class InventoryService {
         include: [{ model: Category, as: 'categoryDetails' },
         { model: BusinessEntity, as: 'statusDesc', attributes: ['code', 'description'] }],
         where: {
-          invId
+          invId: catUnit
         }
       })
       if (!inventory) {
@@ -154,7 +154,8 @@ export class InventoryService {
         ],
         where: {
           invStatus: ['AC', 'ACTIVE']
-        }
+        },
+        order: [["invId", "DESC"]]
       })
       if (!inventory || inventory?.length === 0) {
         logger.debug(defaultMessage.NOT_FOUND)
