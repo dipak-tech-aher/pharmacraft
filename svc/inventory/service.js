@@ -149,7 +149,12 @@ export class InventoryService {
         include: [
           { model: User, as: 'createdByDetails', attributes: ['firstName', 'lastName'] },
           { model: User, as: 'updatedByDetails', attributes: ['firstName', 'lastName'] },
-          { model: Category, as: 'categoryDetails' },
+          {
+            model: Category, as: 'categoryDetails', include: [
+              { model: BusinessEntity, as: 'catSizeDetails', attributes: ['code', 'description'] },
+              { model: BusinessEntity, as: 'catUnitDetails', attributes: ['code', 'description'] }
+            ]
+          },
           { model: BusinessEntity, as: 'statusDesc', attributes: ['code', 'description'] }
         ],
         where: {

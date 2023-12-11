@@ -18,7 +18,16 @@ module.exports = function (sequelize, DataType) {
       type: DataType.INTEGER
     },
     pAmount: {
-      type: DataType.INTEGER
+      type: DataType.DECIMAL
+    },
+    paymentMethod: {
+      type: DataType.STRING
+    },
+    paymentChequeNo: {
+      type: DataType.STRING
+    },
+    paymentTxnNo: {
+      type: DataType.STRING
     },
     pStatus: {
       type: DataType.STRING

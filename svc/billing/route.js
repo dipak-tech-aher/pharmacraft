@@ -12,6 +12,7 @@ billingRouter
   .get('/:id', validateToken, billingService.get.bind(billingService))
   .get('/', validateToken, billingService.getBills.bind(billingService))
   .post('/company', validateToken, billingService.getCompany.bind(billingService))
-  .post('/get-prnding-invoices', validateToken, billingService.getPendingInvoices.bind(billingService))
+  .post('/get-pending-invoices', validateToken, billingService.getPendingInvoices.bind(billingService))
+  .post('/pay-bill/:invId', validateToken, billingService.payBill.bind(billingService))
 
 module.exports = billingRouter

@@ -176,11 +176,14 @@ const ViewInvoices = (props) => {
         if (cell.column.id === "updatedAt") {
             return (<span>{moment(cell.value)?.format('DD-MM-YYYY')}</span>);
         }
+        if (cell.column.id === "invStatus") {
+            return (<span className="text-primary cursor-pointer" >{row.original?.statusDesc?.description}</span>)
+        }
         if (cell.column.id === "CreatedBy") {
-            return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{row.original?.createdByDetails?.firstName ?? '-' + ' ' + (row.original?.createdByDetails?.lastName ?? '-')}</span>)
+            return (<span >{row.original?.createdByDetails?.firstName ?? '-' + ' ' + (row.original?.createdByDetails?.lastName ?? '-')}</span>)
         }
         if (cell.column.id === "UpdatedBy") {
-            return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{row.original?.updatedByDetails?.firstName ?? '-' + ' ' + (row.original?.updatedByDetails?.lastName ?? '-')}
+            return (<span >{row.original?.updatedByDetails?.firstName ?? '-' + ' ' + (row.original?.updatedByDetails?.lastName ?? '-')}
             </span>)
         }
         else {
@@ -229,6 +232,12 @@ const ViewInvoices = (props) => {
             accessor: "invOutstandingAmount",
             disableFilters: true,
             id: "invOutstandingAmount"
+        },
+        {
+            Header: "Payment Status",
+            accessor: "invStatus",
+            disableFilters: true,
+            id: "invStatus"
         },
         {
             Header: "Created By",

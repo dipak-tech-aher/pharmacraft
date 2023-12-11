@@ -23,22 +23,22 @@ const ViewInventory = (props) => {
             .finally(hideSpinner)
     }, [])
 
-    const handleForm=(rowData)=>{
-        console.log("data...............>",rowData);
-        history.push(`${process.env.REACT_APP_BASE}/inventory-create`,{
-            data:{
+    const handleForm = (rowData) => {
+        console.log("data...............>", rowData);
+        history.push(`${process.env.REACT_APP_BASE}/inventory-create`, {
+            data: {
                 rowData,
-                action:"UPDATE"
+                action: "UPDATE"
             }
         })
 
     }
     const handleCellRender = (cell, row) => {
-        if(cell.column.id === "action"){
-            return(<>
+        if (cell.column.id === "action") {
+            return (<>
                 <button className='btn btn-primary' onClick={(e) => handleForm(row?.original)}>
-                       <i className="fas fa-items"></i> Update
-                   </button></>)
+                    <i className="fas fa-items"></i> Update
+                </button></>)
         }
         if (cell.column.id === "invId") {
             return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{cell.value}</span>)
@@ -50,10 +50,10 @@ const ViewInventory = (props) => {
             return (<span>{moment(cell.value)?.format('DD-MM-YYYY')}</span>);
         }
         if (cell.column.id === "CreatedBy") {
-            return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{row.original?.createdByDetails?.firstName + ' ' + row.original?.createdByDetails?.lastName}</span>)
+            return (<span className="text-primary cursor-pointer">{row.original?.createdByDetails?.firstName + ' ' + row.original?.createdByDetails?.lastName}</span>)
         }
         if (cell.column.id === "UpdatedBy") {
-            return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{row.original?.updatedByDetails?.firstName + ' ' + row.original?.updatedByDetails?.lastName}</span>)
+            return (<span className="text-primary cursor-pointer">{row.original?.updatedByDetails?.firstName + ' ' + row.original?.updatedByDetails?.lastName}</span>)
         }
         else {
             return (<span>{cell.value}</span>)
@@ -66,7 +66,7 @@ const ViewInventory = (props) => {
             data: {
                 invId,
                 rowData,
-                action:"UPDATE"
+                action: "UPDATE"
             }
         })
     }
@@ -91,18 +91,26 @@ const ViewInventory = (props) => {
             accessor: "categoryDetails.catName",
             disableFilters: true
         },
+       
+        {
+            Header: "Size",
+            accessor: "categoryDetails.catSize",
+            disableFilters: true,
+            id: "Size"
+        },
+        {
+            Header: "Unit",
+            accessor: "categoryDetails.catUnitDetails.description",
+            disableFilters: true,
+            id: "Unit"
+        },
         {
             Header: "Quantity",
             accessor: "invQty",
             disableFilters: true,
             id: "email Id"
         },
-        {
-            Header: "Unit",
-            accessor: "categoryDetails.catUnit",
-            disableFilters: true,
-            id: "email Id1"
-        },
+
         // {
         //     Header: "HSN/SAC",
         //     accessor: "invHsnCat",
@@ -116,7 +124,7 @@ const ViewInventory = (props) => {
         // },
         {
             Header: "status",
-            accessor: "invStatus",
+            accessor: "statusDesc.description",
             disableFilters: true,
         },
         {

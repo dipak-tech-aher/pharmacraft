@@ -267,6 +267,72 @@ export class BillingService {
     }
   }
 
+  async payBill(req, res) {
+    const t = await sequelize.transaction()
+    try {
+      logger.debug('adding the payment data')
+      const payment = req.body
+      const userId = req.userId
+      const { invId } = req.params
+      const response = {}
+      if (!payment && !invId) {
+        return this.responseHelper.validationError(res, new Error(defaultMessage.MANDATORY_FIELDS_MISSING))
+      }
+
+      let invInfo = await InvoiceHdr.findOne({
+        where: {
+          invId
+        }
+      })
+      invInfo = invInfo?.dataValues ?? invInfo
+      if (!invInfo) {
+        logger.debug(defaultMessage.NOT_FOUND)
+        return this.responseHelper.notFound(res, new Error(defaultMessage.NOT_FOUND))
+      }
+      const commonAttributes = {
+        createdBy: userId,
+        createdAt: new Date(),
+        updatedBy: userId,
+        updatedAt: new Date(),
+      };
+
+      const invOutstandingAmount = Number(invInfo?.invOutstandingAmount) - Number(payment?.pAmount)
+      console.log('payment------------->', payment)
+      await Payments.create({
+        pCId: invInfo?.invBillToId,
+        pInvId: invId,
+        paymentMethod: payment?.paymentMethod,
+        pAmount: Number(payment?.pAmount),
+        paymentChequeNo: payment?.paymentChequeNo,
+        paymentTxnNo: payment?.paymentTxnNo,
+        pStatus: invOutstandingAmount === 0 ? "BILLED" : "PARTIALY-BILLED",
+        ...commonAttributes
+      }, { transaction: t })
+      console.log('payment---------xxxx---->')
+
+      await InvoiceHdr.update({ invOutstandingAmount, ...commonAttributes }, {
+        where: {
+          invId
+        },
+        transaction: t
+      });
+      await t.commit()
+      logger.debug('payment done successfully')
+      return this.responseHelper.onSuccess(res, 'payment done successfully', response)
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        return this.responseHelper.notFound(res, defaultMessage.NOT_FOUND)
+      } else {
+        logger.error(error, defaultMessage.ERROR)
+        return this.responseHelper.onError(res, new Error('Error while payment'))
+      }
+    } finally {
+      if (t && !t.finished) {
+        await t.rollback()
+      }
+    }
+  }
+
   async addStockEntry(req, res) {
     const t = await sequelize.transaction()
     try {

@@ -210,12 +210,12 @@ const MainMenu = () => {
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/company-search`} className="dropdown-item">
-                                                        <i className="fe-search"></i> Search
+                                                         Search
                                                     </Link>
                                                 </li>
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/company-create`} className="dropdown-item">
-                                                        <i className="fe-plus"></i> Create
+                                                         Create
                                                     </Link>
                                                 </li>
                                             </ul>
@@ -227,12 +227,12 @@ const MainMenu = () => {
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/category-search`} className="dropdown-item">
-                                                        <i className="fe-search"></i> Search
+                                                         Search
                                                     </Link>
                                                 </li>
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/category-create`} className="dropdown-item">
-                                                        <i className="fe-plus"></i> Create
+                                                         Create
                                                     </Link>
                                                 </li>
                                             </ul>
@@ -244,12 +244,12 @@ const MainMenu = () => {
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/inventory-search`} className="dropdown-item">
-                                                        <i className="fe-search"></i> Search
+                                                         Search
                                                     </Link>
                                                 </li>
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/inventory-create`} className="dropdown-item">
-                                                        <i className="fe-plus"></i> Create
+                                                         Create
                                                     </Link>
                                                 </li>
                                             </ul>
@@ -261,12 +261,12 @@ const MainMenu = () => {
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/po-search`} className="dropdown-item">
-                                                        <i className="fe-search"></i> Search
+                                                         Search
                                                     </Link>
                                                 </li>
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/po-create`} className="dropdown-item">
-                                                        <i className="fe-plus"></i> Create
+                                                         Create
                                                     </Link>
                                                 </li>
                                             </ul>
@@ -278,12 +278,12 @@ const MainMenu = () => {
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/so-search`} className="dropdown-item">
-                                                        <i className="fe-search"></i> View
+                                                         View
                                                     </Link>
                                                 </li>
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/so-create`} className="dropdown-item">
-                                                        <i className="fe-plus"></i> Create
+                                                         Create
                                                     </Link>
                                                 </li>
                                             </ul>
@@ -295,12 +295,12 @@ const MainMenu = () => {
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/invoice-search`} className="dropdown-item">
-                                                        <i className="fe-search"></i> Search
+                                                         Search
                                                     </Link>
                                                 </li>
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/bill-view`} className="dropdown-item">
-                                                        <i className="fe-plus"></i> Create
+                                                         Create
                                                     </Link>
                                                 </li>
                                             </ul>
@@ -312,14 +312,14 @@ const MainMenu = () => {
                                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/ar-search`} className="dropdown-item">
-                                                        <i className="fe-search"></i> Search
+                                                         Create Payment
                                                     </Link>
                                                 </li>
-                                                <li>
+                                                {/* <li>
                                                     <Link to={`${process.env.REACT_APP_BASE}/ar-create`} className="dropdown-item">
-                                                        <i className="fe-plus"></i> Create
+                                                         Create
                                                     </Link>
-                                                </li>
+                                                </li> */}
                                             </ul>
                                         </li>
                                     </ul>

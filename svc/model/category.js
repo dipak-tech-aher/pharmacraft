@@ -56,9 +56,20 @@ module.exports = function (sequelize, DataType) {
       sourceKey: 'catId',
       as: 'invDetails'
     })
+
     models.Category.belongsTo(models.User, {
       foreignKey: 'createdBy',
       as: 'createdByDetails'
+    })
+
+    models.Category.belongsTo(models.BusinessEntity, {
+      foreignKey: 'catSize',
+      as: 'catSizeDetails'
+    })
+
+    models.Category.belongsTo(models.BusinessEntity, {
+      foreignKey: 'catUnit',
+      as: 'catUnitDetails'
     })
     models.Category.belongsTo(models.User, {
       foreignKey: 'updatedBy',

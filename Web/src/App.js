@@ -86,7 +86,7 @@ import ViewCompany from "./company/ViewCompany";
 import AddEditCompany from "./company/AddEditCompany";
 import AddEditAr from "./ar/AddEditAr";
 import ViewAr from "./ar/ViewAr";
-import PayBill from "./billing/PayBill";
+import PayBill from "./ar/PayBill";
 
 // PHARMAKRAFT ROUTES ENDS HERE
 
