@@ -49,15 +49,6 @@ module.exports = function (sequelize, DataType) {
   }
   )
 
-  BusinessUnit.associate = function (models) {
-    models.BusinessUnit.belongsTo(models.Address, {
-      foreignKey: 'addressId',
-      as: 'address'
-    })
-    models.BusinessUnit.belongsTo(models.Contact, {
-      foreignKey: 'contactId',
-      as: 'contact'
-    })
-  }
+  BusinessUnit.associate = function (models) {}
   return BusinessUnit
 }

@@ -48,17 +48,17 @@ const AddEditPo = (props) => {
     ]);
 
     useEffect(() => {
-        const poItems = dataPo?.poTxnDetails;
-        const poTxnDetails = poItems?.map((ele) => {
-            return {
-                poCatId: { label: ele?.categoryDetails?.catName, value: ele?.categoryDetails?.catId },
-                poRate: ele?.poRate,
-                poQty: ele?.poQty,
-                poTxnId: ele?.poTxnId
-            }
-        })
-        setItems(poTxnDetails)
         if (dataPo) {
+            const poItems = dataPo?.poTxnDetails;
+            const poTxnDetails = poItems?.map((ele) => {
+                return {
+                    poCatId: { label: ele?.categoryDetails?.catName, value: ele?.categoryDetails?.catId },
+                    poRate: ele?.poRate,
+                    poQty: ele?.poQty,
+                    poTxnId: ele?.poTxnId
+                }
+            })
+            setItems(poTxnDetails)
             setCategoryData({
                 poCgstPercentage: dataPo?.poCgstPercentage ?? '',
                 poSgstPercentage: dataPo?.poSgstPercentage ?? '',
@@ -180,6 +180,7 @@ const AddEditPo = (props) => {
     };
 
     const addRow = () => {
+        console.log('items----------->', items)
         setItems([...items, {
             poCatId: { label: "", value: "" },
             poRate: "",
@@ -243,7 +244,7 @@ const AddEditPo = (props) => {
                 post(properties?.PURCHASE_ORDER_API, { ...poPayload })
                     .then((response) => {
                         toast.success(`${response.message}`);
-                        // props.history.push(`${process.env.REACT_APP_BASE}/po-search`);
+                        props.history.push(`${process.env.REACT_APP_BASE}/po-search`);
                     })
                     .finally(() => {
                         hideSpinner();

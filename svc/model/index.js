@@ -8,19 +8,6 @@ const { database, username, password, dialect, host, port,schema } = dbPropertie
 
 console.log({ database, username, password, dialect, host, port,schema })
 
-// const sequelize = new Sequelize(database, username, password, {
-//   host,
-//   port,
-//   dialect,
-//   logging: false,
-//   pool: {
-//     max: 100,
-//     min: 20,
-//     acquire: 100 * 1000,
-//     idle: 300000
-//   }
-// })
-
 const sequelize = new Sequelize(database, username, password, {
   host,
   port,

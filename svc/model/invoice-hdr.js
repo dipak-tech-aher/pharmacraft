@@ -44,6 +44,9 @@ module.exports = function (sequelize, DataType) {
     invTotal: {
       type: DataType.INTEGER
     },
+    invOutstandingAmount: {
+      type: DataType.INTEGER
+    },
     invSubTotal: {
       type: DataType.INTEGER
     },

@@ -86,6 +86,7 @@ import ViewCompany from "./company/ViewCompany";
 import AddEditCompany from "./company/AddEditCompany";
 import AddEditAr from "./ar/AddEditAr";
 import ViewAr from "./ar/ViewAr";
+import PayBill from "./billing/PayBill";
 
 // PHARMAKRAFT ROUTES ENDS HERE
 
@@ -122,6 +123,7 @@ function App() {
 
         <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/ar-search`} component={ViewAr} />
         <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/ar-create`} component={AddEditAr} />
+        <PrivateRoute exact path={`${process.env.REACT_APP_BASE}/pay-bill`} component={PayBill} />
 
 
 

@@ -144,12 +144,24 @@ const ViewInvoices = (props) => {
         return result.trim();
     }
 
+    const payOutstanding = (row) => {
+        history.push(`${process.env.REACT_APP_BASE}/pay-bill`, {
+            data: {
+                rows: row
+            }
+        })
+
+    }
+
     const handleCellRender = (cell, row) => {
         if (cell.column.id === "action") {
             return (<>
                 <button className='btn btn-primary' onClick={(e) => preview(row?.original)}>
                     <i className="fas fa-eye"></i> View & Download
-                </button>
+                </button>&nbsp;&nbsp;
+                {/* {row?.original?.invOutstandingAmount !== 0 && < button className='btn btn-primary' onClick={(e) => payOutstanding(row?.original)}>
+                    <i className="fas fa-cash"></i> Pay
+                </button >} */}
             </>)
         }
         if (cell.column.id === "invDate") {
@@ -207,6 +219,18 @@ const ViewInvoices = (props) => {
             id: "invDate"
         },
         {
+            Header: "Total",
+            accessor: "invTotal",
+            disableFilters: true,
+            id: "invTotal"
+        },
+        {
+            Header: "Total Outstanding amount",
+            accessor: "invOutstandingAmount",
+            disableFilters: true,
+            id: "invOutstandingAmount"
+        },
+        {
             Header: "Created By",
             accessor: "createdByDetails.firstName",
             disableFilters: true,
@@ -244,7 +268,7 @@ const ViewInvoices = (props) => {
         }
     }
 
-    const handleOnClose = ()=>{
+    const handleOnClose = () => {
         setOpenPreviewViewModal(false)
         setInvoiceCopyType("ORIGINAL");
     }

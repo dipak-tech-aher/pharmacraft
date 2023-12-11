@@ -118,6 +118,7 @@ const AddEditAr = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         if (validateForm()) {
             showSpinner();
             let receiptPayload = {

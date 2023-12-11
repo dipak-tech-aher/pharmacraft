@@ -11,6 +11,7 @@ export const properties = {
   SALES_ORDER_API: "/api/sale-orders",
   COMPANY_API: "/api/company",
   BILING_API: "/api/billing",
+  PAYMENTS_API: "/api/payments",
   BUSINESS_ENTITY_API: '/api/lookup/business-entity',
 
 

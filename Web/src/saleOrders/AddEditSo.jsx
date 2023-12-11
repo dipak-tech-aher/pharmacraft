@@ -48,19 +48,17 @@ const AddEditSo = (props) => {
         }
     ]);
     useEffect(() => {
-
-        const soItems = dataSo?.soTxnDetails;
-        const soTxnDetails = soItems?.map((ele) => {
-            return {
-                soCatId: { label: ele?.categoryDetails?.catName, value: ele?.categoryDetails?.catId },
-                soRate: ele?.soRate,
-                soQty: ele?.soQty,
-                soTxnId: ele?.soTxnId
-            }
-        })
-
-        setItems(soTxnDetails)
         if (dataSo) {
+            const soItems = dataSo?.soTxnDetails;
+            const soTxnDetails = soItems?.map((ele) => {
+                return {
+                    soCatId: { label: ele?.categoryDetails?.catName, value: ele?.categoryDetails?.catId },
+                    soRate: ele?.soRate,
+                    soQty: ele?.soQty,
+                    soTxnId: ele?.soTxnId
+                }
+            })
+            setItems(soTxnDetails)
             setCategoryData({
                 soCgstPercentage: dataSo?.soCgstPercentage ?? '',
                 soSgstPercentage: dataSo?.soSgstPercentage ?? '',
@@ -253,7 +251,7 @@ const AddEditSo = (props) => {
                 post(properties?.SALES_ORDER_API, { ...soPayload })
                     .then((response) => {
                         toast.success(`${response.message}`);
-                        // props.history.push(`${process.env.REACT_APP_BASE}/so-search`);
+                        props.history.push(`${process.env.REACT_APP_BASE}/so-search`);
                     })
                     .finally(() => {
                         hideSpinner();

@@ -1,7 +1,7 @@
 import { logger } from '../config/logger'
 import { ResponseHelper } from '../utils'
 import {
-  Category, sequelize, BusinessEntity, User, Company, Inventory, InvoiceHdr, InvoiceTxn, SalesOrderTxn, SalesOrderHdr
+  Category, sequelize, BusinessEntity, User, Company, Inventory, InvoiceHdr, InvoiceTxn, SalesOrderTxn, SalesOrderHdr, Payments
 } from '../model'
 import { defaultMessage } from '../utils/constant'
 import { get, isEmpty } from 'lodash'
@@ -90,11 +90,12 @@ export class BillingService {
         invPaymentTerms: invoice?.soPaymentTerms,
         invMrpDate: invoice?.soMrpDate,
         invDeliveryDate: invoice?.soDeliveryDate,
-        invStatus: invoice?.soStatus,
+        invStatus: invoice?.billStatus === "BILLED" ? "INV_CLS" : "INV_PEND",
         invTotalSgst,
         invTotalCgst,
         invTotalIgst,
         invTotal,
+        invOutstandingAmount: invoice?.billStatus === "BILLED" ? 0 : invoice?.billStatus === "PARTIALY-BILLED" ? Number(invTotal) - Number(invoice?.partialBillAmount) : invTotal,
         invSubTotal,
         invTotalQty: updatedInvoiceItems?.reduce((total, ele) => total + (ele?.soQtyToBilled || 0), 0),
         ...commonAttributes,
@@ -179,10 +180,24 @@ export class BillingService {
           return this.responseHelper.onError(res, new Error('Error while updating inventory'));
         }
       }
-      // Update sale_order_txn
-      //       soBilledQty
-      // soYetToBillQty
-      // Update inventory
+
+      if (invoice?.billStatus === "BILLED") {
+        await Payments.create({
+          pCId: invoice?.soBillToId,
+          pInvId: newInvoice?.invId,
+          pAmount: invTotal,
+          pStatus: invoice?.billStatus,
+          ...commonAttributes
+        }, { transaction: t })
+      } else if (invoice?.billStatus === "PARTIALY-BILLED") {
+        await Payments.create({
+          pCId: invoice?.soBillToId,
+          pInvId: newInvoice?.invId,
+          pAmount: invoice?.partialBillAmount,
+          pStatus: invoice?.billStatus,
+          ...commonAttributes
+        }, { transaction: t })
+      }
 
       // Commit the transaction
       await t.commit();
@@ -393,6 +408,50 @@ export class BillingService {
         // where: {
         //   poStatus: ['AC', 'ACTIVE']
         // }
+      })
+      if (!invoices || invoices?.length === 0) {
+        logger.debug(defaultMessage.NOT_FOUND)
+        return this.responseHelper.notFound(res, new Error(defaultMessage.NOT_FOUND))
+      }
+      logger.debug('Successfully fetch invoices data')
+      return this.responseHelper.onSuccess(res, defaultMessage.SUCCESS, invoices)
+    } catch (error) {
+      logger.error(error, 'Error while fetching po data')
+      return this.responseHelper.onError(res, new Error('Error while fetching invoices data'))
+    }
+  }
+
+  async getPendingInvoices(req, res) {
+    try {
+      logger.debug('Getting bills')
+
+      const invoices = await InvoiceHdr.findAll({
+        include: [
+          { model: Company, as: 'fromDetails' },
+          { model: Company, as: 'billToDetails' },
+          { model: Company, as: 'shipToDetails' },
+          { model: User, as: 'createdByDetails', attributes: ['firstName', 'lastName'] },
+          { model: User, as: 'updatedByDetails', attributes: ['firstName', 'lastName'] },
+          {
+            model: SalesOrderHdr, as: 'soHdrDetails',
+            model: InvoiceTxn, as: 'invoiceTxnDetails',
+            include: [
+              {
+                model: Category, as: 'categoryDetails',
+                include: [
+                  {
+                    model: Inventory, as: 'invDetails'
+                  }
+                ]
+              }
+            ]
+          },
+          { model: BusinessEntity, as: 'statusDesc', attributes: ['code', 'description'] }
+        ],
+        order: [['invId', 'DESC']],
+        where: {
+          invStatus: ['INV_PEND']
+        }
       })
       if (!invoices || invoices?.length === 0) {
         logger.debug(defaultMessage.NOT_FOUND)

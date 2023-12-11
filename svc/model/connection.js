@@ -121,14 +121,6 @@ module.exports = function (sequelize, DataType) {
   }
   )
   Connection.associate = function (models) {
-    models.Connection.belongsTo(models.Address, {
-      foreignKey: 'addressId',
-      as: 'address'
-    })
-    models.Connection.hasMany(models.ConnectionPlan, {
-      foreignKey: 'connectionId',
-      as: 'conn_plan'
-    })
     models.Connection.belongsTo(models.BusinessEntity, {
       foreignKey: 'charge',
       as: 'dep_chrg'

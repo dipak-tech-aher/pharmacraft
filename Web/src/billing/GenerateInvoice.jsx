@@ -20,6 +20,10 @@ const GenerateInvoice = (props) => {
 
     const history = useHistory();
     const { auth } = useContext(AppContext);
+    const [billInputs, setBillInputs] = useState({
+        billStatus: "",
+        partialBillAmount: "",
+    });
     const [tableRowData, setTableRowData] = useState(rowsData);
     const [readyItemId, setReadyItemId] = useState([])
     const [rowsToBilled, setRowsToBilled] = useState([])
@@ -92,6 +96,16 @@ const GenerateInvoice = (props) => {
     }
 
     const handleGenerate = () => {
+        console.log('billInputs--->', billInputs)
+        if (billInputs?.billStatus === "PARTIALY-BILLED") {
+            if (!billInputs?.partialBillAmount || billInputs?.partialBillAmount === '') {
+                toast.error("Bill amount is required!!")
+                return
+            }
+        } else if (!billInputs?.billStatus || billInputs?.billStatus === "") {
+            toast.error("Bill status is required!!");
+            return
+        }
         Swal.fire({
             title: 'Are you sure want to generate invoice? generated invoices you cant edit!',
             icon: 'warning',
@@ -103,7 +117,7 @@ const GenerateInvoice = (props) => {
             if (result.isConfirmed) {
                 showSpinner();
                 const filteredObject = getData();
-                post(`${properties.BILING_API}`, { ...filteredObject })
+                post(`${properties.BILING_API}`, { ...filteredObject, ...billInputs })
                     .then((response) => {
                         toast.success(`${response.message}`);
                         history.push(`${process.env.REACT_APP_BASE}/bill-view`)
@@ -336,18 +350,52 @@ const GenerateInvoice = (props) => {
         return result.trim();
     }
 
+    const [isPartialBillAmountOpen, setIsPartialBillAmountOpen] = useState(false)
+    const handleBillInputsChange = (e) => {
+        const name = e?.target?.name;
+        const value = e?.target?.value;
+        if (name == "billStatus") {
+            if (value === "PARTIALY-BILLED") {
+                setIsPartialBillAmountOpen(true)
+            } else {
+                setIsPartialBillAmountOpen(false)
+            }
+            setBillInputs({ ...billInputs, billStatus: value })
+        } else if (name === "partialBillAmount") {
+            setBillInputs({ ...billInputs, partialBillAmount: value })
+        }
+        console.log('value---->', value)
+    }
+
     return (
         <div className="container-fluid">
             <div className="col-12" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <h1 className="title bold">View Sales Orders Items</h1>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div >
+                    {/* style={{ display: "flex", alignItems: "center" }} */}
                     <input
                         type="number"
                         className='form-control mr-2'
                         onChange={(e) => setOtherCharges(e?.target?.value)}
                         placeholder='Other charges'
-                        style={{ width: "150px" }}
-                    />
+                        style={{ width: "200px" }}
+                    /> <br />
+                    <select style={{ width: "200px" }} name="billStatus" id="" className='form-control  mr-2' onChange={(e) => handleBillInputsChange(e)}>
+                        <option value="">Select Billed Status</option>
+                        <option value="BILLED">Billed</option>
+                        <option value="UNBILLED">Un-billed</option>
+                        <option value="PARTIALY-BILLED">Partially-billed</option>
+                    </select>
+                    <br />
+                    {isPartialBillAmountOpen && <input
+                        type="number"
+                        name="partialBillAmount"
+                        className='form-control mr-2'
+                        onChange={(e) => handleBillInputsChange(e)}
+                        placeholder='Bill amount'
+                        style={{ width: "200px" }}
+                    />} <br />
+
                     <button type='button' className='btn btn-primary mr-2' onClick={() => preview()}>Preview</button>
                     <button type='button' className='btn btn-primary' onClick={() => handleGenerate()}>Generate</button>
                 </div>
