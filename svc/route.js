@@ -17,6 +17,7 @@ const companyRouter = require('./company/route')
 const paymentsRouter = require('./payments/route')
 const workflowRouter = require('./workflow/route')
 const workflowNewRouter = require('./workflow-new/route')
+const reportsRouter = require('./reports/route')
 
 
 
@@ -37,5 +38,6 @@ mainRouter.use('/notes', notesRouter)
 mainRouter.use('/notification', notificationRouter)
 mainRouter.use('/workflow', workflowRouter)
 mainRouter.use('/workflow-new', workflowNewRouter)
+mainRouter.use('/reports', reportsRouter)
 
 module.exports = mainRouter

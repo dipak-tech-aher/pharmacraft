@@ -18,7 +18,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 const routes = require('./route')
+
+app.get('/get-msg', (req, res) => {
+  console.log('welcome');
+  res.json({ msg: 'Welcome' })
+})
 app.use('/api', routes)
+
 
 const server = require('http').createServer(app)
 

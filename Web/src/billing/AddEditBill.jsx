@@ -205,7 +205,7 @@ const AddEditBill = (props) => {
                                 </div>
 
                                 <div className="col-md-4 p-1">
-                                    <label>Po To</label>
+                                    <label>So To</label>
                                     <Select
                                         closeMenuOnSelect={false}
                                         value={categoryData?.soToId}

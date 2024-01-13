@@ -69,10 +69,11 @@ const RoleTable = () => {
 
     }
     const handleCellRender = (cell, row) => {
-        if (cell.column.Header === "Is Admin") {
-            return (<Switch onChange={(e) => switchChange(row.original.roleId)} checked={cell.value === "true"} />)
-        }
-        else if (cell.column.Header === "Edit Role") {
+        // if (cell.column.Header === "Is Admin") {
+        //     return (<Switch onChange={(e) => switchChange(row.original.roleId)} checked={cell.value === "true"} />)
+        // }
+        // else 
+        if (cell.column.Header === "Edit Role") {
             return (
                 <button type="button" className="btn btn-sm btn-outline-primary waves-effect waves-light color-white" onClick={(e) => handleSubmit(row.original, row.original.roleId)}><span className="btn-label"><i className="mdi mdi-file-document-edit-outline font20"></i></span> Edit</button>
             )

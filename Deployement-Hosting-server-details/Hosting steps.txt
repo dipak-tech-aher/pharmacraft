@@ -1,0 +1,9 @@
+
+
+
+Hosting server mdhe Adhi subdomain create kela nantr godady la connect krnyasathi below steps
+
+1. Godaddy mdhe jaun subdomain create kel
+2. hosting vrcha jo pn server IP jo ahe to connect kela
+
+domains/manage dns==> add new record==> Type is A, subdomain name, server ip address===> Save 

@@ -7,12 +7,9 @@ import { hideSpinner, showSpinner } from "../common/spinner";
 import { post } from "../util/restUtil";
 import { properties } from "../properties";
 import { useHistory } from "react-router-dom";
-import { formatDateForBirthDate } from "../util/dateUtil";
-import KioskSearch from "../inquiry/kioskSearch";
-import moment from 'moment';
 
 const LeftTab = (props) => {
-  const { complaintsCount, serviceRequestCount, refresh, dateRange, todoPageCount, setTodoPageCount, selfDept } = props;
+  const {  refresh, dateRange, todoPageCount, setTodoPageCount, selfDept } = props;
 
   const { t } = useTranslation();
   const history = useHistory();

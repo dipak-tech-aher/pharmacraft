@@ -43,26 +43,25 @@ const ProfileNav = () => {
                     <span className="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" onClick={() => { setDisplay(!display) }}>
                         <p style={{ lineHeight: '14px', textAlign: 'left', paddingTop: '12px' }}>Welcome<br />
                             <strong>
-                                {(userDetail.firstName !== undefined) ? userDetail.firstName : ""} {(userDetail.lastName !== "undefined") ? userDetail.lastName : ""}</strong>
+                                {userDetail.firstName ?? ""} {userDetail.lastName ?? ""}</strong>
                             <i className="mdi mdi-chevron-down"></i><br />
                             {auth.currRoleDesc !== "" && auth.currRoleDesc !== undefined && auth.currDeptDesc !== "" && auth.currDeptDesc !== undefined ? auth.currRoleDesc + "-" + auth.currDeptDesc : "Admin - IT"}
                         </p>
                     </span>
-                    {/* {
-                        display ? */}
+
                     <div className={`profile-nav dropdown-menu dropdown-menu-right dropdown ${display && "show"}`}>
                         <div className="dropdown-header noti-title">
-                            <h6 className="text-overflow m-0">Welcome !</h6>
+                            <h6 className="text-overflow m-0">Welcome {userDetail.firstName ?? ""} {userDetail.lastName ?? ""}!</h6>
                         </div>
                         <Link to={`${process.env.REACT_APP_BASE}/user/myprofile`} onClick={() => { setDisplay(!display) }} className="dropdown-item notify-item">
                             <i className="fe-user"></i>
                             <span>My Profile</span>
                         </Link>
 
-                        <Link to="/" className="dropdown-item notify-item" onClick={() => { setDisplay(!display) }}>
+                        {/* <Link to="/" className="dropdown-item notify-item" onClick={() => { setDisplay(!display) }}>
                             <i className="fe-lock"></i>
                             <span>Lock Screen</span>
-                        </Link>
+                        </Link> */}
 
                         <div className="dropdown-divider"></div>
 
@@ -76,8 +75,8 @@ const ProfileNav = () => {
                     } */}
                 </li >
             ) : (
-                    ""
-                )}
+                ""
+            )}
         </>
     );
 };

@@ -23,7 +23,7 @@ const Header = () => {
             <ul className="list-unstyled topnav-menu float-right mb-0">
               <UserRole></UserRole>
               {/* <FullScreen></FullScreen> */}
-              <Language></Language>
+              {/* <Language></Language> */}
               {/* <Notification></Notification> */}
               <ProfileNav></ProfileNav>
               <ToDo ></ToDo>

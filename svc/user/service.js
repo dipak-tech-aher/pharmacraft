@@ -296,44 +296,45 @@ export class UserService {
         return this.responseHelper.conflict(res, new Error('Email already exist in the System'))
       }
       const inviteToken = this.cryptoHelper.createHmac(user)
-      const password = generatePassword.generate({ length: 8, numbers: true })
+      const hashPassword = this.cryptoHelper.hashPassword("Test@123")
+      // const password = generatePassword.generate({ length: 8, numbers: true })
       user = {
         ...user,
-        loginPassword: password,
-        status: 'TEMP',
+        loginPassword: hashPassword,
+        status: 'ACTIVE',
         inviteToken,
         createdBy: systemUserId,
         updatedBy: systemUserId,
-        country: 'CNTBN'
+        country: 'CNTIN'
       }
 
       const response = await User.create(user, { transaction: t })
-      if (response) {
-        const template = await EmailTemplate.findOne({
-          where: {
-            templateName: 'User Registration',
-            templateType: 'Email'
-          }
-        })
-        if (!template) {
-          logger.debug(defaultMessage.NOT_FOUND)
-          return this.responseHelper.notFound(res, new Error('Email template not found,Please create template'))
-        }
-        const data = {
-          userId: response.userId,
-          firstName: user.firstName,
-          aisoDomainURL,
-          email: user.email,
-          loginPassword: password
-        }
-        const htmlContent = ST.select(data).transformWith(template.body).root()
-        const inviteToken = await this.emailHelper.sendMail({
-          to: [user.email],
-          subject: template.subject,
-          message: htmlContent
-        })
-        response.dataValues.inviteToken = inviteToken
-      }
+      // if (response) {
+      //   const template = await EmailTemplate.findOne({
+      //     where: {
+      //       templateName: 'User Registration',
+      //       templateType: 'Email'
+      //     }
+      //   })
+      //   if (!template) {
+      //     logger.debug(defaultMessage.NOT_FOUND)
+      //     return this.responseHelper.notFound(res, new Error('Email template not found,Please create template'))
+      //   }
+      //   const data = {
+      //     userId: response.userId,
+      //     firstName: user.firstName,
+      //     aisoDomainURL,
+      //     email: user.email,
+      //     loginPassword: password
+      //   }
+      //   const htmlContent = ST.select(data).transformWith(template.body).root()
+      //   const inviteToken = await this.emailHelper.sendMail({
+      //     to: [user.email],
+      //     subject: template.subject,
+      //     message: htmlContent
+      //   })
+      //   response.dataValues.inviteToken = inviteToken
+      // }
 
       await t.commit()
       logger.debug('Successfully creates new user')

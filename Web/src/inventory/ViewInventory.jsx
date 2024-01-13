@@ -34,15 +34,15 @@ const ViewInventory = (props) => {
 
     }
     const handleCellRender = (cell, row) => {
-        if (cell.column.id === "action") {
-            return (<>
-                <button className='btn btn-primary' onClick={(e) => handleForm(row?.original)}>
-                    <i className="fas fa-items"></i> Update
-                </button></>)
-        }
-        if (cell.column.id === "invId") {
-            return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{cell.value}</span>)
-        }
+        // if (cell.column.id === "action") {
+        //     return (<>
+        //         <button className='btn btn-primary' onClick={(e) => handleForm(row?.original)}>
+        //             <i className="fas fa-items"></i> Update
+        //         </button></>)
+        // }
+        // if (cell.column.id === "invId") {
+        //     return (<span className="text-primary cursor-pointer" onClick={(e) => handleCellLinkClick(e, row.original)}>{cell.value}</span>)
+        // }
         if (cell.column.id === "createdAt") {
             return (<span>{moment(cell.value)?.format('DD-MM-YYYY')}</span>);
         }
@@ -72,13 +72,13 @@ const ViewInventory = (props) => {
     }
 
     const columns = [
-        {
-            Header: "Action",
-            accessor: "action",
-            disableFilters: true,
-            click: true,
-            id: "action"
-        },
+        // {
+        //     Header: "Action",
+        //     accessor: "action",
+        //     disableFilters: true,
+        //     click: true,
+        //     id: "action"
+        // },
         {
             Header: "Inventory Id",
             accessor: "invId",

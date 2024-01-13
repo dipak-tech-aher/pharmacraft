@@ -34,11 +34,11 @@ export const UserManagementColumns = [
         accessor: "action",
         disableFilters: true
     },
-    {
-        Header: "Map Roles",
-        accessor: "action1",
-        disableFilters: true
-    }
+    // {
+    //     Header: "Map Roles",
+    //     accessor: "action1",
+    //     disableFilters: true
+    // }
 ];
 
 export const RoleTableHiddenColumns = [

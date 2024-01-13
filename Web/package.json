@@ -1,6 +1,5 @@
 {
     "name": "pharmakraft-web",
-    "homepage": "/pharmakraft",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -52,7 +51,6 @@
         "react-to-print": "^2.12.4",
         "react-toastify": "^7.0.3",
         "react-tooltip": "^4.2.21",
-        "react-url-image-downloader": "^1.0.2",
         "reactjs-popup": "^2.0.5",
         "socket.io-client": "^4.2.0",
         "sweetalert2": "^11.6.14",

@@ -699,13 +699,12 @@ const UserManagementForm = (props) => {
                                         {error.gender ? <span className="errormsg">{error.userType}</span> : ""}
                                     </div>
                                 </div>
-                                <div className="col-md-4">
+                                {/* <div className="col-md-4">
                                     <div className="form-group">
                                         <label className="control-label">Notification Type&nbsp;</label>
                                         <Select
                                             closeMenuOnSelect={true}
                                             defaultValue={userInfo ?.notificationType ? notificationTypeOptions.filter((f) => f.value === userInfo ?.notificationType) : ""}
-                                            //   defaultValue={userInfo.gender ? userInfo.gender : "Please Select Gender"}
                                             options={notificationTypeOptions}
                                             onChange={(e) => {
                                                 setUserInfo({
@@ -718,7 +717,7 @@ const UserManagementForm = (props) => {
                                         />
                                         {error.notificationType && <span className="errormsg">{error.notificationType}</span>}
                                     </div>
-                                </div>
+                                </div> */}
                                 {/* <div className="col-md-4">
                                     <div className="form-group">
                                         <label className="control-label">Location</label>
@@ -761,7 +760,7 @@ const UserManagementForm = (props) => {
                                 </div>
 
 
-                                <div className="col-md-4">
+                                {/* <div className="col-md-4">
                                     <div className="form-group">
                                         <label className="control-label">BI Access</label>
                                         <Switch checked={userInfo ?.biAccess}
@@ -772,12 +771,10 @@ const UserManagementForm = (props) => {
                                                 });
 
                                             }} />
-
-
                                     </div>
-                                </div>
+                                </div> */}
 
-                                <div className="col-md-4">
+                                {/* <div className="col-md-4">
                                     <div className="form-group">
                                         <label className="control-label">WhatsApp Access</label>
                                         <Switch checked={userInfo ?.whatsappAccess}
@@ -788,10 +785,8 @@ const UserManagementForm = (props) => {
                                                 });
 
                                             }} />
-
-
                                     </div>
-                                </div>
+                                </div> */}
 
                                 <div className="col-md-4">
                                     <div className="form-group">

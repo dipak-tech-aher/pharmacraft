@@ -14,11 +14,11 @@ export const RoleTableColumns = [
         accessor: "roleDesc",
         disableFilters: true
     },
-    {
-        Header: "Is Admin",
-        accessor: "isAdmin",
-        disableFilters: true
-    },
+    // {
+    //     Header: "Is Admin",
+    //     accessor: "isAdmin",
+    //     disableFilters: true
+    // },
     {
         Header: "Edit Role",
         accessor: "action",

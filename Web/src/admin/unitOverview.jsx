@@ -266,7 +266,7 @@ const UnitOverview = (props) => {
 
 
                 </div>
-                {
+                {/* {
                     (unitAddress) ?
                         editForm ?
                             <UnitAddressForm
@@ -295,9 +295,9 @@ const UnitOverview = (props) => {
                             />
                         :
                         <></>
-                }
+                } */}
 
-                <div className="row" >
+                {/* <div className="row" >
                     <section className="triangle flex-fill" >
                         <h4 id="list-item-0" className="pl-2" > Contact</h4 >
                     </section >
@@ -313,9 +313,6 @@ const UnitOverview = (props) => {
                                             onChange={(e) => {
                                                 setUnit({ ...unit, title: e.target.value });
                                             }}
-                                        // onKeyPress={(e) => {
-                                        //     if (e.key === "Enter") handleSubmit();
-                                        // }}
                                         />
                                         :
                                         <p>{unit && unit.title}</p>
@@ -332,9 +329,7 @@ const UnitOverview = (props) => {
                                             onChange={(e) => {
                                                 setUnit({ ...unit, firstName: e.target.value });
                                             }}
-                                        // onKeyPress={(e) => {
-                                        //     if (e.key === "Enter") handleSubmit();
-                                        // }}
+                                        
                                         />
                                         :
                                         <p>{unit && unit.firstName}</p>
@@ -351,9 +346,7 @@ const UnitOverview = (props) => {
                                             onChange={(e) => {
                                                 setUnit({ ...unit, lastName: e.target.value });
                                             }}
-                                        // onKeyPress={(e) => {
-                                        //     if (e.key === "Enter") handleSubmit();
-                                        // }}
+                                        
                                         />
                                         :
                                         <p>{unit && unit.lastName}</p>
@@ -371,9 +364,7 @@ const UnitOverview = (props) => {
                                             onChange={(e) => {
                                                 setUnit({ ...unit, contactType: e.target.value });
                                             }}
-                                        // onKeyPress={(e) => {
-                                        //     if (e.key === "Enter") handleSubmit();
-                                        // }}
+                                        
                                         />
                                         :
                                         <p>{unit && unit.contactType}</p>
@@ -396,9 +387,7 @@ const UnitOverview = (props) => {
                                             onChange={(e) => {
                                                 setUnit({ ...unit, contactNo: e.target.value });
                                             }}
-                                        // onKeyPress={(e) => {
-                                        //     if (e.key === "Enter") handleSubmit();
-                                        // }}
+                                        
                                         />
                                         :
                                         <p>{unit && unit.contactNo}</p>
@@ -407,20 +396,20 @@ const UnitOverview = (props) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </fieldset >
             <div className="col-12 d-flex justify-content-center" >
                 {
-                    editForm ?
-                        <>
-                            < button className="btn btn-primary btn-md  waves-effect waves-light" type="button" onClick={handleSubmit} >
-                                Submit
-                            </button >
-                            <button className="btn btn-secondary btn-md  waves-effect waves-light ml-2" type="button" onClick={handleCancel}>
-                                Cancel
-                            </button>
-                        </>
-                        :
+                    // editForm ?
+                    //     <>
+                    //         < button className="btn btn-primary btn-md  waves-effect waves-light" type="button" onClick={handleSubmit} >
+                    //             Submit
+                    //         </button >
+                    //         <button className="btn btn-secondary btn-md  waves-effect waves-light ml-2" type="button" onClick={handleCancel}>
+                    //             Cancel
+                    //         </button>
+                    //     </>
+                    //     :
                         <button className="btn btn-primary btn-md  waves-effect waves-light" type="button" onClick={() => { setEditForm(true) }}>
                             Edit
                         </button>
